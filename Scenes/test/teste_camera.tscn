@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://cwuyoyihxk1rg"]
+
+[ext_resource type="Script" path="res://Scripts/test/camera/test_camera.gd" id="1_fc1w5"]
+[ext_resource type="PackedScene" uid="uid://qwe8kj77qs5a" path="res://Scenes/camera/camera.tscn" id="2_qc5mj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kaq47"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2noa"]
+size = Vector3(2.00983, 0.5177, 2.0072)
+
+[sub_resource type="Environment" id="Environment_qjv5e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xn67h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jg5fs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kda0c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_58er1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_h5lul"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nl3kr"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_rnsg2"]
+
+[node name="TesteCamera" type="Node3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_fc1w5")
+camera = NodePath("Camera")
+
+[node name="Camera" parent="." node_paths=PackedStringArray("link_player") instance=ExtResource("2_qc5mj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245876, 0.509321)
+link_player = NodePath("../Scare")
+is_lock = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)
+mesh = SubResource("PlaneMesh_kaq47")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, -129.485, 0)
+shape = SubResource("BoxShape3D_u2noa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qjv5e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "NUMPAD 1 Scare
+NUMPAD 2 Capsule
+NUMPAD 3 Shepre
+NUMPAD 4 Prism 
+L lock unlock camera
+F Switch first third person
+P Free Came mode"
+
+[node name="Scare" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00909, 1.26961, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scare"]
+mesh = SubResource("BoxMesh_xn67h")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scare"]
+shape = SubResource("BoxShape3D_jg5fs")
+
+[node name="Capsule" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39963, 2.0522, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Capsule"]
+mesh = SubResource("CapsuleMesh_kda0c")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Capsule"]
+shape = SubResource("CapsuleShape3D_58er1")
+
+[node name="Sphere" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30082, -4.613)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sphere"]
+mesh = SubResource("SphereMesh_h5lul")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere"]
+shape = SubResource("SphereShape3D_nl3kr")
+
+[node name="Prism" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52395, 4.51603)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prism"]
+mesh = SubResource("PrismMesh_rnsg2")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prism"]
+shape = SubResource("BoxShape3D_jg5fs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.872581, 0.353841, -0.336747, 0, 0.689392, 0.724388, 0.488469, -0.632088, 0.601551, -0.421753, 2.62351, 1.69988)
+shadow_enabled = true

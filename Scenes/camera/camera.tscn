@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://qwe8kj77qs5a"]
+
+[ext_resource type="Script" path="res://Scripts/camera/camera_handler.gd" id="1_7hm6g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ts78f"]
+size = Vector3(0.614807, 0.38916, 0.383301)
+
+[node name="Camera" type="CharacterBody3D"]
+script = ExtResource("1_7hm6g")
+
+[node name="ThirdCameraX" type="Node3D" parent="."]
+
+[node name="ThirdCameraY" type="Node3D" parent="ThirdCameraX"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="ThirdCameraX/ThirdCameraY"]
+
+[node name="ThirdCamera" type="Camera3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
+
+[node name="FirstCameraX" type="Node3D" parent="."]
+
+[node name="FirstCameraY" type="Node3D" parent="FirstCameraX"]
+
+[node name="FirstCamera" type="Camera3D" parent="FirstCameraX/FirstCameraY"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ts78f")
+disabled = true
