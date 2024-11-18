@@ -1,34 +1,49 @@
 extends CharacterBody3D
 
+## Utilse la graviter des paramètres du jeu
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
+## Puissance du saut
 var JUMP_IMPULSE = 5
 
-enum controller {GRAVITY, MOVEMENT, MOVEMENT_CAMERA, NULL}
+## 
+enum controller {
+	## 
+	GRAVITY, 
+	MOVEMENT, 
+	MOVEMENT_CAMERA, 
+	NULL
+}
 
 @export var contoller_mode: controller = controller.GRAVITY 
 @export var controller_mode_link: controller = controller.MOVEMENT_CAMERA
 @export var controller_mode_unlink: controller = controller.GRAVITY 
 
+## Indique la posion de la camera premiere personne avec un marker
 @export var first_camera_position: Marker3D
+## Indique la posion de la camera troisieme personne avec un marker
 @export var third_camera_poistion: Marker3D
 
-@export var camera_forward: String
-@export var camera_left: String
-@export var camera_right: String
-@export var camera_downard: String
-
+## Touche de déplacement avant du personnage
 @export var move_forward: String = "ui_up"
+## Touche de déplacement gauche du personnage
 @export var move_left: String = "ui_left"
+## Touche de déplacement droite du personnage
 @export var move_right: String = "ui_right"
+## Touche de déplacement arrière du personnage
 @export var move_downward: String = "ui_down"
 
+## Touche de saut du personnage
 @export var jump: String = "ui_accept"
 
+## Vitesse de deplacement du personnage
 @export var move_speed: float = 10
 
 func _ready() -> void:
 	set_physics_process(true)
 
+## Genère automatique le marker en fonction de sa collision
+##
+## Attention ca ne gère que les collision simple
 func auto_generate_marker() -> void:
 	var marker: markerDataClasss = search_collision()
 	
@@ -49,13 +64,15 @@ func auto_generate_marker() -> void:
 		
 		add_child(first_camera_position)
 		add_child(third_camera_poistion)
-		
+
+## 
 func linked():
 	contoller_mode = controller_mode_link
 	
 func unlinked():
 	contoller_mode = controller_mode_unlink
-		
+
+## Algorithme qui determine la position des marker
 func search_collision() -> markerDataClasss:
 	var marker_camera = markerDataClasss.new()
 	 
@@ -141,11 +158,14 @@ func get_input(_delta):
 	
 	velocity = move_direction * move_speed
 
+## Permet de connaitre la position de la camera premiere personne
 func camera_first_position() -> Vector3:
 	return first_camera_position.position
-	
+
+## Permet de connaitre la rotation de la camera premire personne
 func camera_first_rotation() -> Vector3:
 	return first_camera_position.rotation
-	
+
+## Permet de connaitre la rotation de la camera troisieme personne
 func camera_third_position() -> Vector3:
 	return third_camera_poistion.position
