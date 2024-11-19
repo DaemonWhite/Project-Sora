@@ -5,17 +5,23 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 ## Puissance du saut
 var JUMP_IMPULSE = 5
 
-## 
+## Comportement par défaut du personnage quand il est relier au script
 enum controller {
-	## 
+	## Est soumis à la graviter
 	GRAVITY, 
-	MOVEMENT, 
+	## Est soumis au mouvement 
+	MOVEMENT,
+	## Est soumis au mouvement et déplace la camera avec
 	MOVEMENT_CAMERA, 
+	## Ne fait strictement rient
 	NULL
 }
 
-@export var contoller_mode: controller = controller.GRAVITY 
+## Mode de controle de par défaut
+@export var contoller_mode: controller = controller.GRAVITY
+## Mode de controle quand le personnage est lier
 @export var controller_mode_link: controller = controller.MOVEMENT_CAMERA
+## Mode de controle quand le personnage est delier
 @export var controller_mode_unlink: controller = controller.GRAVITY 
 
 ## Indique la posion de la camera premiere personne avec un marker
@@ -65,12 +71,16 @@ func auto_generate_marker() -> void:
 		add_child(first_camera_position)
 		add_child(third_camera_poistion)
 
-## 
+## Change le mode de controle quand le personnage est lier 
 func linked():
 	contoller_mode = controller_mode_link
-	
+
+## Change le mode de controle quand le personnage est delier
 func unlinked():
 	contoller_mode = controller_mode_unlink
+	velocity.x = 0
+	velocity.z = 0
+	move_and_slide()
 
 ## Algorithme qui determine la position des marker
 func search_collision() -> markerDataClasss:
@@ -119,16 +129,13 @@ func search_collision() -> markerDataClasss:
 	return marker_camera
 	
 func _physics_process(delta: float) -> void:
-	
-	if contoller_mode == controller.MOVEMENT:
-		if is_on_floor() and Input.is_action_just_released(jump):
-			velocity.y = JUMP_IMPULSE
-	
 	match contoller_mode:
 		controller.MOVEMENT:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
-			
+			elif is_on_floor() and Input.is_action_just_released(jump):
+				velocity.y = JUMP_IMPULSE
+				
 			get_input(delta)
 			
 			if is_on_floor() and Input.is_action_just_released(jump):
@@ -145,7 +152,7 @@ func _physics_process(delta: float) -> void:
 		controller.GRAVITY:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
-				
+			print(name, velocity)
 			move_and_slide()
 		controller.NULL:
 			pass
