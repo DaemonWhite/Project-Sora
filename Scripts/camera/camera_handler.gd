@@ -13,7 +13,7 @@ enum camera_state {
 	FIRST,
 	## Seconde personne
 	THIRD,
-	## Attacher a rien
+	## La camera ne fais rien
 	NULL
 } 
 
@@ -60,8 +60,10 @@ enum camera_state {
 ## Touche pour faire reculer la camera
 @export var input_unzoom: String = "wheel_down"
 
-## Touche pour verrouller la camera
-@export var is_lock: bool = true
+## Si la camera est verrouller 
+@export var is_lock_cam: bool = true
+## Si la camera peut ce déplacer
+@export var is_lock_move: bool = true
 ## Indique si la camera est a la premiere personne
 @export var is_first_peson: bool = false
 ## Indique dans quelle etat est la camera
@@ -69,9 +71,6 @@ enum camera_state {
 
 ## Chemin du scrip gererique de joueur
 var character_default_script = load("res://Scripts/camera/character_camera.gd")
-
-## Movement de la camera dans la scene 3D
-var motion = Transform3D()
 
 ## Si la camera est fixer au personnage ou non
 var is_tying_camera: bool = false
@@ -82,10 +81,15 @@ signal first_person_mode
 
 func _ready() -> void:
 	linked_camera_as_player()
-	if is_lock:
-		lock()
+	if is_lock_cam:
+		lock_camera()
 	else:
-		unlock()
+		unlock_camera()
+		
+	if is_lock_move:
+		lock_movement()
+	else:
+		unlock_movement()
 		
 	if is_first_peson:
 		switch_cam(camera_state.FIRST)
@@ -103,27 +107,18 @@ func set_tying_player(player: Node3D):
 ## Reinitialise la camera premières personne
 func reset_first_camera():
 	pivot_first_camera_x.set_position(Vector3.ZERO)
-	pivot_first_camera_x.set_rotation(Vector3.ZERO)
 	pivot_first_camera_y.set_position(Vector3.ZERO)
-	pivot_first_camera_y.set_rotation(Vector3.ZERO)
 
 ## Reinitialise la camera troisieme personne
 func reset_third_camera():
-	if is_tying_camera:
-		pivot_third_camera_x.set_rotation(Vector3.ZERO)
-		pivot_third_camera_x.set_rotation(Vector3.ZERO)
-		pivot_third_camera_y.set_position(Vector3.ZERO)
-		pivot_third_camera_y.set_rotation(Vector3.ZERO)
-	else:
-		pivot_third_camera_x.set_position(Vector3.ZERO)
-		pivot_third_camera_x.set_rotation(Vector3.ZERO)
-		pivot_third_camera_y.set_position(Vector3.ZERO)
-		pivot_third_camera_y.set_rotation(Vector3.ZERO)
+	pivot_third_camera_x.set_rotation(Vector3.ZERO)
+	pivot_third_camera_y.set_position(Vector3.ZERO)
 
 
 ## Lie la camera au joueur
 func linked_camera_as_player():
 	if not character_default_script == link_player.get_script():
+		push_warning("Player dont have script but default script tying apply")
 		set_tying_player(link_player)
 	
 	if link_player:
@@ -138,7 +133,7 @@ func linked_camera_as_player():
 		pivot_third_camera_x.position.y = link_player.camera_third_position().y
 	else:
 		is_tying_camera = false
-		print("Error link_player is missing")
+		push_error("Error link_player is missing")
 
 ## Delie la camera du joueur
 func unliked_camera_as_player():
@@ -150,6 +145,8 @@ func unliked_camera_as_player():
 		reset_first_camera()
 		reset_third_camera()
 		pivot_third_camera_x.position.y = link_player.camera_third_position().y
+	else:
+		push_error("Error link_player is missing")
 
 func _input(event):
 	var scale_factor: float = min(
@@ -157,9 +154,9 @@ func _input(event):
 			(float(get_viewport().size.y) / get_viewport().get_visible_rect().size.y)
 	)
 	
-	if event is InputEventMouseMotion and not is_lock:
+	if event is InputEventMouseMotion and not is_lock_cam:
 		if is_first_peson:
-			if is_tying_camera:
+			if is_tying_camera and not is_lock_move:
 				rotate_camera_teste(
 					event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
 					pivot_first_camera_y,
@@ -179,7 +176,8 @@ func _input(event):
 			)
 
 func _physics_process(delta: float) -> void:
-	get_input(delta)
+	if is_lock_move:
+		get_input(delta)
 	
 	var camera_length = camera_spring.get_length()
 	
@@ -219,7 +217,7 @@ func get_input(_delta):
 	
 	if is_tying_camera:
 		link_player.velocity = Vector3(
-			move_direction.x * move_speed, 
+			move_direction.x * move_speed,
 			link_player.velocity.y, 
 			move_direction.z * move_speed
 		)
@@ -240,10 +238,6 @@ func get_input(_delta):
 
 ## Change la camera de mode
 func switch_cam(mode: camera_state):
-
-	if lock_camera_mode != camera_state.NULL:
-		mode = lock_camera_mode
-		
 	match mode:
 		camera_state.FIRST:
 			first_camera.make_current()
@@ -251,21 +245,32 @@ func switch_cam(mode: camera_state):
 		camera_state.THIRD:
 			third_camera.make_current()
 			is_first_peson = false
+		camera_state.NULL:
+			lock_camera()
+			lock_movement()
 
 	first_person_mode.emit()
 
-
 func rotate_camera_teste(move, pivot_y, pivot_x):
+	# TODO Changer certaine chose
 	pivot_x.rotate_y(-move.x)
 	pivot_x.orthonormalize()
 	pivot_y.rotation.x = clamp(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
 
 ## Blocker la camera
-func lock():
-	is_lock = true
+func lock_camera():
+	is_lock_cam = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+## Blocke le déplacement de la camera
+func lock_movement():
+	is_lock_move = true
+
 ## Deblocker la camera
-func unlock():
-	is_lock = false
+func unlock_camera():
+	is_lock_cam = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+## Déblocke le déplacement de la camera 
+func unlock_movement():
+	is_lock_move = false

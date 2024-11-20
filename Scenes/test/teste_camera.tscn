@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwuyoyihxk1rg"]
+[gd_scene load_steps=14 format=3 uid="uid://cwuyoyihxk1rg"]
 
 [ext_resource type="Script" path="res://Scripts/test/camera/test_camera.gd" id="1_fc1w5"]
 [ext_resource type="PackedScene" uid="uid://qwe8kj77qs5a" path="res://Scenes/camera/camera.tscn" id="2_qc5mj"]
+[ext_resource type="Script" path="res://Scripts/camera/character_camera.gd" id="3_t5111"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kaq47"]
 
@@ -31,7 +32,6 @@ camera = NodePath("Camera")
 [node name="Camera" parent="." node_paths=PackedStringArray("link_player") instance=ExtResource("2_qc5mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245876, 0.509321)
 link_player = NodePath("../Scare")
-is_lock = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -48,22 +48,42 @@ shape = SubResource("BoxShape3D_u2noa")
 environment = SubResource("Environment_qjv5e")
 
 [node name="Control" type="Control" parent="."]
+layout_direction = 1
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 9.0
+offset_top = 10.0
+offset_right = 294.0
+offset_bottom = 341.0
 text = "NUMPAD 1 Scare
 NUMPAD 2 Capsule
 NUMPAD 3 Shepre
 NUMPAD 4 Prism 
-L lock unlock camera
+NUMPAD 5 ScareScript
+L lock/unlock camera
+M lock/unlock movement
 F Switch first third person
 P Free Came mode"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -355.0
+offset_bottom = 101.0
+grow_horizontal = 0
+text = "1,2,3,4 Utilise une grephe auomatisée
+5 Utilise une grephe manuel. 
+5 Doit tj ce déplacer après sa prise de position
+il teste le mode vue isometrique"
 
 [node name="Scare" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00909, 1.26961, 0)
@@ -103,6 +123,26 @@ mesh = SubResource("PrismMesh_rnsg2")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prism"]
+shape = SubResource("BoxShape3D_jg5fs")
+
+[node name="ScareScript" type="CharacterBody3D" parent="." node_paths=PackedStringArray("first_camera_position", "third_camera_poistion")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665727, 1.26961, 0)
+script = ExtResource("3_t5111")
+controller_mode_unlink = 1
+first_camera_position = NodePath("first")
+third_camera_poistion = NodePath("Third")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ScareScript"]
+mesh = SubResource("BoxMesh_xn67h")
+skeleton = NodePath("")
+
+[node name="Third" type="Marker3D" parent="ScareScript"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0275798, -0.0441314, 0)
+
+[node name="first" type="Marker3D" parent="ScareScript"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.613194, 0.352173, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScareScript"]
 shape = SubResource("BoxShape3D_jg5fs")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

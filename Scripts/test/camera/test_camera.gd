@@ -4,6 +4,7 @@ extends Node3D
 
 @onready var list_input = [
 	["lock_camera", KEY_L],
+	["lock_movement", KEY_M],
 	["free_cam", KEY_P],	
 ]
 
@@ -12,6 +13,7 @@ extends Node3D
 	["Capsule", KEY_KP_2, $Capsule],
 	["Sphere", KEY_KP_3, $Sphere],
 	["Prism", KEY_KP_4, $Prism],
+	["ScareScript", KEY_KP_5, $ScareScript],
 ]
 
 func _ready() -> void:
@@ -29,10 +31,16 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_released("lock_camera"):
-		if camera.is_lock:
-			camera.unlock()
+		if camera.is_lock_cam:
+			camera.unlock_camera()
 		else:
-			camera.lock()
+			camera.lock_camera()
+			
+	if Input.is_action_just_released("lock_movement"):
+		if camera.is_lock_move:
+			camera.unlock_movement()
+		else:
+			camera.lock_movement()
 
 	for character in list_character : 
 		if Input.is_action_just_released(character[0]):

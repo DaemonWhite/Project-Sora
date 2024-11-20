@@ -46,6 +46,12 @@ enum controller {
 
 func _ready() -> void:
 	set_physics_process(true)
+	
+func set_controller_mode_link(controller_mode: controller):
+	controller_mode_link = contoller_mode
+	
+func set_controller_mode_unlink(controller_mode: controller):
+	controller_mode_unlink = contoller_mode
 
 ## Genère automatique le marker en fonction de sa collision
 ##
@@ -94,7 +100,7 @@ func search_collision() -> markerDataClasss:
 				marker_camera.set_first_person_marker_state(true)
 				marker_camera.set_third_person_marker_state(true)
 				marker_camera.third_person_marker = collision_shape.position
-				marker_camera.first_person_marker.y -= collision_shape.shape.radius
+				marker_camera.first_person_marker.y = collision_shape.shape.radius
 				marker_camera.first_person_marker.z = (collision_shape.shape.radius - collision_shape.shape.radius / 4 ) * -1 
 			"CapsuleShape3D":
 				marker_camera.set_first_person_marker_state(true)
@@ -123,6 +129,7 @@ func search_collision() -> markerDataClasss:
 				marker_camera.first_person_marker.y -= collision_shape.shape.size.y / 16
 				marker_camera.first_person_marker.z *= -1
 			_:
+				push_warning("camera_hadler: Colision non connue ou non définie")
 				marker_camera.set_third_person_marker_state(true)
 				marker_camera.third_person_marker = collision_shape.position
 				
@@ -131,28 +138,23 @@ func search_collision() -> markerDataClasss:
 func _physics_process(delta: float) -> void:
 	match contoller_mode:
 		controller.MOVEMENT:
+			get_input(delta)
+			
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
 			elif is_on_floor() and Input.is_action_just_released(jump):
-				velocity.y = JUMP_IMPULSE
-				
-			get_input(delta)
-			
-			if is_on_floor() and Input.is_action_just_released(jump):
 				velocity.y = JUMP_IMPULSE
 				
 			move_and_slide()
 		controller.MOVEMENT_CAMERA:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
-				
-			if is_on_floor() and Input.is_action_just_released(jump):
+			elif is_on_floor() and Input.is_action_just_released(jump):
 				velocity.y = JUMP_IMPULSE
 				
 		controller.GRAVITY:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
-			print(name, velocity)
 			move_and_slide()
 		controller.NULL:
 			pass
