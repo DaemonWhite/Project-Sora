@@ -13,6 +13,7 @@ script = ExtResource("1_7hm6g")
 [node name="ThirdCameraY" type="Node3D" parent="ThirdCameraX"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="ThirdCameraX/ThirdCameraY"]
+spring_length = 2.4
 
 [node name="ThirdCamera" type="Camera3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
 
