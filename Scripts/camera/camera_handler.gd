@@ -81,7 +81,9 @@ signal first_person_mode
 
 
 func _ready() -> void:
-	linked_camera_as_player()
+	if link_player:
+		linked_camera_as_player()
+
 	if is_lock_cam:
 		lock_camera()
 	else:
@@ -177,7 +179,7 @@ func _input(event):
 			)
 
 func _physics_process(delta: float) -> void:
-	if is_lock_move:
+	if not is_lock_move:
 		get_input(delta)
 	
 	var camera_length = camera_spring.get_length()
