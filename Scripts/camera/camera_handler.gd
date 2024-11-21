@@ -1,3 +1,4 @@
+class_name CameraHandler
 extends CharacterBody3D
 ## Script qui permet de controller la camer
 
@@ -157,19 +158,19 @@ func _input(event):
 	if event is InputEventMouseMotion and not is_lock_cam:
 		if is_first_peson:
 			if is_tying_camera and not is_lock_move:
-				rotate_camera_teste(
+				rotate_camera(
 					event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
 					pivot_first_camera_y,
 					link_player
 				)
 			else:
-				rotate_camera_teste(
+				rotate_camera(
 					event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
 					pivot_first_camera_y,
 					pivot_first_camera_x
 				)
 		else:
-			rotate_camera_teste(
+			rotate_camera(
 				event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
 				pivot_third_camera_y,
 				pivot_third_camera_x
@@ -251,7 +252,9 @@ func switch_cam(mode: camera_state):
 
 	first_person_mode.emit()
 
-func rotate_camera_teste(move, pivot_y, pivot_x):
+## Lance la rotation de la camera
+## @experimental
+func rotate_camera(move, pivot_y, pivot_x):
 	# TODO Changer certaine chose
 	pivot_x.rotate_y(-move.x)
 	pivot_x.orthonormalize()
