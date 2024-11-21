@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq58fqdprqay0"]
+[gd_scene load_steps=6 format=3 uid="uid://dq58fqdprqay0"]
 
 [ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_q0exs"]
 [ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic Turbo.otf" id="2_k11rj"]
-[ext_resource type="AudioStream" uid="uid://c74bjtreepgv6" path="res://Sound/strings-intro-239970.mp3" id="3_epf22"]
 [ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="4_u7ckb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rfr8j"]
@@ -52,12 +51,6 @@ grow_horizontal = 0
 theme = SubResource("Theme_moe1k")
 text = "Test"
 expand_icon = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_epf22")
-volume_db = 1.763
-autoplay = true
-parameters/looping = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
