@@ -1,8 +1,8 @@
 extends Control
 
-@onready var ResOptionButton = $Control/OptionButton
+@onready var res_option_button = $Control/OptionButton
 
-@onready var Change_window = $Control/OptionButton2 as OptionButton
+@onready var change_window = $Control/OptionButton2 as OptionButton
 
 
 var Resolutions : Dictionary = {"2560x1440": Vector2i(2560,1440),
@@ -24,34 +24,36 @@ const Window_mode_array : Array[String] = [
  
 func _ready():
 	add_window_mode_items()
-	Change_window.item_selected.connect(on_window_mode_selected)
-	AddResolutions()
-	Check_variables()
-	
-func Check_variables():
-	var _window = get_window()
-	var mode = _window.get_mode()
-	#
-	if mode == Window.MODE_WINDOWED:
-		Change_window.set_pressed_no_signal(true)
+	change_window.item_selected.connect(on_window_mode_selected)
+	add_resolutions()
+	select_current_window_mode()
 
-func AddResolutions():
-	for r in Resolutions:
-		ResOptionButton.add_item(r)
+
+func add_resolutions():
+	var current_resolution = get_window().get_size()
+	var ID = 0
+	
+	for resolution_size in Resolutions:
+		res_option_button.add_item(resolution_size, ID)
+
+		if Resolutions[resolution_size] == current_resolution:
+			res_option_button.select(ID)
+		
+		ID += 1
 
 func _on_option_button_item_selected(index):
-	var ID = ResOptionButton.get_item_text(index)
+	var ID = res_option_button.get_item_text(index)
 	get_window().set_size(Resolutions[ID])
 	Centre_Window()
 	
 func Centre_Window():
-	var Centre_Screen = DisplayServer.screen_get_position()+DisplayServer.screen_get_size()/2
+	var Centre_Screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
 	var Window_size = get_window().get_size_with_decorations()
 	get_window().set_position(Centre_Screen - Window_size/2)
 
 func add_window_mode_items() -> void:
 	for window_mode in Window_mode_array:
-		Change_window.add_item(window_mode)
+		change_window.add_item(window_mode)
 
 func on_window_mode_selected(index : int) -> void:
 	match index:
@@ -67,6 +69,33 @@ func on_window_mode_selected(index : int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 			Centre_Window()
+			
+func select_current_window_mode() -> void:
+	#ici on récupère la méthode qui permet de changer de fenêtre
+	var mode = DisplayServer.window_get_mode()
+	#ici on récupère la méthode pour les bordures
+	var borderless = DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS)
+	match mode:
+		#sert à garder la même type de fenêtre, ci dessous c'est pour le mode plein écrans
+		DisplayServer.WINDOW_MODE_FULLSCREEN:
+			if borderless:
+				change_window.select(1)
+			else:
+				change_window.select(0)
+		#sert à garder la même type de fenêtre, ci dessous c'est pour le mode fenêtré
+		DisplayServer.WINDOW_MODE_WINDOWED:
+			if borderless:
+				change_window.select(1)
+			else:
+				change_window.select(2)
+		#sert à garder la même type de fenêtre, ci dessous c'est pour le mode fenêtré sans bordure
+		DisplayServer.WINDOW_MODE_WINDOWED:
+			if borderless:
+				change_window.select(2)
+			else:
+				change_window.select(1)
+		
+	
 	
 #func _on_full_screen_check_box_toggled(toggled_on):
 	#if toggled_on: 
