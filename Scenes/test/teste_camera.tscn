@@ -29,8 +29,11 @@ size = Vector3(2.00983, 0.5177, 2.0072)
 script = ExtResource("1_fc1w5")
 camera = NodePath("Camera")
 
-[node name="Camera" parent="." instance=ExtResource("2_qc5mj")]
+[node name="Camera" parent="." node_paths=PackedStringArray("link_player") instance=ExtResource("2_qc5mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245876, 0.509321)
+link_player = NodePath("../Scare")
+is_lock_cam = false
+is_lock_move = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

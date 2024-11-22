@@ -227,7 +227,11 @@ func get_input(_delta):
 		
 		if move_direction.z != 0:
 			if not is_first_peson: 
-				link_player.global_transform.basis = pivot_third_camera_x.basis
+				link_player.global_transform.basis = lerp(
+					link_player.global_transform.basis,
+					pivot_third_camera_x.basis,
+					0.5 + _delta
+				)
 		
 		link_player.move_and_slide()
 		position = link_player.position
