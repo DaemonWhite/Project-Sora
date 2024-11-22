@@ -58,12 +58,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 214.0
+offset_bottom = 241.0
+color = Color(0, 0, 0, 0.270588)
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+offset_left = 793.0
+offset_right = 1158.0
+offset_bottom = 119.0
+color = Color(0, 0, 0, 0.270588)
+
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 10.0
-offset_right = 294.0
-offset_bottom = 341.0
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 291.0
+offset_bottom = 340.0
 text = "NUMPAD 1 Scare
 NUMPAD 2 Capsule
 NUMPAD 3 Shepre
