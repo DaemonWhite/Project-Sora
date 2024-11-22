@@ -1,49 +1,74 @@
 extends Control
 
-@onready var res_option_button = $Control/OptionButton
+@onready var res_option_button = $ColorRect/OptionButton
 
-@onready var change_window = $Control/OptionButton2 as OptionButton
+@onready var change_window = $ColorRect/OptionButton2 as OptionButton
+
+@onready var change_msaa = $ColorRect/OptionButton3
 
 
-var Resolutions : Dictionary = {"2560x1440": Vector2i(2560,1440),
-								"1920x1080": Vector2i(1920,1080),
-								"1366x768": Vector2i(1366,768),
-								"1536x864": Vector2i(1536,864),
-								"1280x720": Vector2i(1280,720),
-								"1440x900": Vector2i(1440,900),
-								"1600x900": Vector2i(1600,900),
-								"1024x600": Vector2i(1024,600),
-								"800x600": Vector2i(800,600),
+const resolutions : Dictionary = {
+	"2560x1440": Vector2i(2560,1440),
+	"1920x1080": Vector2i(1920,1080),
+	"1366x768": Vector2i(1366,768),
+	"1536x864": Vector2i(1536,864),
+	"1280x720": Vector2i(1280,720),
+	"1440x900": Vector2i(1440,900),
+	"1600x900": Vector2i(1600,900),
+	"1024x600": Vector2i(1024,600),
+	"800x600": Vector2i(800,600)
 }
 
-const Window_mode_array : Array[String] = [
-	"Plein écrans",
-	"Fenêtré sans bordure",
-	"Fenêtré"
-]
- 
-func _ready():
-	add_window_mode_items()
-	change_window.item_selected.connect(on_window_mode_selected)
-	add_resolutions()
-	select_current_window_mode()
+const window_mode_array : Dictionary = {
+	"Plein écrans": 0,
+	"Fenêtré sans bordure": 0,
+	"Fenêtré": 0
+}
 
+const msaa : Dictionary = {
+	"MSAA Disable": Viewport.MSAA_DISABLED,
+	"MSAA 2X": Viewport.MSAA_2X,
+	"MSAA 4X": Viewport.MSAA_4X,
+	"MSAA 8X": Viewport.MSAA_8X
+}
+ 
+
+func _ready():
+	change_window.item_selected.connect(on_window_mode_selected)
+	##add_resolutions()
+	#select_current_window_mode()
+	add_name_item_for_option_button(resolutions, res_option_button)
+	add_name_item_for_option_button(window_mode_array, change_window)
+	add_name_item_for_option_button(msaa, change_msaa)
+	var resolution = get_window().get_size()
+	select_current_option(
+		"{0}x{1}".format([resolution[0], resolution[1]]),
+		res_option_button
+	)
+	#select_current_option(,change_window)
+
+
+func select_current_option(option : String, option_button : OptionButton):
+	for i in range(0,option_button.item_count):
+		print(option, option_button.get_item_text(i))
+		if option == option_button.get_item_text(i):
+			option_button.select(i)
 
 func add_resolutions():
 	var current_resolution = get_window().get_size()
 	var ID = 0
 	
-	for resolution_size in Resolutions:
-		res_option_button.add_item(resolution_size, ID)
+	for resolution_size in resolutions:
+		res_option_button.add_item(resolution_size)
 
-		if Resolutions[resolution_size] == current_resolution:
+		if resolutions[resolution_size] == current_resolution:
 			res_option_button.select(ID)
 		
 		ID += 1
 
-func _on_option_button_item_selected(index):
+func _on_option_button_item_selected(index : int):
 	var ID = res_option_button.get_item_text(index)
-	get_window().set_size(Resolutions[ID])
+	get_window().set_size(resolutions[ID])
 	Centre_Window()
 	
 func Centre_Window():
@@ -51,9 +76,10 @@ func Centre_Window():
 	var Window_size = get_window().get_size_with_decorations()
 	get_window().set_position(Centre_Screen - Window_size/2)
 
-func add_window_mode_items() -> void:
-	for window_mode in Window_mode_array:
-		change_window.add_item(window_mode)
+
+func add_name_item_for_option_button(name_items : Dictionary, option_button : OptionButton):
+	for name_item in name_items:
+		option_button.add_item(name_item)
 
 func on_window_mode_selected(index : int) -> void:
 	match index:
@@ -94,24 +120,6 @@ func select_current_window_mode() -> void:
 				change_window.select(2)
 			else:
 				change_window.select(1)
-		
-	
-	
-#func _on_full_screen_check_box_toggled(toggled_on):
-	#if toggled_on: 
-		#get_window().set_mode(Window.MODE_FULLSCREEN)
-	#else:
-		#get_window().set_mode(Window.MODE_WINDOWED)
-		#Centre_Window()
-#
-#func _on_check_box_toggled(toggled_on):
-	#if toggled_on: 
-		#get_window().set_mode(Window.MODE_WINDOWED)
-		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-	#else:
-		#get_window().set_mode(Window.MODE_WINDOWED)
-		#DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		#Centre_Window()
 
 func _on_retour_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu/main_menu.tscn")
@@ -128,3 +136,7 @@ func _on_v_sync_check_box_toggled(toggled_on):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+func _on_option_button_3_item_selected(index : int) -> void:
+	ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", msaa)
+	
