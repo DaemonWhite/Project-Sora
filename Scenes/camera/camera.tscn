@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/camera/camera_handler.gd" id="1_7hm6g"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ts78f"]
-size = Vector3(0.614807, 0.38916, 0.383301)
+[sub_resource type="SphereShape3D" id="SphereShape3D_b26h7"]
+custom_solver_bias = 1.0
+margin = 0.001
+radius = 0.05
 
-[node name="Camera" type="CharacterBody3D"]
+[node name="CameraHandler" type="CharacterBody3D"]
+motion_mode = 1
 script = ExtResource("1_7hm6g")
 
 [node name="ThirdCameraX" type="Node3D" parent="."]
@@ -13,16 +16,15 @@ script = ExtResource("1_7hm6g")
 [node name="ThirdCameraY" type="Node3D" parent="ThirdCameraX"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="ThirdCameraX/ThirdCameraY"]
-spring_length = 2.4
+process_mode = 3
+shape = SubResource("SphereShape3D_b26h7")
 
 [node name="ThirdCamera" type="Camera3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.147978, 0)
 
 [node name="FirstCameraX" type="Node3D" parent="."]
+visible = false
 
 [node name="FirstCameraY" type="Node3D" parent="FirstCameraX"]
 
 [node name="FirstCamera" type="Camera3D" parent="FirstCameraX/FirstCameraY"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_ts78f")
-disabled = true

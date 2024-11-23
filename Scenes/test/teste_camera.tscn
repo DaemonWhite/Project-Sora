@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://qwe8kj77qs5a" path="res://Scenes/camera/camera.tscn" id="2_qc5mj"]
 [ext_resource type="Script" path="res://Scripts/camera/character_camera.gd" id="3_t5111"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_kaq47"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_u2noa"]
-size = Vector3(2.00983, 0.5177, 2.0072)
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kaq47"]
 
 [sub_resource type="Environment" id="Environment_qjv5e"]
 
@@ -30,21 +30,24 @@ script = ExtResource("1_fc1w5")
 camera = NodePath("Camera")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("link_player") instance=ExtResource("2_qc5mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245876, 0.509321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82471, 0.509321)
 link_player = NodePath("../Scare")
+margin_third_person_camera = 0.5
 is_lock_cam = false
 is_lock_move = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)
-mesh = SubResource("PlaneMesh_kaq47")
-skeleton = NodePath("../..")
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, -129.485, 0)
+transform = Transform3D(0.999933, 0, 0, 0, 0.999933, 0, 0, 0, 0.999933, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_u2noa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_kaq47")
+skeleton = NodePath("../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qjv5e")
@@ -66,6 +69,7 @@ offset_bottom = 241.0
 color = Color(0, 0, 0, 0.270588)
 
 [node name="ColorRect2" type="ColorRect" parent="Control"]
+layout_mode = 0
 offset_left = 793.0
 offset_right = 1158.0
 offset_bottom = 119.0
@@ -102,6 +106,8 @@ il teste le mode vue isometrique"
 
 [node name="Scare" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00909, 1.26961, 0)
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Scare"]
 mesh = SubResource("BoxMesh_xn67h")
@@ -112,6 +118,8 @@ shape = SubResource("BoxShape3D_jg5fs")
 
 [node name="Capsule" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39963, 2.0522, 0)
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Capsule"]
 mesh = SubResource("CapsuleMesh_kda0c")
@@ -122,6 +130,8 @@ shape = SubResource("CapsuleShape3D_58er1")
 
 [node name="Sphere" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30082, -4.613)
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sphere"]
 mesh = SubResource("SphereMesh_h5lul")
@@ -132,6 +142,8 @@ shape = SubResource("SphereShape3D_nl3kr")
 
 [node name="Prism" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52395, 4.51603)
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prism"]
 mesh = SubResource("PrismMesh_rnsg2")
@@ -142,8 +154,9 @@ shape = SubResource("BoxShape3D_jg5fs")
 
 [node name="ScareScript" type="CharacterBody3D" parent="." node_paths=PackedStringArray("first_camera_position", "third_camera_poistion")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665727, 1.26961, 0)
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("3_t5111")
-controller_mode_unlink = 1
 first_camera_position = NodePath("first")
 third_camera_poistion = NodePath("Third")
 
@@ -155,7 +168,7 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0275798, -0.0441314, 0)
 
 [node name="first" type="Marker3D" parent="ScareScript"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.613194, 0.352173, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.613194, 0.352173, -0.00280595)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScareScript"]
 shape = SubResource("BoxShape3D_jg5fs")

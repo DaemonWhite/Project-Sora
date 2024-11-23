@@ -1,6 +1,6 @@
 class_name CameraHandler
 extends CharacterBody3D
-## Script qui permet de controller la camer
+## Script qui permet de controller la camera
 
 ## Vitesse de la camera
 const CAMERA_MOUSE_ROTATION_SPEED := 0.001
@@ -16,32 +16,39 @@ enum camera_state {
 	THIRD,
 	## La camera ne fais rien
 	NULL
-} 
+}
 
 ## Vitesse de deplacement
 @export var move_speed: float = 6
 ## Attache un character body
 @export var link_player: CharacterBody3D = null 
 ## Axe X de la camera troisieme persone 
-@onready var pivot_third_camera_x = $ThirdCameraX
+@onready var pivot_third_camera_x: Node3D = $ThirdCameraX
 ## Axe y de la camera troisieme persone
-@onready var pivot_third_camera_y = $ThirdCameraX/ThirdCameraY 
+@onready var pivot_third_camera_y: Node3D = $ThirdCameraX/ThirdCameraY 
 ## Axe x de la camera premiere persone 
-@onready var pivot_first_camera_x = $FirstCameraX
+@onready var pivot_first_camera_x: Node3D = $FirstCameraX
 ## Axe y de la camera premiere persone
-@onready var pivot_first_camera_y = $FirstCameraX/FirstCameraY
+@onready var pivot_first_camera_y: Node3D = $FirstCameraX/FirstCameraY
 ## Collision de la camera
-@onready var camera_spring = $ThirdCameraX/ThirdCameraY/SpringArm3D
+@onready var camera_spring: SpringArm3D = $ThirdCameraX/ThirdCameraY/SpringArm3D
 
 ## Camera troisièmes personne
 @onready var third_camera: Camera3D = $ThirdCameraX/ThirdCameraY/SpringArm3D/ThirdCamera
 ## Camera Premiere Personne
 @onready var first_camera: Camera3D = $FirstCameraX/FirstCameraY/FirstCamera
 
+
+
 ## Distance minimum de la camera à la troisieme personne
 @export var min_dist_third_person: float = 1
 ## Distance maximum de la camera à la troisieme personne
 @export var max_dist_third_person: float = 3.5
+## Default third position
+@export var default_dist_third_person: float = 2.4
+## Marge de la camera avec le sol
+@export var margin_third_person_camera: float = 1
+
 ## Vitesse de déplacement de la caméra
 @export var move_dist_camera: float = 0.5
 
@@ -81,6 +88,9 @@ signal first_person_mode
 
 
 func _ready() -> void:
+	camera_spring.spring_length = default_dist_third_person
+	camera_spring.margin = margin_third_person_camera
+	
 	if link_player:
 		linked_camera_as_player()
 
@@ -184,6 +194,8 @@ func _physics_process(delta: float) -> void:
 	
 	var camera_length = camera_spring.get_length()
 	
+	print(camera_spring.margin)
+	
 	if Input.is_action_just_pressed(input_switch_cam):
 		if is_first_peson:
 			switch_cam(camera_state.THIRD)
@@ -260,11 +272,12 @@ func switch_cam(mode: camera_state) -> void:
 
 ## Lance la rotation de la camera
 ## @experimental
-func rotate_camera(move, pivot_y, pivot_x) -> void:
-	# TODO Changer certaine chose
+func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
+	# TODO Dois passer la rotation a basis
 	pivot_x.rotate_y(-move.x)
 	pivot_x.orthonormalize()
 	pivot_y.rotation.x = clamp(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+	pivot_y.orthonormalize()
 
 ## Blocker la camera
 func lock_camera() -> void:
