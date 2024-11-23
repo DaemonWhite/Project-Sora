@@ -100,7 +100,7 @@ func _ready() -> void:
 		switch_cam(camera_state.THIRD)
 
 ## Fixe la camera sur le joueur
-func set_tying_player(player: Node3D):
+func set_tying_player(player: Node3D) -> void:
 	link_player = player
 	if not character_default_script == link_player.get_script():
 		link_player.set_script(character_default_script)
@@ -108,18 +108,18 @@ func set_tying_player(player: Node3D):
 		link_player.auto_generate_marker()
 
 ## Reinitialise la camera premières personne
-func reset_first_camera():
+func reset_first_camera() -> void:
 	pivot_first_camera_x.set_position(Vector3.ZERO)
 	pivot_first_camera_y.set_position(Vector3.ZERO)
 
 ## Reinitialise la camera troisieme personne
-func reset_third_camera():
+func reset_third_camera() -> void:
 	pivot_third_camera_x.set_rotation(Vector3.ZERO)
 	pivot_third_camera_y.set_position(Vector3.ZERO)
 
 
 ## Lie la camera au joueur
-func linked_camera_as_player():
+func linked_camera_as_player() -> void:
 	if not character_default_script == link_player.get_script():
 		push_warning("Player dont have script but default script tying apply")
 		set_tying_player(link_player)
@@ -139,7 +139,7 @@ func linked_camera_as_player():
 		push_error("Error link_player is missing")
 
 ## Delie la camera du joueur
-func unliked_camera_as_player():
+func unliked_camera_as_player() -> void:
 	is_tying_camera = false
 	if link_player:
 		link_player.first_camera_position.remove_child(pivot_first_camera_x)
@@ -151,7 +151,7 @@ func unliked_camera_as_player():
 	else:
 		push_error("Error link_player is missing")
 
-func _input(event):
+func _input(event) -> void:
 	var scale_factor: float = min(
 			(float(get_viewport().size.x) / get_viewport().get_visible_rect().size.x),
 			(float(get_viewport().size.y) / get_viewport().get_visible_rect().size.y)
@@ -203,7 +203,7 @@ func _physics_process(delta: float) -> void:
 			
 	camera_spring.orthonormalize()
 	
-func get_input(_delta):
+func get_input(_delta) -> void:
 	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_axis(input_move_left, input_move_right)
 	move_direction.z = Input.get_axis(input_move_forward, input_move_downward)
@@ -244,7 +244,7 @@ func get_input(_delta):
 		move_and_slide()
 
 ## Change la camera de mode
-func switch_cam(mode: camera_state):
+func switch_cam(mode: camera_state) -> void:
 	match mode:
 		camera_state.FIRST:
 			first_camera.make_current()
@@ -260,26 +260,26 @@ func switch_cam(mode: camera_state):
 
 ## Lance la rotation de la camera
 ## @experimental
-func rotate_camera(move, pivot_y, pivot_x):
+func rotate_camera(move, pivot_y, pivot_x) -> void:
 	# TODO Changer certaine chose
 	pivot_x.rotate_y(-move.x)
 	pivot_x.orthonormalize()
 	pivot_y.rotation.x = clamp(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
 
 ## Blocker la camera
-func lock_camera():
+func lock_camera() -> void:
 	is_lock_cam = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 ## Blocke le déplacement de la camera
-func lock_movement():
+func lock_movement() -> void:
 	is_lock_move = true
 
 ## Deblocker la camera
-func unlock_camera():
+func unlock_camera() -> void:
 	is_lock_cam = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 ## Déblocke le déplacement de la camera 
-func unlock_movement():
+func unlock_movement() -> void:
 	is_lock_move = false

@@ -47,10 +47,10 @@ enum controller {
 func _ready() -> void:
 	set_physics_process(true)
 	
-func set_controller_mode_link(controller_mode: controller):
+func set_controller_mode_link(controller_mode: controller) -> void:
 	controller_mode_link = contoller_mode
 	
-func set_controller_mode_unlink(controller_mode: controller):
+func set_controller_mode_unlink(controller_mode: controller) -> void:
 	controller_mode_unlink = contoller_mode
 
 ## Genère automatique le marker en fonction de sa collision
@@ -78,11 +78,11 @@ func auto_generate_marker() -> void:
 		add_child(third_camera_poistion)
 
 ## Change le mode de controle quand le personnage est lier 
-func linked():
+func linked() -> void:
 	contoller_mode = controller_mode_link
 
 ## Change le mode de controle quand le personnage est delier
-func unlinked():
+func unlinked() -> void:
 	contoller_mode = controller_mode_unlink
 	velocity.x = 0
 	velocity.z = 0
@@ -159,7 +159,7 @@ func _physics_process(delta: float) -> void:
 		controller.NULL:
 			pass
 			
-func get_input(_delta):
+func get_input(_delta) -> void:
 	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_axis(move_left, move_right)
 	move_direction.z = Input.get_axis(move_forward, move_downward)
