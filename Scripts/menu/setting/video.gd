@@ -21,8 +21,8 @@ const resolutions : Dictionary = {
 
 const window_mode_array : Dictionary = {
 	"Plein écrans": 0,
-	"Fenêtré sans bordure": 0,
-	"Fenêtré": 0
+	"Fenêtré sans bordure": 1,
+	"Fenêtré": 2
 }
 
 const msaa : Dictionary = {
@@ -45,7 +45,7 @@ func _ready():
 		"{0}x{1}".format([resolution[0], resolution[1]]),
 		res_option_button
 	)
-	#select_current_option(,change_window)
+	#select_current_option( ,change_window)
 
 
 func select_current_option(option : String, option_button : OptionButton):
@@ -86,16 +86,18 @@ func on_window_mode_selected(index : int) -> void:
 		0:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-			Centre_Window()
+			
 		1:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-			Centre_Window()
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
+
 		2:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-			Centre_Window()
-			
+
+	Centre_Window()
+	
 func select_current_window_mode() -> void:
 	#ici on récupère la méthode qui permet de changer de fenêtre
 	var mode = DisplayServer.window_get_mode()
