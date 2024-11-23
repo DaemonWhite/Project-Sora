@@ -194,8 +194,6 @@ func _physics_process(delta: float) -> void:
 	
 	var camera_length = camera_spring.get_length()
 	
-	print(camera_spring.margin)
-	
 	if Input.is_action_just_pressed(input_switch_cam):
 		if is_first_peson:
 			switch_cam(camera_state.THIRD)
@@ -276,7 +274,14 @@ func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
 	# TODO Dois passer la rotation a basis
 	pivot_x.rotate_y(-move.x)
 	pivot_x.orthonormalize()
-	pivot_y.rotation.x = clamp(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+	var offset: float = 1
+	# Verifie si la rotation qui vas êtres demander n'est pas superieur à c'elle souhaiter
+	# Si superieur met offset a 0 ce qui annuelera tout déplacement
+	match clampf(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX):
+		CAMERA_X_ROT_MAX: offset = 0
+		CAMERA_X_ROT_MIN: offset = 0
+
+	pivot_y.rotate_x(move.y * offset)
 	pivot_y.orthonormalize()
 
 ## Blocker la camera
