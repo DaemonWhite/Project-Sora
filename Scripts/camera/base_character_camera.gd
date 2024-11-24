@@ -15,8 +15,8 @@ enum controller {
 	## Ne fait strictement rient
 	NULL
 }
-
-@export_category("Déplacement")
+## Si la camera ce deconnecte le script sera détacher du personnage
+@export var native: bool = true
 
 ## Puissance du saut
 @export var JUMP_IMPULSE = 5
@@ -24,7 +24,7 @@ enum controller {
 ## Vitesse de deplacement du personnage
 @export var move_speed: float = 10
 
-@export_category("Camera")
+@export_group("Camera Position")
 
 ## Mode de controle de par défaut
 @export var contoller_mode: controller = controller.GRAVITY
@@ -38,7 +38,7 @@ enum controller {
 ## Indique la posion de la camera troisieme personne avec un marker
 @export var third_camera_poistion: Marker3D
 
-@export_category("Entrée")
+@export_group("Controlle")
 
 ## Touche de déplacement avant du personnage
 @export var move_forward: String = "ui_up"
@@ -51,6 +51,9 @@ enum controller {
 
 ## Touche de saut du personnage
 @export var jump: String = "ui_accept"
+
+var link_camera: CameraHandler = null
+var move_direction := Vector3.ZERO
 
 func _ready() -> void:
 	set_physics_process(true)
@@ -86,11 +89,13 @@ func auto_generate_marker() -> void:
 		add_child(third_camera_poistion)
 
 ## Change le mode de controle quand le personnage est lier 
-func linked() -> void:
+func linked(_camera: CameraHandler) -> void:
 	contoller_mode = controller_mode_link
+	link_camera = _camera
 
 ## Change le mode de controle quand le personnage est delier
 func unlinked() -> void:
+	link_camera = null
 	contoller_mode = controller_mode_unlink
 	velocity.x = 0
 	velocity.z = 0
@@ -149,17 +154,18 @@ func _physics_process(delta: float) -> void:
 			get_input(delta)
 			
 			if not is_on_floor():
-				velocity.y -= GRAVITY * delta
-			elif is_on_floor() and Input.is_action_just_released(jump):
+				velocity.y = -GRAVITY * delta
+			elif is_on_floor() and Input.is_action_just_pressed(jump):
 				velocity.y = JUMP_IMPULSE
 				
 			move_and_slide()
 		controller.MOVEMENT_CAMERA:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
-			elif is_on_floor() and Input.is_action_just_released(jump):
+			elif is_on_floor() and Input.is_action_just_pressed(jump):
 				velocity.y = JUMP_IMPULSE
 				
+			get_input(delta)
 		controller.GRAVITY:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
@@ -168,12 +174,26 @@ func _physics_process(delta: float) -> void:
 			pass
 			
 func get_input(_delta) -> void:
-	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_axis(move_left, move_right)
 	move_direction.z = Input.get_axis(move_forward, move_downward)
+
+	## TODO Corriger le déplacement
+
+	if link_camera and controller.MOVEMENT_CAMERA == contoller_mode:
+		var orientation_x: float = link_camera.pivot_third_camera_x.rotation.y
+		if (link_camera.camera_state.FIRST == link_camera.current_camera_mode):
+			orientation_x = rotation.y
+		elif (link_camera.camera_state.FIRST == link_camera.current_camera_mode):
+			orientation_x = link_camera.pivot_first_camera_x.rotation.y
+
+		move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
+		
 	move_direction.normalized()
-	
-	velocity = move_direction * move_speed
+	velocity = Vector3( 
+		move_direction.x * move_speed,
+		velocity.y,
+		move_direction.z * move_speed
+	)
 
 ## Permet de connaitre la position de la camera premiere personne
 func camera_first_position() -> Vector3:

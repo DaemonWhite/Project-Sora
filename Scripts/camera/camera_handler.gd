@@ -2,6 +2,12 @@ class_name CameraHandler
 extends CharacterBody3D
 ## Script qui permet de controller la camera
 
+## TODO Ajouter FOV
+
+## Ce qui suit n'est pas n'éssaisaire avant longtemps	
+## TODO Ajouter la suivie d'une courbe
+## TODO Ajouter la suivie de point matrixiel
+
 ## Vitesse de la camera
 const CAMERA_MOUSE_ROTATION_SPEED := 0.001
 ## Angle minimum de la camera à la premiere personne
@@ -22,7 +28,7 @@ enum camera_state {
 	NULL
 }
 
-@export_category("Camera Third")
+@export_group("Camera Third")
 ## Axe X de la camera troisieme persone 
 @onready var pivot_third_camera_x: Node3D = $ThirdCameraX
 ## Axe y de la camera troisieme persone
@@ -43,7 +49,7 @@ enum camera_state {
 ## Marge de la camera avec le sol
 @export var margin_third_person_camera: float = 1
 
-@export_category("Camera Frist")
+@export_group("Camera Frist")
 ## Axe x de la camera premiere persone 
 @onready var pivot_first_camera_x: Node3D = $FirstCameraX
 ## Axe y de la camera premiere persone
@@ -55,12 +61,12 @@ enum camera_state {
 ## Attache un character body
 @export var link_player: CharacterBody3D = null
 ## Chemin du scrip gererique de joueur
-@export var character_default_script: Script = SimpleCharacterCamera
+var character_default_script: Script = BaseCharacterCamera
 
 ## Si la camera est fixer au personnage ou non
 var is_tying_camera: bool = false
 
-@export_category("Control")
+@export_group("Control")
 
 ## Vitesse de deplacement de la caméra
 @export var move_speed: float = 6
@@ -81,7 +87,7 @@ var is_tying_camera: bool = false
 ## Touche pour faire reculer la camera
 @export var input_unzoom: String = "wheel_down"
 
-@export_category("Status de la camera")
+@export_group("Status de la camera")
 
 ## Si la camera est verrouller 
 @export var is_lock_cam: bool = true
@@ -116,11 +122,15 @@ func _ready() -> void:
 
 ## Fixe la camera sur le joueur
 func set_tying_player(player: Node3D) -> void:
+	
+	if not (player is SimpleCharacterCamera):
+		push_warning("Player dont have script but default script tying apply BaseCharacterCamera")
+		player.set_script(character_default_script)
+		player.set_physics_process(true)
+		player.auto_generate_marker()
+		player.native = false
+
 	link_player = player
-	if not character_default_script == link_player.get_script():
-		link_player.set_script(character_default_script)
-		link_player.set_physics_process(true)
-		link_player.auto_generate_marker()
 
 ## Reinitialise la camera premières personne
 func reset_first_camera() -> void:
@@ -135,8 +145,8 @@ func reset_third_camera() -> void:
 
 ## Lie la camera au joueur
 func linked_camera_as_player() -> void:
-	if not character_default_script == link_player.get_script():
-		push_warning("Player dont have script but default script tying apply")
+	# Verifier si link player est connectable si non il rattache automatiquement
+	if not (link_player is BaseCharacterCamera):
 		set_tying_player(link_player)
 	
 	if link_player:
@@ -144,7 +154,7 @@ func linked_camera_as_player() -> void:
 
 		remove_child(pivot_first_camera_x)
 		link_player.first_camera_position.add_child(pivot_first_camera_x)
-		link_player.linked()
+		link_player.linked(self)
 		reset_first_camera()
 		reset_third_camera()
 		velocity = link_player.velocity
@@ -219,44 +229,29 @@ func _physics_process(delta: float) -> void:
 	camera_spring.orthonormalize()
 	
 func get_input(_delta) -> void:
-	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_axis(input_move_left, input_move_right)
-	move_direction.z = Input.get_axis(input_move_forward, input_move_downward)
-	move_direction.normalized()
-	
-	var orientation_x: float = pivot_third_camera_x.rotation.y
-		
-	if (camera_state.FIRST == current_camera_mode) and is_tying_camera:
-		orientation_x = link_player.rotation.y
-	elif (camera_state.FIRST == current_camera_mode):
-		orientation_x = pivot_first_camera_x.rotation.y
-	
-	move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
-	
 	if is_tying_camera:
-		link_player.velocity = Vector3(
-			move_direction.x * move_speed,
-			link_player.velocity.y, 
-			move_direction.z * move_speed
-		)
-		
-		if move_direction.z != 0:
-			if not (camera_state.FIRST == current_camera_mode): 
-				link_player.global_transform.basis = lerp(
-					link_player.global_transform.basis,
-					pivot_third_camera_x.basis,
-					0.5 + _delta
-				)
-		
 		link_player.move_and_slide()
 		position = link_player.position
 	else:
+		var move_direction := Vector3.ZERO
+		move_direction.x = Input.get_axis(input_move_left, input_move_right)
+		move_direction.z = Input.get_axis(input_move_forward, input_move_downward)
+		move_direction.normalized()
+		
+		var orientation_x: float = pivot_third_camera_x.rotation.y
+			
+		if (camera_state.FIRST == current_camera_mode):
+			orientation_x = link_player.rotation.y
+		elif (camera_state.FIRST == current_camera_mode):
+			orientation_x = pivot_first_camera_x.rotation.y
+		
+		move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
 		velocity = Vector3(
-			move_direction.x * move_speed, 
-			velocity.y, 
+			move_direction.x * move_speed,
+			velocity.y,
 			move_direction.z * move_speed
 		)
-		move_and_slide()
+		move_and_slide()		
 
 ## Change la camera de mode
 func switch_cam(mode: camera_state) -> void:
@@ -270,7 +265,6 @@ func switch_cam(mode: camera_state) -> void:
 			lock_movement()
 			lock_camera()
 		camera_state.OVERLAY_MENU:
-			print("im_overlay menu")
 			lock_camera()
 			lock_movement()
 		camera_state.NULL:

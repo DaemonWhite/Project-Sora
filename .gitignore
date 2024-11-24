@@ -14,4 +14,8 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# Build ignore
 export/*
+
+# Vscode ignore
+.vscode/
