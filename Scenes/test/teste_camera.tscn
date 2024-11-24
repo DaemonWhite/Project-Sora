@@ -36,6 +36,7 @@ margin_third_person_camera = 0.01
 link_player = NodePath("../Scare")
 is_lock_cam = false
 is_lock_move = false
+current_camera_mode = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)

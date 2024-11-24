@@ -10,10 +10,14 @@ const CAMERA_X_ROT_MIN = deg_to_rad(-89)
 const CAMERA_X_ROT_MAX = deg_to_rad(70) 
 
 enum camera_state {
-	## Premiere personne
+	## Camera en mode premiere personne
 	FIRST,
-	## Seconde personne
+	## Camera en mode seconde personne
 	THIRD,
+	## Camera en mode menu
+	MENU,
+	## Camera en mode overlay emnu
+	OVERLAY_MENU,
 	## La camera ne fais rien
 	NULL
 }
@@ -83,14 +87,12 @@ var is_tying_camera: bool = false
 @export var is_lock_cam: bool = true
 ## Si la camera peut ce déplacer
 @export var is_lock_move: bool = true
-## Indique si la camera est a la premiere personne
-@export var is_first_peson: bool = false
 
 ## Indique dans quelle etat est la camera
-@export var lock_camera_mode: camera_state = camera_state.NULL
+@export var current_camera_mode: camera_state = camera_state.NULL
 
 ## Signal qui prévient du changement d'etat de la camera
-signal first_person_mode
+signal change_camera_mode
 
 
 func _ready() -> void:
@@ -99,6 +101,8 @@ func _ready() -> void:
 	
 	if link_player:
 		linked_camera_as_player()
+
+	switch_cam(current_camera_mode)
 
 	if is_lock_cam:
 		lock_camera()
@@ -109,11 +113,6 @@ func _ready() -> void:
 		lock_movement()
 	else:
 		unlock_movement()
-		
-	if is_first_peson:
-		switch_cam(camera_state.FIRST)
-	else:
-		switch_cam(camera_state.THIRD)
 
 ## Fixe la camera sur le joueur
 func set_tying_player(player: Node3D) -> void:
@@ -174,7 +173,7 @@ func _input(event) -> void:
 	)
 	
 	if event is InputEventMouseMotion and not is_lock_cam:
-		if is_first_peson:
+		if camera_state.FIRST == current_camera_mode:
 			if is_tying_camera and not is_lock_move:
 				rotate_camera(
 					event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
@@ -201,20 +200,20 @@ func _physics_process(delta: float) -> void:
 	var camera_length = camera_spring.get_length()
 	
 	if Input.is_action_just_pressed(input_switch_cam):
-		if is_first_peson:
+		if camera_state.FIRST == current_camera_mode:
 			switch_cam(camera_state.THIRD)
 		else:
 			switch_cam(camera_state.FIRST)
 	
 	if Input.is_action_just_released(input_zoom) and max_dist_third_person >= camera_length:
 		camera_spring.set_length(camera_length + move_dist_camera)
-		if is_first_peson:
+		if camera_state.FIRST == current_camera_mode:
 			switch_cam(camera_state.THIRD)
 		
 	if Input.is_action_just_released(input_unzoom) and min_dist_third_person < camera_length:
 		camera_spring.set_length(camera_length - move_dist_camera)
 		
-	if not is_first_peson and min_dist_third_person > camera_length:
+	if not (camera_state.FIRST == current_camera_mode) and min_dist_third_person > camera_length:
 		switch_cam(camera_state.FIRST)
 			
 	camera_spring.orthonormalize()
@@ -227,9 +226,9 @@ func get_input(_delta) -> void:
 	
 	var orientation_x: float = pivot_third_camera_x.rotation.y
 		
-	if is_first_peson and is_tying_camera:
+	if (camera_state.FIRST == current_camera_mode) and is_tying_camera:
 		orientation_x = link_player.rotation.y
-	elif is_first_peson:
+	elif (camera_state.FIRST == current_camera_mode):
 		orientation_x = pivot_first_camera_x.rotation.y
 	
 	move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
@@ -242,7 +241,7 @@ func get_input(_delta) -> void:
 		)
 		
 		if move_direction.z != 0:
-			if not is_first_peson: 
+			if not (camera_state.FIRST == current_camera_mode): 
 				link_player.global_transform.basis = lerp(
 					link_player.global_transform.basis,
 					pivot_third_camera_x.basis,
@@ -264,15 +263,22 @@ func switch_cam(mode: camera_state) -> void:
 	match mode:
 		camera_state.FIRST:
 			first_camera.make_current()
-			is_first_peson = true
 		camera_state.THIRD:
 			third_camera.make_current()
-			is_first_peson = false
+		camera_state.MENU:
+			first_camera.make_current()
+			lock_movement()
+			lock_camera()
+		camera_state.OVERLAY_MENU:
+			print("im_overlay menu")
+			lock_camera()
+			lock_movement()
 		camera_state.NULL:
 			lock_camera()
 			lock_movement()
 
-	first_person_mode.emit()
+	current_camera_mode = mode
+	change_camera_mode.emit()
 
 ## Lance la rotation de la camera
 func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
