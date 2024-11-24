@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://qwe8kj77qs5a"]
+[gd_scene load_steps=2 format=3 uid="uid://qwe8kj77qs5a"]
 
 [ext_resource type="Script" path="res://Scripts/camera/camera_handler.gd" id="1_7hm6g"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_b26h7"]
-custom_solver_bias = 1.0
-margin = 0.001
-radius = 0.05
 
 [node name="CameraHandler" type="CharacterBody3D"]
 motion_mode = 1
@@ -17,9 +12,10 @@ script = ExtResource("1_7hm6g")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="ThirdCameraX/ThirdCameraY"]
 process_mode = 3
-shape = SubResource("SphereShape3D_b26h7")
 
-[node name="ThirdCamera" type="Camera3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
+[node name="TMPHack" type="Node3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
+
+[node name="ThirdCamera" type="Camera3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D/TMPHack"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.147978, 0)
 
 [node name="FirstCameraX" type="Node3D" parent="."]

@@ -18,27 +18,17 @@ enum camera_state {
 	NULL
 }
 
-## Vitesse de deplacement
-@export var move_speed: float = 6
-## Attache un character body
-@export var link_player: CharacterBody3D = null 
+@export_category("Camera Third")
 ## Axe X de la camera troisieme persone 
 @onready var pivot_third_camera_x: Node3D = $ThirdCameraX
 ## Axe y de la camera troisieme persone
 @onready var pivot_third_camera_y: Node3D = $ThirdCameraX/ThirdCameraY 
-## Axe x de la camera premiere persone 
-@onready var pivot_first_camera_x: Node3D = $FirstCameraX
-## Axe y de la camera premiere persone
-@onready var pivot_first_camera_y: Node3D = $FirstCameraX/FirstCameraY
 ## Collision de la camera
 @onready var camera_spring: SpringArm3D = $ThirdCameraX/ThirdCameraY/SpringArm3D
-
 ## Camera troisièmes personne
-@onready var third_camera: Camera3D = $ThirdCameraX/ThirdCameraY/SpringArm3D/ThirdCamera
-## Camera Premiere Personne
-@onready var first_camera: Camera3D = $FirstCameraX/FirstCameraY/FirstCamera
-
-
+@onready var third_camera: Camera3D = $ThirdCameraX/ThirdCameraY/SpringArm3D/TMPHack/ThirdCamera
+## Vitesse de déplacement du zoom de la caméra
+@export var move_dist_camera: float = 0.5
 
 ## Distance minimum de la camera à la troisieme personne
 @export var min_dist_third_person: float = 1
@@ -49,8 +39,27 @@ enum camera_state {
 ## Marge de la camera avec le sol
 @export var margin_third_person_camera: float = 1
 
-## Vitesse de déplacement de la caméra
-@export var move_dist_camera: float = 0.5
+@export_category("Camera Frist")
+## Axe x de la camera premiere persone 
+@onready var pivot_first_camera_x: Node3D = $FirstCameraX
+## Axe y de la camera premiere persone
+@onready var pivot_first_camera_y: Node3D = $FirstCameraX/FirstCameraY
+## Camera Premiere Personne
+@onready var first_camera: Camera3D = $FirstCameraX/FirstCameraY/FirstCamera
+
+@export_category("Link player")
+## Attache un character body
+@export var link_player: CharacterBody3D = null
+## Chemin du scrip gererique de joueur
+@export var character_default_script: Script = SimpleCharacterCamera
+
+## Si la camera est fixer au personnage ou non
+var is_tying_camera: bool = false
+
+@export_category("Control")
+
+## Vitesse de deplacement de la caméra
+@export var move_speed: float = 6
 
 ## Touche pour avancer la camera
 @export var input_move_forward: String = "ui_up"
@@ -68,20 +77,17 @@ enum camera_state {
 ## Touche pour faire reculer la camera
 @export var input_unzoom: String = "wheel_down"
 
+@export_category("Status de la camera")
+
 ## Si la camera est verrouller 
 @export var is_lock_cam: bool = true
 ## Si la camera peut ce déplacer
 @export var is_lock_move: bool = true
 ## Indique si la camera est a la premiere personne
 @export var is_first_peson: bool = false
+
 ## Indique dans quelle etat est la camera
 @export var lock_camera_mode: camera_state = camera_state.NULL
-
-## Chemin du scrip gererique de joueur
-var character_default_script = load("res://Scripts/camera/character_camera.gd")
-
-## Si la camera est fixer au personnage ou non
-var is_tying_camera: bool = false
 
 ## Signal qui prévient du changement d'etat de la camera
 signal first_person_mode
@@ -269,17 +275,17 @@ func switch_cam(mode: camera_state) -> void:
 	first_person_mode.emit()
 
 ## Lance la rotation de la camera
-## @experimental
 func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
-	# TODO Dois passer la rotation a basis
-	pivot_x.rotate_y(-move.x)
-	pivot_x.orthonormalize()
+	
 	var offset: float = 1
 	# Verifie si la rotation qui vas êtres demander n'est pas superieur à c'elle souhaiter
 	# Si superieur met offset a 0 ce qui annuelera tout déplacement
 	match clampf(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX):
 		CAMERA_X_ROT_MAX: offset = 0
 		CAMERA_X_ROT_MIN: offset = 0
+		
+	pivot_x.rotate_y(-move.x)
+	pivot_x.orthonormalize()
 
 	pivot_y.rotate_x(move.y * offset)
 	pivot_y.orthonormalize()
