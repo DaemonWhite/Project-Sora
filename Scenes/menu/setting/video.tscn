@@ -1,9 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn4ysq0gnht1x"]
+[gd_scene load_steps=7 format=3 uid="uid://bn4ysq0gnht1x"]
 
 [ext_resource type="Script" path="res://Scripts/menu/setting/video.gd" id="1_w1ufn"]
 [ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="2_5woid"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5rxos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r31ps"]
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro37t"]
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6amg3"]
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -72,17 +81,13 @@ text = "Retour"
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.144
-anchor_top = 0.494
-anchor_right = 0.886
-anchor_bottom = 0.725
-offset_left = -165.888
-offset_top = -0.112
-offset_right = 131.328
-offset_bottom = 0.199982
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.781
+offset_bottom = -13.088
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.498)
+color = Color(0.230315, 0.230315, 0.230315, 0.498)
 
 [node name="Resolution" type="Label" parent="ColorRect"]
 material = SubResource("CanvasItemMaterial_5rxos")
@@ -99,6 +104,7 @@ offset_left = 112.0
 offset_top = 21.0
 offset_right = 293.0
 offset_bottom = 50.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_r31ps")
 
 [node name="Affichage" type="Label" parent="ColorRect"]
 layout_mode = 0
@@ -114,6 +120,7 @@ offset_left = 163.0
 offset_top = 77.0
 offset_right = 345.0
 offset_bottom = 104.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ro37t")
 
 [node name="VSync_CheckBox" type="CheckBox" parent="ColorRect"]
 layout_mode = 0
@@ -137,6 +144,23 @@ offset_left = 575.0
 offset_top = 21.0
 offset_right = 756.0
 offset_bottom = 50.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_6amg3")
+
+[node name="TAA_CheckBox" type="CheckBox" parent="ColorRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 80.0
+offset_right = 570.0
+offset_bottom = 104.0
+text = "TAA"
+
+[node name="FXAA_CheckBox" type="CheckBox" parent="ColorRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 120.0
+offset_right = 570.0
+offset_bottom = 144.0
+text = "FXAA"
 
 [connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
 [connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
@@ -144,3 +168,5 @@ offset_bottom = 50.0
 [connection signal="item_selected" from="ColorRect/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="ColorRect/VSync_CheckBox" to="." method="_on_v_sync_check_box_toggled"]
 [connection signal="item_selected" from="ColorRect/OptionButton3" to="." method="_on_option_button_3_item_selected"]
+[connection signal="toggled" from="ColorRect/TAA_CheckBox" to="." method="_on_taa_check_box_toggled"]
+[connection signal="toggled" from="ColorRect/FXAA_CheckBox" to="." method="_on_fxaa_check_box_toggled"]
