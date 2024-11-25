@@ -102,9 +102,8 @@ P Free Came mode"
 [node name="ColorRect" type="ColorRect" parent="Control/Label"]
 layout_mode = 0
 offset_left = -6.0
-offset_top = -1.0
 offset_right = 208.0
-offset_bottom = 232.0
+offset_bottom = 233.0
 color = Color(0, 0, 0, 0.270588)
 
 [node name="Scare" type="CharacterBody3D" parent="."]

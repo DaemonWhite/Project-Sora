@@ -123,7 +123,7 @@ func _ready() -> void:
 ## Fixe la camera sur le joueur
 func set_tying_player(player: Node3D) -> void:
 	
-	if not (player is SimpleCharacterCamera):
+	if not (player is BaseCharacterCamera):
 		push_warning("Player dont have script but default script tying apply BaseCharacterCamera")
 		player.set_script(character_default_script)
 		player.set_physics_process(true)
@@ -242,8 +242,6 @@ func get_input(_delta) -> void:
 			
 		if (camera_state.FIRST == current_camera_mode):
 			orientation_x = link_player.rotation.y
-		elif (camera_state.FIRST == current_camera_mode):
-			orientation_x = pivot_first_camera_x.rotation.y
 		
 		move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
 		velocity = Vector3(
