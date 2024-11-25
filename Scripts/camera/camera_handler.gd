@@ -28,6 +28,11 @@ enum camera_state {
 	NULL
 }
 
+
+@export_range(1, 179, 0.1) var FOV_first_person: float = 75
+@export_range(1, 179, 0.1) var FOV_third_person: float = 75
+
+
 @export_group("Camera Third")
 ## Axe X de la camera troisieme persone 
 @onready var pivot_third_camera_x: Node3D = $ThirdCameraX
@@ -105,6 +110,9 @@ func _ready() -> void:
 	camera_spring.spring_length = default_dist_third_person
 	camera_spring.margin = margin_third_person_camera
 	
+	first_camera.fov = FOV_first_person
+	third_camera.fov = FOV_third_person
+
 	if link_player:
 		linked_camera_as_player()
 

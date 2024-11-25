@@ -5,6 +5,7 @@
 [node name="CameraHandler" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_7hm6g")
+FOV_first_person = 179.0
 
 [node name="ThirdCameraX" type="Node3D" parent="."]
 
