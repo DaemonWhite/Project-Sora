@@ -47,12 +47,20 @@ const vsync : Array = [
 ]
 
 func _ready():
+	var liste_ecran : Array
+	var nb_ecran = DisplayServer.get_screen_count()
+	for i in range(0,nb_ecran):
+		liste_ecran.push_back(["Ecran : {0}".format([i+1]), i])
+
+	
 	change_window.item_selected.connect(on_window_mode_selected)
 	##add_resolutions()
 	add_name_item_for_option_button(resolutions, res_option_button)
 	add_name_item_for_option_button(window_mode_array, change_window)
 	add_name_item_for_option_button(msaa, change_msaa)
 	add_name_item_for_option_button(vsync, change_vsync)
+	add_name_item_for_option_button(liste_ecran, change_ecran)
+	
 	select_current_window_mode()
 	var resolution = get_window().get_size()
 	select_current_option(
@@ -65,14 +73,13 @@ func _ready():
 	var v_sync = ProjectSettings.get_setting("display/window/vsync/vsync_mode")
 	select_current_option(vsync[v_sync][0], change_vsync)
 	
-	var selection_ecran = ProjectSettings.get_setting("display/window/size/initial_position_type")
-	#select_current_option(ecran[selection_ecran][0], change_ecran)
+	var ecran_courant = get_viewport().get_window().current_screen
+	select_current_option(liste_ecran[ecran_courant][0], change_ecran)
 	
 	change_TAA.button_pressed = ProjectSettings.get_setting("rendering/anti_aliasing/quality/use_taa")
 	
 	change_FXAA.button_pressed = ProjectSettings.get_setting("rendering/anti_aliasing/quality/screen_space_aa")
 
-	get_ecran()
 
 func select_current_option(option : String, option_button : OptionButton):
 	for i in range(0,option_button.item_count):
@@ -80,17 +87,17 @@ func select_current_option(option : String, option_button : OptionButton):
 		if option == option_button.get_item_text(i):
 			option_button.select(i)
 
-func add_resolutions():
-	var current_resolution = get_window().get_size()
-	var ID = 0
-	
-	for resolution_size in resolutions:
-		res_option_button.add_item(resolution_size)
-
-		if resolutions[resolution_size] == current_resolution:
-			res_option_button.select(ID)
-		
-		ID += 1
+#func add_resolutions():
+	#var current_resolution = get_window().get_size()
+	#var ID = 0
+	#
+	#for resolution_size in resolutions:
+		#res_option_button.add_item(resolution_size)
+#
+		#if resolutions[resolution_size] == current_resolution:
+			#res_option_button.select(ID)
+		#
+		#ID += 1
 
 func _on_option_button_item_selected(index : int):
 	get_window().set_size(resolutions[index][1])
@@ -151,14 +158,8 @@ func _on_taa_check_box_toggled(toggled_on: bool) -> void:
 func _on_fxaa_check_box_toggled(toggled_on: bool) -> void:
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/screen_space_aa", toggled_on)
 
-func get_ecran():
-	var nb_ecran = DisplayServer.get_screen_count()
-	
-	for i in range(0,nb_ecran):
-		change_ecran.add_item("Ecran : {0}".format([i+1]))
-
 func _on_selec_ecran_option_button_4_item_selected(index: int) -> void:
-	# get_viewportretourne la vue qui elle à pour réfèrence l'écran principale
+	# get_viewport retourne la vue qui elle à pour réfèrence l'écran principale
 	# get_window nous permet donc de récupérer la fenètres principale
 	get_viewport().get_window().current_screen = index
 
