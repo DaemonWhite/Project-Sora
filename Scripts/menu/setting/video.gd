@@ -158,7 +158,9 @@ func get_ecran():
 		change_ecran.add_item("Ecran : {0}".format([i+1]))
 
 func _on_selec_ecran_option_button_4_item_selected(index: int) -> void:
-	Window.current_screen = index
+	# get_viewportretourne la vue qui elle à pour réfèrence l'écran principale
+	# get_window nous permet donc de récupérer la fenètres principale
+	get_viewport().get_window().current_screen = index
 
 func _on_retour_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu/main_menu.tscn")
