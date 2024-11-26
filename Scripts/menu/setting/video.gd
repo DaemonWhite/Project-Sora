@@ -10,6 +10,8 @@ extends Control
 
 @onready var change_FXAA : CheckBox = $ColorRect/FXAA_CheckBox
 
+@onready var change_vsync : = $ColorRect/VSync_OptionButton4
+
 const resolutions : Array = [
 	["2560x1440", Vector2i(2560,1440)],
 	["1920x1080", Vector2i(1920,1080)],
@@ -37,6 +39,12 @@ const msaa : Array = [
 	["MSAA 8X", Viewport.MSAA_8X]
 ]
  
+const vsync : Array = [
+	["Disable", DisplayServer.VSYNC_DISABLED],
+	["Enable", DisplayServer.VSYNC_ENABLED],
+	["Adaptive", DisplayServer.VSYNC_ADAPTIVE],
+	["Mailbox", DisplayServer.VSYNC_MAILBOX]
+]
 
 func _ready():
 	change_window.item_selected.connect(on_window_mode_selected)
@@ -44,6 +52,7 @@ func _ready():
 	add_name_item_for_option_button(resolutions, res_option_button)
 	add_name_item_for_option_button(window_mode_array, change_window)
 	add_name_item_for_option_button(msaa, change_msaa)
+	add_name_item_for_option_button(vsync, change_vsync)
 	select_current_window_mode()
 	var resolution = get_window().get_size()
 	select_current_option(
@@ -53,10 +62,12 @@ func _ready():
 	var aliasing = ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d")
 	select_current_option(msaa[aliasing][0] ,change_msaa)
 	
+	var v_sync = ProjectSettings.get_setting("display/window/vsync/vsync_mode")
+	select_current_option(vsync[v_sync][0], change_vsync)
+	
 	change_TAA.button_pressed = ProjectSettings.get_setting("rendering/anti_aliasing/quality/use_taa")
 	
 	change_FXAA.button_pressed = ProjectSettings.get_setting("rendering/anti_aliasing/quality/screen_space_aa")
-
 
 func select_current_option(option : String, option_button : OptionButton):
 	for i in range(0,option_button.item_count):
@@ -133,11 +144,15 @@ func _on_audio_pressed():
 func _on_graphisme_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu/setting/video.tscn")
 
-func _on_v_sync_check_box_toggled(toggled_on):
-	if toggled_on:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-	else:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+#func _on_v_sync_check_box_toggled(toggled_on):
+	#if toggled_on:
+		#DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	#else:
+	#DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+func _on_v_sync_option_button_4_item_selected(index: int) -> void:
+	ProjectSettings.set_setting("display/window/vsync/vsync_mode", vsync[index][1])
+	print("bonjout")
 
 func _on_option_button_3_item_selected(index : int) -> void:
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", msaa[index][1])

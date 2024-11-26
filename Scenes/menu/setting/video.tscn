@@ -94,7 +94,7 @@ material = SubResource("CanvasItemMaterial_5rxos")
 layout_mode = 0
 offset_left = 5.0
 offset_top = 23.0
-offset_right = 117.0
+offset_right = 105.0
 offset_bottom = 46.0
 text = "Résolution :"
 
@@ -121,14 +121,6 @@ offset_top = 77.0
 offset_right = 345.0
 offset_bottom = 104.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_ro37t")
-
-[node name="VSync_CheckBox" type="CheckBox" parent="ColorRect"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 120.0
-offset_right = 84.0
-offset_bottom = 151.0
-text = "VSync"
 
 [node name="MSAA" type="Label" parent="ColorRect"]
 layout_mode = 0
@@ -162,11 +154,26 @@ offset_right = 570.0
 offset_bottom = 144.0
 text = "FXAA"
 
+[node name="VSync" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 130.0
+offset_right = 59.0
+offset_bottom = 153.0
+text = "VSync :"
+
+[node name="VSync_OptionButton4" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 130.0
+offset_right = 252.0
+offset_bottom = 157.0
+
 [connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
 [connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]
 [connection signal="item_selected" from="ColorRect/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="toggled" from="ColorRect/VSync_CheckBox" to="." method="_on_v_sync_check_box_toggled"]
 [connection signal="item_selected" from="ColorRect/OptionButton3" to="." method="_on_option_button_3_item_selected"]
 [connection signal="toggled" from="ColorRect/TAA_CheckBox" to="." method="_on_taa_check_box_toggled"]
 [connection signal="toggled" from="ColorRect/FXAA_CheckBox" to="." method="_on_fxaa_check_box_toggled"]
+[connection signal="item_selected" from="ColorRect/VSync_OptionButton4" to="." method="_on_v_sync_option_button_4_item_selected"]
