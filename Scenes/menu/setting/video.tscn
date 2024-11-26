@@ -81,10 +81,13 @@ text = "Retour"
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.248
 anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.781
-offset_bottom = -13.088
+anchor_right = 0.783
+anchor_bottom = 0.5
+offset_left = -285.696
+offset_right = 249.984
+offset_bottom = 195.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.230315, 0.230315, 0.230315, 0.498)
@@ -169,6 +172,21 @@ offset_top = 130.0
 offset_right = 252.0
 offset_bottom = 157.0
 
+[node name="Selection_ecran" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 23.0
+offset_right = 927.0
+offset_bottom = 46.0
+text = "Sélection écran :"
+
+[node name="Selec_ecran_OptionButton4" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 935.0
+offset_top = 23.0
+offset_right = 1117.0
+offset_bottom = 50.0
+
 [connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
 [connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]
@@ -177,3 +195,4 @@ offset_bottom = 157.0
 [connection signal="toggled" from="ColorRect/TAA_CheckBox" to="." method="_on_taa_check_box_toggled"]
 [connection signal="toggled" from="ColorRect/FXAA_CheckBox" to="." method="_on_fxaa_check_box_toggled"]
 [connection signal="item_selected" from="ColorRect/VSync_OptionButton4" to="." method="_on_v_sync_option_button_4_item_selected"]
+[connection signal="item_selected" from="ColorRect/Selec_ecran_OptionButton4" to="." method="_on_selec_ecran_option_button_4_item_selected"]
