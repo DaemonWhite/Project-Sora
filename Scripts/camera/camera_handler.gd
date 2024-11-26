@@ -129,10 +129,13 @@ var is_tying_camera: bool = false
 
 ## Signal qui prévient du changement d'etat de la camera
 signal change_camera_mode
+## Previen quand la rotation est blocker ou non
+signal change_lock_camera
+## Previent quand les mouvement sont blocker ou non
+signal change_movement_camera
 
-## Initilise la camera avec ces différentres proprieter
+## Initialise la camera avec ces différentres proprieter
 func _ready() -> void:
-	print(fov_first)
 	first_camera.fov = fov_first
 	third_camera.fov = fov_third
 		
@@ -335,17 +338,21 @@ func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
 ## Blocker la camera
 func lock_camera() -> void:
 	is_lock_cam = true
+	change_lock_camera.emit(is_lock_cam)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 ## Blocke le déplacement de la camera
 func lock_movement() -> void:
 	is_lock_move = true
+	change_camera_mode.emit(is_lock_move)
 
 ## Deblocker la camera
 func unlock_camera() -> void:
 	is_lock_cam = false
+	change_lock_camera.emit(is_lock_cam)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 ## Déblocke le déplacement de la camera 
 func unlock_movement() -> void:
 	is_lock_move = false
+	change_movement_camera.emit(is_lock_cam)
