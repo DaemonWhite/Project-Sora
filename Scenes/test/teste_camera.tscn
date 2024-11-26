@@ -69,26 +69,27 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -355.0
-offset_bottom = 101.0
+offset_bottom = 135.0
 grow_horizontal = 0
 text = "1,2,3,4 Utilise une grephe auomatisée
 5 Utilise une grephe manuel. 
 5 Doit tj ce déplacer après sa prise de position
-il teste le mode vue isometrique"
+il teste le mode vue isometrique
+5 Utile SimpleCharacter plutot que base"
 
 [node name="ColorRect2" type="ColorRect" parent="Control/Label2"]
 layout_mode = 0
 offset_left = -4.0
 offset_right = 361.0
-offset_bottom = 119.0
+offset_bottom = 139.0
 color = Color(0, 0, 0, 0.270588)
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 9.0
-offset_right = 291.0
-offset_bottom = 340.0
+offset_right = 209.0
+offset_bottom = 244.0
 text = "NUMPAD 1 Scare
 NUMPAD 2 Capsule
 NUMPAD 3 Shepre

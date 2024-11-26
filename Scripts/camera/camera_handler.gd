@@ -13,7 +13,7 @@ const CAMERA_MOUSE_ROTATION_SPEED := 0.001
 ## Angle minimum de la camera à la premiere personne
 const CAMERA_X_ROT_MIN = deg_to_rad(-89)
 ## Angle maximum de la camera à la premiere personne 
-const CAMERA_X_ROT_MAX = deg_to_rad(70) 
+const CAMERA_X_ROT_MAX = deg_to_rad(70)
 
 enum camera_state {
 	## Camera en mode premiere personne
@@ -28,9 +28,34 @@ enum camera_state {
 	NULL
 }
 
+# Contient le FOV de la camera
+var _fov_first: float = 75
+# Contien le FOV de la camera troisieme risque de disparaitre
+var _fov_third: float = 75
 
-@export_range(1, 179, 0.1) var FOV_first_person: float = 75
-@export_range(1, 179, 0.1) var FOV_third_person: float = 75
+## Fov de la camera a la premiere personne
+@export_range(1, 179, 0.1) var fov_first: float = 75:
+	get:
+		return _fov_first
+	set(fov_first):
+		if first_camera:
+			first_camera.set_fov(fov_first)
+
+		_fov_first = fov_first
+
+## Fov de la camera à la troisieme personne
+@export_range(1, 179, 0.1) var fov_third: float = 75:
+	get:
+		return _fov_third
+	set(fov_third):
+		if third_camera:
+			third_camera.set_fov(_fov_third)
+		_fov_third = fov_third
+
+## Rotation sur l'axe vertical de la camera
+@export_range(0.1, 5, 0.1) var camera_speed_axe_x: float = 1
+## Rotation sur l'axe horizontal de la camera
+@export_range(0.1, 5, 0.1) var camera_speed_axe_y: float = 1
 
 
 @export_group("Camera Third")
@@ -62,7 +87,7 @@ enum camera_state {
 ## Camera Premiere Personne
 @onready var first_camera: Camera3D = $FirstCameraX/FirstCameraY/FirstCamera
 
-@export_category("Link player")
+@export_group("Link player")
 ## Attache un character body
 @export var link_player: CharacterBody3D = null
 ## Chemin du scrip gererique de joueur
@@ -105,13 +130,14 @@ var is_tying_camera: bool = false
 ## Signal qui prévient du changement d'etat de la camera
 signal change_camera_mode
 
-
+## Initilise la camera avec ces différentres proprieter
 func _ready() -> void:
+	print(fov_first)
+	first_camera.fov = fov_first
+	third_camera.fov = fov_third
+		
 	camera_spring.spring_length = default_dist_third_person
 	camera_spring.margin = margin_third_person_camera
-	
-	first_camera.fov = FOV_first_person
-	third_camera.fov = FOV_third_person
 
 	if link_player:
 		linked_camera_as_player()
@@ -185,8 +211,10 @@ func unliked_camera_as_player() -> void:
 		push_error("Error link_player is missing")
 
 func _input(event) -> void:
+	# Recupère le deplacement de la souris et détermine une vitesse correspondant
+	# au mouvement
 	var scale_factor: float = min(
-			(float(get_viewport().size.x) / get_viewport().get_visible_rect().size.x),
+			(float(get_viewport().size.x) / get_viewport().get_visible_rect().size.x) ,
 			(float(get_viewport().size.y) / get_viewport().get_visible_rect().size.y)
 	)
 	
@@ -213,7 +241,7 @@ func _input(event) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_lock_move:
-		get_input(delta)
+		move_camera_input(delta)
 	
 	var camera_length = camera_spring.get_length()
 	
@@ -235,8 +263,13 @@ func _physics_process(delta: float) -> void:
 		switch_cam(camera_state.FIRST)
 			
 	camera_spring.orthonormalize()
-	
-func get_input(_delta) -> void:
+
+## Deplace la camera
+##
+## Si la camera est attacher à un objet elle le suivra
+## Si elle est detacher elle à son propres sette de déplacement
+## TODO Faire monter ou désendre la camera
+func move_camera_input(_delta) -> void:
 	if is_tying_camera:
 		link_player.move_and_slide()
 		position = link_player.position
@@ -278,22 +311,25 @@ func switch_cam(mode: camera_state) -> void:
 			lock_movement()
 
 	current_camera_mode = mode
-	change_camera_mode.emit()
+	change_camera_mode.emit(current_camera_mode)
 
 ## Lance la rotation de la camera
 func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
 	
-	var offset: float = 1
+	move.y *= camera_speed_axe_y
+
 	# Verifie si la rotation qui vas êtres demander n'est pas superieur à c'elle souhaiter
-	# Si superieur met offset a 0 ce qui annuelera tout déplacement
-	match clampf(pivot_y.rotation.x + move.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX):
-		CAMERA_X_ROT_MAX: offset = 0
-		CAMERA_X_ROT_MIN: offset = 0
-		
-	pivot_x.rotate_y(-move.x)
+	# Si supérieur prend move.y prend la valeur maximal de la rotation
+	match clampf(pivot_y.rotation.x + move.y , CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX):
+		CAMERA_X_ROT_MAX: 
+			move.y = (CAMERA_X_ROT_MAX - pivot_y.rotation.x)
+		CAMERA_X_ROT_MIN: 
+			move.y = (CAMERA_X_ROT_MIN - pivot_y.rotation.x)
+	
+	pivot_x.rotate_y(-move.x * camera_speed_axe_x)
 	pivot_x.orthonormalize()
 
-	pivot_y.rotate_x(move.y * offset)
+	pivot_y.rotate_x(move.y)
 	pivot_y.orthonormalize()
 
 ## Blocker la camera
