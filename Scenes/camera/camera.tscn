@@ -12,6 +12,7 @@ script = ExtResource("1_7hm6g")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="ThirdCameraX/ThirdCameraY"]
 process_mode = 3
+collision_mask = 3
 
 [node name="TMPHack" type="Node3D" parent="ThirdCameraX/ThirdCameraY/SpringArm3D"]
 

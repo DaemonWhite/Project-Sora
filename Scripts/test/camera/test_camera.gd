@@ -35,6 +35,12 @@ func _physics_process(_delta: float) -> void:
 			camera.unlock_camera()
 		else:
 			camera.lock_camera()
+
+	if Input.is_action_just_pressed("switch_cam"):
+		if camera.camera_state.FIRST == camera.current_camera_mode:
+			camera.switch_cam(camera.camera_state.THIRD)
+		else:
+			camera.switch_cam(camera.camera_state.FIRST)
 			
 	if Input.is_action_just_released("lock_movement"):
 		if camera.is_lock_move:

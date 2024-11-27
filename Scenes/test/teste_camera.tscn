@@ -31,6 +31,7 @@ camera = NodePath("Camera")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("link_player") instance=ExtResource("2_qc5mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82471, 0.509321)
+collision_layer = 0
 move_dist_camera = 1.0
 margin_third_person_camera = 0.01
 link_player = NodePath("../Scare")

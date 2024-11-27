@@ -110,8 +110,6 @@ var is_tying_camera: bool = false
 ## Touche pour reculer la camera
 @export var input_move_downward: String = "ui_down"
 
-## Touche pour faire changer la camera
-@export var input_switch_cam: String = "switch_cam"
 ## Touche pour faire avancer la camera
 @export var input_zoom: String = "wheel_up"
 ## Touche pour faire reculer la camera
@@ -256,12 +254,6 @@ func _physics_process(delta: float) -> void:
 		move_camera_input(delta)
 	
 	var camera_length = camera_spring.get_length()
-	
-	if Input.is_action_just_pressed(input_switch_cam):
-		if camera_state.FIRST == current_camera_mode:
-			switch_cam(camera_state.THIRD)
-		else:
-			switch_cam(camera_state.FIRST)
 	
 	if Input.is_action_just_released(input_zoom) and max_dist_third_person >= camera_length:
 		camera_spring.set_length(camera_length + move_dist_camera)
