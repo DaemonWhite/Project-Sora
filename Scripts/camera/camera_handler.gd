@@ -2,10 +2,10 @@ class_name CameraHandler
 extends CharacterBody3D
 ## Script qui permet de controller la camera
 
-## TODO Ajouter FOV
+## Ce qui suit n'est pas n'éssaisaire avant longtemps
 
-## Ce qui suit n'est pas n'éssaisaire avant longtemps	
 ## TODO Ajouter la suivie d'une courbe
+
 ## TODO Ajouter la suivie de point matrixiel
 
 ## Vitesse de la camera
@@ -136,6 +136,9 @@ signal change_movement_camera
 
 ## Initialise la camera avec ces différentres proprieter
 func _ready() -> void:
+	# Copy le mask de la classe au bras de la camera troisieme personne.
+	camera_spring.collision_mask = collision_mask
+
 	first_camera.fov = fov_first
 	third_camera.fov = fov_third
 		
@@ -156,6 +159,12 @@ func _ready() -> void:
 		lock_movement()
 	else:
 		unlock_movement()
+
+func set_camera_spring_mask(mask: int):
+	camera_spring.collision_mask = mask
+
+func get_camera_sping_mask():
+	return camera_spring
 
 ## Fixe la camera sur le joueur
 func set_tying_player(player: Node3D) -> void:
