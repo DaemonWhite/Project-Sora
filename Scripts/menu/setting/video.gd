@@ -62,11 +62,14 @@ func _ready():
 	add_name_item_for_option_button(liste_ecran, change_ecran)
 	
 	select_current_window_mode()
+	
 	var resolution = get_window().get_size()
 	select_current_option(
 		"{0}x{1}".format([resolution[0], resolution[1]]),
 		res_option_button
 	)
+	
+	
 	var aliasing = ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d")
 	select_current_option(msaa[aliasing][0] ,change_msaa)
 	
@@ -101,9 +104,9 @@ func select_current_option(option : String, option_button : OptionButton):
 
 func _on_option_button_item_selected(index : int):
 	get_window().set_size(resolutions[index][1])
-	Centre_Window()
+	centre_Window()
 	
-func Centre_Window():
+func centre_Window():
 	var Centre_Screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
 	var Window_size = get_window().get_size_with_decorations()
 	get_window().set_position(Centre_Screen - Window_size/2)
@@ -126,7 +129,7 @@ func on_window_mode_selected(index : int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 
-	Centre_Window()
+	centre_Window()
 	
 func select_current_window_mode() -> void:
 	#permet de récupérer de mode de fenêtre
@@ -171,3 +174,6 @@ func _on_audio_pressed():
 
 func _on_graphisme_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu/setting/video.tscn")
+
+func _on_controlle_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/menu/setting/control.tscn")

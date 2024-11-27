@@ -39,13 +39,13 @@ texture = ExtResource("2_5woid")
 
 [node name="Options" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.504
+anchor_left = 0.537
 anchor_top = 0.407
-anchor_right = 0.504
+anchor_right = 0.537
 anchor_bottom = 0.407
-offset_left = -137.608
+offset_left = -218.624
 offset_top = -26.736
-offset_right = 137.392
+offset_right = 218.376
 offset_bottom = 27.264
 
 [node name="Graphisme" type="Button" parent="Options"]
@@ -61,6 +61,13 @@ offset_left = 158.0
 offset_right = 274.0
 offset_bottom = 53.0
 text = "Audio"
+
+[node name="Controlle" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 436.0
+offset_bottom = 53.0
+text = "Controlle"
 
 [node name="Retour" type="Control" parent="."]
 layout_mode = 1
@@ -189,6 +196,7 @@ offset_bottom = 50.0
 
 [connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
 [connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Options/Controlle" to="." method="_on_controlle_pressed"]
 [connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]
 [connection signal="item_selected" from="ColorRect/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="ColorRect/OptionButton3" to="." method="_on_option_button_3_item_selected"]

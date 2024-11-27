@@ -1,0 +1,201 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3jy8p2tm7mni"]
+
+[ext_resource type="Script" path="res://Scripts/menu/setting/control.gd" id="1_2gh1v"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="1_81njt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2gh1v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -395.0
+offset_right = 158.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_81njt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.52
+anchor_top = 0.407
+anchor_right = 0.52
+anchor_bottom = 0.407
+offset_left = -219.04
+offset_top = -26.736
+offset_right = 217.96
+offset_bottom = 27.264
+
+[node name="Graphisme" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 53.0
+text = "Graphisme"
+
+[node name="Audio" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 274.0
+offset_bottom = 53.0
+text = "Audio"
+
+[node name="Controlle" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 436.0
+offset_bottom = 53.0
+text = "Contrôle"
+
+[node name="Retour" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 136.0
+grow_vertical = 0
+
+[node name="Retour_Button" type="Button" parent="Retour"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -11.98
+anchor_bottom = -11.98
+offset_top = 599.0
+offset_right = 136.0
+offset_bottom = 649.0
+text = "Retour"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_bottom = 216.0
+color = Color(0.231373, 0.231373, 0.231373, 0.498039)
+
+[node name="Control" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchor_left = 0.512
+anchor_right = 0.512
+offset_left = -589.824
+offset_right = 562.176
+offset_bottom = 216.0
+
+[node name="Avancer" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 30.0
+offset_right = 516.0
+offset_bottom = 74.0
+text = "Avancer :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Avancer_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 30.0
+offset_right = 610.0
+offset_bottom = 75.0
+
+[node name="Reculer" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 90.0
+offset_right = 516.0
+offset_bottom = 134.0
+text = "Reculer :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reculer_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 90.0
+offset_right = 610.0
+offset_bottom = 135.0
+
+[node name="Sauter" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 150.0
+offset_right = 516.0
+offset_bottom = 194.0
+text = "Sauter :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sauter_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 150.0
+offset_right = 610.0
+offset_bottom = 195.0
+
+[node name="Gauche" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 30.0
+offset_right = 846.0
+offset_bottom = 74.0
+text = "Gauche :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gauche_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 30.0
+offset_right = 930.0
+offset_bottom = 75.0
+
+[node name="Droite" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 90.0
+offset_right = 846.0
+offset_bottom = 134.0
+text = "Droite :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Droite_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 90.0
+offset_right = 930.0
+offset_bottom = 135.0
+
+[node name="Courir" type="Label" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 150.0
+offset_right = 846.0
+offset_bottom = 194.0
+text = "Courir :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Courir_Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 150.0
+offset_right = 930.0
+offset_bottom = 195.0
+
+[connection signal="pressed" from="Control/Graphisme" to="." method="_on_graphisme_pressed"]
+[connection signal="pressed" from="Control/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Control/Controlle" to="." method="_on_controlle_pressed"]
+[connection signal="pressed" from="Retour/Retour_Button" to="." method="_on_retour_button_pressed"]
