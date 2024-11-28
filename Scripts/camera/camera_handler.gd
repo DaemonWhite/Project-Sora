@@ -1,12 +1,17 @@
 class_name CameraHandler
 extends CharacterBody3D
 ## Script qui permet de controller la camera
-
-## Ce qui suit n'est pas n'éssaisaire avant longtemps
-
-## TODO Ajouter la suivie d'une courbe
-
-## TODO Ajouter la suivie de point matrixiel
+##
+## La camera est conçu pour êtres seul elle comprend différent comportement tel qu'un mode première personne et un mode troisieme. [br]
+## Elle permet aussi de ce grefer à une entiter [CharacterBody3D]
+## En cas de greffe il vas verifier si il possède une classe aprartenant à [BaseCharacterCamera] si non il lui en gréffera automatiquement [BaseCharacterCamera]  [br]
+## Si vous voullez changer le comportement de déplacement du joueur il faudra vous référer à [BaseCharacterCamera] pour créer un script personaliser.
+## [br][br]
+## [color=red]Ce qui suit n'est pas n'éssaisaire avant longtemps![/color]
+## [br]
+## [color=orange]TODO![/color] Ajouter la suivie d'une courbe
+## [br]
+## [color=orange]TODO![/color] Ajouter la suivie de point matrixiel
 
 ## Vitesse de la camera
 const CAMERA_MOUSE_ROTATION_SPEED := 0.001
@@ -158,13 +163,21 @@ func _ready() -> void:
 	else:
 		unlock_movement()
 
+## Definie le masque de colisiont du bras de la camera troisiemes persones
 func set_camera_spring_mask(mask: int):
 	camera_spring.collision_mask = mask
 
+## Récupère le masque de colisiont du bras de la camera troisiemes persones
 func get_camera_sping_mask():
 	return camera_spring
 
 ## Fixe la camera sur le joueur
+## [codeblock]
+## Il est important de ce deconnecter avant de le relier à un nouveau personnage 
+## camera.unliked_camera_as_player()
+## camera.set_tying_player(character[2])
+## camera.linked_camera_as_player()
+## [/codeblock]
 func set_tying_player(player: Node3D) -> void:
 	
 	if not (player is BaseCharacterCamera):
@@ -192,7 +205,7 @@ func linked_camera_as_player() -> void:
 	# Verifier si link player est connectable si non il rattache automatiquement
 	if not (link_player is BaseCharacterCamera):
 		set_tying_player(link_player)
-	
+	print(link_player)
 	if link_player:
 		is_tying_camera = true
 
