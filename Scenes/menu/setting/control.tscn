@@ -95,9 +95,9 @@ offset_bottom = 216.0
 
 [node name="Avancer" type="Label" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 390.0
+offset_left = 350.0
 offset_top = 30.0
-offset_right = 516.0
+offset_right = 476.0
 offset_bottom = 74.0
 text = "Avancer :"
 horizontal_alignment = 1
@@ -105,16 +105,16 @@ vertical_alignment = 1
 
 [node name="Avancer_Button" type="Button" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 520.0
+offset_left = 460.0
 offset_top = 30.0
-offset_right = 610.0
+offset_right = 550.0
 offset_bottom = 75.0
 
 [node name="Reculer" type="Label" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 390.0
+offset_left = 350.0
 offset_top = 90.0
-offset_right = 516.0
+offset_right = 476.0
 offset_bottom = 134.0
 text = "Reculer :"
 horizontal_alignment = 1
@@ -122,16 +122,16 @@ vertical_alignment = 1
 
 [node name="Reculer_Button" type="Button" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 520.0
+offset_left = 460.0
 offset_top = 90.0
-offset_right = 610.0
+offset_right = 550.0
 offset_bottom = 135.0
 
 [node name="Sauter" type="Label" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 390.0
+offset_left = 350.0
 offset_top = 150.0
-offset_right = 516.0
+offset_right = 476.0
 offset_bottom = 194.0
 text = "Sauter :"
 horizontal_alignment = 1
@@ -139,9 +139,9 @@ vertical_alignment = 1
 
 [node name="Sauter_Button" type="Button" parent="ColorRect/Control"]
 layout_mode = 0
-offset_left = 520.0
+offset_left = 460.0
 offset_top = 150.0
-offset_right = 610.0
+offset_right = 550.0
 offset_bottom = 195.0
 
 [node name="Gauche" type="Label" parent="ColorRect/Control"]
@@ -195,7 +195,34 @@ offset_top = 150.0
 offset_right = 930.0
 offset_bottom = 195.0
 
+[node name="Sensibilité" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 47.0
+offset_top = 33.0
+offset_right = 400.0
+offset_bottom = 75.0
+
+[node name="Label" type="Label" parent="Sensibilité"]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 88.0
+offset_bottom = 33.0
+text = "Sensibilité :"
+
+[node name="Sensibilite_souris" type="HSlider" parent="Sensibilité"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 14.0
+offset_right = 306.0
+offset_bottom = 30.0
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
 [connection signal="pressed" from="Control/Graphisme" to="." method="_on_graphisme_pressed"]
 [connection signal="pressed" from="Control/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="Control/Controlle" to="." method="_on_controlle_pressed"]
 [connection signal="pressed" from="Retour/Retour_Button" to="." method="_on_retour_button_pressed"]
+[connection signal="pressed" from="ColorRect/Control/Avancer_Button" to="." method="_on_avancer_button_pressed"]
+[connection signal="value_changed" from="Sensibilité/Sensibilite_souris" to="." method="_on_sensibilite_souris_value_changed"]
