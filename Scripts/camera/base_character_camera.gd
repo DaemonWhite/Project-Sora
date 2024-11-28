@@ -1,11 +1,17 @@
 class_name BaseCharacterCamera
 extends CharacterBody3D
+## Systeme de deplacement de base qui est conçu pour gérer les êtres relier à CameraHandler
+##
+## Ce systéme de déplcement est conçu pour gérer les déplacement pour auttant il n'est pas recomander de l'utiliser en tant que tel.
+## Si vous avez besoin d'un script de déplacement préfèrer [SimpleCharacterCamera]. Il propose un systéme de déplacment plus complexe
+## et qui coresponddra beaucoup plus au déplacement traditionel du monde du jeux vidéo. Cela dit il est recomander de créer votre propre déplacement  
+## Pour relier la camera au personage référer vous à [CameraHandler].
 
 ## Utilse la graviter des paramètres du jeu
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 ## Comportement par défaut du personnage quand il est relier au script
-enum controller {
+enum ControllerCharacter {
 	## Est soumis à la graviter
 	GRAVITY, 
 	## Est soumis au mouvement 
@@ -15,6 +21,7 @@ enum controller {
 	## Ne fait strictement rient
 	NULL
 }
+
 ## Si la camera ce deconnecte le script sera détacher du personnage
 @export var native: bool = true
 
@@ -27,11 +34,11 @@ enum controller {
 @export_group("Camera Position")
 
 ## Mode de controle de par défaut
-@export var contoller_mode: controller = controller.GRAVITY
+@export var contoller_mode: ControllerCharacter = ControllerCharacter.GRAVITY
 ## Mode de controle quand le personnage est lier
-@export var controller_mode_link: controller = controller.MOVEMENT_CAMERA
+@export var controller_mode_link: ControllerCharacter = ControllerCharacter.MOVEMENT_CAMERA
 ## Mode de controle quand le personnage est delier
-@export var controller_mode_unlink: controller = controller.GRAVITY 
+@export var controller_mode_unlink: ControllerCharacter = ControllerCharacter.GRAVITY 
 
 ## Indique la posion de la camera premiere personne avec un marker
 @export var first_camera_position: Marker3D
@@ -52,16 +59,20 @@ enum controller {
 ## Touche de saut du personnage
 @export var jump: String = "ui_accept"
 
-var link_camera: CameraHandler = null
-var move_direction := Vector3.ZERO
+
+var _link_camera: CameraHandler = null
+var _move_direction := Vector3.ZERO
 
 func _ready() -> void:
 	set_physics_process(true)
-	
-func set_controller_mode_link(controller_mode: controller) -> void:
+
+
+## Choisier le mode de controller en cas de liens avec le joueur
+func set_controller_mode_link(controller_mode: ControllerCharacter) -> void:
 	controller_mode_link = contoller_mode
-	
-func set_controller_mode_unlink(controller_mode: controller) -> void:
+
+## Choisir le mode de controller en cas de déliens avec le joueur
+func set_controller_mode_unlink(controller_mode: ControllerCharacter) -> void:
 	controller_mode_unlink = contoller_mode
 
 ## Genère automatique le marker en fonction de sa collision
@@ -91,11 +102,11 @@ func auto_generate_marker() -> void:
 ## Change le mode de controle quand le personnage est lier 
 func linked(_camera: CameraHandler) -> void:
 	contoller_mode = controller_mode_link
-	link_camera = _camera
+	_link_camera = _camera
 
 ## Change le mode de controle quand le personnage est delier
 func unlinked() -> void:
-	link_camera = null
+	_link_camera = null
 	contoller_mode = controller_mode_unlink
 	velocity.x = 0
 	velocity.z = 0
@@ -150,46 +161,89 @@ func search_collision() -> markerDataClasss:
 	
 func _physics_process(delta: float) -> void:
 	match contoller_mode:
-		controller.MOVEMENT:
-			get_input(delta)
+		ControllerCharacter.MOVEMENT:
+			move_character_input(delta)
 			
 			if not is_on_floor():
 				velocity.y = -GRAVITY * delta
 			elif is_on_floor() and Input.is_action_just_pressed(jump):
 				velocity.y = JUMP_IMPULSE
+
+			_process_movement(delta)
 				
 			move_and_slide()
-		controller.MOVEMENT_CAMERA:
+		ControllerCharacter.MOVEMENT_CAMERA:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
 			elif is_on_floor() and Input.is_action_just_pressed(jump):
 				velocity.y = JUMP_IMPULSE
+
+			_process_movement_camera(delta)
 				
-			get_input(delta)
-		controller.GRAVITY:
+			move_character_input(delta)
+		ControllerCharacter.GRAVITY:
 			if not is_on_floor():
 				velocity.y -= GRAVITY * delta
+
+			_process_movement_gravity(delta)
 			move_and_slide()
-		controller.NULL:
-			pass
-			
-func get_input(_delta) -> void:
-	move_direction.x = Input.get_axis(move_left, move_right)
-	move_direction.z = Input.get_axis(move_forward, move_downward)
+		ControllerCharacter.NULL:
+			_process_movement_null(delta)
 
-	## TODO Corriger le déplacement
+## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT] selectione un movement 
+func _process_movement(_delta):
+	pass
 
-	if link_camera and controller.MOVEMENT_CAMERA == contoller_mode:
-		if link_camera.current_camera_mode == link_camera.camera_state.THIRD:
-			global_transform.basis = link_camera.pivot_third_camera_x.basis
-		move_direction = move_direction.rotated(Vector3.UP, rotation.y).normalized()
+## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT_CAMERA] selectione un movement
+func _process_movement_camera(_delta):
+	pass
+
+## Virtual methode appeler quand [enum ControllerCharacter.GRAVITY] selectione un movement
+func _process_movement_gravity(_delta):
+	pass
+
+## Virtual methode appeler quand [enum ControllerCharacter.NULL] selectione un movement
+func _process_movement_null(_delta):
+	pass
+
+## Gère le déplacement du personage
+## Cette méthode est prévue pour êtres modifier par sont enfant
+## Un example ce trouver dans le code de [SimpleCharacterCamera]
+## Ici il y'a un comportement de base qui est quand même appliquer
+## [codeblock]
+## func move_character_input(_delta) -> void:
+## 	_move_direction.x = Input.get_axis(move_left, move_right)
+## 	_move_direction.z = Input.get_axis(move_forward, move_downward)
+## 
+## 	if _link_camera and ControllerCharacter.MOVEMENT_CAMERA == contoller_mode:
+## 		if _link_camera.current_camera_mode == _link_camera.camera_state.THIRD:
+## 			global_transform.basis = _link_camera.pivot_third_camera_x.basis
+## 		_move_direction = _move_direction.rotated(Vector3.UP, rotation.y).normalized()
+## 
+## 
+## 	_move_direction.normalized()
+## 	velocity = Vector3( 
+## 		_move_direction.x * move_speed,
+## 		velocity.y,
+## 		_move_direction.z * move_speed
+## 	)
+## [/codeblock]
+## 
+func move_character_input(_delta) -> void:
+	_move_direction.x = Input.get_axis(move_left, move_right)
+	_move_direction.z = Input.get_axis(move_forward, move_downward)
+
+	if _link_camera and ControllerCharacter.MOVEMENT_CAMERA == contoller_mode:
+		if _link_camera.current_camera_mode == _link_camera.CameraState.THIRD:
+			global_transform.basis = _link_camera.pivot_third_camera_x.basis
+		_move_direction = _move_direction.rotated(Vector3.UP, rotation.y).normalized()
 
 
-	move_direction.normalized()
+	_move_direction.normalized()
 	velocity = Vector3( 
-		move_direction.x * move_speed,
+		_move_direction.x * move_speed,
 		velocity.y,
-		move_direction.z * move_speed
+		_move_direction.z * move_speed
 	)
 
 ## Permet de connaitre la position de la camera premiere personne

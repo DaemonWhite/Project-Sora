@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/test/camera/test_camera.gd" id="1_fc1w5"]
 [ext_resource type="PackedScene" uid="uid://qwe8kj77qs5a" path="res://Scenes/camera/camera.tscn" id="2_qc5mj"]
-[ext_resource type="Script" path="res://Scripts/camera/character_camera.gd" id="3_t5111"]
+[ext_resource type="Script" path="res://Scripts/camera/simple_character_camera.gd" id="3_bg85k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u2noa"]
 size = Vector3(2, 0.5, 2)
@@ -160,9 +160,8 @@ shape = SubResource("BoxShape3D_jg5fs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665727, 1.26961, 0)
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("3_t5111")
-controller_mode_unlink = 1
-first_camera_position = NodePath("first")
+script = ExtResource("3_bg85k")
+first_camera_position = NodePath("First")
 third_camera_poistion = NodePath("Third")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ScareScript"]
@@ -172,7 +171,7 @@ skeleton = NodePath("")
 [node name="Third" type="Marker3D" parent="ScareScript"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0275798, -0.0441314, 0)
 
-[node name="first" type="Marker3D" parent="ScareScript"]
+[node name="First" type="Marker3D" parent="ScareScript"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.613194, 0.352173, -0.00280595)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScareScript"]

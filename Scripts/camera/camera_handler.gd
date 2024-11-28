@@ -20,12 +20,12 @@ const CAMERA_X_ROT_MIN = deg_to_rad(-89)
 ## Angle maximum de la camera à la premiere personne 
 const CAMERA_X_ROT_MAX = deg_to_rad(70)
 
-enum camera_state {
+enum CameraState {
 	## Camera en mode premiere personne
 	FIRST,
 	## Camera en mode seconde personne
 	THIRD,
-	## Camera en mode menu
+	## Camera en mode menuPc
 	MENU,
 	## Camera en mode overlay emnu
 	OVERLAY_MENU,
@@ -57,9 +57,9 @@ var _fov_third: float = 75
 			third_camera.set_fov(_fov_third)
 		_fov_third = fov_third
 
-## Rotation sur l'axe vertical de la camera
+## Rotation sur l'axe vertical de la camera de 0.1 à 5 sur pas de 0.1 
 @export_range(0.1, 5, 0.1) var camera_speed_axe_x: float = 1
-## Rotation sur l'axe horizontal de la camera
+## Rotation sur l'axe horizontal de la camera de 0.1 à 5 sur pas de 0.1
 @export_range(0.1, 5, 0.1) var camera_speed_axe_y: float = 1
 
 
@@ -128,7 +128,7 @@ var is_tying_camera: bool = false
 @export var is_lock_move: bool = true
 
 ## Indique dans quelle etat est la camera
-@export var current_camera_mode: camera_state = camera_state.NULL
+@export var current_camera_mode: CameraState = CameraState.NULL
 
 ## Signal qui prévient du changement d'etat de la camera
 signal change_camera_mode
@@ -205,7 +205,7 @@ func linked_camera_as_player() -> void:
 	# Verifier si link player est connectable si non il rattache automatiquement
 	if not (link_player is BaseCharacterCamera):
 		set_tying_player(link_player)
-	print(link_player)
+
 	if link_player:
 		is_tying_camera = true
 
@@ -242,7 +242,7 @@ func _input(event) -> void:
 	)
 	
 	if event is InputEventMouseMotion and not is_lock_cam:
-		if camera_state.FIRST == current_camera_mode:
+		if CameraState.FIRST == current_camera_mode:
 			if is_tying_camera and not is_lock_move:
 				rotate_camera(
 					event.relative * CAMERA_MOUSE_ROTATION_SPEED * scale_factor,
@@ -270,14 +270,14 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_released(input_zoom) and max_dist_third_person >= camera_length:
 		camera_spring.set_length(camera_length + move_dist_camera)
-		if camera_state.FIRST == current_camera_mode:
-			switch_cam(camera_state.THIRD)
+		if CameraState.FIRST == current_camera_mode:
+			switch_cam(CameraState.THIRD)
 		
 	if Input.is_action_just_released(input_unzoom) and min_dist_third_person < camera_length:
 		camera_spring.set_length(camera_length - move_dist_camera)
 		
-	if not (camera_state.FIRST == current_camera_mode) and min_dist_third_person > camera_length:
-		switch_cam(camera_state.FIRST)
+	if not (CameraState.FIRST == current_camera_mode) and min_dist_third_person > camera_length:
+		switch_cam(CameraState.FIRST)
 			
 	camera_spring.orthonormalize()
 
@@ -298,7 +298,7 @@ func move_camera_input(_delta) -> void:
 		
 		var orientation_x: float = pivot_third_camera_x.rotation.y
 			
-		if (camera_state.FIRST == current_camera_mode):
+		if (CameraState.FIRST == current_camera_mode):
 			orientation_x = link_player.rotation.y
 		
 		move_direction = move_direction.rotated(Vector3.UP, orientation_x).normalized()
@@ -310,20 +310,20 @@ func move_camera_input(_delta) -> void:
 		move_and_slide()		
 
 ## Change la camera de mode
-func switch_cam(mode: camera_state) -> void:
+func switch_cam(mode: CameraState) -> void:
 	match mode:
-		camera_state.FIRST:
+		CameraState.FIRST:
 			first_camera.make_current()
-		camera_state.THIRD:
+		CameraState.THIRD:
 			third_camera.make_current()
-		camera_state.MENU:
+		CameraState.MENU:
 			first_camera.make_current()
 			lock_movement()
 			lock_camera()
-		camera_state.OVERLAY_MENU:
+		CameraState.OVERLAY_MENU:
 			lock_camera()
 			lock_movement()
-		camera_state.NULL:
+		CameraState.NULL:
 			lock_camera()
 			lock_movement()
 
