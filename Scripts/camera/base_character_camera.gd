@@ -67,7 +67,7 @@ func _ready() -> void:
 	set_physics_process(true)
 
 
-## Choisier le mode de controller en cas de liens avec le joueur
+## Choisir le mode du controlleur en cas de liens avec le joueur
 func set_controller_mode_link(controller_mode: ControllerCharacter) -> void:
 	controller_mode_link = contoller_mode
 
@@ -77,9 +77,9 @@ func set_controller_mode_unlink(controller_mode: ControllerCharacter) -> void:
 
 ## Genère automatique le marker en fonction de sa collision
 ##
-## Attention ca ne gère que les collision simple
+## Attention ca ne gère que les collisions simple
 func auto_generate_marker() -> void:
-	var marker: markerDataClasss = search_collision()
+	var marker: markerDataClasss = search_placement_camera()
 	
 	if not first_camera_position or marker.first_person_marker:
 		if marker.first_person_marker and not first_camera_position:
@@ -99,7 +99,7 @@ func auto_generate_marker() -> void:
 		add_child(first_camera_position)
 		add_child(third_camera_position)
 
-## Change le mode de controle quand le personnage est lier 
+## Change le mode de controle quand le personnage est lié
 func linked(_camera: CameraHandler) -> void:
 	contoller_mode = controller_mode_link
 	_link_camera = _camera
@@ -113,7 +113,7 @@ func unlinked() -> void:
 	move_and_slide()
 
 ## Algorithme qui determine la position des marker
-func search_collision() -> markerDataClasss:
+func search_placement_camera() -> markerDataClasss:
 	var marker_camera = markerDataClasss.new()
 	 
 	var collision_shape: CollisionShape3D = get_node("CollisionShape3D")
@@ -190,19 +190,19 @@ func _physics_process(delta: float) -> void:
 		ControllerCharacter.NULL:
 			_process_movement_null(delta)
 
-## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT] selectione un movement 
+## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT] selectione un mouvement 
 func _process_movement(_delta):
 	pass
 
-## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT_CAMERA] selectione un movement
+## Virtual methode appeler quand [enum ControllerCharacter.MOVEMENT_CAMERA] selectione un mouvement
 func _process_movement_camera(_delta):
 	pass
 
-## Virtual methode appeler quand [enum ControllerCharacter.GRAVITY] selectione un movement
+## Virtual methode appeler quand [enum ControllerCharacter.GRAVITY] selectione un mouvement
 func _process_movement_gravity(_delta):
 	pass
 
-## Virtual methode appeler quand [enum ControllerCharacter.NULL] selectione un movement
+## Virtual methode appeler quand [enum ControllerCharacter.NULL] selectione un mouvement
 func _process_movement_null(_delta):
 	pass
 
@@ -250,7 +250,7 @@ func move_character_input(_delta) -> void:
 func camera_first_position() -> Vector3:
 	return first_camera_position.position
 
-## Permet de connaitre la rotation de la camera premire personne
+## Permet de connaitre la rotation de la camera premiere personne
 func camera_first_rotation() -> Vector3:
 	return first_camera_position.rotation
 
