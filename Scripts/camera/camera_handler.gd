@@ -3,11 +3,11 @@ extends CharacterBody3D
 ## Script qui permet de controller la camera
 ##
 ## La camera est conçu pour êtres seul elle comprend différent comportement tel qu'un mode première personne et un mode troisieme. [br]
-## Elle permet aussi de ce grefer à une entiter [CharacterBody3D]
-## En cas de greffe il vas verifier si il possède une classe aprartenant à [BaseCharacterCamera] si non il lui en gréffera automatiquement [BaseCharacterCamera]  [br]
-## Si vous voullez changer le comportement de déplacement du joueur il faudra vous référer à [BaseCharacterCamera] pour créer un script personaliser.
+## Elle permet aussi de ce greffer à une entiter [CharacterBody3D]
+## En cas de greffe il vas verifier si il possède une classe appartenant à [BaseCharacterCamera] si non il lui en greffera automatiquement [BaseCharacterCamera]  [br]
+## Si vous voullez changer le comportement de déplacement du joueur il faudra vous référer à [BaseCharacterCamera] pour créer un script personalisé.
 ## [br][br]
-## [color=red]Ce qui suit n'est pas n'éssaisaire avant longtemps![/color]
+## [color=red]Ce qui suit n'est pas nécessaire avant longtemps![/color]
 ## [br]
 ## [color=orange]TODO![/color] Ajouter la suivie d'une courbe
 ## [br]
@@ -70,7 +70,7 @@ var _fov_third: float = 75
 @onready var pivot_third_camera_y: Node3D = $ThirdCameraX/ThirdCameraY 
 ## Collision de la camera
 @onready var camera_spring: SpringArm3D = $ThirdCameraX/ThirdCameraY/SpringArm3D
-## Camera troisièmes personne
+## Camera troisième personne
 @onready var third_camera: Camera3D = $ThirdCameraX/ThirdCameraY/SpringArm3D/TMPHack/ThirdCamera
 ## Vitesse de déplacement du zoom de la caméra
 @export var move_dist_camera: float = 0.5
@@ -79,15 +79,15 @@ var _fov_third: float = 75
 @export var min_dist_third_person: float = 1
 ## Distance maximum de la camera à la troisieme personne
 @export var max_dist_third_person: float = 3.5
-## Default third position
+## Distance par défaut de la caméra à la troisième personne
 @export var default_dist_third_person: float = 2.4
 ## Marge de la camera avec le sol
 @export var margin_third_person_camera: float = 1
 
 @export_group("Camera Frist")
-## Axe x de la camera premiere persone 
+## Axe x de la camera premiere personne 
 @onready var pivot_first_camera_x: Node3D = $FirstCameraX
-## Axe y de la camera premiere persone
+## Axe y de la camera premiere personne
 @onready var pivot_first_camera_y: Node3D = $FirstCameraX/FirstCameraY
 ## Camera Premiere Personne
 @onready var first_camera: Camera3D = $FirstCameraX/FirstCameraY/FirstCamera
@@ -122,7 +122,7 @@ var is_tying_camera: bool = false
 
 @export_group("Status de la camera")
 
-## Si la camera est verrouller 
+## Si la camera est verrouiller 
 @export var is_lock_cam: bool = true
 ## Si la camera peut ce déplacer
 @export var is_lock_move: bool = true
@@ -132,12 +132,12 @@ var is_tying_camera: bool = false
 
 ## Signal qui prévient du changement d'etat de la camera
 signal change_camera_mode
-## Previen quand la rotation est blocker ou non
+## Previent quand la rotation est blocker ou non
 signal change_lock_camera
 ## Previent quand les mouvement sont blocker ou non
 signal change_movement_camera
 
-## Initialise la camera avec ces différentres proprieter
+## Initialise la camera avec ses différentres proprieter
 func _ready() -> void:
 	# Copy le mask de la classe au bras de la camera troisieme personne.
 	camera_spring.collision_mask = collision_mask
@@ -189,12 +189,12 @@ func set_tying_player(player: Node3D) -> void:
 
 	link_player = player
 
-## Reinitialise la camera premières personne
+## Réinitialise la caméra première personne
 func reset_first_camera() -> void:
 	pivot_first_camera_x.set_position(Vector3.ZERO)
 	pivot_first_camera_y.set_position(Vector3.ZERO)
 
-## Reinitialise la camera troisieme personne
+## Réinitialise la caméra troisième personne
 func reset_third_camera() -> void:
 	pivot_third_camera_x.set_rotation(Vector3.ZERO)
 	pivot_third_camera_y.set_position(Vector3.ZERO)
@@ -237,8 +237,8 @@ func _input(event) -> void:
 	# Recupère le deplacement de la souris et détermine une vitesse correspondant
 	# au mouvement
 	var scale_factor: float = min(
-			(float(get_viewport().size.x) / get_viewport().get_visible_rect().size.x) ,
-			(float(get_viewport().size.y) / get_viewport().get_visible_rect().size.y)
+		(float(get_viewport().size.x) / get_viewport().get_visible_rect().size.x) ,
+		(float(get_viewport().size.y) / get_viewport().get_visible_rect().size.y)
 	)
 	
 	if event is InputEventMouseMotion and not is_lock_cam:
@@ -284,7 +284,7 @@ func _physics_process(delta: float) -> void:
 ## Deplace la camera
 ##
 ## Si la camera est attacher à un objet elle le suivra
-## Si elle est detacher elle à son propres sette de déplacement
+## Si elle est detachée elle à son propres sette de déplacement
 ## TODO Faire monter ou désendre la camera
 func move_camera_input(_delta) -> void:
 	if is_tying_camera:
@@ -349,24 +349,24 @@ func rotate_camera(move, pivot_y: Node3D, pivot_x: Node3D) -> void:
 	pivot_y.rotate_x(move.y)
 	pivot_y.orthonormalize()
 
-## Blocker la camera
+## Bloquer la camera
 func lock_camera() -> void:
 	is_lock_cam = true
 	change_lock_camera.emit(is_lock_cam)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-## Blocke le déplacement de la camera
+## Bloque le déplacement de la camera
 func lock_movement() -> void:
 	is_lock_move = true
 	change_camera_mode.emit(is_lock_move)
 
-## Deblocker la camera
+## Débloque la camera
 func unlock_camera() -> void:
 	is_lock_cam = false
 	change_lock_camera.emit(is_lock_cam)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-## Déblocke le déplacement de la camera 
+## Débloque le déplacement de la camera 
 func unlock_movement() -> void:
 	is_lock_move = false
 	change_movement_camera.emit(is_lock_cam)

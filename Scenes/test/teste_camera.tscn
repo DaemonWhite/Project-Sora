@@ -156,13 +156,12 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prism"]
 shape = SubResource("BoxShape3D_jg5fs")
 
-[node name="ScareScript" type="CharacterBody3D" parent="." node_paths=PackedStringArray("first_camera_position", "third_camera_poistion")]
+[node name="ScareScript" type="CharacterBody3D" parent="." node_paths=PackedStringArray("first_camera_position")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0665727, 1.26961, 0)
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("3_bg85k")
 first_camera_position = NodePath("First")
-third_camera_poistion = NodePath("Third")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ScareScript"]
 mesh = SubResource("BoxMesh_xn67h")

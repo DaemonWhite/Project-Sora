@@ -2,12 +2,12 @@ class_name BaseCharacterCamera
 extends CharacterBody3D
 ## Systeme de deplacement de base qui est conçu pour gérer les êtres relier à CameraHandler
 ##
-## Ce systéme de déplcement est conçu pour gérer les déplacement pour auttant il n'est pas recomander de l'utiliser en tant que tel.
+## Ce systéme de déplacement est conçu pour gérer les déplacements pour autant il n'est pas recomandé de l'utiliser en tant que tel.
 ## Si vous avez besoin d'un script de déplacement préfèrer [SimpleCharacterCamera]. Il propose un systéme de déplacment plus complexe
-## et qui coresponddra beaucoup plus au déplacement traditionel du monde du jeux vidéo. Cela dit il est recomander de créer votre propre déplacement  
-## Pour relier la camera au personage référer vous à [CameraHandler].
+## et qui correspondra beaucoup plus au déplacement traditionel du monde du jeux vidéo. Cela dit il est recommander de créer votre propre déplacement  
+## Pour relier la camera au personage référé vous à [CameraHandler].
 
-## Utilse la graviter des paramètres du jeu
+## Utilise la graviter des paramètres du jeu
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 ## Comportement par défaut du personnage quand il est relier au script
@@ -18,7 +18,7 @@ enum ControllerCharacter {
 	MOVEMENT,
 	## Est soumis au mouvement et déplace la camera avec
 	MOVEMENT_CAMERA, 
-	## Ne fait strictement rient
+	## Ne fait strictement rien
 	NULL
 }
 
@@ -33,17 +33,17 @@ enum ControllerCharacter {
 
 @export_group("Camera Position")
 
-## Mode de controle de par défaut
+## Mode de controle par défaut
 @export var contoller_mode: ControllerCharacter = ControllerCharacter.GRAVITY
-## Mode de controle quand le personnage est lier
+## Mode de controle quand le personnage est lier à la caméra
 @export var controller_mode_link: ControllerCharacter = ControllerCharacter.MOVEMENT_CAMERA
-## Mode de controle quand le personnage est delier
+## Mode de controle quand le personnage est delier à la caméra
 @export var controller_mode_unlink: ControllerCharacter = ControllerCharacter.GRAVITY 
 
-## Indique la posion de la camera premiere personne avec un marker
+## Indique la position de la camera premiere personne avec un marker
 @export var first_camera_position: Marker3D
 ## Indique la posion de la camera troisieme personne avec un marker
-@export var third_camera_poistion: Marker3D
+@export var third_camera_position: Marker3D
 
 @export_group("Controlle")
 
@@ -89,15 +89,15 @@ func auto_generate_marker() -> void:
 			first_camera_position = Marker3D.new()
 			first_camera_position.position = Vector3.ZERO
 			
-		if marker.third_person_marker and not third_camera_poistion:
-			third_camera_poistion = Marker3D.new()
-			third_camera_poistion.position = marker.third_person_marker
-		elif not third_camera_poistion:
-			third_camera_poistion = Marker3D.new()
-			third_camera_poistion.position = Vector3.ZERO
+		if marker.third_person_marker and not third_camera_position:
+			third_camera_position = Marker3D.new()
+			third_camera_position.position = marker.third_person_marker
+		elif not third_camera_position:
+			third_camera_position = Marker3D.new()
+			third_camera_position.position = Vector3.ZERO
 		
 		add_child(first_camera_position)
-		add_child(third_camera_poistion)
+		add_child(third_camera_position)
 
 ## Change le mode de controle quand le personnage est lier 
 func linked(_camera: CameraHandler) -> void:
@@ -256,4 +256,4 @@ func camera_first_rotation() -> Vector3:
 
 ## Permet de connaitre la rotation de la camera troisieme personne
 func camera_third_position() -> Vector3:
-	return third_camera_poistion.position
+	return third_camera_position.position
