@@ -3,7 +3,7 @@ extends BaseCharacterCamera
 ## Deplacement d'un personnage simple
 ##
 ## Comparer à [BaseCharacterCamera] il peut êtres réèlement utiliser il sert aussi d'example pour la creation d'un mouvement
-## Il érite bien évidement de [BaseCharacterCamera] et comme lui il est conçu pour êtres utilisée par [CameraHandler]
+## Il hérite bien évidement de [BaseCharacterCamera] et comme lui il est conçu pour êtres utilisée par [CameraHandler]
 
 
 ## Gère le déplacement du personage
