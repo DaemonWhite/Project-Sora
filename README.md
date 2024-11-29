@@ -36,12 +36,13 @@ var first_person_camera # C'est bien
 ```
 
 Un autre point intéressant et l'ordre de nommage par example
-```
+```gdscript
 var camera_first_person # Pas bien
 var first_person_camera # Bien
 ```
 
-> [!NOTE] Le premier mot de la variable doit êtres le demarqueur alors que le dernier dois êtres le commun. Il n'est pas très grace si
+> [!NOTE]
+> Le premier mot de la variable doit êtres le demarqueur alors que le dernier dois êtres le commun. Il n'est pas très grace si
 
 Une autre règles à respecter et que les nom de classe dans un fichier doit correspondre au nom du fichier. Exemple : 
 
