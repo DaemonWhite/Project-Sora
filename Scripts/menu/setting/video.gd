@@ -83,7 +83,7 @@ func _ready():
 	
 	change_FXAA.button_pressed = ProjectSettings.get_setting("rendering/anti_aliasing/quality/screen_space_aa")
 
-
+##Fonction pour sélectionner l'option choisie lorsque l'on quitte et l'on revient sur la page
 func select_current_option(option : String, option_button : OptionButton):
 	for i in range(0,option_button.item_count):
 		#print(option, option_button.get_item_text(i))
@@ -102,19 +102,23 @@ func select_current_option(option : String, option_button : OptionButton):
 		#
 		#ID += 1
 
+##Fonction pour sélectionner la résolution 
 func _on_option_button_item_selected(index : int):
 	get_window().set_size(resolutions[index][1])
 	centre_Window()
 	
+##Fonction pour centrer la fenêtre lorsque que l'on change de mode de fenêtrage
 func centre_Window():
 	var Centre_Screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
 	var Window_size = get_window().get_size_with_decorations()
 	get_window().set_position(Centre_Screen - Window_size/2)
-	
+
+##Fonction qui permet d'ajouter le nom sur les différents boutons
 func add_name_item_for_option_button(name_items : Array, option_button : OptionButton):
 	for name_item in name_items:
 		option_button.add_item(name_item[0])
 
+##fonction qui permet de changer le mode de fenêtrage
 func on_window_mode_selected(index : int) -> void:
 	match index:
 		0:
@@ -131,6 +135,7 @@ func on_window_mode_selected(index : int) -> void:
 
 	centre_Window()
 	
+	##Fonction qui permet sélectionner le mode de fenêtre actuelle
 func select_current_window_mode() -> void:
 	#permet de récupérer de mode de fenêtre
 	var mode = DisplayServer.window_get_mode()
@@ -148,19 +153,24 @@ func select_current_window_mode() -> void:
 			else:
 				change_window.select(2)
 
+##Fonction pour sélectionner le mode de vsync
 func _on_v_sync_option_button_4_item_selected(index: int) -> void:
 	ProjectSettings.set_setting("display/window/vsync/vsync_mode", vsync[index][1])
 
+##Fonction pour sélectionner le msaa 2d et 3d
 func _on_option_button_3_item_selected(index : int) -> void:
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", msaa[index][1])
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", msaa[index][1])
-	
+
+##Fonction pour activer ou désactiver le taa
 func _on_taa_check_box_toggled(toggled_on: bool) -> void:
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/use_taa", toggled_on)
 
+##Fonction pour activer ou désactiver le fxaa
 func _on_fxaa_check_box_toggled(toggled_on: bool) -> void:
 	ProjectSettings.set_setting("rendering/anti_aliasing/quality/screen_space_aa", toggled_on)
 
+##Fonction pour sélectionner l'écran
 func _on_selec_ecran_option_button_4_item_selected(index: int) -> void:
 	# get_viewport retourne la vue qui elle à pour réfèrence l'écran principale
 	# get_window nous permet donc de récupérer la fenètres principale

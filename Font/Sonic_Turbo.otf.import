@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dob1wfbsmhgpo"
-path="res://.godot/imported/Sonic Turbo.otf-4b2c452c25ef91aa5cc5b9e3e7a64cdc.fontdata"
+path="res://.godot/imported/Sonic_Turbo.otf-7f820dbde05aeee3dd57a09cfa2586c9.fontdata"
 
 [deps]
 
-source_file="res://Font/Sonic Turbo.otf"
-dest_files=["res://.godot/imported/Sonic Turbo.otf-4b2c452c25ef91aa5cc5b9e3e7a64cdc.fontdata"]
+source_file="res://Font/Sonic_Turbo.otf"
+dest_files=["res://.godot/imported/Sonic_Turbo.otf-7f820dbde05aeee3dd57a09cfa2586c9.fontdata"]
 
 [params]
 

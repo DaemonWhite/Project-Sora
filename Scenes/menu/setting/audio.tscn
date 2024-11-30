@@ -54,7 +54,7 @@ layout_mode = 0
 offset_left = 320.0
 offset_right = 436.0
 offset_bottom = 53.0
-text = "Controlle"
+text = "Contrôle"
 
 [node name="Control2" type="Control" parent="."]
 layout_mode = 1

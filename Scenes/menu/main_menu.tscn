@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dq58fqdprqay0"]
 
 [ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_q0exs"]
-[ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic Turbo.otf" id="2_k11rj"]
+[ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic_Turbo.otf" id="2_k11rj"]
 [ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="4_u7ckb"]
+
 
 [sub_resource type="LabelSettings" id="LabelSettings_rfr8j"]
 font = ExtResource("2_k11rj")

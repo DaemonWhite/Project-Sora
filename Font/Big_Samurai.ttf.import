@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bhgn8wvma001o"
-path="res://.godot/imported/Big Samurai.ttf-8e7d5c58192c6e16d1f8eb65181a0b52.fontdata"
+path="res://.godot/imported/Big_Samurai.ttf-14cb27f595c2629db807976a0cf0a96f.fontdata"
 
 [deps]
 
-source_file="res://Font/Big Samurai.ttf"
-dest_files=["res://.godot/imported/Big Samurai.ttf-8e7d5c58192c6e16d1f8eb65181a0b52.fontdata"]
+source_file="res://Font/Big_Samurai.ttf"
+dest_files=["res://.godot/imported/Big_Samurai.ttf-14cb27f595c2629db807976a0cf0a96f.fontdata"]
 
 [params]
 
