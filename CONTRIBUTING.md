@@ -1,8 +1,8 @@
-# Contributing
+# Contribution
 Bienvenue au saint projet sora ici on vas voir les différentes règles de contribution
 
 > [!WARNING]
-> Avant toute choses il faut que vous lisiez la         [conduite du code](CODE_OF_CONDUCT.md) si vous voullez contribuer au code ou à [l'architecture du projet](README.md).
+> Avant toute choses il faut que vous lisiez la         [conduite du code](CODE_OF_CONDUCT.md) si vous voullez contribuer au code autrement pour les assets allez voir [l'architecture du projet](README.md).
 
 ## Sommaire
 - [Ajouter une nouvelle fonctionaliter](Travailler_sur_une_nouvelle_fonctionnalité_au_projet)
@@ -18,22 +18,22 @@ Pour les commits il faut respecter une syntaxe particulières pour ça créons u
 
 ### Contexte
 
-Imaginons qu'ont crée la possibilité de passer d'une caméra première personne à une camera troisième personne. le nom du commit sera celui-ci
+Imaginons qu'ont crée la possibilité de passer d'une caméra première personne à une camera troisième personne.
 
 ### Syntaxe de base
-> Add: Switch Camera
+Imaginon qu'ont apporte une foncionaliter
+`Add: Switch Camera -> Permet de permuter entre première et troisiémes camera`
 
 Imaginons qu'on apporte des changement à notre switch camera
 
-> Change: Switch Camera fonctionne avec signaux mtn
+`Change: Switch Camera fonctionne avec signaux mtn`
 
 Imaginon qu'ont corrige un bug mtn
 
-> Fix: Switch Camera Le switch étais inverser
-
-On remarque la syntaxe du commit suit toujours cette logique
+`Fix: Switch Camera -> Le switch étais inverser`
 
 > [!TIP]
+> On remarque la syntaxe du commit suit toujours cette logique
 > [Type]: [Truc influencer] [Description]
 
 > [!NOTE]
@@ -46,7 +46,8 @@ On remarque la syntaxe du commit suit toujours cette logique
 Imaginons qu'on ajoute plein de fonctionnaliser mineur ou répétitive. Dans le cas d'un menu par exemple on vas pas s’amuser à faire un commit par bouton. 
 
 Dans ce cas la on vas les regrouper
-> Add: Boutons menu controle (Déplacement, Controlle Cameran, etc)
+
+` Add: Boutons menu contrôle (Déplacement, Contrôle Caméra, etc)`
 
 > [!WARNING]
 > A noter qu'il faut quand même qu'ils ont un liens entre heux. Par example on ne met pas pas dans le même commit les bouton des controle avec celuis des items.
@@ -55,8 +56,9 @@ Dans ce cas la on vas les regrouper
 Les pull request sont les demandes de raliement d'une branche à une autre (en générale le main). Pour les pull request il faudra suivre les règles suivante
 
 ### Description
-La description dois contenir une liste de teste à executer. Ainsie qu'un rappelle de la branche par example
+La description dois contenir une liste de teste à exécuter Ainsi qu'un rappelle de la branche par exemple
 
+> [!IMPORTANT]
 > # CameraHandler
 > #1 (Liens vers issue)
 > 
