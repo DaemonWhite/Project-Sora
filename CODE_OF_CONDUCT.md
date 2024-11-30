@@ -119,8 +119,11 @@ CharacterMoveSimple
 > Ne réinventer pas la roux est priviligier les méthodes de GDScript pour les calcul ou autres.
 > 
 > Il y'a deux raison à ça:
-> - La première c'est la feignatise il ne faut pas réinventer la roux
+> 
+> La première c'est la feignatise il ne faut pas réinventer la roux
+> 
 > La deuximées c'est la rapiditer GDScript est très lent. Donc même si d'un point de vue algo votre code est meilleur. Il risque d'étres plus performant d'utiliser les méthode de GDScript qui pointe vers du c++
+> 
 > Si jamais il y'a pas d'autre choix il sera donc plus pertinant d'utiliser [GDExtention](#gdxtention)
 
 ### Typage
@@ -184,6 +187,3 @@ Après si besoint on peut rajouter des détailles sur le fonctionement ou le lie
 
 > [!TIP]
 > Si malgrés l'explication il reste dificile de comprendre comment utiliser votre classe il est pas mal de mêtres un example concret avec des codeblock
-
-> [!NOTE]
-> 

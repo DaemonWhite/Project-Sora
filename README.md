@@ -51,7 +51,7 @@ Une autre règles à respecter et que les nom de classe dans un fichier doit cor
   >
 > file -> first_camera.gd
 
-pour plus de détaille référer vous à [code_of_conduite](code_of_conduct.md)
+pour plus de détaille référer vous à [conduite du code](CODE_OF_CONDUCT.md)
 
 # Architecture du projet
 Le projet suivra l'aboressance suivante
