@@ -88,62 +88,62 @@ func _on_avancer_button_pressed() -> void:
 	select_button_index = index
 	
 func _on_reculer_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 1
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_gauche_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 2
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_droite_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 3
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_sauter_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 4
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_courir_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 5
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_vue_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 6
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_accroupie_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 7 
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_interagir_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 8
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_inventaire_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 9
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
 func _on_carte_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 10
 	change_button_for_control(boutons[index])
 	select_button_index = index
 	
 func _on_marcher_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 11
 	change_button_for_control(boutons[index])
 	select_button_index = index
 	
 func _on_ramper_button_pressed() -> void:
-	var index: int = 0
+	var index: int = 12
 	change_button_for_control(boutons[index])
 	select_button_index = index
 
