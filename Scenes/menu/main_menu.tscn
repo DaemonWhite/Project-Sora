@@ -80,7 +80,7 @@ offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="TextureRect/Control"]
+[node name="NewGameButton" type="Button" parent="TextureRect/Control"]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 0
 offset_left = 374.0
@@ -91,7 +91,7 @@ theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "Nouvelle partie"
 
-[node name="Button2" type="Button" parent="TextureRect/Control"]
+[node name="OptionsButton" type="Button" parent="TextureRect/Control"]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 0
 offset_left = 374.0
@@ -102,7 +102,7 @@ theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "OPTIONS"
 
-[node name="Button3" type="Button" parent="TextureRect/Control"]
+[node name="ExitButton" type="Button" parent="TextureRect/Control"]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 0
 offset_left = 374.0
@@ -113,5 +113,5 @@ theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "QUITTER"
 
-[connection signal="pressed" from="TextureRect/Control/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="TextureRect/Control/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="TextureRect/Control/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="TextureRect/Control/ExitButton" to="." method="_on_exit_button_pressed"]
