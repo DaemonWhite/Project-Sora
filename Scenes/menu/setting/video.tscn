@@ -1,0 +1,374 @@
+[gd_scene load_steps=19 format=3 uid="uid://bn4ysq0gnht1x"]
+
+[ext_resource type="Script" path="res://Scripts/menu/setting/video.gd" id="1_w1ufn"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="2_5woid"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5rxos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_askf1"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5rxv"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r31ps"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ifb"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0knue"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro37t"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0295066, 0.0295066, 0.0295065, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnlnj"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q10bo"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6amg3"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf2ta"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slwth"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_juys5"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tvph"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jthtp"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00s5s"]
+content_margin_left = 8.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1ufn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -395.0
+offset_right = 158.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5woid")
+
+[node name="Options" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.537
+anchor_top = 0.407
+anchor_right = 0.537
+anchor_bottom = 0.407
+offset_left = -218.624
+offset_top = -26.736
+offset_right = 218.376
+offset_bottom = 27.264
+
+[node name="Graphisme" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 114.0
+offset_bottom = 53.0
+text = "Graphisme"
+
+[node name="Audio" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 274.0
+offset_bottom = 53.0
+text = "Audio"
+
+[node name="Controlle" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 436.0
+offset_bottom = 53.0
+text = "Contrôle"
+
+[node name="Retour" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 136.0
+grow_vertical = 0
+
+[node name="Retour" type="Button" parent="Retour"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 134.0
+offset_bottom = 49.0
+text = "Retour"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.248
+anchor_top = 0.5
+anchor_right = 0.783
+anchor_bottom = 0.5
+offset_left = -285.696
+offset_right = 249.984
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.230315, 0.230315, 0.230315, 0.498)
+
+[node name="Resolution" type="Label" parent="ColorRect"]
+material = SubResource("CanvasItemMaterial_5rxos")
+layout_mode = 0
+offset_left = 5.0
+offset_top = 23.0
+offset_right = 105.0
+offset_bottom = 46.0
+text = "Résolution :"
+
+[node name="OptionButton" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 21.0
+offset_right = 293.0
+offset_bottom = 50.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_askf1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n5rxv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r31ps")
+
+[node name="Affichage" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 78.0
+offset_right = 147.0
+offset_bottom = 101.0
+text = "Mode d'affichage :"
+
+[node name="OptionButton2" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 77.0
+offset_right = 345.0
+offset_bottom = 104.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_26ifb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0knue")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ro37t")
+
+[node name="MSAA" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 23.0
+offset_right = 570.0
+offset_bottom = 46.0
+text = "MSAA :"
+
+[node name="OptionButton3" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 21.0
+offset_right = 756.0
+offset_bottom = 50.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_tnlnj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q10bo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6amg3")
+
+[node name="TAA_CheckBox" type="CheckBox" parent="ColorRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 80.0
+offset_right = 570.0
+offset_bottom = 104.0
+text = "TAA"
+
+[node name="FXAA_CheckBox" type="CheckBox" parent="ColorRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 120.0
+offset_right = 570.0
+offset_bottom = 144.0
+text = "FXAA"
+
+[node name="VSync" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 130.0
+offset_right = 59.0
+offset_bottom = 153.0
+text = "VSync :"
+
+[node name="VSync_OptionButton4" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 130.0
+offset_right = 252.0
+offset_bottom = 157.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_pf2ta")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_slwth")
+theme_override_styles/normal = SubResource("StyleBoxFlat_juys5")
+
+[node name="Selection_ecran" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 23.0
+offset_right = 927.0
+offset_bottom = 46.0
+text = "Sélection écran :"
+
+[node name="Selec_ecran_OptionButton4" type="OptionButton" parent="ColorRect"]
+layout_mode = 0
+offset_left = 935.0
+offset_top = 23.0
+offset_right = 1117.0
+offset_bottom = 50.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_5tvph")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jthtp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_00s5s")
+
+[connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
+[connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Options/Controlle" to="." method="_on_controlle_pressed"]
+[connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]
+[connection signal="item_selected" from="ColorRect/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="ColorRect/OptionButton3" to="." method="_on_option_button_3_item_selected"]
+[connection signal="toggled" from="ColorRect/TAA_CheckBox" to="." method="_on_taa_check_box_toggled"]
+[connection signal="toggled" from="ColorRect/FXAA_CheckBox" to="." method="_on_fxaa_check_box_toggled"]
+[connection signal="item_selected" from="ColorRect/VSync_OptionButton4" to="." method="_on_v_sync_option_button_4_item_selected"]
+[connection signal="item_selected" from="ColorRect/Selec_ecran_OptionButton4" to="." method="_on_selec_ecran_option_button_4_item_selected"]

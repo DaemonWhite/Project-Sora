@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq58fqdprqay0"]
+
+[ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_q0exs"]
+[ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic_Turbo.otf" id="2_k11rj"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="4_u7ckb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rfr8j"]
+font = ExtResource("2_k11rj")
+font_size = 64
+font_color = Color(1, 0.231373, 0.203922, 1)
+
+[sub_resource type="Theme" id="Theme_moe1k"]
+default_font_size = 20
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q0exs")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -441.0
+offset_top = -293.0
+offset_right = 500.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Le Sablier"
+label_settings = SubResource("LabelSettings_rfr8j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="test" type="Button" parent="."]
+modulate = Color(7.567, 1, 1, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme = SubResource("Theme_moe1k")
+text = "Test"
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -395.0
+offset_right = 158.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_u7ckb")
+
+[node name="Control" type="Control" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -575.0
+offset_top = -326.0
+offset_right = 575.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="TextureRect/Control"]
+modulate = Color(7.567, 1, 1, 1)
+layout_mode = 0
+offset_left = 374.0
+offset_top = 292.0
+offset_right = 837.0
+offset_bottom = 366.0
+theme_override_fonts/font = ExtResource("2_k11rj")
+theme_override_font_sizes/font_size = 25
+text = "Nouvelle partie"
+
+[node name="OptionsButton" type="Button" parent="TextureRect/Control"]
+modulate = Color(7.567, 1, 1, 1)
+layout_mode = 0
+offset_left = 374.0
+offset_top = 382.0
+offset_right = 837.0
+offset_bottom = 456.0
+theme_override_fonts/font = ExtResource("2_k11rj")
+theme_override_font_sizes/font_size = 25
+text = "OPTIONS"
+
+[node name="ExitButton" type="Button" parent="TextureRect/Control"]
+modulate = Color(7.567, 1, 1, 1)
+layout_mode = 0
+offset_left = 374.0
+offset_top = 472.0
+offset_right = 837.0
+offset_bottom = 547.0
+theme_override_fonts/font = ExtResource("2_k11rj")
+theme_override_font_sizes/font_size = 25
+text = "QUITTER"
+
+[connection signal="pressed" from="TextureRect/Control/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="TextureRect/Control/ExitButton" to="." method="_on_exit_button_pressed"]
