@@ -61,24 +61,26 @@ func _ready() -> void:
 func add_name_for_button(key : Array, button : Button):
 	button.text = key[0]
 
-## Fonction pour désactiver l'interaction de tout les boutons
+## Méthode pour désactiver l'interaction de tout les boutons
 func disabled_all_boutton(time_sleep: float = 0.5):
 	await get_tree().create_timer(time_sleep).timeout
 	for bouton in boutons:
 		bouton.disabled = true
 
-## Fonction pour activer l'interaction de tout les boutons
+## Méthode pour activer l'interaction de tout les boutons
 func enabled_all_boutton(time_sleep: float = 0.5 ):
 	await get_tree().create_timer(time_sleep).timeout
 	for bouton in boutons:
 		bouton.disabled = false
 
-## Fonction pour afficher lors d'un appuis sur le bouton le texte pour changer de touche
+## Méthode pour afficher lors d'un appuis sur le bouton le texte pour changer de touche
 func change_button_for_control(change_button : Button):
 	if change_button.pressed and not analyser_entree:
 		change_button.text = "Entrer une touche"
 		analyser_entree = true
 		disabled_all_boutton(0)
+
+# ------------------------------------ EVENEMENT ---------------------------------------------------- #
 
 func _on_avancer_button_pressed() -> void:
 	var index: int = 0

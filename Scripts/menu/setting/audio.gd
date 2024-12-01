@@ -5,11 +5,11 @@ func _ready():
 	$Control2/Slider_music.value = SceneSound.get_music_level()
 	$Control2/Slider_effect.value = SceneSound.get_sfx_level()
 
-##Fonction pour modifier le volume de la musique 
+## Evenement qui modifie le volume de la musique 
 func _on_slider_music_value_changed(value):
 	SceneSound.update_music_level(value)
 	
-##Fonction pour changer le volume des effets
+## Evenement qui change le volume des effets
 func _on_slider_effect_value_changed(value):
 	SceneSound.update_sfx_level(value)
 	
