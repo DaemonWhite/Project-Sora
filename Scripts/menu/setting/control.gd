@@ -46,6 +46,17 @@ const controle : Array = [
 	["C", KEY_C]
 ]
 
+const controle_manette : Array = [
+	["A", JOY_BUTTON_A],
+	["L3", JOY_BUTTON_LEFT_STICK],
+	["Flèche haut", JOY_BUTTON_DPAD_UP],
+	["R3", JOY_BUTTON_RIGHT_STICK],
+	["X", JOY_BUTTON_X],
+	["Flèche droit", JOY_BUTTON_DPAD_RIGHT],
+	["Select", JOY_BUTTON_SDL_MAX],
+	["Flèche bas", JOY_BUTTON_DPAD_DOWN]
+]
+
 @onready var boutons : Array = [
 	$ColorRect/Control/Avancer_Button,
 	$ColorRect/Control/Reculer_Button,
