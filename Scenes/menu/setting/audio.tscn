@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://chrm4m3gr4hik"]
 
 [ext_resource type="Script" path="res://Scripts/menu/setting/audio.gd" id="1_csj5f"]
-[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="1_xbl8s"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="1_xbl8s"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

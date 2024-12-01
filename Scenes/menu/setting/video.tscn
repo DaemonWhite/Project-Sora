@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bn4ysq0gnht1x"]
 
 [ext_resource type="Script" path="res://Scripts/menu/setting/video.gd" id="1_w1ufn"]
-[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/Image/OIG-351x351-upscaled.png" id="2_5woid"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="2_5woid"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5rxos"]
 

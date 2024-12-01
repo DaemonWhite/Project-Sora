@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0il5ag06b50w"]
 
 [ext_resource type="Script" path="res://Scripts/menu/setting/scene_sound.gd" id="1_3r772"]
-[ext_resource type="AudioStream" uid="uid://bup444ace8dp4" path="res://Sound/Musique/strings-intro-239970.mp3" id="2_8ii0c"]
-[ext_resource type="AudioStream" uid="uid://u2bldqc6g8cv" path="res://Sound/Effet/sword-sound-effect-1-234987.mp3" id="3_csmj5"]
+[ext_resource type="AudioStream" uid="uid://bup444ace8dp4" path="res://Sound/musique/menu_song.mp3" id="2_8ii0c"]
+[ext_resource type="AudioStream" uid="uid://u2bldqc6g8cv" path="res://Sound/effet/sword_sound_effect.mp3" id="3_csmj5"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_3r772")
