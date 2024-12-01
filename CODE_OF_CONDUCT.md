@@ -16,7 +16,7 @@ Avant toute chose lisez la doc officielle de GDScript et GDExtention. Et celle a
 > 
 > Si il y a du franglais alors il sera demandez de le renommer à la revue du code
 
-#### Comment nommez les variables
+#### Comment nommer les variables
 Pour nommer les variables il suffit juste de dire ce quelle représentes.
 
 
