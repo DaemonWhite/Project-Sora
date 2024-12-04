@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=3 uid="uid://chrm4m3gr4hik"]
+
+[ext_resource type="Script" path="res://Scripts/menu/setting/audio.gd" id="1_csj5f"]
+[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="1_xbl8s"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_csj5f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -395.0
+offset_right = 158.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xbl8s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.537
+anchor_top = 0.407
+anchor_right = 0.537
+anchor_bottom = 0.407
+offset_left = -218.624
+offset_top = -26.736
+offset_right = 218.376
+offset_bottom = 27.264
+
+[node name="Graphisme" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 53.0
+text = "Graphisme"
+
+[node name="Audio" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 274.0
+offset_bottom = 53.0
+text = "Audio"
+
+[node name="Controlle" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 436.0
+offset_bottom = 53.0
+text = "Contrôle"
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.452
+anchor_right = 0.5
+anchor_bottom = 0.731
+offset_left = -145.0
+offset_top = 0.103973
+offset_right = 516.0
+offset_bottom = 0.311981
+
+[node name="Slider_music" type="HSlider" parent="Control2"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 21.0
+offset_right = 317.0
+offset_bottom = 50.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Label" type="Label" parent="Control2"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 112.0
+offset_bottom = 46.0
+text = "Musique :"
+
+[node name="Slider_effect" type="HSlider" parent="Control2"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 77.0
+offset_right = 317.0
+offset_bottom = 104.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Label2" type="Label" parent="Control2"]
+layout_mode = 0
+offset_top = 78.0
+offset_right = 70.0
+offset_bottom = 101.0
+text = "Effet :"
+
+[node name="Retour" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 136.0
+grow_vertical = 0
+
+[node name="Retour" type="Button" parent="Retour"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -11.944
+anchor_bottom = -11.919
+offset_top = 597.2
+offset_right = 136.0
+offset_bottom = 645.95
+text = "Retour"
+
+[connection signal="pressed" from="Control/Graphisme" to="." method="_on_graphisme_pressed"]
+[connection signal="pressed" from="Control/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Control/Controlle" to="." method="_on_controlle_pressed"]
+[connection signal="value_changed" from="Control2/Slider_music" to="." method="_on_slider_music_value_changed"]
+[connection signal="value_changed" from="Control2/Slider_effect" to="." method="_on_slider_effect_value_changed"]
+[connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]

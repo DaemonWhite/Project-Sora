@@ -8,22 +8,23 @@ var test : Array =[
 
 func _ready():
 	SceneSound.launch_music_menu()
+	add_name_for_button_test(test, test_button)
+	analyse_file_and_folder("")
 
-	var dir = DirAccess.open("res://Scenes/test/")
+func analyse_file_and_folder(sub_folder : String):
+	var dir = DirAccess.open("res://Scenes/test/{0}".format([sub_folder]))
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
-				print("Found directory: " + file_name)
+				analyse_file_and_folder(sub_folder)
+				#print(file_name)
 			else:
 				test.push_back(file_name)
-				print(test)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
-
-	add_name_for_button_test(test, test_button)
 
 func add_name_for_button_test(name_items : Array, option_button : OptionButton):
 	for name_item in name_items:
