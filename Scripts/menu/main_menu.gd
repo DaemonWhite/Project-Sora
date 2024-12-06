@@ -19,7 +19,7 @@ func analyse_file_and_folder(sub_folder : String):
 		while file_name != "":
 			if dir.current_is_dir():
 				analyse_file_and_folder("{0}/{1}".format([sub_folder, file_name]))
-				#print(file_name)
+				print("hello wourld")
 			else:
 				test.push_back("{0}/{1}".format([sub_folder, file_name]))
 			file_name = dir.get_next()
