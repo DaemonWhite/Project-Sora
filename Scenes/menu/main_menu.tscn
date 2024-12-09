@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq58fqdprqay0"]
+[gd_scene load_steps=5 format=3 uid="uid://dq58fqdprqay0"]
 
 [ext_resource type="Script" path="res://Scripts/menu/main_menu.gd" id="1_q0exs"]
 [ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic_Turbo.otf" id="2_k11rj"]
@@ -8,9 +8,6 @@
 font = ExtResource("2_k11rj")
 font_size = 64
 font_color = Color(1, 0.231373, 0.203922, 1)
-
-[sub_resource type="Theme" id="Theme_moe1k"]
-default_font_size = 20
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -38,19 +35,6 @@ text = "Le Sablier"
 label_settings = SubResource("LabelSettings_rfr8j")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="test" type="Button" parent="."]
-modulate = Color(7.567, 1, 1, 1)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -120.0
-offset_bottom = 50.0
-grow_horizontal = 0
-theme = SubResource("Theme_moe1k")
-text = "Test"
-expand_icon = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
@@ -113,5 +97,15 @@ theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "QUITTER"
 
+[node name="Test" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -161.0
+offset_bottom = 37.0
+grow_horizontal = 0
+
 [connection signal="pressed" from="TextureRect/Control/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="TextureRect/Control/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="item_selected" from="Test" to="." method="_on_test_item_selected"]
