@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq0p5gvkmf3t8"]
+
+[ext_resource type="Script" path="res://Scripts/test/menu_overlay/overlay_menu.gd" id="1_5an8i"]
+[ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic_Turbo.otf" id="1_doux4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmcb7"]
+font = ExtResource("1_doux4")
+font_size = 40
+
+[node name="Overlay_menu" type="CanvasLayer"]
+script = ExtResource("1_5an8i")
+
+[node name="Menu" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -147.0
+offset_right = 113.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pause"
+label_settings = SubResource("LabelSettings_rmcb7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue_Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -15.5
+offset_right = 89.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_doux4")
+text = "Reprendre"
+
+[node name="Option_Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = 47.0
+offset_right = 89.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_doux4")
+text = "Options"
+
+[node name="Quitter_Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = 111.0
+offset_right = 89.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_doux4")
+text = "Quitter"
+
+[connection signal="pressed" from="Continue_Button" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Option_Button" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="Quitter_Button" to="." method="_on_quitter_button_pressed"]

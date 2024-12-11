@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_81njt")
 
-[node name="Control" type="Control" parent="."]
+[node name="Options" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.52
 anchor_top = 0.407
@@ -37,20 +37,20 @@ offset_top = -26.736
 offset_right = 217.96
 offset_bottom = 27.264
 
-[node name="Graphisme" type="Button" parent="Control"]
+[node name="Graphisme" type="Button" parent="Options"]
 layout_mode = 0
 offset_right = 116.0
 offset_bottom = 53.0
 text = "Graphisme"
 
-[node name="Audio" type="Button" parent="Control"]
+[node name="Audio" type="Button" parent="Options"]
 layout_mode = 0
 offset_left = 158.0
 offset_right = 274.0
 offset_bottom = 53.0
 text = "Audio"
 
-[node name="Controlle" type="Button" parent="Control"]
+[node name="Controlle" type="Button" parent="Options"]
 layout_mode = 0
 offset_left = 320.0
 offset_right = 436.0
@@ -339,9 +339,9 @@ max_value = 5.0
 step = 0.1
 value = 1.0
 
-[connection signal="pressed" from="Control/Graphisme" to="." method="_on_graphisme_pressed"]
-[connection signal="pressed" from="Control/Audio" to="." method="_on_audio_pressed"]
-[connection signal="pressed" from="Control/Controlle" to="." method="_on_controlle_pressed"]
+[connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
+[connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Options/Controlle" to="." method="_on_controlle_pressed"]
 [connection signal="pressed" from="Retour/Retour_Button" to="." method="_on_retour_button_pressed"]
 [connection signal="pressed" from="ColorRect/Control/Avancer_Button" to="." method="_on_avancer_button_pressed"]
 [connection signal="pressed" from="ColorRect/Control/Reculer_Button" to="." method="_on_reculer_button_pressed"]

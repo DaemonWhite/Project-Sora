@@ -1,0 +1,162 @@
+[gd_scene load_steps=2 format=3 uid="uid://djc41r2no5c8b"]
+
+[ext_resource type="Script" path="res://Scripts/test/menu_overlay/option_graphique.gd" id="1_d6jf5"]
+
+[node name="Option_graphique" type="CanvasLayer"]
+script = ExtResource("1_d6jf5")
+
+[node name="Menu_Options" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.537
+anchor_top = 0.366
+anchor_right = 0.537
+anchor_bottom = 0.449
+offset_left = -218.624
+offset_top = -0.168015
+offset_right = 218.376
+offset_bottom = 0.0479736
+
+[node name="Graphisme_Button" type="Button" parent="Options"]
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 53.0
+text = "Graphisme"
+
+[node name="Audio_Button" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = 158.0
+offset_right = 274.0
+offset_bottom = 53.0
+text = "Audio"
+
+[node name="Controle_Button" type="Button" parent="Options"]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 436.0
+offset_bottom = 53.0
+text = "Contrôle"
+
+[node name="Graphique_Option" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.341
+anchor_top = 0.5
+anchor_right = 0.729
+anchor_bottom = 0.5
+offset_left = -392.832
+offset_right = 312.192
+offset_bottom = 195.0
+
+[node name="Resolution" type="Label" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 23.0
+offset_right = 105.0
+offset_bottom = 46.0
+text = "Résolution :"
+
+[node name="Resolution_OptionButton" type="OptionButton" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 21.0
+offset_right = 293.0
+offset_bottom = 50.0
+
+[node name="Affichage" type="Label" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 78.0
+offset_right = 147.0
+offset_bottom = 101.0
+text = "Mode d'affichage :"
+
+[node name="Affichage_OptionButton" type="OptionButton" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 77.0
+offset_right = 345.0
+offset_bottom = 104.0
+
+[node name="VSync" type="Label" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 130.0
+offset_right = 59.0
+offset_bottom = 153.0
+text = "VSync :"
+
+[node name="VSync_OptionButton" type="OptionButton" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 130.0
+offset_right = 252.0
+offset_bottom = 157.0
+
+[node name="MSAA" type="Label" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 23.0
+offset_right = 540.0
+offset_bottom = 46.0
+text = "MSAA :"
+
+[node name="MSAA_OptionButton" type="OptionButton" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 21.0
+offset_right = 726.0
+offset_bottom = 50.0
+
+[node name="TAA_CheckBox" type="CheckBox" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 80.0
+offset_right = 540.0
+offset_bottom = 111.0
+text = "TAA"
+
+[node name="FXAA_CheckBox" type="CheckBox" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 120.0
+offset_right = 543.0
+offset_bottom = 151.0
+text = "FXAA"
+
+[node name="Selection_ecran" type="Label" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 790.0
+offset_top = 23.0
+offset_right = 925.0
+offset_bottom = 46.0
+text = "Sélection écrans :"
+
+[node name="Selec_ecran_OptionButton" type="OptionButton" parent="Graphique_Option"]
+layout_mode = 0
+offset_left = 935.0
+offset_top = 23.0
+offset_right = 1117.0
+offset_bottom = 50.0
+
+[node name="Retour" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 136.0
+grow_vertical = 0
+
+[node name="Retour_Button" type="Button" parent="Retour"]
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 48.0
+text = "Retour"
+
+[connection signal="pressed" from="Retour/Retour_Button" to="." method="_on_retour_button_pressed"]

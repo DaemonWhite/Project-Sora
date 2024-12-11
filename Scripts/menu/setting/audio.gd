@@ -2,8 +2,8 @@ extends Control
 
 func _ready():
 	
-	$Control2/Slider_music.value = SceneSound.get_music_level()
-	$Control2/Slider_effect.value = SceneSound.get_sfx_level()
+	$Son/Slider_music.value = SceneSound.get_music_level()
+	$Son/Slider_effect.value = SceneSound.get_sfx_level()
 
 ## Evenement qui modifie le volume de la musique 
 func _on_slider_music_value_changed(value):

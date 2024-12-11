@@ -106,6 +106,7 @@ offset_left = -161.0
 offset_bottom = 37.0
 grow_horizontal = 0
 
+[connection signal="pressed" from="TextureRect/Control/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="TextureRect/Control/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="TextureRect/Control/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="item_selected" from="Test" to="." method="_on_test_item_selected"]

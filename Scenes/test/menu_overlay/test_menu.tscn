@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://0ons2ts6e45t"]
+
+[ext_resource type="PackedScene" uid="uid://bq0p5gvkmf3t8" path="res://Scenes/test/menu_overlay/overlay_menu.tscn" id="1_1oacu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tspk"]
+size = Vector3(1000, 1, 1000)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Overlay_menu" parent="." instance=ExtResource("1_1oacu")]
+process_mode = 3
+visible = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_5tspk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.356, 20.993, 50.785)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.793172, 0.607458, 0.0432642, 0.38166, -0.551187, 0.741976, 0.474566, -0.572003, -0.669029, 0, 200.031, 0)

@@ -33,7 +33,7 @@ func _on_test_item_selected(index: int) -> void:
 	get_tree().change_scene_to_file("res://Scenes/test/{0}".format([test[index]]))
 
 func _on_new_game_button_pressed():
-	get_tree().change_scene_to_file("res://node.tscn")
+	get_tree().change_scene_to_file("res://Scenes/test/menu_overlay/test_menu.tscn")
 
 func _on_options_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu/setting/video.tscn")

@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_xbl8s")
 
-[node name="Control" type="Control" parent="."]
+[node name="Options" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.537
 anchor_top = 0.407
@@ -36,27 +36,27 @@ offset_top = -26.736
 offset_right = 218.376
 offset_bottom = 27.264
 
-[node name="Graphisme" type="Button" parent="Control"]
+[node name="Graphisme" type="Button" parent="Options"]
 layout_mode = 0
 offset_right = 116.0
 offset_bottom = 53.0
 text = "Graphisme"
 
-[node name="Audio" type="Button" parent="Control"]
+[node name="Audio" type="Button" parent="Options"]
 layout_mode = 0
 offset_left = 158.0
 offset_right = 274.0
 offset_bottom = 53.0
 text = "Audio"
 
-[node name="Controlle" type="Button" parent="Control"]
+[node name="Controlle" type="Button" parent="Options"]
 layout_mode = 0
 offset_left = 320.0
 offset_right = 436.0
 offset_bottom = 53.0
 text = "Contrôle"
 
-[node name="Control2" type="Control" parent="."]
+[node name="Son" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.452
@@ -67,7 +67,7 @@ offset_top = 0.103973
 offset_right = 516.0
 offset_bottom = 0.311981
 
-[node name="Slider_music" type="HSlider" parent="Control2"]
+[node name="Slider_music" type="HSlider" parent="Son"]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 21.0
@@ -77,14 +77,14 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="Label" type="Label" parent="Control2"]
+[node name="Musique" type="Label" parent="Son"]
 layout_mode = 0
 offset_top = 23.0
 offset_right = 112.0
 offset_bottom = 46.0
 text = "Musique :"
 
-[node name="Slider_effect" type="HSlider" parent="Control2"]
+[node name="Slider_effect" type="HSlider" parent="Son"]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 77.0
@@ -94,7 +94,7 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="Label2" type="Label" parent="Control2"]
+[node name="Effet" type="Label" parent="Son"]
 layout_mode = 0
 offset_top = 78.0
 offset_right = 70.0
@@ -120,9 +120,9 @@ offset_right = 136.0
 offset_bottom = 645.95
 text = "Retour"
 
-[connection signal="pressed" from="Control/Graphisme" to="." method="_on_graphisme_pressed"]
-[connection signal="pressed" from="Control/Audio" to="." method="_on_audio_pressed"]
-[connection signal="pressed" from="Control/Controlle" to="." method="_on_controlle_pressed"]
-[connection signal="value_changed" from="Control2/Slider_music" to="." method="_on_slider_music_value_changed"]
-[connection signal="value_changed" from="Control2/Slider_effect" to="." method="_on_slider_effect_value_changed"]
+[connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
+[connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Options/Controlle" to="." method="_on_controlle_pressed"]
+[connection signal="value_changed" from="Son/Slider_music" to="." method="_on_slider_music_value_changed"]
+[connection signal="value_changed" from="Son/Slider_effect" to="." method="_on_slider_effect_value_changed"]
 [connection signal="pressed" from="Retour/Retour" to="." method="_on_retour_pressed"]
