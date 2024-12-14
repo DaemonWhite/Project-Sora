@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://0ons2ts6e45t"]
+[gd_scene load_steps=5 format=3 uid="uid://0ons2ts6e45t"]
 
-[ext_resource type="PackedScene" uid="uid://bq0p5gvkmf3t8" path="res://Scenes/test/menu_overlay/overlay_menu.tscn" id="1_1oacu"]
+[ext_resource type="PackedScene" uid="uid://bxp5114qclwck" path="res://Scenes/test/menu_overlay/overlay_menu.tscn" id="1_1oacu"]
+[ext_resource type="PackedScene" uid="uid://b6u5f5invuioi" path="res://Scenes/test/menu_overlay/inventaire.tscn" id="2_fqcib"]
+[ext_resource type="PackedScene" uid="uid://b17iiagg50to6" path="res://Scenes/test/menu_overlay/option_graphique.tscn" id="2_xpr0w"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5tspk"]
 size = Vector3(1000, 1, 1000)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Overlay_menu" parent="." instance=ExtResource("1_1oacu")]
-process_mode = 3
-visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -25,3 +23,171 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.356, 20.993, 50.785)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.793172, 0.607458, 0.0432642, 0.38166, -0.551187, 0.741976, 0.474566, -0.572003, -0.669029, 0, 200.031, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Overlay_Menu" parent="CanvasLayer" instance=ExtResource("1_1oacu")]
+visible = false
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="Option_Graphique" parent="CanvasLayer3" instance=ExtResource("2_xpr0w")]
+visible = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Inventaire_slot" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -176.0
+offset_top = -118.0
+offset_right = -176.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot2" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -116.0
+offset_top = -118.0
+offset_right = -116.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot3" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = -118.0
+offset_right = -56.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot4" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 4.0
+offset_top = -118.0
+offset_right = 4.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot5" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 64.0
+offset_top = -118.0
+offset_right = 64.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot6" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 124.0
+offset_top = -118.0
+offset_right = 124.0
+offset_bottom = -118.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot7" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -176.0
+offset_top = -58.0
+offset_right = -176.0
+offset_bottom = -58.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot8" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -116.0
+offset_top = -58.0
+offset_right = -116.0
+offset_bottom = -58.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot9" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = -58.0
+offset_right = -56.0
+offset_bottom = -58.0
+
+[node name="Inventaire_slot10" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 4.0
+offset_top = -58.0
+offset_right = 4.0
+offset_bottom = -58.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot11" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 64.0
+offset_top = -58.0
+offset_right = 64.0
+offset_bottom = -58.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventaire_slot12" parent="CanvasLayer2" instance=ExtResource("2_fqcib")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 124.0
+offset_top = -58.0
+offset_right = 124.0
+offset_bottom = -58.0
+grow_horizontal = 1
+grow_vertical = 1

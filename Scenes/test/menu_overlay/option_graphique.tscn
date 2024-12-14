@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://djc41r2no5c8b"]
+[gd_scene load_steps=2 format=3 uid="uid://b17iiagg50to6"]
 
 [ext_resource type="Script" path="res://Scripts/test/menu_overlay/option_graphique.gd" id="1_d6jf5"]
 
-[node name="Option_graphique" type="CanvasLayer"]
+[node name="Option_Graphique" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_d6jf5")
 
 [node name="Menu_Options" type="Panel" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Options" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchor_left = 0.537
 anchor_top = 0.366
 anchor_right = 0.537
@@ -44,7 +51,7 @@ offset_bottom = 53.0
 text = "Contrôle"
 
 [node name="Graphique_Option" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchor_left = 0.341
 anchor_top = 0.5
 anchor_right = 0.729
@@ -145,7 +152,7 @@ offset_right = 1117.0
 offset_bottom = 50.0
 
 [node name="Retour" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

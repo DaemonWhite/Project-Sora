@@ -1,7 +1,6 @@
-extends CanvasLayer
+extends Control
 
 var pause = false
-
 
 func pause_unpause():
 	pause = !pause
@@ -12,7 +11,6 @@ func pause_unpause():
 		get_tree().paused = false
 		hide()
 
-# Called when the node enters the scene tree for the first time.
 func _input(event):
 	if event.is_action_pressed("Pause"):
 		pause_unpause()
@@ -23,6 +21,7 @@ func _on_continue_button_pressed() -> void:
 
 func _on_option_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/test/menu_overlay/option_graphique.tscn")
+
 
 func _on_quitter_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/menu/main_menu.tscn")
