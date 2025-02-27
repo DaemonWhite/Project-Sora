@@ -8,3 +8,9 @@ func _init(name: String, default_settings: Variant, list_settings: Array) -> voi
 	name_settings = name
 	default_settings = default_settings
 	list_settings = list_settings
+
+func get_name() -> String :
+	return name_settings
+	
+func get_default_setting() -> Variant:
+	return default_settings
