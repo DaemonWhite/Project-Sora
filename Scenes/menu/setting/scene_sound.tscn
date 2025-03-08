@@ -9,7 +9,6 @@ script = ExtResource("1_3r772")
 
 [node name="Music_Menu" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_8ii0c")
-autoplay = true
 bus = &"Music"
 
 [node name="click" type="AudioStreamPlayer2D" parent="."]

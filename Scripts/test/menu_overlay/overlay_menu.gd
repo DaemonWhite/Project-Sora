@@ -1,6 +1,8 @@
 extends Control
 
 var pause = false
+@export var option_graphique:Control = null
+
 
 func pause_unpause():
 	pause = !pause
@@ -20,8 +22,13 @@ func _on_continue_button_pressed() -> void:
 	hide()
 
 func _on_option_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/test/menu_overlay/option_graphique.tscn")
-
+	hide()
+	option_graphique.show()
+	
+func _on_retour_button_pressed() -> void:
+	option_graphique.hide()
+	show()
 
 func _on_quitter_button_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/menu/main_menu.tscn")

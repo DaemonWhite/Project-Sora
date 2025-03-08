@@ -22,7 +22,7 @@ mesh = SubResource("BoxMesh_5tspk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.356, 20.993, 50.785)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.793172, 0.607458, 0.0432642, 0.38166, -0.551187, 0.741976, 0.474566, -0.572003, -0.669029, 0, 200.031, 0)
+transform = Transform3D(0.793172, 0.607458, 0.043264, 0.38166, -0.551187, 0.741976, 0.474566, -0.572003, -0.669029, 0, 200.031, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
