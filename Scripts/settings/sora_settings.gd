@@ -1,6 +1,8 @@
 ## Simple Description
 ##  coucou 
+@static_unload
 class_name  SoraSettings
+
 static var _config: ConfigFile = ConfigFile.new()
 static var _list_settings: Dictionary
 
@@ -23,4 +25,6 @@ func load():
 	_config.load(_path_settings)
 
 func save():
+	for setting in _list_settings:
+		_config.set_value("teste", _list_settings[setting].get_name(), _list_settings[setting].get_default_setting())
 	_config.save(_path_settings)

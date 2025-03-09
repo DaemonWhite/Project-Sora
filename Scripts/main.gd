@@ -1,4 +1,3 @@
-
 class_name SoraMain
 extends Node
 
@@ -8,30 +7,32 @@ var settings: SoraSettings = SoraSettings.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var list_settings: DefaultSettings = DefaultSettings.new()
+	var default_settings: SoraDefaultSettings = SoraDefaultSettings.new()
+	
+	print(default_settings.VSYNC)
 	
 	settings.add_settings(
 		"resolution", 
-		list_settings.resolution_default,
-		list_settings.resolutions
+		default_settings.get_RESOLUTION_DEFAULT(),
+		default_settings.RESOLUTIONS
 	)
 	
 	settings.add_settings(
 		"window_mode", 
-		list_settings.window_mode_default,
-		list_settings.window_mode
+		default_settings.WINDOW_MODE_DEFAULT,
+		default_settings.WINDOW_MODE
 	)
 	
 	settings.add_settings(
 		"MSAA", 
-		list_settings.msaa_default,
-		list_settings.msaa
+		default_settings.MSAA_DEFAULT,
+		default_settings.MSAA
 	)
 	
 	settings.add_settings(
 		"vsync", 
-		list_settings.vsync_default,
-		list_settings.vsync
+		default_settings.VSYNC_DEFAULT,
+		default_settings.VSYNC
 	)
 	
 	settings.save()

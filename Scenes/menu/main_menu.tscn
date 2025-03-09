@@ -12,7 +12,7 @@ font_color = Color(1, 0.231373, 0.203922, 1)
 [sub_resource type="Theme" id="Theme_moe1k"]
 default_font_size = 20
 
-[node name="Control" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

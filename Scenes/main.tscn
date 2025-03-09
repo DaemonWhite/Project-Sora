@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://c36rjb1v7wf34"]
+[gd_scene load_steps=3 format=3 uid="uid://c36rjb1v7wf34"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_bgolk"]
+[ext_resource type="PackedScene" uid="uid://dq58fqdprqay0" path="res://Scenes/menu/main_menu.tscn" id="1_ca6h7"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_bgolk")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MainMenu" parent="Control" instance=ExtResource("1_ca6h7")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 542.0
+offset_top = 326.0
+offset_right = 542.0
+offset_bottom = 326.0
+grow_horizontal = 1
+grow_vertical = 1
