@@ -6,6 +6,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	BaseSettings.set_path_settings("user://sora_settings.cfg")
+	BaseSettings.load()
 
 	ResolutionSetting.new()
 	MsaaSetting.new()
@@ -13,13 +14,13 @@ func _ready() -> void:
 	WindowModeSetting.new()
 
 	MasterSoundSetting.new()
-	
+	KeyboardSettings.new()
 	
 
 	print(BaseSettings.get_path_settings())
 
 	for setting in BaseSettings.get_settings():
-		print("a")
+		print(setting.get_name())
 	
 	BaseSettings.save()
 
