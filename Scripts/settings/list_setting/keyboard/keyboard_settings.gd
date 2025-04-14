@@ -1,10 +1,6 @@
 class_name KeyboardSettings
 extends Object
 
-class Map:
-	var keycode: Array
-	var input_name
-
 var _map_keyboard: Array[KeySettings]
 
 func _init():
