@@ -25,6 +25,7 @@ func _ready() -> void:
 	
 	print("RESOLUTION Not Default -> ", s.is_not_default())
 	
+	s.set_current_option("1920") # Doit echouer
 	s.set_current_option("1920x1080")
 	
 	print("RESOLUTION Diffenret -> ", s.is_different())
