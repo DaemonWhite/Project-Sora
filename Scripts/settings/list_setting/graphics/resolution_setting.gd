@@ -17,4 +17,3 @@ func _ready():
 	]
 
 	self._default_option = "800x600"
-	self.reset()
