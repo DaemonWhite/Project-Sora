@@ -20,7 +20,18 @@ enum GROUP {
 func _init() -> void:
 	BaseSettings._list_settings.append(self)
 	self._ready()
-	self.reset()
+	
+	var current_option = BaseSettings._config.get_value(
+		self.get_group_to_string(self._group), 
+		self._name
+	)
+	
+	if current_option != null:
+		self.set_current_option(current_option)
+		self.apply(false)
+	else:
+		self.reset()
+		
 	# TODO Ajouter une meilleur vérification d'erreur
 	if self._name == null:
 		push_warning("Nom non définie de ", self)
@@ -34,17 +45,19 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func apply():
-	print(self._name)
+func apply(save: bool=true):
 	BaseSettings._config.set_value(
 		BaseSettings.get_group_to_string(self._group),
 		self._name,
 		self._current_option
 	)
+	
+	if save:
+		BaseSettings.save()
 
 func reset():
 	self._current_option = self._default_option
-	self.apply()
+	self.apply(false)
 
 func get_current_option() -> Variant:
 	return self._current_option
@@ -87,15 +100,24 @@ static func get_settings_by_enum(group_enum: BaseSettings) -> Array:
 
 	return list_settings
 
-static func get_settings_by_name(group_enum: BaseSettings, name: String) -> Variant:
+static func get_settings_by_name(group_enum: BaseSettings.GROUP , name: String) -> Variant:
 	for setting in BaseSettings._list_settings:
-		if setting.get_group() == group_enum and setting.get_path() == name:
+		if setting.get_group() == group_enum and setting.get_name() == name:
 			return setting
 	
 	return null
 
-func is_diff() -> bool:
-	return self._config.get_value(BaseSettings.get_group_to_string(self.group), self.name) != self.default_settings
+func is_different() -> bool:
+	return BaseSettings._config.get_value(
+		BaseSettings.get_group_to_string(self._group), 
+		self._name
+	) != self._current_option
+	
+func is_not_default() -> bool:
+	return BaseSettings._config.get_value(
+		BaseSettings.get_group_to_string(self._group), 
+		self._name
+	) != self._default_option
 
 func set_current_option(option: Variant):
 	self._current_option = option

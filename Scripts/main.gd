@@ -16,11 +16,24 @@ func _ready() -> void:
 	MasterSoundSetting.new()
 	KeyboardSettings.new()
 	
+	var s = BaseSettings.get_settings_by_name(
+		BaseSettings.GROUP.GRAPHICS, 
+		"RESOLUTION"
+	)
+	
+	print("RESOLUTION Recup -> ", s.get_current_option())
+	
+	print("RESOLUTION Not Default -> ", s.is_not_default())
+	
+	s.set_current_option("1920x1080")
+	
+	print("RESOLUTION Diffenret -> ", s.is_different())
+	
+	s.apply()
+	# print(BaseSettings.get_path_settings())
 
-	print(BaseSettings.get_path_settings())
-
-	for setting in BaseSettings.get_settings():
-		print(setting.get_name())
+	# for setting in BaseSettings.get_settings():
+		# print(setting.get_name())
 	
 	BaseSettings.save()
 

@@ -3,6 +3,8 @@ extends BaseSettings
 
 func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 	self._name = action
+	self._group = BaseSettings.GROUP.KEYBOARD
+	
 	self._default_option = []
 	
 	for keycode in keycodes:
