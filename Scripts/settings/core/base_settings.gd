@@ -96,6 +96,9 @@ static var _config: ConfigFile = ConfigFile.new()
 ## Contient le chemin de la configuration sauvegarder
 static var _path_settings: String = ""
 
+## Signal envoyer quand la méthode [method BaseSettings.apply] est appeler
+signal apply_signal(Class, save)
+
 ## Liste les différentes catégories prise en charge 
 enum GROUP {
 	## Catégorire des Divers
@@ -128,22 +131,27 @@ func _init() -> void:
 		push_warning("Nom non définie de ", self)
 	
 	if self._default_option == null:
-		push_warning("Aucune option par défaut")
+		push_warning("Aucune option par défaut", self)
 
 
 ## À utiliser pour configurer les paramètres de l'enfant
 func _ready() -> void:
 	pass # Replace with function body.
 
+## Methode virtuelle appeler quand [method BaseSettings.apply] est appeler
+func _apply() -> void:
+	pass
+
 ## Applique le paramètre à la configuration par défaut et sauvegarde directement 
 ## dans le fichier Passer false si la sauvegarde instantanée et non désirer
-func apply(save: bool=true):
+func apply(save: bool=true) -> void:
 	BaseSettings._config.set_value(
 		BaseSettings.get_group_to_string(self._group),
 		self._name,
 		self._current_option
 	)
-	
+	self.apply_signal.emit(self, save)
+	self._apply()
 	if save:
 		BaseSettings.save()
 
@@ -234,9 +242,9 @@ static func set_path_settings(path: String):
 	BaseSettings._path_settings = path
 
 ## Charge la configuration sauvegarde dans la configuration courante.
-static func load():
-	BaseSettings._config.load(BaseSettings._path_settings)
+static func load() -> Error:
+	return BaseSettings._config.load(BaseSettings._path_settings)
 
 ## Sauvegarde la configuration courante dans un fichier.
-static func save():
-	BaseSettings._config.save(BaseSettings._path_settings)
+static func save() -> Error:
+	return BaseSettings._config.save(BaseSettings._path_settings)
