@@ -8,13 +8,16 @@ func _ready() -> void:
 	BaseSettings.set_path_settings("user://sora_settings.cfg")
 	BaseSettings.load()
 
-	ResolutionSetting.new()
+	var resolution = ResolutionSetting.new()
 	MsaaSetting.new()
 	VsyncSetting.new()
-	WindowModeSetting.new()
-
+	var window = WindowModeSetting.new()
+	window.apply_signal.connect(Callable(resolution, "event_apply"))
+	window.apply(false)
 	MasterSoundSetting.new()
 	KeyboardSettings.new()
+	
+	
 	
 	var s = BaseSettings.get_settings_by_name(
 		BaseSettings.GROUP.GRAPHICS, 

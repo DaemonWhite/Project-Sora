@@ -1,9 +1,9 @@
 class_name  SingleOptionSettings
 extends BaseSettings
 
-var _options: Array
+var _options: Dictionary
 
-func get_options() -> Array:
+func get_options() -> Dictionary:
 	return _options
 
 func set_current_option(value: Variant):
@@ -12,9 +12,8 @@ func set_current_option(value: Variant):
 	else:
 		push_warning("Options non existante", self)
 
-func exist_option(search: String):
-	for option in self._options:
-		if option[0] == search:
-			return true
-			
+func exist_option(search: String) -> bool:
+	if self._options.get(search) != null:
+		return true
+		
 	return false
