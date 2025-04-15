@@ -153,15 +153,15 @@ func _apply() -> void:
 
 ## Applique le paramètre à la configuration par défaut et sauvegarde directement 
 ## dans le fichier Passer false si la sauvegarde instantanée et non désirer
-func apply(save: bool=true) -> void:
+func apply(save_configuration: bool=true) -> void:
 	BaseSettings._config.set_value(
 		BaseSettings.get_group_to_string(self._group),
 		self._name,
 		self._current_option
 	)
-	self.apply_signal.emit(self, save)
+	self.apply_signal.emit(self, save_configuration)
 	self._apply()
-	if save:
+	if save_configuration:
 		BaseSettings.save()
 
 ## Réinitialises-en appliquant le paramètre automatiquement.[br]

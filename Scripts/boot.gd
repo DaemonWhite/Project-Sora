@@ -1,4 +1,4 @@
-class_name SoraMain
+class_name SoraBoot
 extends Node
 
 # var settings = SoraSett
@@ -13,6 +13,9 @@ func _ready() -> void:
 	VsyncSetting.new()
 	TaaSetting.new()
 	FxaaSetting.new()
+	# var screen = ScreenSetting.new() # Teste screen
+	# screen.set_current_option(1)
+	# screen.apply(false)
 	var window = WindowModeSetting.new()
 	window.apply_signal.connect(Callable(resolution, "event_apply"))
 	window.apply(false)
@@ -42,8 +45,3 @@ func _ready() -> void:
 	event_key.apply(false)
 	# event_key.remove_event(input_event) # Pour supprimer l'action tester
 	BaseSettings.save()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
