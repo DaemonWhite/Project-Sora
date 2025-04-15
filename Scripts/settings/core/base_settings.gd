@@ -160,7 +160,7 @@ func apply(save: bool=true) -> void:
 ## Réinitialises-en appliquant le paramètre automatiquement.[br]
 ## [color=Orange][b] ATTENTION [/b][/color] Ne sauvegarde pas la configuration voir 
 ## [method BaseSettings.save] pour sauvegarder.
-func reset():
+func reset() -> void:
 	self._current_option = self._default_option
 	self.apply(false)
 
@@ -236,11 +236,11 @@ func is_not_default() -> bool:
 	) != self._default_option
 
 ## Change le paramètre courant.
-func set_current_option(option: Variant):
+func set_current_option(option: Variant) -> void:
 	self._current_option = option
 
 ## Change le chemin de sauvegarde.
-static func set_path_settings(path: String):
+static func set_path_settings(path: String) -> void:
 	BaseSettings._path_settings = path
 
 ## Charge la configuration sauvegarde dans la configuration courante.
