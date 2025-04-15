@@ -1,6 +1,12 @@
 class_name KeySettings
 extends BaseSettings
 
+## Gère le paramètrage desevenments clavier.
+##
+## Permet de sauvegarder les paramètres clavier associer à une action.
+## Il est pas recomander de l'utiliser directement car [KeyboardSettings] s'occupe de les générer
+## tous dynamiquement au moment ou il est instancier.
+
 ## Entrer des controlleur prise en charge
 enum INPUT {
 	## Prise en charge du controlleur [InputEventJoypadButton]
@@ -57,10 +63,10 @@ static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
 
 	return event
 
-## Ajoute une lettre à la configuration
+## Ajoute un evenement voir [enum KeySettings.INPUT] pour voir les evenments pris en charge
 func add_event(event: InputEvent) -> void:
 	var value: Variant = null
-	print('ok')
+	
 	var type_event = KeySettings.detect_event_input(event)
 
 	match type_event:
@@ -81,7 +87,31 @@ func add_event(event: InputEvent) -> void:
 		self._current_option[type_event].append(value)
 	else:
 		push_warning("Evenement deja assigner")
-
+		
+## Permet de supprimer l'evenment correspondant
+func remove_event(event: InputEvent):
+	var value: Variant = null
+	
+	var type_event = KeySettings.detect_event_input(event)
+	
+	match type_event:
+		KeySettings.INPUT.joypad_button:
+			value = event.button_index
+		KeySettings.INPUT.joypad_motion:
+			value = event.axis
+		KeySettings.INPUT.mouse:
+			value = event.button_index
+		KeySettings.INPUT.keyboard:
+			value = event.as_text()
+		_:
+			push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconu", event)
+			return
+	var index: int = self._current_option[type_event].find(value)
+	# Empeche le double evenement
+	if index  != -1:
+		self._current_option[type_event].remove_at(index)
+	else:
+		push_warning("Evenement innexistant")
 	
 func _apply() -> void:
 	InputMap.action_erase_events(self._name)

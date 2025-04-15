@@ -38,7 +38,7 @@ func _ready() -> void:
 	var event_key = keyboard.get_key_settings("ui_up")
 	event_key.add_event(input_event)
 	event_key.apply(false)
-	
+	# event_key.remove_event(input_event) # Pour supprimer l'action tester
 	BaseSettings.save()
 
 
