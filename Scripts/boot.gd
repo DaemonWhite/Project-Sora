@@ -15,9 +15,7 @@ func _ready() -> void:
 	window.apply_signal.connect(Callable(resolution, "event_apply"))
 	window.apply(false)
 	MasterSoundSetting.new()
-	KeyboardSettings.new()
-	
-	
+	var keyboard = KeyboardSettings.new()
 	
 	var s = BaseSettings.get_settings_by_name(
 		BaseSettings.GROUP.GRAPHICS, 
@@ -34,10 +32,12 @@ func _ready() -> void:
 	print("RESOLUTION Diffenret -> ", s.is_different())
 	
 	s.apply()
-	# print(BaseSettings.get_path_settings())
-
-	# for setting in BaseSettings.get_settings():
-		# print(setting.get_name())
+	
+	var input_event = InputEventKey.new()
+	input_event.keycode = KEY_F2
+	var event_key = keyboard.get_key_settings("ui_up")
+	event_key.add_event(input_event)
+	event_key.apply(false)
 	
 	BaseSettings.save()
 
