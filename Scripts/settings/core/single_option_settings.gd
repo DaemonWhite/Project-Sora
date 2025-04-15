@@ -43,7 +43,7 @@ func set_current_option(value: Variant) -> void:
 		push_warning("Options non existante", self)
 
 ## Vérifie la bonne présences de l'option
-func exist_option(search: String) -> bool:
+func exist_option(search: Variant) -> bool:
 	if self._options.get(search) != null:
 		return true
 		
