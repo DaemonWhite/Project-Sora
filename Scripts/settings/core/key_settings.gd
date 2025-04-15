@@ -7,6 +7,8 @@ enum INPUT {
 	joypad_button,
 	## Prise en charge du controlleur [InputEventJoypadMotion]
 	joypad_motion,
+	## Prise en charge du controlleur [InputEventMouseButton]
+	mouse,
 	## Prise en charge du controlleur [InputEventKey]
 	keyboard,
 	## Enum d'erreur
@@ -21,6 +23,7 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 	self._default_option = {
 		KeySettings.INPUT.joypad_button : [], # Bouton de la manetette
 		KeySettings.INPUT.joypad_motion : [], # Joystick de la manette
+		KeySettings.INPUT.mouse : [], # Touche de la souris
 		KeySettings.INPUT.keyboard : [], # Touche clavier
 	}
 	
@@ -30,6 +33,8 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 				self._default_option[KeySettings.INPUT.joypad_button].append(e.button_index)
 			KeySettings.INPUT.joypad_motion:
 				self._default_option[KeySettings.INPUT.joypad_motion].append(e.axis)
+			KeySettings.INPUT.mouse:
+				self._default_option[KeySettings.INPUT.mouse].append(e.button_index)
 			KeySettings.INPUT.keyboard:
 				self._default_option[KeySettings.INPUT.keyboard].append(e.as_text())
 			_:
@@ -45,6 +50,8 @@ static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
 		event = KeySettings.INPUT.joypad_button
 	elif input is InputEventJoypadMotion:
 		event = KeySettings.INPUT.joypad_motion
+	elif input is InputEventMouseButton:
+		event = KeySettings.INPUT.mouse
 	elif input is InputEventKey:
 		event = KeySettings.INPUT.keyboard
 
@@ -61,6 +68,8 @@ func add_event(event: InputEvent) -> void:
 			value = event.button_index
 		KeySettings.INPUT.joypad_motion:
 			value = event.axis
+		KeySettings.INPUT.mouse:
+			value = event.button_index
 		KeySettings.INPUT.keyboard:
 			value = event.as_text()
 		_:
@@ -92,6 +101,12 @@ func _apply() -> void:
 					input_event = InputEventJoypadMotion.new()
 					input_event.axis = value
 					input_event.axis_value = 0
+					InputMap.action_add_event(self._name, input_event)
+					
+			KeySettings.INPUT.mouse:
+				for value in self._current_option[key]:
+					input_event = InputEventMouseButton.new()
+					input_event.button_index = value
 					InputMap.action_add_event(self._name, input_event)
 					
 			KeySettings.INPUT.keyboard:
