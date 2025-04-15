@@ -11,6 +11,7 @@ func _ready() -> void:
 	var resolution = ResolutionSetting.new()
 	MsaaSetting.new()
 	VsyncSetting.new()
+	TaaSetting.new()
 	var window = WindowModeSetting.new()
 	window.apply_signal.connect(Callable(resolution, "event_apply"))
 	window.apply(false)
