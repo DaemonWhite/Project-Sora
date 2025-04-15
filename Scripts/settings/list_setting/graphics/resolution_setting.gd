@@ -1,5 +1,6 @@
 class_name ResolutionSetting
 extends SingleOptionSettings
+## Paramètre lier à la resolution
 
 func _ready():
 	self._name = "RESOLUTION"
@@ -18,7 +19,8 @@ func _ready():
 	}
 
 	self._default_option = "800x600"
-	
+
+## Evenment qui applique le changement graphique en cas de modification extene
 func event_apply(_Class: BaseSettings, _save: bool):
 	self._apply()
 

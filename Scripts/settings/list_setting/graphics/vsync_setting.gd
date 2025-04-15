@@ -1,5 +1,6 @@
 class_name VsyncSetting
 extends SingleOptionSettings
+## Paramètre lier a la Vsync
 
 func _ready():
 	self._name = "VSYNC"

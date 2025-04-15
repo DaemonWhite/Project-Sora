@@ -16,26 +16,26 @@ extends Object
 ## 	class_name  SingleOptionSettings
 ## 	extends BaseSettings
 ##
-##  # Définis la liste des options possibles
-##	var _options: Array
+##	# Définis la liste des options possibles
+##	var _options: Dictionary
 ##
-##  # Permet de récupérer la dites liste
-##	func get_options() -> Array:
+##	# Permet de récupérer la dites liste
+##	func get_options() -> Dictionary:
 ##	    return _options
 ##	
-##  # Redéfinis la méthode pour choisir l'option
-##  # En rajoutant la gestion d'erreur
+## 	# Redéfinis la méthode pour choisir l'option
+## 	# En rajoutant la gestion d'erreur
 ##	func set_current_option(value: Variant):
 ##	    if self.exist_option(value):
 ##		    self._current_option = value
-##		else:
-##		    push_warning("Options non existante", self)
+##	    else:
+##	        push_warning("Options non existante", self)
 ##	
-##  # Offre une nouvelle méthode pour vérifier la bonne existence de l'option.
+##	# Offre une nouvelle méthode pour vérifier la bonne existence de l'option.
 ##	func exist_option(search: String):
 ##	    for option in self._options:
-##		    if option[0] == search:
-##			    return true
+##	        if option[0] == search:
+##	            return true
 ##				
 ##	    return false
 ##	
@@ -44,29 +44,36 @@ extends Object
 ## Maintenant, qu'ont à créer des règles de paramètre, 
 ## il faut qu'on puisse ajouter nos paramètres. 
 ## [codeblock]
-## class_name ResolutionSetting
-## extends SingleOptionSettings
-## 
+##	class_name ResolutionSetting 
+##	extends SingleOptionSettings # Classe générique parents 
+##	
 ##	func _ready():
-##      # Le nom est obligatoire défini par [BaseSettings]
-##	    self._name = "RESOLUTION"
-##      # Le group est obligatoir défini par [BaseSettings]
-##	    self._group = BaseSettings.GROUP.GRAPHICS
-##      # L'option est obligatoire défini par [SingleOptionSettings]
-##	    self._options = [ 
-##	        ["2560x1440", Vector2i(2560,1440)],
-##	        ["1920x1080", Vector2i(1920,1080)],
-##	        ["1366x768", Vector2i(1366,768)],
-##	        ["1536x864", Vector2i(1536,864)],
-##	        ["1280x720", Vector2i(1280,720)],
-##	        ["1440x900", Vector2i(1440,900)],
-##	        ["1600x900", Vector2i(1600,900)],
-##	        ["1024x600", Vector2i(1024,600)],
-##	        ["800x600", Vector2i(800,600)]
-##	    ]
-## 
-## 	    # L'option par défaut est obligatoire défini par [BaseSettings]
-## 	    self._default_option = "800x600"
+##	    self._name = "RESOLUTION" # Nom de la classe obligatoire et en majuscule sauf si dynamique
+##	    self._group = BaseSettings.GROUP.GRAPHICS # Catégorie de la classe
+##	    
+##	    self._options = { # Liste des options
+##	        "2560x1440": Vector2i(2560,1440),
+##	        "1920x1080": Vector2i(1920,1080),
+##	        "1366x768": Vector2i(1366,768),
+##	        "1536x864": Vector2i(1536,864),
+##	        "1280x720": Vector2i(1280,720),
+##	        "1440x900": Vector2i(1440,900),
+##	        "1600x900": Vector2i(1600,900),
+##	        "1024x600": Vector2i(1024,600),
+##	        "800x600": Vector2i(800,600)
+##	    }
+##	
+##	    # Option par défaut
+##	    self._default_option = "800x600"
+##		
+##	## Nouvelle methode optionel
+##	func event_apply(_Class: BaseSettings, _save: bool):
+##	    self._apply()
+##	
+##	## Redefinition d'apply pour que le paramètres soit appliquer automatiquement
+##	func _apply() -> void:
+##	    DisplayServer.window_set_size(self._options[self._current_option])
+##	
 ## [/codeblock]
 ## [br]
 ## Au démarrage du système, on a plus qu'a instancier la classe [code]ResolutionSetting.new()[/code].

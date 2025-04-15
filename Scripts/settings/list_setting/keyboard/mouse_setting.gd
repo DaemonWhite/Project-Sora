@@ -1,5 +1,8 @@
 class_name MouseSpeed
 extends SlideOptionSettings
+## Paramètre en liens avec la vitesse de la souris
+## @experimental
+## TODO Apply n'est pas implementer car fonction inexistante
 
 func _ready():
     self._name = "MOUSE_SPEED"

@@ -1,5 +1,6 @@
 class_name TaaSetting
 extends BooleanOptionSettings
+##  Paramètres lier à Taa 
 
 func _ready() -> void:
 	self._name = "TAA"

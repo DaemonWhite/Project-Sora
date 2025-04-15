@@ -11,15 +11,15 @@ extends BaseSettings
 ##	extends SingleOptionSettings
 ##	
 ##	func _ready() -> void:
-##		self._name = "WINDOW_MODE" # Nom du paramètre obligatoire
-##		self._group = BaseSettings.GROUP.GRAPHICS # Catégorie obligatoire
-##		self._options = { # Liste des options disponible
-##		    "full_screen": DisplayServer.WINDOW_MODE_FULLSCREEN,
-##		    "full_screen_exclusif": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
-##		    "Windowed": DisplayServer.WINDOW_MODE_WINDOWED
-##		}
+##	    self._name = "WINDOW_MODE" # Nom du paramètre obligatoire
+##	    self._group = BaseSettings.GROUP.GRAPHICS # Catégorie obligatoire
+##	    self._options = { # Liste des options disponible
+##	        "full_screen": DisplayServer.WINDOW_MODE_FULLSCREEN,
+##	        "full_screen_exclusif": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+##	        "Windowed": DisplayServer.WINDOW_MODE_WINDOWED
+##	    }
 ##		
-##		self._default_option = "Windowed" # Paramètre par défaut
+##	    self._default_option = "Windowed" # Paramètre par défaut
 ##	
 ##	# Logique métier si nécessaire à ne pas implémenter si elle est lourde utilisée le signal [BaseSettings.apply_signal] plutôt 
 ##	func _apply() -> void: 

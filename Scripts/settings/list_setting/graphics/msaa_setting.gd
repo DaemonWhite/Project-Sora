@@ -1,5 +1,6 @@
 class_name MsaaSetting
 extends SingleOptionSettings
+## Paramètres lier à MSAA 3D et 2D
 
 func _ready():
 	self._name = "MSAA"

@@ -1,5 +1,6 @@
 class_name WindowModeSetting
 extends SingleOptionSettings
+## Paramètre lier à WindowMode
 
 func _ready() -> void:
 	self._name = "WINDOW_MODE"

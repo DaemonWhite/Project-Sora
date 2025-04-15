@@ -1,5 +1,8 @@
 class_name MasterSoundSetting
 extends SlideOptionSettings
+## Paramètres en liens avec le son principal
+## @experimental
+## TODO Apply n'est pas implementer car fonction inexistante
 
 func _ready():
     self._name = "MASTER"
