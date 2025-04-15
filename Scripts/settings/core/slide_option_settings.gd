@@ -26,7 +26,7 @@ var _min: float
 var _max: float
 
 ## Change le paramètre courant un [float] est attendue sii non fait rien	
-func set_current_option(value: Variant):
+func set_current_option(value: Variant) -> void:
 	if self._min <= value or self._max >= value:
 		self._current_option = value
 	else:
