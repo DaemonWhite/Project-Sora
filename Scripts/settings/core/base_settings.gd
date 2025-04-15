@@ -138,7 +138,9 @@ func _init() -> void:
 func _ready() -> void:
 	pass # Replace with function body.
 
-## Methode virtuelle appeler quand [method BaseSettings.apply] est appeler
+## Methode virtuelle appeler quand [method BaseSettings.apply] est appeler. [br]
+## Elle sert à mettre une logique metier simple si la logique métier est lourde utiliser le signal
+## [signal BaseSettings.apply_signal] plutôt
 func _apply() -> void:
 	pass
 
