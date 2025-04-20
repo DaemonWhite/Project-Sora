@@ -84,7 +84,7 @@ extends Object
 ## Dans le cas où vous voudriez le récupérer dans un autre script, il vous suffit de vous référer
 ## à [method BaseSettings.get_settings_by_name]
 
-## Norm du paramètre
+## Nom du paramètre
 var _name: String = ""
 
 ## Group du paramètre voir [enum BaseSettings.GROUP]
@@ -108,7 +108,7 @@ signal apply_signal(Class, save)
 
 ## Liste les différentes catégories prise en charge 
 enum GROUP {
-	## Catégorire des Divers
+	## Catégorie des Divers
 	OTHER,
 	## Catégorie en lien avec les graphismes
 	GRAPHICS,
@@ -211,8 +211,8 @@ static func get_settings() -> Array:
 	return BaseSettings._list_settings
 
 ## Renvoie tous les paramètres instanciés appartenant à la catégorie désignée voir [enum BaseSettings.GROUP]
-static func get_settings_by_enum(group_enum: BaseSettings) -> Array:
-	var list_settings: Array
+static func get_settings_by_enum(group_enum: BaseSettings.GROUP) -> Array[BaseSettings]:
+	var list_settings: Array[BaseSettings]
 
 	for setting in BaseSettings._list_settings:
 		if setting.get_group() == group_enum:
@@ -221,7 +221,7 @@ static func get_settings_by_enum(group_enum: BaseSettings) -> Array:
 	return list_settings
 
 ## Revois le paramètre instancier en passant son groupe et son Nom.
-static func get_settings_by_name(group_enum: BaseSettings.GROUP , name: String) -> Variant:
+static func get_settings_by_name(group_enum: BaseSettings.GROUP , name: String) -> BaseSettings:
 	for setting in BaseSettings._list_settings:
 		if setting.get_group() == group_enum and setting.get_name() == name:
 			return setting
