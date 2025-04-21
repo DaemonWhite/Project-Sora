@@ -13,7 +13,7 @@ func _ready() -> void:
 	VsyncSetting.new()
 	TaaSetting.new()
 	FxaaSetting.new()
-	# var screen = ScreenSetting.new() # Teste screen
+	var screen = ScreenSetting.new() # Teste screen
 	# screen.set_current_option(1)
 	# screen.apply(false)
 	var window = WindowModeSetting.new()
