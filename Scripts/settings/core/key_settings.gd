@@ -38,7 +38,7 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 			KeySettings.INPUT.joypad_button:
 				self._default_option[KeySettings.INPUT.joypad_button].append(e.button_index)
 			KeySettings.INPUT.joypad_motion:
-				self._default_option[KeySettings.INPUT.joypad_motion].append(e.axis)
+				self._default_option[KeySettings.INPUT.joypad_motion].append([e.axis, e.axis_value])
 			KeySettings.INPUT.mouse:
 				self._default_option[KeySettings.INPUT.mouse].append(e.button_index)
 			KeySettings.INPUT.keyboard:
@@ -73,7 +73,7 @@ func add_event(event: InputEvent) -> void:
 		KeySettings.INPUT.joypad_button:
 			value = event.button_index
 		KeySettings.INPUT.joypad_motion:
-			value = event.axis
+			value = [event.axis, event.axis_value]
 		KeySettings.INPUT.mouse:
 			value = event.button_index
 		KeySettings.INPUT.keyboard:
@@ -98,7 +98,7 @@ func remove_event(event: InputEvent):
 		KeySettings.INPUT.joypad_button:
 			value = event.button_index
 		KeySettings.INPUT.joypad_motion:
-			value = event.axis
+			value = [event.axis, event.axis_value]
 		KeySettings.INPUT.mouse:
 			value = event.button_index
 		KeySettings.INPUT.keyboard:
@@ -129,8 +129,8 @@ func _apply() -> void:
 			KeySettings.INPUT.joypad_motion:
 				for value in self._current_option[key]:
 					input_event = InputEventJoypadMotion.new()
-					input_event.axis = value
-					input_event.axis_value = 0
+					input_event.axis = value[0]
+					input_event.axis_value = value[1]
 					InputMap.action_add_event(self._name, input_event)
 					
 			KeySettings.INPUT.mouse:
@@ -150,9 +150,10 @@ func _apply() -> void:
 ## Format du dictionaires
 ##	[codeblock]
 ##	{
-##	    KeySettings.INPUT.joypad_button : [], # Bouton de la manetette
-##	    KeySettings.INPUT.joypad_motion : [], # Joystick de la manette
-##	    KeySettings.INPUT.keyboard : [], # Touche clavier
+##	    KeySettings.INPUT.joypad_button : [button_gamepad], # Bouton de la manetette
+##	    KeySettings.INPUT.joypad_motion : [[axis], [axis_value]], # Joystick de la manette
+##		KeySettings.INPUT.joypad_mouse : [button_louse], # Touche de la souris
+##	    KeySettings.INPUT.keyboard : [key], # Touche clavier
 ##	}
 ## [/codeblock]
 func get_current_option() -> Dictionary:
