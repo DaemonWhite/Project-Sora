@@ -1,13 +1,13 @@
 class_name KeySettings
 extends BaseSettings
 
-## Gère le paramètrage desevenments clavier.
+## Gère le paramètrage des évenements du clavier.
 ##
-## Permet de sauvegarder les paramètres clavier associer à une action.
-## Il est pas recomander de l'utiliser directement car [KeyboardSettings] s'occupe de les générer
-## tous dynamiquement au moment ou il est instancier.
+## Permet de sauvegarder les paramètres clavier associé à une action.
+## Il est pas recommandé de l'utiliser directement car [KeyboardSettings] s'occupe de les générer
+## tous dynamiquement au moment ou il est instancié.
 
-## Entrer des controlleur prise en charge
+## Entrer des controlleurs prise en charge
 enum INPUT {
 	## Prise en charge du controlleur [InputEventJoypadButton]
 	joypad_button,
@@ -27,7 +27,7 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 	
 	# Initialise la stucture du clavier
 	self._default_option = {
-		KeySettings.INPUT.joypad_button : [], # Bouton de la manetette
+		KeySettings.INPUT.joypad_button : [], # Bouton de la manette
 		KeySettings.INPUT.joypad_motion : [], # Joystick de la manette
 		KeySettings.INPUT.mouse : [], # Touche de la souris
 		KeySettings.INPUT.keyboard : [], # Touche clavier
@@ -48,7 +48,7 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 		
 	super._init()
 
-## Permet de detecter le type de controleur utiliser
+## Permet de detecter le type de controleur utilisé
 static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
 	var event = KeySettings.INPUT.error
 
@@ -63,7 +63,7 @@ static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
 
 	return event
 
-## Ajoute un evenement voir [enum KeySettings.INPUT] pour voir les evenments pris en charge
+## Ajoute un evenement voir [enum KeySettings.INPUT] pour voir les évenements pris en charge
 func add_event(event: InputEvent) -> void:
 	var value: Variant = null
 	
@@ -82,13 +82,13 @@ func add_event(event: InputEvent) -> void:
 			push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconu", event)
 			return
 	
-	# Empeche le double evenement
+	# Empeche le double évenement
 	if self._current_option[type_event].find(value) == -1:
 		self._current_option[type_event].append(value)
 	else:
 		push_warning("Evenement deja assigner")
 		
-## Permet de supprimer l'evenment correspondant
+## Permet de supprimer l'évenement correspondant
 func remove_event(event: InputEvent):
 	var value: Variant = null
 	
@@ -107,7 +107,7 @@ func remove_event(event: InputEvent):
 			push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconu", event)
 			return
 	var index: int = self._current_option[type_event].find(value)
-	# Empeche le double evenement
+	# Empeche le double évenement
 	if index  != -1:
 		self._current_option[type_event].remove_at(index)
 	else:
@@ -147,7 +147,7 @@ func _apply() -> void:
 
 ## Renvoie le dictionaire contenant toutes les lettres
 ## [br]
-## Format du dictionaires
+## Format du dictionnaire
 ##	[codeblock]
 ##	{
 ##	    KeySettings.INPUT.joypad_button : [button_gamepad], # Bouton de la manetette

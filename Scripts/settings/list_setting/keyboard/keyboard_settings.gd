@@ -3,9 +3,9 @@ extends Object
 
 ## Génère dynamiquement les inputs
 ## 
-## Permet de génèrer dynamquement la configuration des [KeySettings] a 
-## partir de [InputMap] il est recomander de l'activer au lancement du projet
-## pour eviter d'ajouter des inputs temporaires non désirée
+## Permet de génèrer dynamiquement la configuration des [KeySettings] à 
+## partir de [InputMap] il est recommander de l'activer au lancement du projet
+## pour éviter d'ajouter des inputs temporaires non désiré
 
 var _map_keyboard: Array[KeySettings]
 
@@ -17,7 +17,7 @@ func _init():
 					InputMap.action_get_events(action))
 			)
 			
-## Retourne tout les entrer clavier enregistrer
+## Retourne toute les entrées clavier enregistrer
 func get_keyboard_settings() -> Array[KeySettings]:
 	return self._map_keyboard
 	

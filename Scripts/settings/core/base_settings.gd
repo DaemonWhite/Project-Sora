@@ -1,9 +1,9 @@
 class_name  BaseSettings
 extends Object
-## Gère la sauvegarde des parmaètrs et sert de classe de base pour les paramètres
+## Gère la sauvegarde des paramètres et sert de classe de base pour les paramètres
 ##
 ## La classe permet de gérer les sauvegardes des paramètres à partir de méthodes static.
-## Les méthodes non static sont prévues pour être virtuel. Et doit être donc utilisé par 
+## Les méthodes non static sont prévues pour être virtuel. Et doivent être donc utilisées par 
 ## la classe Enfant. La classe BaseSettings n'est donc pas à utiliser pour créer 
 ## un nouveau paramètre, mais pour créer une classe enfant qui elle s'occupera des paramètres. 
 ## [br][br]
@@ -11,7 +11,7 @@ extends Object
 ## On utilisera le terme configuration courrante pour la classe [ConfigFile]
 ## On utilisera le terme paramètre courrant pour les membres de la classe [BaseSettings]
 ## [br][br]
-## Vous pouver creer vos propres règles de paramètres comme ceci. Example pris de [SingleOptionSettings]
+## Vous pouvez créer vos propres règles de paramètres comme ceci. Exemple pris de [SingleOptionSettings]
 ## [codeblock]
 ## 	class_name  SingleOptionSettings
 ## 	extends BaseSettings
@@ -41,7 +41,7 @@ extends Object
 ##	
 ## [/codeblock]
 ## [br]
-## Maintenant, qu'ont à créer des règles de paramètre, 
+## Maintenant, qu'on à créée des règles de paramètre, 
 ## il faut qu'on puisse ajouter nos paramètres. 
 ## [codeblock]
 ##	class_name ResolutionSetting 
@@ -66,22 +66,22 @@ extends Object
 ##	    # Option par défaut
 ##	    self._default_option = "800x600"
 ##		
-##	## Nouvelle methode optionel
+##	## Nouvelle méthode optionel
 ##	func event_apply(_Class: BaseSettings, _save: bool):
 ##	    self._apply()
 ##	
-##	## Redefinition d'apply pour que le paramètres soit appliquer automatiquement
+##	## Redéfinition d'apply pour que le paramètre soit appliqué automatiquement
 ##	func _apply() -> void:
 ##	    DisplayServer.window_set_size(self._options[self._current_option])
 ##	
 ## [/codeblock]
 ## [br]
-## Au démarrage du système, on a plus qu'a instancier la classe [code]ResolutionSetting.new()[/code].
+## Au démarrage du système, on a plus qu'à instancier la classe [code]ResolutionSetting.new()[/code].
 ## Elle sera alors automatiquement ajoutée dans [member BaseSettings._list_settings] 
 ## donc pas besoin de la stocker dans une variable sauf si vous voulez apporter 
 ## des modifications après.
 ## [br][br]
-## Dans le cas où vous voudriez le récupérer dans un autre script, il vous suffit de vous référer
+## Dans le cas où vous voudriez la récupérer dans un autre script, il vous suffit de vous référer
 ## à [method BaseSettings.get_settings_by_name]
 
 ## Nom du paramètre
@@ -100,10 +100,10 @@ var _current_option: Variant = null
 static var _list_settings: Array = []
 ## Contient la configuration courante
 static var _config: ConfigFile = ConfigFile.new()
-## Contient le chemin de la configuration sauvegarder
+## Contient le chemin de la configuration sauvegardé
 static var _path_settings: String = ""
 
-## Signal envoyer quand la méthode [method BaseSettings.apply] est appeler
+## Signal envoyé quand la méthode [method BaseSettings.apply] est appelée
 signal apply_signal(Class, save)
 
 ## Liste les différentes catégories prise en charge 
@@ -145,14 +145,14 @@ func _init() -> void:
 func _ready() -> void:
 	pass # Replace with function body.
 
-## Methode virtuelle appeler quand [method BaseSettings.apply] est appeler. [br]
-## Elle sert à mettre une logique metier simple si la logique métier est lourde utiliser le signal
+## Methode virtuelle appelée quand [method BaseSettings.apply] est appelée. [br]
+## Elle sert à mettre une logique métier simple si la logique métier est lourde utiliser le signal
 ## [signal BaseSettings.apply_signal] plutôt
 func _apply() -> void:
 	pass
 
 ## Applique le paramètre à la configuration par défaut et sauvegarde directement 
-## dans le fichier Passer false si la sauvegarde instantanée et non désirer
+## dans le fichier Passer false si la sauvegarde instantanée est non désirée
 func apply(save_configuration: bool=true) -> void:
 	BaseSettings._config.set_value(
 		BaseSettings.get_group_to_string(self._group),
@@ -206,7 +206,7 @@ func get_name() -> String:
 static func get_path_settings() -> String:
 	return BaseSettings._path_settings
 
-## Renvoie tout les paramètres instancier
+## Renvoie tout les paramètres instanciés
 static func get_settings() -> Array:
 	return BaseSettings._list_settings
 
@@ -220,7 +220,7 @@ static func get_settings_by_enum(group_enum: BaseSettings.GROUP) -> Array[BaseSe
 
 	return list_settings
 
-## Revois le paramètre instancier en passant son groupe et son Nom.
+## Revois le paramètre instancié en passant son groupe et son Nom.
 static func get_settings_by_name(group_enum: BaseSettings.GROUP , name: String) -> BaseSettings:
 	for setting in BaseSettings._list_settings:
 		if setting.get_group() == group_enum and setting.get_name() == name:
@@ -228,7 +228,7 @@ static func get_settings_by_name(group_enum: BaseSettings.GROUP , name: String) 
 	
 	return null
 
-## Vérifie si la configuration courante et différente du paramètre courant
+## Vérifie si la configuration courante est différente du paramètre courant
 func is_different() -> bool:
 	return BaseSettings._config.get_value(
 		BaseSettings.get_group_to_string(self._group), 

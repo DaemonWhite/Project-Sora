@@ -1,10 +1,10 @@
 class_name SlideOptionSettings
 extends BaseSettings
-## Permet de creer une configuration avec une valeurs minimum et maximum
+## Permet de créer une configuration avec une valeur minimum et maximum
 ##
-## Permet de créer une configuratation avec de la gestion d'erreur baser sur un slider
+## Permet de créer une configuratation avec de la gestion d'erreur basé sur un slider
 ## avec une limite minimum et maximum [br]
-## Example de configuration
+## Exemple de configuration
 ## [codeblock]
 ## class_name MasterSoundSetting
 ## extends SlideOptionSettings
@@ -25,7 +25,7 @@ var _min: float
 ## Valeur maximum
 var _max: float
 
-## Change le paramètre courant un [float] est attendue si non fait rien	
+## Change le paramètre courant un [float] est attendue si on ne fait rien	
 func set_current_option(value: Variant) -> void:
 	if self._min <= value or self._max >= value:
 		self._current_option = value

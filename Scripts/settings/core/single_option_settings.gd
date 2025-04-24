@@ -1,9 +1,9 @@
 class_name  SingleOptionSettings
 extends BaseSettings
-## Parametres unique
+## Paramètres unique
 ## 
-## Une base pour créer des paramètres avec option connue intègre une gestion d'erreur primitive.
-## Pour plus de detailles sur comment créer votre jeux de règles référer vous à [BaseSettings]
+## Une base pour créer des paramètres avec option connue, intègre une gestion d'erreur primitive.
+## Pour plus de détailles sur comment créer votre jeux de règles référer vous à [BaseSettings]
 ## [br][br]
 ## Example pris de l'enfant [WindowModeSetting]
 ## [codeblock]
@@ -42,7 +42,7 @@ func set_current_option(value: Variant) -> void:
 	else:
 		push_warning("Options non existante", self)
 
-## Vérifie la bonne présences de l'option
+## Vérifie la bonne présence de l'option
 func exist_option(search: Variant) -> bool:
 	if self._options.get(search) != null:
 		return true

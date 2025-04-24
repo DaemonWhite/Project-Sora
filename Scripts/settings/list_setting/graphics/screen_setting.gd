@@ -1,6 +1,6 @@
 class_name ScreenSetting
 extends SingleOptionSettings
-## Permet de choisir l'écrans sur lequel afficher le jeu
+## Permet de choisir l'écran sur lequel afficher le jeu
 
 func _ready() -> void:
 	self._name = "SCREEN_SELECTED"
