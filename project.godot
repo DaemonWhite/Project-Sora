@@ -22,14 +22,16 @@ buses/default_bus_layout="res://Sound/default_bus_layout.tres"
 [autoload]
 
 SceneSound="*res://Scenes/menu/setting/scene_sound.tscn"
-
-[display]
-
-window/size/mode=3
+Boot="*res://Scripts/boot.gd"
 
 [dotnet]
 
 project/assembly_name="Projet-sora"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [input]
 

@@ -1,6 +1,6 @@
 extends Control
 
-## Si ecoute le clavier
+## Si écoute le clavier
 var analyser_entree : bool = false
 
 ## Index du bouton cliquer
@@ -35,7 +35,7 @@ const controle_manette : Array = [
 	["Flèche bas", JOY_BUTTON_DPAD_DOWN]
 ]
 
-## Liste des boutons de controles
+## Liste des boutons de controle
 @onready var boutons : Array = [
 	$ColorRect/Control/Avancer_Button,
 	$ColorRect/Control/Reculer_Button,
@@ -166,9 +166,9 @@ func _on_retour_button_pressed() -> void:
 func _on_sensibilite_souris_value_changed(value: float) -> void:
 	pass # Replace with function body.
 
-## Méthode hériter qui récupères les touches
-## A l'intérieurs on retrouve la verification
-## si une touche et appuyer et que le clavier et écouter.
+## Méthode hériter qui récupère les touches
+## A l'intérieur on retrouve la verification
+## si une touche est appuyée et que le clavier est écouté.
 func _input(event: InputEvent) -> void:
 	if event.is_pressed() and analyser_entree:
 		var thread = Thread.new()

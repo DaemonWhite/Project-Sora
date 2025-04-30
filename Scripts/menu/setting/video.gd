@@ -162,7 +162,7 @@ func _on_resolution_option_button_item_selected(index : int):
 	get_window().set_size(resolutions[index][1])
 	centre_Window()
 
-## Evenment qui sélectionne le mode de vsync
+## Evenement qui sélectionne le mode de vsync
 func _on_v_sync_option_button_4_item_selected(index: int) -> void:
 	ProjectSettings.set_setting("display/window/vsync/vsync_mode", vsync[index][1])
 
