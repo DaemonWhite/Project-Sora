@@ -5,4 +5,3 @@
 [node name="Node" type="Node"]
 
 [node name="MainMenu" parent="." instance=ExtResource("1_ca6h7")]
-pivot_offset = Vector2(665, 414)

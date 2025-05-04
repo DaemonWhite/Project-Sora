@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bavji8n4dhmli"]
+
+[ext_resource type="Script" path="res://Scripts/menu/setting/menu_setting.gd" id="1_myxm8"]
+[ext_resource type="PackedScene" uid="uid://d3jy8p2tm7mni" path="res://Scenes/menu/setting/controller.tscn" id="2_p4h8w"]
+[ext_resource type="PackedScene" uid="uid://chrm4m3gr4hik" path="res://Scenes/menu/setting/audio.tscn" id="3_oytpo"]
+[ext_resource type="PackedScene" uid="uid://bn4ysq0gnht1x" path="res://Scenes/menu/setting/video.tscn" id="4_k8osn"]
+
+[node name="MenuSetting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_myxm8")
+
+[node name="TabSetting" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 2
+use_hidden_tabs_for_min_size = true
+
+[node name="ControllerSetting" parent="TabSetting" instance=ExtResource("2_p4h8w")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="SoundSetting" parent="TabSetting" instance=ExtResource("3_oytpo")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VideoSetting" parent="TabSetting" instance=ExtResource("4_k8osn")]
+layout_mode = 2
+metadata/_tab_index = 2

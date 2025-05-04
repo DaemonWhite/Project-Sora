@@ -1,6 +1,8 @@
 extends Control
 
-@onready var test_button = $Test
+@onready var test_button = $TestSelect
+@onready var tabs = $SwitchMenuTabs
+
 
 var test : Array =[
 	"Test",
@@ -36,7 +38,10 @@ func _on_new_game_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/test/menu_overlay/test_menu.tscn")
 
 func _on_options_button_pressed():
-	get_tree().change_scene_to_file("res://Scenes/menu/setting/video.tscn")
+	tabs.current_tab = 1
 
 func _on_exit_button_pressed():
 	get_tree().quit()
+
+func _on_return_button_pressed() -> void:
+	tabs.current_tab = 0

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3jy8p2tm7mni"]
+[gd_scene load_steps=2 format=3 uid="uid://d3jy8p2tm7mni"]
 
-[ext_resource type="Script" path="res://Scripts/menu/setting/control.gd" id="1_2gh1v"]
-[ext_resource type="Texture2D" uid="uid://dah8g1njilnah" path="res://Textures/image/menu/main_background.png" id="1_81njt"]
+[ext_resource type="Script" path="res://Scripts/menu/setting/control.gd" id="1_y2oys"]
 
-[node name="Control" type="Control"]
+[node name="ControllerSetting" type="Control"]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,51 +11,7 @@ anchor_bottom = 1.0
 offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2gh1v")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -395.0
-offset_right = 158.0
-offset_bottom = 361.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_81njt")
-
-[node name="Options" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.52
-anchor_top = 0.407
-anchor_right = 0.52
-anchor_bottom = 0.407
-offset_left = -219.04
-offset_top = -26.736
-offset_right = 217.96
-offset_bottom = 27.264
-
-[node name="Graphisme" type="Button" parent="Options"]
-layout_mode = 0
-offset_right = 116.0
-offset_bottom = 53.0
-text = "Graphisme"
-
-[node name="Audio" type="Button" parent="Options"]
-layout_mode = 0
-offset_left = 158.0
-offset_right = 274.0
-offset_bottom = 53.0
-text = "Audio"
-
-[node name="Controlle" type="Button" parent="Options"]
-layout_mode = 0
-offset_left = 320.0
-offset_right = 436.0
-offset_bottom = 53.0
-text = "Contrôle"
+script = ExtResource("1_y2oys")
 
 [node name="Retour" type="Control" parent="."]
 layout_mode = 1
@@ -65,16 +21,6 @@ anchor_bottom = 1.0
 offset_top = -50.0
 offset_right = 136.0
 grow_vertical = 0
-
-[node name="Retour_Button" type="Button" parent="Retour"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -11.98
-anchor_bottom = -11.98
-offset_top = 599.0
-offset_right = 136.0
-offset_bottom = 649.0
-text = "Retour"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -339,10 +285,6 @@ max_value = 5.0
 step = 0.1
 value = 1.0
 
-[connection signal="pressed" from="Options/Graphisme" to="." method="_on_graphisme_pressed"]
-[connection signal="pressed" from="Options/Audio" to="." method="_on_audio_pressed"]
-[connection signal="pressed" from="Options/Controlle" to="." method="_on_controlle_pressed"]
-[connection signal="pressed" from="Retour/Retour_Button" to="." method="_on_retour_button_pressed"]
 [connection signal="pressed" from="ColorRect/Control/Avancer_Button" to="." method="_on_avancer_button_pressed"]
 [connection signal="pressed" from="ColorRect/Control/Reculer_Button" to="." method="_on_reculer_button_pressed"]
 [connection signal="pressed" from="ColorRect/Control/Sauter_Button" to="." method="_on_sauter_button_pressed"]
