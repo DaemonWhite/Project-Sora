@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bavji8n4dhmli"]
+[gd_scene load_steps=10 format=3 uid="uid://bavji8n4dhmli"]
 
-[ext_resource type="Script" path="res://Scripts/menu/setting/menu_setting.gd" id="1_myxm8"]
+[ext_resource type="Script" path="res://Scripts/menu_setting.gd" id="1_myxm8"]
+[ext_resource type="Script" path="res://Scripts/menu/overlay.gd" id="2_jkvie"]
 [ext_resource type="PackedScene" uid="uid://d3jy8p2tm7mni" path="res://Scenes/menu/setting/controller.tscn" id="2_p4h8w"]
+[ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
 [ext_resource type="PackedScene" uid="uid://chrm4m3gr4hik" path="res://Scenes/menu/setting/audio.tscn" id="3_oytpo"]
 [ext_resource type="PackedScene" uid="uid://bn4ysq0gnht1x" path="res://Scenes/menu/setting/video.tscn" id="4_k8osn"]
+
+[sub_resource type="Resource" id="Resource_arj4i"]
+script = ExtResource("3_nv03i")
+index = 0
+event = ""
+name_tab = "Contrôle"
+
+[sub_resource type="Resource" id="Resource_riah2"]
+script = ExtResource("3_nv03i")
+index = 1
+event = ""
+name_tab = "Son"
+
+[sub_resource type="Resource" id="Resource_un8ve"]
+script = ExtResource("3_nv03i")
+index = 2
+event = ""
+name_tab = "Vidéo"
 
 [node name="MenuSetting" type="Control"]
 layout_mode = 3
@@ -22,11 +42,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 2
-use_hidden_tabs_for_min_size = true
+current_tab = 0
+script = ExtResource("2_jkvie")
+event_by_submenu = Array[ExtResource("3_nv03i")]([SubResource("Resource_arj4i"), SubResource("Resource_riah2"), SubResource("Resource_un8ve")])
 
 [node name="ControllerSetting" parent="TabSetting" instance=ExtResource("2_p4h8w")]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -36,5 +56,6 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="VideoSetting" parent="TabSetting" instance=ExtResource("4_k8osn")]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2

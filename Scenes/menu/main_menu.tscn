@@ -60,11 +60,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_gsc5y")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_noe2p")
-current_tab = 1
+current_tab = 0
 tabs_visible = false
 
 [node name="Menu" type="Control" parent="SwitchMenuTabs"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -122,6 +121,7 @@ theme_override_font_sizes/font_size = 25
 text = "QUITTER"
 
 [node name="Settings" type="Control" parent="SwitchMenuTabs"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
