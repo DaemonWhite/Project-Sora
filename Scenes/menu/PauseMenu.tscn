@@ -121,7 +121,7 @@ offset_right = 69.0
 offset_bottom = 646.0
 text = "Retour"
 
-[connection signal="pressed" from="Pause/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Pause/ContinueButton" to="." method="pause"]
 [connection signal="pressed" from="Pause/OptionsButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="Pause/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Options/ReturnButton" to="." method="_on_return_button_pressed"]
