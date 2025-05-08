@@ -10,5 +10,6 @@ event = ""
 name_tab = ""
 
 [node name="Overlay" type="TabContainer"]
+process_mode = 3
 script = ExtResource("1_5vx1c")
 event_by_submenu = Array[ExtResource("2_5gfos")]([SubResource("Resource_f0lgo")])
