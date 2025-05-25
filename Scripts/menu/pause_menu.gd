@@ -18,10 +18,11 @@ func pause() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		
-
+	
+	
 func _on_exit_button_pressed() -> void:
 	self.pause()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://Scenes/menu/main_menu.tscn")
 
 func _on_option_button_pressed() -> void:
