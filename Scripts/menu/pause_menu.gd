@@ -3,7 +3,7 @@ extends Overlay
 
 func _ready() -> void:
 	super._ready()
-	get_tree().paused = !self.visible
+	get_tree().paused = self.visible
 
 func _input(event: InputEvent) -> void:
 	super._input(event)
@@ -13,6 +13,12 @@ func _input(event: InputEvent) -> void:
 func pause() -> void:
 	self.visible = !self.visible
 	get_tree().paused = self.visible
+	
+	if get_tree().paused:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 
 func _on_exit_button_pressed() -> void:
 	self.pause()
