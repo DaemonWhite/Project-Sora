@@ -4,6 +4,9 @@ extends SingleOptionSettings
 
 func _ready():
 	self._name = "RESOLUTION"
+	self._ui_name = tr("Resolution")
+	self._description = tr("Permet de choisir la résolution de l'écran.")
+
 	self._group = BaseSettings.GROUP.GRAPHICS
 	# TODO Support des autres format d'écrans
 	self._options = {

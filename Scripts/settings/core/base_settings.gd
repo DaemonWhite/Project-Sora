@@ -87,6 +87,12 @@ extends Object
 ## Nom du paramètre
 var _name: String = ""
 
+## Nom du paramètre à afficher dans l'UI
+var _ui_name: String = ""
+
+## Description du paramètre à afficher dans l'UI
+var _description: String = ""
+
 ## Group du paramètre voir [enum BaseSettings.GROUP]
 var _group: BaseSettings.GROUP = BaseSettings.GROUP.OTHER
 

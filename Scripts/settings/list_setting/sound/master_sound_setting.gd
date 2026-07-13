@@ -6,6 +6,8 @@ extends SlideOptionSettings
 
 func _ready() -> void:
 	self._name = "MASTER"
+	self._ui_name = tr("Master Sound")
+	self._description = tr("Régle le volume principal du jeu.")	
 	self._group = BaseSettings.GROUP.SOUND
 
 	self._min = 0.0

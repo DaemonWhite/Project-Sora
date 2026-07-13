@@ -4,6 +4,8 @@ extends SingleOptionSettings
 
 func _ready():
 	self._name = "VSYNC"
+	self._ui_name = tr("Vsync")
+	self._description = tr("Active ou désactive la Vsync. La Vsync permet de synchroniser le nombre d'image par seconde du jeu avec le taux de rafraichissement de l'écran. Cela permet d'éviter le tearing mais peut causer du lag et du stuttering. (Non nécessaire sur linux avec wayland)")
 	self._group = BaseSettings.GROUP.GRAPHICS
 
 	self._options =  {
