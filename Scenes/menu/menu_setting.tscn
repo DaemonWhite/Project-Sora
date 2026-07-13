@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bavji8n4dhmli"]
+[gd_scene load_steps=10 format=3 uid="uid://bavji8n4dhmli"]
 
+[ext_resource type="Script" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
 [ext_resource type="Script" path="res://Scripts/menu/overlay.gd" id="2_jkvie"]
 [ext_resource type="PackedScene" uid="uid://d3jy8p2tm7mni" path="res://Scenes/menu/setting/controller.tscn" id="2_p4h8w"]
 [ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
@@ -31,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kftnu")
 
 [node name="TabSetting" type="TabContainer" parent="."]
 layout_mode = 1
