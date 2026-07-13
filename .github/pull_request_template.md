@@ -1,29 +1,20 @@
-# CameraHandler
+# Nom de la pull request
 #1 (Lien vers issue)
  
 ## Description
-Camera Handler permet de manipuler la camera première et troisième personne
-Elle peut ce lier à un CharacterBody3D
+Décrire l'objectif de l'issue
  
 # teste
+
+Ce qu'il faut tester
  
 ## Information
-- On peut changer de personage avec les 1,2,3,4,5
-- Déplacement flèches clavier + espace pour sauter
-- "," et "L" bloque respectivement le mouvement et la caméra
-- "P" Passe en free mode
-- Le personnage 5 A un comportement complexe à un script par défaut, ne génère pas d'avertisement
-- Les personnages 1,2,3,4 on un comportement simple ils suivent la camera comme des idiots. La caméra leur attache un script dynamiquement ce qui génère une erreur.
+Information pour aider aux tests ou à la compréhension du code source
 
-## Element à teste
-- [ ] Déplacement
-    - [ ] Déplacement Simple de 1,2,3,4
-    - [ ] Déplacement Complexe 5
- -[ ] Changement de Camera
-- [ ] Une fois 5 sélectioné il dois toujours ce déplacer même si plus il n'est plus sélectioné
+## Élément à tester
+
+Liste des éléments à tester
 
 ## Fichier de testes
 
-Scenes/test/camera.tscn
-
-Script/test/camera/camera.gd
+Lister ici les fichiers de tests relatifs au projet
