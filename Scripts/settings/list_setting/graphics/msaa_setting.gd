@@ -4,6 +4,8 @@ extends SingleOptionSettings
 
 func _ready():
 	self._name = "MSAA"
+	self._ui_name = tr("MSAA")
+	self._description = tr("Active ou désactive le MSAA. Le MSAA est un filtre anti-aliasing qui permet de lisser les bords des objets dans le jeu. Plus couteux en performance que le FXAA mais plus efficace.")
 	self._group = BaseSettings.GROUP.GRAPHICS
 	self._options = {
 		"MSAA Disable": Viewport.MSAA_DISABLED,
