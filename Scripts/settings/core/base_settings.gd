@@ -202,11 +202,19 @@ static func get_group_to_string(group_enum: BaseSettings.GROUP) -> String:
 		BaseSettings.GROUP.KEYBOARD:
 			categorie = "KEYBOARD"
 			
-	return categorie
+	return TranslationServer.translate(categorie)
 
-## Renvoie le non du paramètre
+## Renvoie le nom du paramètre
 func get_name() -> String:
 	return self._name
+
+## Renvoie le nom du paramètre à afficher dans l'UI
+func get_ui_name() -> String:
+	return self._ui_name
+
+## Renvoie la description du paramètre à afficher dans l'UI
+func get_description() -> String:
+	return self._description
 
 ## Renvoie le chemin de sauvegarde de la configuration
 static func get_path_settings() -> String:

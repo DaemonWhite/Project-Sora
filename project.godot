@@ -91,6 +91,10 @@ Inventaire={
 ]
 }
 
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Scripts/settings/core/base_settings.gd", "res://Scripts/settings/list_setting/graphics/fxaa_setting.gd", "res://Scripts/settings/list_setting/graphics/msaa_setting.gd", "res://Scripts/settings/list_setting/graphics/resolution_setting.gd", "res://Scripts/settings/list_setting/graphics/screen_setting.gd", "res://Scripts/settings/list_setting/graphics/vsync_setting.gd", "res://Scripts/settings/list_setting/graphics/window_mode_setting.gd", "res://Scripts/settings/list_setting/graphics/taa_setting.gd")
+
 [layer_names]
 
 3d_physics/layer_1="Camera"
