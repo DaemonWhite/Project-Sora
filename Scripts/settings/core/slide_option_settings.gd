@@ -24,6 +24,8 @@ extends BaseSettings
 var _min: float
 ## Valeur maximum
 var _max: float
+## Valeur du pas
+var _step: float
 
 ## Change le paramètre courant un [float] est attendue si on ne fait rien	
 func set_current_option(value: Variant) -> void:
@@ -31,3 +33,15 @@ func set_current_option(value: Variant) -> void:
 		self._current_option = value
 	else:
 		push_warning("Valeur hors plage")
+
+## Renvoie la valeur minimum
+func get_min() -> float:
+	return self._min
+
+## Renvoie la valeur maximum
+func get_max() -> float:
+	return self._max
+
+## Renvoie la valeur du pas
+func get_step() -> float:
+	return self._step

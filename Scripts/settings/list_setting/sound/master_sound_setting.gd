@@ -12,6 +12,7 @@ func _ready() -> void:
 
 	self._min = 0.0
 	self._max = 1.0
+	self._step = 0.05
 
 	self._default_option = 0.2
 	
