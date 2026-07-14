@@ -8,10 +8,11 @@ func _ready() -> void:
 	self._description = tr("Permet de choisir l'écran à utiliser")
 	self._group = BaseSettings.GROUP.GRAPHICS
 	
-	self._default_option = 0
+	self._default_option = "0"
 	
 	for i in DisplayServer.get_screen_count():
-		self._options.get_or_add(i,i)
+		var i_str = str(i)
+		self._options.get_or_add(i_str, i)
 
 func _apply() -> void:
 	var target_screen = self._options[self._current_option]
@@ -33,6 +34,5 @@ func _apply() -> void:
 		var screen_size = DisplayServer.screen_get_size(target_screen)
 		var window_size = DisplayServer.window_get_size(0)
 		var screen_position = DisplayServer.screen_get_position(target_screen)
-		
 		var new_pos = screen_position + ((screen_size - window_size) / 2)
 		DisplayServer.window_set_position(new_pos, 0)
