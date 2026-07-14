@@ -46,8 +46,8 @@ func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
 	print("setting: ", setting)
 	match setting:
 		var n when n is BooleanOptionSettings:
-			push_warning("BooleanOptionSettings n'est pas encore supporté dans le menu", self)
-			return
+			print("BooleanOptionSettings")
+			component_path += "CheckBox.tscn"
 		var n when n is KeySettings:
 			push_warning("KeySettings n'est pas encore supporté dans le menu", self)
 			return

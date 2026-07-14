@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://deq5cjr3ccxps"]
+
+[ext_resource type="Script" path="res://Scripts/menu/components/settings/check_box.gd" id="1_qojdc"]
+
+[node name="CheckBox" type="HBoxContainer"]
+script = ExtResource("1_qojdc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 2

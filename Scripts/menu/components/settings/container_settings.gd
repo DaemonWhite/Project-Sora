@@ -1,7 +1,7 @@
 class_name ContainerSettings
 extends Control
 
-@onready var container = $HFlowContainer
+@onready var container = $VBoxContainer
 @onready var description = $Description
 
 # Called when the node enters the scene tree for the first time.
