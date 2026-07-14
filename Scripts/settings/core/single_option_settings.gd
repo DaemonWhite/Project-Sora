@@ -42,6 +42,13 @@ func set_current_option(value: Variant) -> void:
 	else:
 		push_warning("Options non existante", self)
 
+func get_current_option_index() -> int:
+	var keys = _options.keys()
+	for i in range(keys.size()):
+		if keys[i] == self._current_option:
+			return i
+	return -1
+
 ## Vérifie la bonne présence de l'option
 func exist_option(search: Variant) -> bool:
 	if self._options.get(search) != null:
