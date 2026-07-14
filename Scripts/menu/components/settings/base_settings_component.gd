@@ -12,8 +12,11 @@ func initialize(p_setting: BaseSettings) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if setting:
-		label.text = setting.get_ui_name()
+	if self.setting:
+		label.text = self.setting.get_ui_name()
 
-func get_drescription() -> String:
+func reset() -> void:
+	push_warning("Reset non implémenté pour le composant de base", self)
+
+func get_description() -> String:
 	return self.description
