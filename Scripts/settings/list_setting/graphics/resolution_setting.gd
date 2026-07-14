@@ -28,4 +28,15 @@ func event_apply(_Class: BaseSettings, _save: bool):
 	self._apply()
 
 func _apply() -> void:
-	DisplayServer.window_set_size(self._options[self._current_option])
+	# Change la résolution de la fénètre
+	var new_size = self._options[self._current_option]
+	DisplayServer.window_set_size(new_size)
+
+	# Change la résolution du viewport principale
+	var main_viewport = Engine.get_main_loop().root
+	if main_viewport:
+		main_viewport.size = new_size
+
+	# Centrage de la fénètre sur l'écran
+	var screen_size = DisplayServer.screen_get_size()
+	DisplayServer.window_set_position((screen_size - new_size) / 2)
