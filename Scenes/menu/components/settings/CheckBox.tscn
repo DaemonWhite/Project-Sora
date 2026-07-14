@@ -13,3 +13,4 @@ layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 2
+text = "Reset"
