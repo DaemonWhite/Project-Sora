@@ -55,8 +55,8 @@ func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
 			print("SingleOptionSettings")
 			component_path += "SelectOptions.tscn"
 		var n when n is SlideOptionSettings:
-			push_warning("SlideOptionSettings n'est pas encore supporté dans le menu", self)
-			return
+			print("SlideOptionSettings")
+			component_path += "Slider.tscn"
 		
 	print("component_path: ", component_path)
 
