@@ -11,7 +11,8 @@ func _ready() -> void:
 	self.resetButton.pressed.connect(_on_ResetButton_pressed)
 
 	if self.setting:
-		self.checkBox.toggle_mode = self.setting.get_current_option()
+		self.checkBox.toggle_mode = true
+		self.checkBox.button_pressed = self.setting.get_current_option()
 
 func _on_CheckBox_toggled(button_pressed: bool) -> void:
 	if self.setting:
@@ -24,4 +25,4 @@ func _on_ResetButton_pressed() -> void:
 func reset() -> void:
 	if self.setting:
 		self.setting.reset()
-		self.checkBox.pressed = self.setting.get_current_option()
+		self.checkBox.button_pressed = self.setting.get_current_option()
