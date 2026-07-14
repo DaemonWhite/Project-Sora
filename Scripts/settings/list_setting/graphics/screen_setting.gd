@@ -4,6 +4,8 @@ extends SingleOptionSettings
 
 func _ready() -> void:
 	self._name = "SCREEN_SELECTED"
+	self._ui_name = tr("Sélèction de l'écran")
+	self._description = tr("Permet de choisir l'écran à utiliser")
 	self._group = BaseSettings.GROUP.GRAPHICS
 	
 	self._default_option = 0
