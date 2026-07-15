@@ -22,6 +22,7 @@ buses/default_bus_layout="res://Sound/default_bus_layout.tres"
 [autoload]
 
 SceneSound="*res://Scenes/menu/setting/scene_sound.tscn"
+UiManager="*res://Scenes/menu/components/UIManager/UIManager.tscn"
 Boot="*res://Scripts/boot.gd"
 
 [dotnet]

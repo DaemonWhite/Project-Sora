@@ -13,6 +13,7 @@ func _ready() -> void:
 	VsyncSetting.new()
 	TaaSetting.new()
 	FxaaSetting.new()
+	MouseSpeed.new()
 	var screen = ScreenSetting.new() # Teste screen
 	# screen.set_current_option(1)
 	# screen.apply(false)
@@ -43,5 +44,16 @@ func _ready() -> void:
 	var event_key = keyboard.get_key_settings("ui_up")
 	event_key.add_event(input_event)
 	event_key.apply(false)
+
+	print(len(keyboard.get_keyboard_settings()))
 	# event_key.remove_event(input_event) # Pour supprimer l'action tester
 	BaseSettings.save()
+	print("Settings saved to user://sora_settings.cfg")
+	self._register_ui_manager()
+
+	UiManager.push_ui(&"MainMenu")
+
+func _register_ui_manager() -> void:
+	UiManager.register_ui(&"MainMenu", "res://Scenes/menu/main_menu.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"SettingsMenu", "res://Scenes/menu/menu_setting.tscn", UiManager.LayerType.SYSTEM_MENU)
+
