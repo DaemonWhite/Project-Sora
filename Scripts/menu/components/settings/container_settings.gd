@@ -1,8 +1,8 @@
 class_name ContainerSettings
 extends Control
 
-@onready var container = $VBoxContainer
-@onready var description = $Description
+@onready var container = $HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer
+@onready var description = $HBoxContainer/VBoxContainer/Description
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +12,12 @@ func add_component(component: BaseSettingsComponent) -> void:
 	container.add_child(component)
 	container.queue_sort()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func set_description(text: String) -> void:
+	description.text = text
+
+func hide_description() -> void:
+	description.text = ""
+	description.hide()
+
+func show_description() -> void:
+	description.show()
