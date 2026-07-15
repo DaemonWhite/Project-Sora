@@ -7,8 +7,8 @@ extends BaseSettingsComponent
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	self.checkBox.toggled.connect(_on_CheckBox_toggled)
-	self.resetButton.pressed.connect(_on_ResetButton_pressed)
+	self.checkBox.toggled.connect(self._on_CheckBox_toggled)
+	self.resetButton.pressed.connect(self._on_ResetButton_pressed)
 
 	if self.setting:
 		self.checkBox.toggle_mode = true
@@ -22,7 +22,10 @@ func _on_CheckBox_toggled(button_pressed: bool) -> void:
 func _on_ResetButton_pressed() -> void:
 	self.reset()
 
+func _on_apply_signal(_class, _save) -> void:
+	if self.setting: 
+		self.checkBox.button_pressed = self.setting.get_current_option()	
+
 func reset() -> void:
 	if self.setting:
 		self.setting.reset()
-		self.checkBox.button_pressed = self.setting.get_current_option()

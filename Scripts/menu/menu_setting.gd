@@ -17,31 +17,39 @@ func _init_tab_settings() -> void:
 	var index = 3
 
 	for group in groups.values():
-		var name = BaseSettings.get_group_to_string(group)
-		var tab = Control.new()
-		var tabContainer = load(COMPOENT_PATH + "containerSettings.tscn").instantiate()
-		tab.add_child(tabContainer)
-		tab.name = name
+		index = self._init_settings_by_group(group, index)
+		print("index", index)
 
-		tabSettings.add_tab(
-			EventOverlay.new(
-				index, 
-				"", 
-				name
-			),
-			tab
-		)
-		index += 1
-
-		self._init_settings_by_group(group, tabContainer)
-
-func _init_settings_by_group(group_enum: BaseSettings.GROUP, tab: ContainerSettings) -> void:
+func _init_settings_by_group(group_enum: BaseSettings.GROUP, index: int) -> int:
 	var list_settings = BaseSettings.get_settings_by_enum(group_enum)
+
+	if len(list_settings) <= 0:
+		return index
+
+	var name = BaseSettings.get_group_to_string(group_enum)
+	var tab = Control.new()
+	var tabContainer = load(COMPOENT_PATH + "containerSettings.tscn").instantiate()
+	tab.add_child(tabContainer)
+	tab.name = name
+
+	tabSettings.add_tab(
+		EventOverlay.new(
+			index, 
+			"", 
+			name
+		),
+		tab
+	)
+	index += 1
+
 	for setting in list_settings:
-		self._auto_build_component(setting, tab)
+		self._auto_build_component(setting, tabContainer)
+
+	return index
 		
 
 func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
+	print(tab)
 	var component_path = COMPOENT_PATH
 	print("setting: ", setting)
 	match setting:
@@ -63,7 +71,7 @@ func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
 	var component = component_scene.instantiate()
 	component.initialize(setting)
 	component.mouse_entered.connect(
-    	self._on_description_changed.bind(setting.get_description(), tab)
+		self._on_description_changed.bind(setting.get_description(), tab)
 	)
 	tab.add_component(component)
 
@@ -72,3 +80,16 @@ func _on_return_pressed() -> void:
 
 func _on_description_changed(text: String, tab: Control) -> void:
 	tab.set_description(text)
+
+func resets() -> void:
+	BaseSettings.resets()
+	BaseSettings.save()
+
+func _on_reset_pressed() -> void:
+	var dialogConfirm = UiManager.push_ui(&"DialogConfirm")
+	dialogConfirm.setup(
+		tr("Reset Settings"), 
+		tr("Are you sure you want to reset all settings to their default values?")
+	)
+	if not dialogConfirm.confirmed.is_connected(self.resets):
+		dialogConfirm.confirmed.connect(self.resets)

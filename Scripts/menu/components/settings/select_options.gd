@@ -11,9 +11,9 @@ var resetButton = $ResetButton
 func _ready() -> void:
 	super._ready()
 	# Connect the signal for when an option is selected
-	self.optionButton.item_selected.connect(_on_OptionButton_item_selected)
+	self.optionButton.item_selected.connect(self._on_OptionButton_item_selected)
 	# Connect the signal for when the reset button is pressed
-	self.resetButton.pressed.connect(_on_ResetButton_pressed)
+	self.resetButton.pressed.connect(self._on_ResetButton_pressed)
 
 	# initialize the option button with the options from the setting
 	if self.setting:
@@ -34,12 +34,15 @@ func _on_OptionButton_item_selected(index: int) -> void:
 func _on_ResetButton_pressed() -> void:
 	self.reset()
 
-func reset() -> void:
+func _on_apply_signal(_class, _save) -> void:
 	if self.setting:
-		self.setting.reset()
 		var index = self.setting.get_current_option_index()
 		if index >= 0:
 			self.optionButton.select(index)
+
+func reset() -> void:
+	if self.setting:
+		self.setting.reset()
 
 func get_description() -> String:
 	return self.description

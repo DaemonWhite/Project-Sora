@@ -27,11 +27,21 @@ func _append_keys(type_keys) -> void:
 			button.text = str(key)
 			self.keyListContainer.add_child(button)
 
+func _clear_key() -> void:
+	for child in self.keyListContainer.get_children():
+		child.queue_free()
+
 func _on_AddKeyButton_pressed() -> void:
 	key_add_pressed.emit()
 
 func _on_ResetButton_pressed() -> void:
 	self.reset()
+
+func _on_apply_signal(_class, _save) -> void:
+	if self.setting:
+		self._clear_key()
+		var type_keys = self.setting.get_current_option()
+		self._append_keys(type_keys)
 
 func add_key(key: InputEventKey) -> void:
 	if self.setting:

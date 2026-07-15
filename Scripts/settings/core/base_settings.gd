@@ -170,12 +170,19 @@ func apply(save_configuration: bool=true) -> void:
 	if save_configuration:
 		BaseSettings.save()
 
-## Réinitialises-en appliquant le paramètre automatiquement.[br]
+## Réinitialises-en appliquant le paramètre par défaut.[br]
 ## [color=Orange][b] ATTENTION [/b][/color] Ne sauvegarde pas la configuration voir 
 ## [method BaseSettings.save] pour sauvegarder.
 func reset() -> void:
 	self._current_option = self._default_option
 	self.apply(false)
+
+## Réinitialises-en tout les paramètres par défauts.[br]
+## [color=Orange][b] ATTENTION [/b][/color] Ne sauvegarde pas la configuration voir 
+## [method BaseSettings.save] pour sauvegarder.
+static func resets() -> void:
+	for setting in BaseSettings._list_settings:
+		setting.reset()
 
 ## Renvoie le paramètre courant.
 func get_current_option() -> Variant:

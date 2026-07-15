@@ -91,3 +91,4 @@ custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Reset" to="." method="_on_reset_pressed"]

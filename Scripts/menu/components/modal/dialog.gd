@@ -30,6 +30,11 @@ func _ready() -> void:
 	titleLabel.text = title
 	descriptionLabel.text = message
 
+func setup(d_title: String, d_message: String) -> Dialog:
+	self.title = d_title
+	self.message = d_message
+	return self
+
 func set_visible_close_button(visible_button: bool) -> void:
 	self.enabledCloseButton = visible_button
 

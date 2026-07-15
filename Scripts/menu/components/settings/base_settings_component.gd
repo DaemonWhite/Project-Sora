@@ -14,9 +14,13 @@ func initialize(p_setting: BaseSettings) -> void:
 func _ready() -> void:
 	if self.setting:
 		label.text = self.setting.get_ui_name()
+		self.setting.apply_signal.connect(self._on_apply_signal)
 
 func reset() -> void:
 	push_warning("Reset non implémenté pour le composant de base", self)
 
 func get_description() -> String:
 	return self.description
+
+func _on_apply_signal(_class, _save) -> void:
+	push_error("apply signal is not defined")

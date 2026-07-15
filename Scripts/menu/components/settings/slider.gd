@@ -7,8 +7,8 @@ extends BaseSettingsComponent
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	self.slider.value_changed.connect(_on_Slider_value_changed)
-	self.resetButton.pressed.connect(_on_ResetButton_pressed)
+	self.slider.value_changed.connect(self._on_Slider_value_changed)
+	self.resetButton.pressed.connect(self._on_ResetButton_pressed)
 
 	if self.setting:
 		self.slider.min_value = self.setting.get_min()
@@ -24,7 +24,10 @@ func _on_Slider_value_changed(value: float) -> void:
 func _on_ResetButton_pressed() -> void:
 	self.reset()
 
+func _on_apply_signal(_class, _save) -> void:
+	if self.setting: 
+		self.slider.value = self.setting.get_current_option()
+
 func reset() -> void:
 	if self.setting:
 		self.setting.reset()
-		self.slider.value = self.setting.get_current_option()
