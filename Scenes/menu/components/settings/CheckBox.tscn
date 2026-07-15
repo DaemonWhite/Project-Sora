@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://deq5cjr3ccxps"]
+[gd_scene load_steps=3 format=3 uid="uid://deq5cjr3ccxps"]
 
 [ext_resource type="Script" path="res://Scripts/menu/components/settings/check_box.gd" id="1_qojdc"]
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="2_8pyig"]
 
 [node name="CheckBox" type="HBoxContainer"]
 script = ExtResource("1_qojdc")
@@ -13,4 +14,6 @@ layout_mode = 2
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 2
+theme = ExtResource("2_8pyig")
+theme_type_variation = &"ButtonError"
 text = "Reset"

@@ -1,18 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ubsuj4ykp5w"]
+[gd_scene load_steps=3 format=3 uid="uid://ubsuj4ykp5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu/components/settings/key_choose.gd" id="1_58l0p"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1re2"]
-bg_color = Color(0.493324, 0.826846, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijurd"]
-bg_color = Color(3.27289e-06, 0.576208, 0.778723, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbgiu"]
-bg_color = Color(1, 0.407245, 0.338652, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgw17"]
-bg_color = Color(0.699195, 2.08165e-06, 6.73831e-07, 1)
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="2_6o6mw"]
 
 [node name="KeyChoose" type="HBoxContainer"]
 script = ExtResource("1_58l0p")
@@ -25,12 +14,12 @@ layout_mode = 2
 
 [node name="AddKeyButton" type="Button" parent="."]
 layout_mode = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_s1re2")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ijurd")
+theme = ExtResource("2_6o6mw")
+theme_type_variation = &"ButtonSuccess"
 text = "Add"
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_dbgiu")
-theme_override_styles/normal = SubResource("StyleBoxFlat_bgw17")
+theme = ExtResource("2_6o6mw")
+theme_type_variation = &"ButtonError"
 text = "Reset"

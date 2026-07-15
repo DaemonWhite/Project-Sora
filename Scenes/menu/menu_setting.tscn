@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bavji8n4dhmli"]
+[gd_scene load_steps=11 format=3 uid="uid://bavji8n4dhmli"]
 
 [ext_resource type="Script" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
 [ext_resource type="Script" path="res://Scripts/menu/overlay.gd" id="2_jkvie"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
 [ext_resource type="PackedScene" uid="uid://chrm4m3gr4hik" path="res://Scenes/menu/setting/audio.tscn" id="3_oytpo"]
 [ext_resource type="PackedScene" uid="uid://bn4ysq0gnht1x" path="res://Scenes/menu/setting/video.tscn" id="4_k8osn"]
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="7_veiov"]
 
 [sub_resource type="Resource" id="Resource_arj4i"]
 script = ExtResource("3_nv03i")
@@ -75,10 +76,14 @@ text = "Return"
 
 [node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("7_veiov")
+theme_type_variation = &"ButtonError"
 text = "Reset"
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("7_veiov")
+theme_type_variation = &"ButtonSuccess"
 text = "Apply"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]

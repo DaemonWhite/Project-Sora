@@ -68,6 +68,9 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 		
 	var source = self._ui_registry[ui_id]["resource"]
 	var packed_scene: PackedScene
+
+	print("UIManager: Creating UI instance for ", ui_id)
+	print("UIManager: Source type: ", typeof(source))
 	
 	if source is String:
 		packed_scene = load(source) as PackedScene # Lazy Loading (chargement à la demande)
