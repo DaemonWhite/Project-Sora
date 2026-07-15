@@ -1,6 +1,6 @@
-extends Control
+extends BaseLayerUi
 
-@onready var tabSettings = $TabSetting;
+@onready var tabSettings = $VBoxContainer/TabSetting;
 
 var settings = BaseSettings;
 
@@ -49,22 +49,26 @@ func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
 			print("BooleanOptionSettings")
 			component_path += "CheckBox.tscn"
 		var n when n is KeySettings:
-			push_warning("KeySettings n'est pas encore supporté dans le menu", self)
-			return
+			print("KeySettings")
+			component_path += "KeyChoose.tscn"
+			tab.hide_description()
 		var n when n is SingleOptionSettings:
 			print("SingleOptionSettings")
 			component_path += "SelectOptions.tscn"
 		var n when n is SlideOptionSettings:
 			print("SlideOptionSettings")
 			component_path += "Slider.tscn"
-		
-	print("component_path: ", component_path)
-
+	
 	var component_scene = load(component_path)
 	var component = component_scene.instantiate()
 	component.initialize(setting)
+	component.mouse_entered.connect(
+    	self._on_description_changed.bind(setting.get_description(), tab)
+	)
 	tab.add_component(component)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_return_pressed() -> void:
+	self.close()
+
+func _on_description_changed(text: String, tab: Control) -> void:
+	tab.set_description(text)

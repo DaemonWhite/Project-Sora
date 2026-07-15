@@ -23,6 +23,7 @@ enum INPUT {
 
 func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 	self._name = action
+	self._ui_name = tr(action)
 	self._group = BaseSettings.GROUP.KEYBOARD
 	
 	# Initialise la stucture du clavier
