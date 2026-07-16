@@ -21,7 +21,13 @@ enum INPUT {
 	error
 }
 
-func _init(action: String, keycodes: Array[InputEvent] ) -> void:
+enum ADD_RESULT {
+	SUCCESS,
+	ERROR_DUPLICATE,
+	ERROR_INVALID_EVENT_TYPE,
+}
+
+func _init(action: String, events: Array[InputEvent] ) -> void:
 	self._name = action
 	self._ui_name = tr(action)
 	self._group = BaseSettings.GROUP.KEYBOARD
@@ -34,20 +40,33 @@ func _init(action: String, keycodes: Array[InputEvent] ) -> void:
 		KeySettings.INPUT.keyboard : [], # Touche clavier
 	}
 	
-	for e in keycodes:
-		match KeySettings.detect_event_input(e):
-			KeySettings.INPUT.joypad_button:
-				self._default_option[KeySettings.INPUT.joypad_button].append(e.button_index)
-			KeySettings.INPUT.joypad_motion:
-				self._default_option[KeySettings.INPUT.joypad_motion].append([e.axis, e.axis_value])
-			KeySettings.INPUT.mouse:
-				self._default_option[KeySettings.INPUT.mouse].append(e.button_index)
-			KeySettings.INPUT.keyboard:
-				self._default_option[KeySettings.INPUT.keyboard].append(e.as_text())
-			_:
-				push_warning("Keyboard Settings: Evenement inconue il sera ignorer", e)
+
+
+	for event in events:
+		var data = self._process_input_event(event)
+		if data.type != KeySettings.INPUT.error:
+			self._default_option[data.type].append(data.value)
+		else:
+			push_warning("Keyboard Settings: Evenement inconnu, il sera ignoré", event)
 		
 	super._init()
+
+## Fonction utilitaire pour extraire la valeur et le type d'un événement
+func _process_input_event(event: InputEvent) -> Dictionary:
+	var type = detect_event_input(event)
+	var value: Variant = null
+    
+	match type:
+		KeySettings.INPUT.joypad_button:
+			value = event.button_index
+		KeySettings.INPUT.joypad_motion:
+			value = [event.axis, event.axis_value]
+		KeySettings.INPUT.mouse:
+			value = event.button_index
+		KeySettings.INPUT.keyboard:
+			value = event.keycode
+    
+	return {"type": type, "value": value}
 
 ## Permet de detecter le type de controleur utilisé
 static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
@@ -65,86 +84,71 @@ static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
 	return event
 
 ## Ajoute un evenement voir [enum KeySettings.INPUT] pour voir les évenements pris en charge
-func add_event(event: InputEvent) -> void:
-	var value: Variant = null
+func add_event(event: InputEvent) -> KeySettings.ADD_RESULT:
 	
-	var type_event = KeySettings.detect_event_input(event)
+	var data = self._process_input_event(event)
+	
+	if data.type == KeySettings.INPUT.error:
+		push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconnu", event)
+		return KeySettings.ADD_RESULT.ERROR_INVALID_EVENT_TYPE
 
-	match type_event:
-		KeySettings.INPUT.joypad_button:
-			value = event.button_index
-		KeySettings.INPUT.joypad_motion:
-			value = [event.axis, event.axis_value]
-		KeySettings.INPUT.mouse:
-			value = event.button_index
-		KeySettings.INPUT.keyboard:
-			value = event.as_text()
-		_:
-			push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconu", event)
-			return
-	
 	# Empeche le double évenement
-	if self._current_option[type_event].find(value) == -1:
-		self._current_option[type_event].append(value)
+	if self._current_option[data["type"]].find(data["value"]) == -1:
+		self._current_option[data["type"]].append(data["value"])
 	else:
-		push_warning("Evenement deja assigner")
+		push_warning("Keyboard Settings: Evenement deja assigner")
+		return KeySettings.ADD_RESULT.ERROR_DUPLICATE
+
+	return KeySettings.ADD_RESULT.SUCCESS
 		
 ## Permet de supprimer l'évenement correspondant
 func remove_event(event: InputEvent):
-	var value: Variant = null
-	
-	var type_event = KeySettings.detect_event_input(event)
-	
-	match type_event:
-		KeySettings.INPUT.joypad_button:
-			value = event.button_index
-		KeySettings.INPUT.joypad_motion:
-			value = [event.axis, event.axis_value]
-		KeySettings.INPUT.mouse:
-			value = event.button_index
-		KeySettings.INPUT.keyboard:
-			value = event.as_text()
-		_:
-			push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconu", event)
-			return
-	var index: int = self._current_option[type_event].find(value)
+	var data = self._process_input_event(event)
+
+	if data.type == KeySettings.INPUT.error:
+		push_warning("Keyboard Settings: Impossible de supprimer l'evenement inconnu", event)
+		return
+
+	var index: int = self._current_option[data["type"]].find(data["value"])
 	# Empeche le double évenement
 	if index  != -1:
-		self._current_option[type_event].remove_at(index)
+		self._current_option[data["type"]].remove_at(index)
 	else:
 		push_warning("Evenement innexistant")
-	
+
+func convert_key_code_to_event(key: Variant, value) -> InputEvent:
+	var input_event = null
+
+	match key:
+		KeySettings.INPUT.joypad_button:
+				input_event = InputEventJoypadButton.new()
+				input_event.button_index = value
+
+		KeySettings.INPUT.joypad_motion:
+				input_event = InputEventJoypadMotion.new()
+				input_event.axis = value[0]
+				input_event.axis_value = value[1]
+					
+		KeySettings.INPUT.mouse:
+				input_event = InputEventMouseButton.new()
+				input_event.button_index = value
+					
+		KeySettings.INPUT.keyboard:
+				input_event = InputEventKey.new()
+				input_event.keycode = value
+		_: push_warning("KeySettings: Input not supported", key)
+		
+
+	return input_event
+
 func _apply() -> void:
 	InputMap.action_erase_events(self._name)
 	
 	for key in self._current_option.keys():
-		var input_event: InputEvent = null
+		for value in self._current_option[key]:
+			self.convert_key_code_to_event(key, value)
 		
-		match key:
-			KeySettings.INPUT.joypad_button:
-				for value in self._current_option[key]:
-					input_event = InputEventJoypadButton.new()
-					input_event.button_index = value
-					InputMap.action_add_event(self._name, input_event)
-					
-			KeySettings.INPUT.joypad_motion:
-				for value in self._current_option[key]:
-					input_event = InputEventJoypadMotion.new()
-					input_event.axis = value[0]
-					input_event.axis_value = value[1]
-					InputMap.action_add_event(self._name, input_event)
-					
-			KeySettings.INPUT.mouse:
-				for value in self._current_option[key]:
-					input_event = InputEventMouseButton.new()
-					input_event.button_index = value
-					InputMap.action_add_event(self._name, input_event)
-					
-			KeySettings.INPUT.keyboard:
-				for value in self._current_option[key]:
-					input_event = InputEventKey.new()
-					input_event.keycode = OS.find_keycode_from_string(value)
-					InputMap.action_add_event(self._name, input_event)
+		
 
 ## Renvoie le dictionaire contenant toutes les lettres
 ## [br]
