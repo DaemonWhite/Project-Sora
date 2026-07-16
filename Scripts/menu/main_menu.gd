@@ -1,7 +1,6 @@
 extends BaseLayerUi
 
 @onready var test_button = $TestSelect
-@onready var tabs = $SwitchMenuTabs
 
 
 var test : Array =[
@@ -42,6 +41,3 @@ func _on_options_button_pressed():
 
 func _on_exit_button_pressed():
 	get_tree().quit()
-
-func _on_return_button_pressed() -> void:
-	tabs.current_tab = 0
