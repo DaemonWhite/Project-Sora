@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxe8qtslny6pm"]
+
+[ext_resource type="PackedScene" uid="uid://d0qjqlbl4jvox" path="res://Scenes/menu/components/modal/DialogConfirm.tscn" id="1_el80l"]
+[ext_resource type="Script" path="res://Scripts/menu/components/modal/dialog_choose_key.gd" id="2_p3ht4"]
+
+[node name="DialogConfirm" instance=ExtResource("1_el80l")]
+script = ExtResource("2_p3ht4")
+title = "Veulier choisir une touche"
+
+[node name="Title" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="0"]
+text = "Veulier choisir une touche"
+
+[node name="Description" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" index="0"]
+visible = false
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" index="1"]
+layout_mode = 2
+
+[node name="LabelChooseButton" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer/CenterContainer" index="0"]
+layout_mode = 2
+text = "Appuyer sur une touche"
+
+[node name="Retry" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0"]
+layout_mode = 2
+text = "Retry"
+
+[node name="Valide" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="2"]
+disabled = true
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Retry" to="." method="_on_retry_pressed"]

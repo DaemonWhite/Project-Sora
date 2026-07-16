@@ -8,10 +8,8 @@
 script = ExtResource("2_eq6gh")
 enabledCloseButton = false
 
-[node name="Title" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="0"]
-text = ""
-
 [node name="Close" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="1"]
+visible = false
 theme = ExtResource("3_ta21w")
 theme_type_variation = &"ButtonError"
 

@@ -15,16 +15,18 @@ func _ready() -> void:
 	self.resetButton.pressed.connect(_on_ResetButton_pressed)
 
 	if self.setting:
-		var type_keys = self.setting.get_current_option()
-		self._append_keys(type_keys)
+		var keys = self.setting.get_current_option()
+		self._append_keys(keys)
 
-func _append_keys(type_keys) -> void:
-	print("type_keys: ", type_keys)
-	for keys in type_keys:
-		print("keys: ", keys)
-		for key in type_keys[keys]:
+func _append_keys(keys) -> void:
+	for key in keys:
+		for value in keys[key]:
 			var button = Button.new()
-			button.text = str(key)
+			button.text = InputTranslator.get_event_key_to_string(
+				self.setting.convert_key_code_to_event(
+					key, value
+				)
+			)
 			self.keyListContainer.add_child(button)
 
 func _clear_key() -> void:
@@ -40,13 +42,16 @@ func _on_ResetButton_pressed() -> void:
 func _on_apply_signal(_class, _save) -> void:
 	if self.setting:
 		self._clear_key()
-		var type_keys = self.setting.get_current_option()
-		self._append_keys(type_keys)
+		var keys = self.setting.get_current_option()
+		self._append_keys(keys)
 
-func add_key(key: InputEventKey) -> void:
+func add_key(key: InputEvent) -> KeySettings.ADD_RESULT:
+	var result = KeySettings.ADD_RESULT.ERROR_INVALID_EVENT_TYPE
 	if self.setting:
-		self.setting.add_key(key)
+		result = self.setting.add_event(key)
 		self.setting.apply()
+
+	return result
 
 func reset() -> void:
 	if self.setting:

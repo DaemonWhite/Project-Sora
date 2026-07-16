@@ -137,6 +137,12 @@ static func get_joypad_button_name(button_index: int, map_type: GAMEPAD_MAP = _d
 			return "RB" if map_type == GAMEPAD_MAP.XBOX else "R" if map_type == GAMEPAD_MAP.SWITCH else "R1"
 		# ... (ajoute le reste des correspondances selon le même modèle)
 		JOY_BUTTON_DPAD_UP: return "Croix Haut"
+		JOY_BUTTON_DPAD_DOWN: return "Croix Bas"
+		JOY_BUTTON_DPAD_LEFT: return "Croix Gauche"
+		JOY_BUTTON_DPAD_RIGHT: return "Croix Droite"
+		JOY_BUTTON_BACK: return "Select"
+		JOY_BUTTON_GUIDE: return "Home"
+		JOY_BUTTON_START: return "Start"
 		_: 
 			return "Bouton " + str(button_index)
 

@@ -1,5 +1,11 @@
 @tool
+class_name DialogConfirm
 extends Dialog
+
+@onready 
+var canceled_button = $CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Cancel
+@onready 
+var confirmed_button = $CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Valide
 
 signal confirmed
 signal canceled
