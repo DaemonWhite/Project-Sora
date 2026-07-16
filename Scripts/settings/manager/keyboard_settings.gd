@@ -7,25 +7,25 @@ extends Object
 ## partir de [InputMap] il est recommander de l'activer au lancement du projet
 ## pour éviter d'ajouter des inputs temporaires non désiré
 
-var _map_keyboard: Array[KeySettings]
+static var _map_keyboard: Array[KeySettings]
 
-func _init():
+static func init():
 	for action in InputMap.get_actions():
-		self._map_keyboard.append(
+		KeyboardSettings._map_keyboard.append(
 				KeySettings.new(
 					action, 
 					InputMap.action_get_events(action))
 			)
 			
 ## Retourne toute les entrées clavier enregistrer
-func get_keyboard_settings() -> Array[KeySettings]:
-	return self._map_keyboard
+static func get_keyboard_settings() -> Array[KeySettings]:
+	return KeyboardSettings._map_keyboard
 	
 ## Renvoi une configuration clavier précise
-func get_key_settings(action: String) -> KeySettings:
+static func get_key_settings(action: String) -> KeySettings:
 	var key = null
 	
-	for key_search in self._map_keyboard:
+	for key_search in KeyboardSettings._map_keyboard:
 		if key_search.get_name() == action:
 			key = key_search
 			 
