@@ -50,11 +50,21 @@ func _ready() -> void:
 	BaseSettings.save()
 	print("Settings saved to user://sora_settings.cfg")
 	self._register_ui_manager()
+	self._register_tags_text()
 
 	UiManager.push_ui(&"MainMenu")
+	UiManager.push_ui(&"DialogChooseKey")
+
+	var text = "un simple text {input:ui_left} {input:ui_accept} {input:ui_paste}"
+	print(text)
+	print(TextFormatter.format_text(text))
 
 func _register_ui_manager() -> void:
 	UiManager.register_ui(&"MainMenu", "res://Scenes/menu/main_menu.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"SettingsMenu", "res://Scenes/menu/menu_setting.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"Dialog", "res://Scenes/menu/components/modal/Dialog.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"DialogConfirm", "res://Scenes/menu/components/modal/DialogConfirm.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"DialogChooseKey", "res://Scenes/menu/components/modal/DialogChooseKey.tscn", UiManager.LayerType.SYSTEM_MENU)
+
+func _register_tags_text() -> void:
+	TextFormatter.register_route("input", InputTranslator.get_action_key_text)
