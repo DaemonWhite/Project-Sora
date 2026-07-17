@@ -11,7 +11,6 @@ func _ready() -> void:
 	self._register_tags_text()
 
 	UiManager.push_ui(&"TestSelect")
-	UiManager.push_ui(&"MainMenu")
 	print("Boot finished")
 
 func _load_settings() -> void:

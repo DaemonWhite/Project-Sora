@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://c36rjb1v7wf34"]
+[gd_scene load_steps=2 format=3 uid="uid://c36rjb1v7wf34"]
+
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_8blsm"]
 
 [node name="Node" type="Node"]
 process_mode = 3
 physics_interpolation_mode = 1
+script = ExtResource("1_8blsm")
