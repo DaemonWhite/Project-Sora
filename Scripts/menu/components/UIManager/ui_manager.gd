@@ -52,11 +52,16 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT ) -> BaseLa
 	var ui_instance = self._get_or_create_ui(ui_id, target_layer)
 	if not ui_instance:
 		return null
-		
-	if not self._ui_stack.is_empty():
-		var active_ui = self._ui_stack.back()
-		if ui_instance.is_modal:
-			active_ui.process_mode = PROCESS_MODE_DISABLED
+	
+	if ui_instance.is_modal:
+        # On remonte la pile pour trouver le menu modal précédent et le bloquer
+		for i in range(_ui_stack.size() - 1, -1, -1):
+			var prev_ui = _ui_stack[i]
+            
+            # Grâce à ton idée, on ignore automatiquement les HUDs
+			if prev_ui.is_modal:
+				prev_ui.process_mode = PROCESS_MODE_DISABLED
+				break # On a bloqué le menu, on peut s'arrêter
 			
 	self._ui_stack.append(ui_instance)
 	ui_instance.open()
@@ -127,14 +132,9 @@ func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
 	if _ui_stack.has(ui_instance):
 		_ui_stack.erase(ui_instance)
         
-	var modal_to_reactivate: BaseLayerUi = null
-    
 	for i in range(_ui_stack.size() - 1, -1, -1):
 		var ui = _ui_stack[i]
 		if ui.is_modal:
-			modal_to_reactivate = ui
-			break
-            
-	if modal_to_reactivate:
-		modal_to_reactivate.process_mode = PROCESS_MODE_INHERIT
-		modal_to_reactivate.grab_focus_on_default()
+			ui.process_mode = PROCESS_MODE_INHERIT
+			ui.grab_focus_on_default()
+			break # On l'a trouvé et réactivé, on s'arrête
