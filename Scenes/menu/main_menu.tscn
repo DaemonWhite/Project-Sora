@@ -91,16 +91,6 @@ theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "QUITTER"
 
-[node name="TestSelect" type="OptionButton" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -161.0
-offset_bottom = 37.0
-grow_horizontal = 0
-
 [connection signal="pressed" from="Menu/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="item_selected" from="TestSelect" to="." method="_on_test_item_selected"]
