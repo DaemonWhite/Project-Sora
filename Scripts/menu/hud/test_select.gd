@@ -6,6 +6,7 @@ const PATH_TEST = "res://Scenes/test/"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	var list_scenes = Utils.search_recursif_file(PATH_TEST, ["tscn"])
 
 	self.add_name_for_button_test("Test")

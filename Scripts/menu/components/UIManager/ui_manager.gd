@@ -41,7 +41,7 @@ func unregister_ui(ui_id: StringName) -> void:
 		self._cached_uis.erase(ui_id)
 
 
-func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT ) -> BaseLayerUi:
+func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLayerUi:
 	var target_layer: LayerType = layer
 	if layer == LayerType.DEFAULT:
 		if not self._ui_registry.has(ui_id):
@@ -64,7 +64,6 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT ) -> BaseLa
 				break # On a bloqué le menu, on peut s'arrêter
 			
 	self._ui_stack.append(ui_instance)
-	ui_instance.open()
 	return ui_instance
 
 

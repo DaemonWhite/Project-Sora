@@ -26,6 +26,7 @@ extends BaseLayerUi
 @onready var childContainer: Container = $CenterContainer/PanelContainer/VBoxContainer/ChildContainer
 
 func _ready() -> void:
+	super._ready()
 	closeButton.visible = enabledCloseButton
 	titleLabel.text = title
 	descriptionLabel.text = message

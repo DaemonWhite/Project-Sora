@@ -77,6 +77,7 @@ func _on_key_add_pressed(component: KeyChooseSettingsBox) -> void:
 	dialog_choose_key.closed.connect(
 		self._on_closed_key_choose_setting.bind(component)
 	)
+	dialog_choose_key.open()
 
 func _on_closed_key_choose_setting( 
 			dialog_choose_key: DialogChooseKey,
@@ -92,12 +93,14 @@ func _on_closed_key_choose_setting(
 					tr("Error Add Key"),
 					tr("Key already exist")
 				)
+				ui.open()
 			KeySettings.ADD_RESULT.ERROR_INVALID_EVENT_TYPE:
 				var ui = UiManager.push_ui("Dialog")
 				ui.setup(
 					tr("Error Add Key"),
 					tr("Key not supported ")
 				)
+				ui.open()
 	dialog_choose_key.closed.disconnect(
 		self._on_closed_key_choose_setting.bind(component)
 	)
@@ -118,5 +121,6 @@ func _on_reset_pressed() -> void:
 		tr("Reset Settings"), 
 		tr("Are you sure you want to reset all settings to their default values?")
 	)
+	dialogConfirm.open()
 	if not dialogConfirm.confirmed.is_connected(self.resets):
 		dialogConfirm.confirmed.connect(self.resets)

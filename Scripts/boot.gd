@@ -10,7 +10,8 @@ func _ready() -> void:
 	self._register_ui_manager()
 	self._register_tags_text()
 
-	UiManager.push_ui(&"TestSelect")
+	UiManager.push_ui(&"PauseMenu")
+	UiManager.push_ui(&"TestSelect").open()
 	print("Boot finished")
 
 func _load_settings() -> void:
@@ -43,6 +44,7 @@ func _load_settings() -> void:
 
 func _register_ui_manager() -> void:
 	UiManager.register_ui(&"MainMenu", "res://Scenes/menu/main_menu.tscn", UiManager.LayerType.GAME_MENU)
+	UiManager.register_ui(&"PauseMenu", "/home/matheo/Projects/godot/Project-Sora/Scenes/menu/PauseMenu.tscn", UiManager.LayerType.CRITICAL)
 	UiManager.register_ui(&"SettingsMenu", "res://Scenes/menu/menu_setting.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"Dialog", "res://Scenes/menu/components/modal/Dialog.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"DialogConfirm", "res://Scenes/menu/components/modal/DialogConfirm.tscn", UiManager.LayerType.SYSTEM_MENU)

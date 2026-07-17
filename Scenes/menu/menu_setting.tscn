@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bavji8n4dhmli"]
 
 [ext_resource type="Script" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
-[ext_resource type="Script" path="res://Scripts/menu/overlay.gd" id="2_jkvie"]
+[ext_resource type="Script" path="res://Scripts/menu/better_tab_menu.gd" id="2_jkvie"]
 [ext_resource type="PackedScene" uid="uid://d3jy8p2tm7mni" path="res://Scenes/menu/setting/controller.tscn" id="2_p4h8w"]
 [ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
 [ext_resource type="PackedScene" uid="uid://chrm4m3gr4hik" path="res://Scenes/menu/setting/audio.tscn" id="3_oytpo"]

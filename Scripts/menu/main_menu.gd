@@ -4,7 +4,7 @@ func _ready():
 	SceneSound.launch_music_menu()
 
 func _on_options_button_pressed():
-	UiManager.push_ui(&"SettingsMenu")
+	UiManager.push_ui(&"SettingsMenu").open()
 
 func _on_new_game_button_pressed():
 	self.close()
