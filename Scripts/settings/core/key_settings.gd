@@ -146,7 +146,8 @@ func _apply() -> void:
 	
 	for key in self._current_option.keys():
 		for value in self._current_option[key]:
-			self.convert_key_code_to_event(key, value)
+			var event = self.convert_key_code_to_event(key, value)
+			InputMap.action_add_event(self._name, event)
 		
 		
 
