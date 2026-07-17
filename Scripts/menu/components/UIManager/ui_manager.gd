@@ -62,6 +62,34 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT ) -> BaseLa
 	ui_instance.open()
 	return ui_instance
 
+
+func pop_ui(ui_id: StringName, c_clear_chache: bool = false) -> void:
+	if not _cached_uis.has(ui_id):
+		push_warning("Tentative de fermer une UI qui n'est pas instanciée : ", ui_id)
+		return
+    	
+	var ui_instance = _cached_uis[ui_id]
+    
+	if _ui_stack.has(ui_instance):
+		ui_instance.close()
+		if c_clear_chache:
+			self.clear_cache(ui_id)
+
+func clear_cache(ui_id: StringName):
+	if not _cached_uis.has(ui_id):
+		push_warning("Tentative de supprimer une UI qui n'est pas instanciée : ", ui_id)
+
+	var ui_instance = _cached_uis[ui_id]
+	self._cached_uis.erase(ui_id)
+	self.ui_instance.queue_free()
+
+func clear_all_cache():
+	for ui_id in _cached_uis:
+		var ui_instance = _cached_uis[ui_id]
+		if is_instance_valid(ui_instance):
+			ui_instance.queue_free()
+	self._cached_uis.clear()
+
 func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 	if self._cached_uis.has(ui_id):
 		return self._cached_uis[ui_id]
@@ -96,11 +124,17 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 	return instance
 
 func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
-	if not self._ui_stack.is_empty() and self._ui_stack.back() == ui_instance:
-		self._ui_stack.pop_back() # On la retire de la pile
-		
-		# On réactive le menu précédent s'il y en a un
-		if not self._ui_stack.is_empty():
-			var previous_ui = self._ui_stack.back()
-			previous_ui.process_mode = PROCESS_MODE_INHERIT
-			previous_ui.grab_focus_on_default()
+	if _ui_stack.has(ui_instance):
+		_ui_stack.erase(ui_instance)
+        
+	var modal_to_reactivate: BaseLayerUi = null
+    
+	for i in range(_ui_stack.size() - 1, -1, -1):
+		var ui = _ui_stack[i]
+		if ui.is_modal:
+			modal_to_reactivate = ui
+			break
+            
+	if modal_to_reactivate:
+		modal_to_reactivate.process_mode = PROCESS_MODE_INHERIT
+		modal_to_reactivate.grab_focus_on_default()
