@@ -29,7 +29,7 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	if self.setting:
 		var option = self.optionButton.get_item_text(index)
 		self.setting.set_current_option(option)
-		self.setting.apply()
+		self.setting.apply(false)
 
 func _on_ResetButton_pressed() -> void:
 	self.reset()

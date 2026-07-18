@@ -84,12 +84,6 @@ theme = ExtResource("7_veiov")
 theme_type_variation = &"ButtonError"
 text = "Reset"
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("7_veiov")
-theme_type_variation = &"ButtonSuccess"
-text = "Apply"
-
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2

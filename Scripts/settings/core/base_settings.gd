@@ -255,6 +255,13 @@ func is_different() -> bool:
 		BaseSettings.get_group_to_string(self._group), 
 		self._name
 	) != self._current_option
+
+static func is_differents() -> bool:
+	for settings: BaseSettings in BaseSettings._list_settings :
+		print(settings._name, " -> ", settings.is_different())
+		if settings.is_different():
+			return true
+	return false
 	
 ## Vérifie si le paramètre diffère de celui par défaut.
 func is_not_default() -> bool:

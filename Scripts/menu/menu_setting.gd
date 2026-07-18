@@ -114,7 +114,14 @@ func _on_closed_key_choose_setting(
 	)
 
 func _on_return_pressed() -> void:
-	self.close()
+	if BaseSettings.is_differents():
+		var dialog: DialogConfirm = UiManager.push_ui("DialogConfirm")
+		dialog.setup(
+			tr("Do you don't save ?"),
+			tr("No changes have been saved. Are you sure you don't want to apply them?")
+		)
+	else:
+		self.close()
 
 func _on_description_changed(text: String, tab: Control) -> void:
 	tab.set_description(text)
