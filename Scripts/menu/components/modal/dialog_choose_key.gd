@@ -1,15 +1,21 @@
 @tool
 class_name DialogChooseKey
 extends DialogConfirm
+## Dialog permetant de sélèctioner la touche de clavier voulue 
+##
 
 @onready var labelChooseButton = $CenterContainer/PanelContainer/VBoxContainer/ChildContainer/CenterContainer/LabelChooseButton
 
+## Autorise l'écoute des évènement clavier
 var scan_input: bool = true
 
+## Évite de fermer le scan directement
 var start_scan: bool = false
 
+## Stocke le dernier évènement utiliser 
 var stocked_event: InputEvent = null 
 
+## TODO définie la zone morte des joystick à changer à l'avenir par un paramètres global
 const JOY_AXIS_DEADZONE: float = 0.5
 
 func _ready() -> void:
@@ -36,6 +42,8 @@ func _finalise_detection() -> void:
 	self.scan_input = false
 	self.confirmed_button.disabled = false
 
+## Remet le modal dans sont états d'avant ouverture.
+## WARNING Ne comprend pas [member Dialog.title]  et  [member Dialog.description]
 func reset() -> void:
 	self.scan_input = true
 	self.stocked_event = null
@@ -43,6 +51,7 @@ func reset() -> void:
 	self.labelChooseButton.text = tr("Appuyer sur une touche")
 	self.confirmed_button.disabled = true
 
+## Permet de récupérer l'evenement intercepter
 func get_choose_key() -> InputEvent:
 	return self.stocked_event
 
@@ -53,6 +62,7 @@ func _on_cancel_pressed() -> void:
 	self.reset()
 	super._on_cancel_pressed()
 
+## Ouvre le Dialog
 func open() -> void:
 	self.reset()
 	super.open()
