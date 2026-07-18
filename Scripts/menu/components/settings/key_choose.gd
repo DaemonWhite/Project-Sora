@@ -58,7 +58,7 @@ func add_key(key: InputEvent) -> KeySettings.ADD_RESULT:
 	var result = KeySettings.ADD_RESULT.ERROR_INVALID_EVENT_TYPE
 	if self.setting:
 		result = self.setting.add_event(key)
-		self.setting.apply(false)
+		self.setting.apply()
 
 	return result
 
@@ -68,12 +68,12 @@ func modify_key(
 			old_value: Variant
 		) -> KeySettings.ADD_RESULT:
 	var result = self.setting.modify_event(key, old_key, old_value)
-	self.setting.apply(false)
+	self.setting.apply()
 	return result
 
 func remove_key(key, value) -> void:
 	self.setting.remove_event(key, value)
-	self.setting.apply(false)
+	self.setting.apply()
 
 func reset() -> void:
 	if self.setting:

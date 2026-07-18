@@ -57,11 +57,11 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLay
 	ui_instance.process_mode = ui_instance.active_process_mode
 
 	if ui_instance.is_modal:
-        # On remonte la pile pour trouver le menu modal précédent et le bloquer
+		# On remonte la pile pour trouver le menu modal précédent et le bloquer
 		for i in range(_ui_stack.size() - 1, -1, -1):
 			var prev_ui = _ui_stack[i]
-            
-            # Grâce à ton idée, on ignore automatiquement les HUDs
+			
+			# Grâce à ton idée, on ignore automatiquement les HUDs
 			if prev_ui.is_modal:
 				prev_ui.process_mode = Node.PROCESS_MODE_DISABLED
 				break # On a bloqué le menu, on peut s'arrêter
@@ -75,9 +75,9 @@ func pop_ui(ui_id: StringName, c_clear_chache: bool = false) -> void:
 	if not _cached_uis.has(ui_id):
 		push_warning("Tentative de fermer une UI qui n'est pas instanciée : ", ui_id)
 		return
-    	
+		
 	var ui_instance = _cached_uis[ui_id]
-    
+	
 	if _ui_stack.has(ui_instance):
 		ui_instance.close()
 		if c_clear_chache:
@@ -138,7 +138,7 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
 	if _ui_stack.has(ui_instance):
 		_ui_stack.erase(ui_instance)
-        
+		
 	for i in range(_ui_stack.size() - 1, -1, -1):
 		var ui = _ui_stack[i]
 		if ui.is_modal:
