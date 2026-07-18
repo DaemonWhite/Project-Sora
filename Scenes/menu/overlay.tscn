@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://qwvjdm5jpq28"]
+[gd_scene load_steps=4 format=3 uid="uid://bgj1gy63x6iei"]
 
-[ext_resource type="Script" path="res://Scripts/menu/overlay.gd" id="1_5vx1c"]
+[ext_resource type="Script" path="res://Scripts/menu/better_tab_menu.gd" id="1_5vx1c"]
 [ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="2_5gfos"]
 
 [sub_resource type="Resource" id="Resource_f0lgo"]
@@ -9,7 +9,7 @@ index = 0
 event = ""
 name_tab = ""
 
-[node name="Overlay" type="TabContainer"]
+[node name="BetterTabMenu" type="TabContainer"]
 process_mode = 3
 script = ExtResource("1_5vx1c")
 event_by_submenu = Array[ExtResource("2_5gfos")]([SubResource("Resource_f0lgo")])

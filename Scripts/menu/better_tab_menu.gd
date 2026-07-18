@@ -1,8 +1,11 @@
-class_name Overlay
+@tool
+class_name BetterTabMenu
 extends TabContainer
 
 @export var event_overlay: String  = "Pause"
-@export var event_by_submenu: Array[EventOverlay]
+@export var event_by_submenu: Array[EventOverlay] = [
+	EventOverlay.new(0,"", ""),
+]
 var list_events_keyboad: Array[EventOverlay]
 
 func _ready() -> void:

@@ -121,6 +121,7 @@ func _on_reset_pressed() -> void:
 		tr("Reset Settings"), 
 		tr("Are you sure you want to reset all settings to their default values?")
 	)
+	dialogConfirm.process_mode = Node.PROCESS_MODE_ALWAYS
 	dialogConfirm.open()
 	if not dialogConfirm.confirmed.is_connected(self.resets):
 		dialogConfirm.confirmed.connect(self.resets)

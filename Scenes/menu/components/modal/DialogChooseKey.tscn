@@ -4,8 +4,10 @@
 [ext_resource type="Script" path="res://Scripts/menu/components/modal/dialog_choose_key.gd" id="2_p3ht4"]
 
 [node name="DialogConfirm" instance=ExtResource("1_el80l")]
+visible = false
 script = ExtResource("2_p3ht4")
 title = "Veulier choisir une touche"
+active_process_mode = 3
 
 [node name="Title" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="0"]
 text = "Veulier choisir une touche"

@@ -1,44 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdd3xv5gyojg1"]
+[gd_scene load_steps=4 format=3 uid="uid://cdd3xv5gyojg1"]
 
-[ext_resource type="Script" path="res://Scripts/menu/pause_menu.gd" id="1_ga4od"]
-[ext_resource type="PackedScene" uid="uid://bavji8n4dhmli" path="res://Scenes/menu/menu_setting.tscn" id="2_3ewoo"]
-[ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="2_ctp7t"]
+[ext_resource type="Script" path="res://Scripts/menu/pause_menu.gd" id="1_6bd8v"]
 [ext_resource type="FontFile" uid="uid://dob1wfbsmhgpo" path="res://Font/Sonic_Turbo.otf" id="2_sw1f8"]
-
-[sub_resource type="Resource" id="Resource_6e6tk"]
-script = ExtResource("2_ctp7t")
-index = 0
-event = "Pause"
-name_tab = "Pause"
-
-[sub_resource type="Resource" id="Resource_v8apj"]
-script = ExtResource("2_ctp7t")
-index = 1
-event = ""
-name_tab = "Options"
 
 [sub_resource type="LabelSettings" id="LabelSettings_o3lev"]
 font = ExtResource("2_sw1f8")
 font_size = 40
 
-[node name="PauseMenu" type="TabContainer"]
-process_mode = 3
+[node name="Pause" type="Control" node_paths=PackedStringArray("default_focus_node")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
-clip_tabs = false
-tabs_visible = false
-script = ExtResource("1_ga4od")
-event_by_submenu = Array[ExtResource("2_ctp7t")]([SubResource("Resource_6e6tk"), SubResource("Resource_v8apj")])
+script = ExtResource("1_6bd8v")
+default_focus_node = NodePath(".")
+active_process_mode = 3
 
-[node name="Pause" type="Control" parent="."]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Pause" type="Label" parent="Pause"]
+[node name="Pause" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,7 +36,7 @@ label_settings = SubResource("LabelSettings_o3lev")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="Pause"]
+[node name="ContinueButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,7 +52,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Reprendre"
 
-[node name="OptionsButton" type="Button" parent="Pause"]
+[node name="OptionsButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,7 +68,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Options"
 
-[node name="ExitButton" type="Button" parent="Pause"]
+[node name="ExitButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,24 +84,5 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Quitter"
 
-[node name="Options" type="Control" parent="."]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="MenuSetting" parent="Options" instance=ExtResource("2_3ewoo")]
-layout_mode = 2
-anchors_preset = 0
-
-[node name="ReturnButton" type="Button" parent="Options"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 615.0
-offset_right = 69.0
-offset_bottom = 646.0
-text = "Retour"
-
-[connection signal="pressed" from="Pause/ContinueButton" to="." method="pause"]
-[connection signal="pressed" from="Pause/OptionsButton" to="." method="_on_option_button_pressed"]
-[connection signal="pressed" from="Pause/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="Options/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

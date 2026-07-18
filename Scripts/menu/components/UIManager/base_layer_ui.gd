@@ -13,6 +13,7 @@ signal openfinished
 ## Noeud qui doit prendre le focus par défaut (crucial pour le support manette/clavier)
 @export var default_focus_node: Control
 
+@export var active_process_mode: Node.ProcessMode = Node.PROCESS_MODE_INHERIT
 
 func _ready() -> void:
 	hide()

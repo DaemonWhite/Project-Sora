@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q0exs")
+active_process_mode = 3
 
 [node name="Background" type="TextureRect" parent="."]
 show_behind_parent = true

@@ -10,6 +10,7 @@ anchor_right = 1.0
 grow_horizontal = 0
 script = ExtResource("1_7f2rd")
 is_modal = false
+active_process_mode = 3
 
 [node name="Select" type="OptionButton" parent="."]
 layout_mode = 1

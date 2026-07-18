@@ -24,14 +24,15 @@ var _cached_uis: Dictionary = {}
 }
 
 
-func register_ui(ui_id: StringName, ui_resource: Variant, layer: LayerType) -> void:
+func register_ui(ui_id: StringName, ui_resource: Variant, layer: LayerType, unique: bool = true) -> void:
 	if not (ui_resource is PackedScene or ui_resource is String):
 		push_error("Ressource invalide pour l'enregistrement de l'UI : ", ui_id)
 		return
 	
 	self._ui_registry[ui_id] = { 
 		"resource": ui_resource, 
-		"layer": layer 
+		"layer": layer,
+		"unique": unique
 	}
 
 func unregister_ui(ui_id: StringName) -> void:
@@ -53,6 +54,8 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLay
 	if not ui_instance:
 		return null
 	
+	ui_instance.process_mode = ui_instance.active_process_mode
+
 	if ui_instance.is_modal:
         # On remonte la pile pour trouver le menu modal précédent et le bloquer
 		for i in range(_ui_stack.size() - 1, -1, -1):
@@ -60,13 +63,14 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLay
             
             # Grâce à ton idée, on ignore automatiquement les HUDs
 			if prev_ui.is_modal:
-				prev_ui.process_mode = PROCESS_MODE_DISABLED
+				prev_ui.process_mode = Node.PROCESS_MODE_DISABLED
 				break # On a bloqué le menu, on peut s'arrêter
 			
 	self._ui_stack.append(ui_instance)
 	return ui_instance
 
 
+## Ferme l'ui désirer ATTENTION Les UI non Unique ne sont pas supporter
 func pop_ui(ui_id: StringName, c_clear_chache: bool = false) -> void:
 	if not _cached_uis.has(ui_id):
 		push_warning("Tentative de fermer une UI qui n'est pas instanciée : ", ui_id)
@@ -95,7 +99,9 @@ func clear_all_cache():
 	self._cached_uis.clear()
 
 func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
-	if self._cached_uis.has(ui_id):
+	var is_unique = self._ui_registry[ui_id]["unique"]
+
+	if self._cached_uis.has(ui_id) and is_unique:
 		return self._cached_uis[ui_id]
 		
 	var source = self._ui_registry[ui_id]["resource"]
@@ -117,13 +123,15 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 
 	var instance: BaseLayerUi = raw_instance as BaseLayerUi
 
-	instance.closed.connect(_on_ui_closed)
+	instance.closed.connect(self._on_ui_closed)
 
 	if layer == LayerType.DEFAULT:
 		layer = self._ui_registry[ui_id]["layer"]
 
 	self._layers[layer].add_child(instance)
-	self._cached_uis[ui_id] = instance
+	
+	if is_unique:
+		self._cached_uis[ui_id] = instance
 	
 	return instance
 
@@ -134,6 +142,6 @@ func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
 	for i in range(_ui_stack.size() - 1, -1, -1):
 		var ui = _ui_stack[i]
 		if ui.is_modal:
-			ui.process_mode = PROCESS_MODE_INHERIT
+			ui.process_mode = ui.active_process_mode
 			ui.grab_focus_on_default()
 			break # On l'a trouvé et réactivé, on s'arrête

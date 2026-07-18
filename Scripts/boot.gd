@@ -44,10 +44,10 @@ func _load_settings() -> void:
 
 func _register_ui_manager() -> void:
 	UiManager.register_ui(&"MainMenu", "res://Scenes/menu/main_menu.tscn", UiManager.LayerType.GAME_MENU)
-	UiManager.register_ui(&"PauseMenu", "/home/matheo/Projects/godot/Project-Sora/Scenes/menu/PauseMenu.tscn", UiManager.LayerType.CRITICAL)
+	UiManager.register_ui(&"PauseMenu", "/home/matheo/Projects/godot/Project-Sora/Scenes/menu/PauseMenu.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"SettingsMenu", "res://Scenes/menu/menu_setting.tscn", UiManager.LayerType.SYSTEM_MENU)
-	UiManager.register_ui(&"Dialog", "res://Scenes/menu/components/modal/Dialog.tscn", UiManager.LayerType.SYSTEM_MENU)
-	UiManager.register_ui(&"DialogConfirm", "res://Scenes/menu/components/modal/DialogConfirm.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"Dialog", "res://Scenes/menu/components/modal/Dialog.tscn", UiManager.LayerType.SYSTEM_MENU, false)
+	UiManager.register_ui(&"DialogConfirm", "res://Scenes/menu/components/modal/DialogConfirm.tscn", UiManager.LayerType.SYSTEM_MENU, false)
 	UiManager.register_ui(&"DialogChooseKey", "res://Scenes/menu/components/modal/DialogChooseKey.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"TestSelect", "res://Scenes/menu/hud/TestSelect.tscn", UiManager.LayerType.CRITICAL)
 	print("Ui registered")
