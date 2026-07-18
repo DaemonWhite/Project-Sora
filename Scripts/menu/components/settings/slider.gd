@@ -1,5 +1,7 @@
 class_name SliderSettingsBox
 extends BaseSettingsComponent
+## Simple Slider permetant de régler un volume par example
+
 
 @onready var slider = $HSlider
 @onready var resetButton = $ResetButton
@@ -27,7 +29,3 @@ func _on_ResetButton_pressed() -> void:
 func _on_apply_signal(_class, _save) -> void:
 	if self.setting: 
 		self.slider.value = self.setting.get_current_option()
-
-func reset() -> void:
-	if self.setting:
-		self.setting.reset()

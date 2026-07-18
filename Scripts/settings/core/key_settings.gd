@@ -57,7 +57,7 @@ func _process_input_event(event: InputEvent) -> Dictionary:
 	var value: Variant = null
 	
 	match type:
-		KeySettings.INPUT.joypad_butto:
+		KeySettings.INPUT.joypad_button:
 			value = event.button_index
 		KeySettings.INPUT.joypad_motion:
 			value = [event.axis, event.axis_value]

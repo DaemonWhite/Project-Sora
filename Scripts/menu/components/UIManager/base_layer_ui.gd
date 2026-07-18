@@ -1,5 +1,11 @@
+@abstract
 class_name BaseLayerUi
 extends Control
+
+## BaseLayerUi est une classe abstraite permetant la création d'élèment graphique
+##
+## BaseLayerUi et une base pour tout les élèment graphique qui apparaisse sous la forme
+## de menu ou d'HUD il est concue pour êtres utiliser par [UIManager]
 
 ## Signal émis lorsque l'UI est complètement fermée
 signal closed(BaseLayerUi)
@@ -13,6 +19,8 @@ signal openfinished
 ## Noeud qui doit prendre le focus par défaut (crucial pour le support manette/clavier)
 @export var default_focus_node: Control
 
+## Définie le process qu'il doit prendre l'ors de son ouverture
+## [color=Orange][b] WARNING [/b][/color][br] open() ne change pas ça propriétée seul UIManager le fait
 @export var active_process_mode: Node.ProcessMode = Node.PROCESS_MODE_INHERIT
 
 func _ready() -> void:

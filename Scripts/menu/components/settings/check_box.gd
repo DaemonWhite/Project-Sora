@@ -1,7 +1,11 @@
 class_name CheckSettingsBox
 extends BaseSettingsComponent
+## Composant settings pour les check box
 
+## Le checkbox du composant
 @onready var checkBox = $CheckBox
+
+## Le bouton de remise à zero
 @onready var resetButton = $ResetButton
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +29,3 @@ func _on_ResetButton_pressed() -> void:
 func _on_apply_signal(_class, _save) -> void:
 	if self.setting: 
 		self.checkBox.button_pressed = self.setting.get_current_option()	
-
-func reset() -> void:
-	if self.setting:
-		self.setting.reset()

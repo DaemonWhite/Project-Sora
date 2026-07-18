@@ -3,8 +3,11 @@ class_name DialogConfirm
 extends Dialog
 ## Simple dialog pour demander l'opinion de l'utilisateur par oui ou non
 
+## Bouton de refus
 @onready 
 var canceled_button = $CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Cancel
+
+## Bouton d'accepation
 @onready 
 var confirmed_button = $CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Valide
 

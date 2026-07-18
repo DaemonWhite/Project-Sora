@@ -43,7 +43,8 @@ func _finalise_detection() -> void:
 	self.confirmed_button.disabled = false
 
 ## Remet le modal dans sont états d'avant ouverture.
-## WARNING Ne comprend pas [member Dialog.title]  et  [member Dialog.description]
+##
+## [color=Orange][b] WARNING [/b][/color][br] Ne comprend pas [member Dialog.title]  et  [member Dialog.description]
 func reset() -> void:
 	self.scan_input = true
 	self.stocked_event = null

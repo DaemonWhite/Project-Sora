@@ -1,9 +1,15 @@
 class_name SelectSettingsOptions
 extends BaseSettingsComponent
+## Menu déroulant pour les Settings
+##
+## Permet de choisir l'option parmi une liste d'option
 
+
+## Le selecteur permetant l'ajout de choisir les options
 @onready
 var optionButton = $OptionButton
 
+## Permet de réinitialiser l'états du bouton
 @onready
 var resetButton = $ResetButton
 
@@ -40,12 +46,10 @@ func _on_apply_signal(_class, _save) -> void:
 		if index >= 0:
 			self.optionButton.select(index)
 
-func reset() -> void:
-	if self.setting:
-		self.setting.reset()
-
+## Permet d'obtenir la description
 func get_description() -> String:
 	return self.description
 
+## Permet d'obtenir le selecteur
 func get_option_button() -> OptionButton:
 	return self.optionButton
