@@ -22,9 +22,9 @@ enum INPUT {
 }
 
 enum ADD_RESULT {
-	SUCCESS,
-	ERROR_DUPLICATE,
-	ERROR_INVALID_EVENT_TYPE,
+	SUCCESS = 1,
+	ERROR_DUPLICATE = 2,
+	ERROR_INVALID_EVENT_TYPE = 3,
 }
 
 func _init(action: String, events: Array[InputEvent] ) -> void:
@@ -55,7 +55,7 @@ func _init(action: String, events: Array[InputEvent] ) -> void:
 func _process_input_event(event: InputEvent) -> Dictionary:
 	var type = detect_event_input(event)
 	var value: Variant = null
-    
+	
 	match type:
 		KeySettings.INPUT.joypad_button:
 			value = event.button_index
@@ -65,7 +65,7 @@ func _process_input_event(event: InputEvent) -> Dictionary:
 			value = event.button_index
 		KeySettings.INPUT.keyboard:
 			value = event.keycode
-    
+	
 	return {"type": type, "value": value}
 
 ## Permet de detecter le type de controleur utilisé
@@ -100,21 +100,57 @@ func add_event(event: InputEvent) -> KeySettings.ADD_RESULT:
 		return KeySettings.ADD_RESULT.ERROR_DUPLICATE
 
 	return KeySettings.ADD_RESULT.SUCCESS
-		
-## Permet de supprimer l'évenement correspondant
-func remove_event(event: InputEvent):
+
+# Permet de modifier les évènement
+func modify_event(
+			input_event: InputEvent,
+			old_input_mode: KeySettings.INPUT ,
+			old_value: Variant
+		) -> KeySettings.ADD_RESULT:
+	
+	var result: KeySettings.ADD_RESULT = self.add_event(input_event)
+
+	print(self._current_option)
+
+	print(old_input_mode)
+	print(old_value)
+
+	print(result)
+
+	if result != KeySettings.ADD_RESULT.SUCCESS:
+		print("sss")
+		return result
+
+
+	print("rrr")
+	self.remove_event(old_input_mode, old_value)
+	
+	return result
+
+#Permet de supprimer l'évenement
+func remove_event(input_mode: KeySettings.INPUT, value: Variant) -> void:
+	if not self._current_option.has(input_mode):
+		push_warning("Keyboard Settings remove_event: Input invalide")
+
+
+	var index = self._current_option[input_mode].find(value)
+
+	if index  != -1:
+		self._current_option[input_mode].remove_at(index)
+		print(self._current_option)
+	else:
+		push_warning("Keyboard Settings remove_event: Evenement innexistant")
+
+
+## Permet de supprimer l'évenement  par l'InputEvent
+func remove_event_by_event(event: InputEvent):
 	var data = self._process_input_event(event)
 
 	if data.type == KeySettings.INPUT.error:
 		push_warning("Keyboard Settings: Impossible de supprimer l'evenement inconnu", event)
 		return
 
-	var index: int = self._current_option[data["type"]].find(data["value"])
-	# Empeche le double évenement
-	if index  != -1:
-		self._current_option[data["type"]].remove_at(index)
-	else:
-		push_warning("Evenement innexistant")
+	self.remove_event(data["type"], data["value"])
 
 func convert_key_code_to_event(key: Variant, value) -> InputEvent:
 	var input_event = null

@@ -8,6 +8,8 @@ extends BaseSettingsComponent
 
 signal key_add_pressed
 
+var _link_signals: Callable = _fake_link_signals
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -28,6 +30,13 @@ func _append_keys(keys) -> void:
 				)
 			)
 			self.keyListContainer.add_child(button)
+			button.pressed.connect(self._link_signals.bind(self, button, key, value))
+
+func set_link_signals(link_signalls: Callable) -> void:
+	self._link_signals = link_signalls
+
+func _fake_link_signals(_key_choose, _button, _key, _value) -> void:
+	push_warning("KeyChooseSettingsBox: _fake_link_signals not override")
 
 func _clear_key() -> void:
 	for child in self.keyListContainer.get_children():
@@ -52,6 +61,19 @@ func add_key(key: InputEvent) -> KeySettings.ADD_RESULT:
 		self.setting.apply()
 
 	return result
+
+func modify_key(
+			key: InputEvent, 
+			old_key: KeySettings.INPUT, 
+			old_value: Variant
+		) -> KeySettings.ADD_RESULT:
+	var result = self.setting.modify_event(key, old_key, old_value)
+	self.setting.apply()
+	return result
+
+func remove_key(key, value) -> void:
+	self.setting.remove_event(key, value)
+	self.setting.apply()
 
 func reset() -> void:
 	if self.setting:

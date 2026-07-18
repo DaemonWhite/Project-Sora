@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="3_ta21w"]
 
 [node name="DialogConfirm" instance=ExtResource("1_i5vra")]
+visible = false
 script = ExtResource("2_eq6gh")
 enabledCloseButton = false
 

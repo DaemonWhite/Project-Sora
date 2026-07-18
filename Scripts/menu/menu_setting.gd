@@ -69,6 +69,7 @@ func _auto_build_component(setting: BaseSettings, tab: Control) -> void:
 
 	if component is KeyChooseSettingsBox:
 		component.key_add_pressed.connect(self._on_key_add_pressed.bind(component))
+		component.set_link_signals(self._on_event_change_key)
 
 	tab.add_component(component)
 
@@ -81,12 +82,19 @@ func _on_key_add_pressed(component: KeyChooseSettingsBox) -> void:
 
 func _on_closed_key_choose_setting( 
 			dialog_choose_key: DialogChooseKey,
-			component: KeyChooseSettingsBox
+			component: KeyChooseSettingsBox,
+			old_key: KeySettings.INPUT = KeySettings.INPUT.error,
+			old_value: Variant = null,
 		) -> void:
 	var choose_key = dialog_choose_key.get_choose_key()
 
+	var call_event: Callable = component.add_key.bind(choose_key)
+	if old_key != KeySettings.INPUT.error:
+		print("MODIFY")
+		call_event = component.modify_key.bind(choose_key, old_key, old_value)
+
 	if choose_key != null:
-		match component.add_key(choose_key):
+		match call_event.call():
 			KeySettings.ADD_RESULT.ERROR_DUPLICATE:
 				var ui = UiManager.push_ui("Dialog")
 				ui.setup(
@@ -110,6 +118,52 @@ func _on_return_pressed() -> void:
 
 func _on_description_changed(text: String, tab: Control) -> void:
 	tab.set_description(text)
+
+func _on_event_change_key(
+		key_choose: KeyChooseSettingsBox,
+		button: Button, 
+		key: KeySettings.INPUT, 
+		value: Variant
+	) -> void:
+	var dialogOptions: DialogOptions = UiManager.push_ui("DialogOptions")
+	print(button.text)
+	dialogOptions.setup(
+		tr("Would you like to edit or delete a key %s?") % button.text,
+		("")
+	)
+
+	var mon_theme = preload("res://Theme/menu.tres")
+
+	var delete_button: Button = dialogOptions.add_option("Delete")
+	var modify_button: Button = dialogOptions.add_option("Modify")
+
+	delete_button.theme = mon_theme
+	modify_button.theme = mon_theme
+
+	delete_button.theme_type_variation = "ButtonError"
+	modify_button.theme_type_variation = "ButtonSuccess"
+
+
+	delete_button.pressed.connect(key_choose.remove_key.bind(key, value))
+	delete_button.pressed.connect(dialogOptions.close)
+
+	modify_button.pressed.connect(
+		self._on_event_change_key_modify.bind(
+			key_choose,
+			key,
+			value
+		)
+	)
+	modify_button.pressed.connect(dialogOptions.close)
+
+	dialogOptions.open()
+
+func _on_event_change_key_modify(component, key, value) -> void:
+	var dialog_choose_key = UiManager.push_ui(&"DialogChooseKey")
+	dialog_choose_key.closed.connect(
+		self._on_closed_key_choose_setting.bind(component, key, value)
+	)
+	dialog_choose_key.open()
 
 func resets() -> void:
 	BaseSettings.resets()
