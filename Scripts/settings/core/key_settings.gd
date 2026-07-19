@@ -1,8 +1,12 @@
 class_name KeySettings
 extends BaseSettings
 
-## Gère le paramétrage des événements.
-## Version propre et simplifiée profitant de la sérialisation native de Godot.
+## Gère le paramètrage des évenements.
+##
+## Permet de sauvegarder les paramètres clavier associé à une action.
+## Il est pas recommandé de l'utiliser directement car [KeyboardSettings] s'occupe de les générer
+## tous dynamiquement au moment ou il est instancié.
+
 
 enum ADD_RESULT {
 	SUCCESS = 1,
@@ -35,6 +39,7 @@ func add_event(event: InputEvent) -> KeySettings.ADD_RESULT:
 	self._current_option.append(event)
 	return KeySettings.ADD_RESULT.SUCCESS
 
+## Permet de modifier un évènement
 func modify_event(
 		input_event: InputEvent,
 		old_event: InputEvent
