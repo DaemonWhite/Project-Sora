@@ -4,7 +4,7 @@ on: push
 # NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
 
 env:
-  GODOT_VERSION: 4.3
+  GODOT_VERSION: 4.7
   EXPORT_NAME: test-project
   PROJECT_PATH: .
 
@@ -13,7 +13,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.7
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.7
     steps:
       - name: Checkout
         uses: actions/checkout@v4

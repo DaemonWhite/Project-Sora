@@ -169,6 +169,7 @@ func _on_event_change_key_modify(component, key) -> void:
 	)
 	dialog_choose_key.open()
 
+## Remet à zero tout les paramètres
 func resets() -> void:
 	BaseSettings.resets()
 	BaseSettings.save()
