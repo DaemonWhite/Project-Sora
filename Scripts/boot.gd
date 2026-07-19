@@ -28,14 +28,26 @@ func _load_settings() -> void:
 
 
 	for file in files_settings:
-		var script = load(file)
-		if script and script.can_instantiate():
-			var settings = script.new()
-			# Vérification de sécurité avant d'appeler les méthodes
-			if settings is BaseSettings:
-				print("Loaded : {0} -> {1}".format([settings.get_name(), settings.get_current_option()]))
-			else:
-				push_warning("Le script {0} n'hérite pas de BaseSettings".format([file]))
+		var script = load(file) as GDScript
+		
+		if not script or not script.can_instantiate():
+			continue
+
+		var base_script = script.get_base_script()
+		var is_valid_setting = false
+		
+		while base_script != null:
+			if base_script.resource_path.get_file() == "base_settings.gd":
+				is_valid_setting = true
+				break
+			base_script = base_script.get_base_script()
+			
+		if not is_valid_setting:
+			push_warning("Le script ignoré (n'hérite pas de BaseSettings) : ", file)
+			continue
+			
+		var settings = script.new()
+		print("Loaded : {0} -> {1}".format([settings.get_name(), settings.get_current_option()]))
 
 	KeyboardSettings.init()
 
