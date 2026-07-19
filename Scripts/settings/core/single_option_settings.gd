@@ -36,11 +36,11 @@ func get_options() -> Dictionary:
 
 ## Change l'option par défaut
 ## ne fait rien si valeurs non existantes dans option 
-func set_current_option(value: Variant) -> void:
+func set_current_option(value: Variant) -> bool:
 	if self.exist_option(value):
-		self._current_option = value
-	else:
-		push_warning("Options non existante", self)
+		return super.set_current_option(value)
+	push_warning("Options non existante", self)
+	return false
 
 func get_current_option_index() -> int:
 	var keys = _options.keys()

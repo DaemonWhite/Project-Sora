@@ -135,8 +135,11 @@ func _init() -> void:
 	)
 	
 	if current_option != null:
-		self.set_current_option(current_option)
-		self.apply(false)
+		var result: bool = self.set_current_option(current_option)
+		if result:
+			self.apply(false)
+		else:
+			self.reset()
 	else:
 		self.reset()
 		
@@ -277,8 +280,9 @@ func is_not_default() -> bool:
 	) != self._default_option
 
 ## Change le paramètre courant.
-func set_current_option(option: Variant) -> void:
+func set_current_option(option: Variant) -> bool:
 	self._current_option = option
+	return true
 
 ## Change le chemin de sauvegarde.
 static func set_path_settings(path: String) -> void:
