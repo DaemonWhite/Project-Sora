@@ -10,7 +10,7 @@ func _on_new_game_button_pressed():
 	self.close()
 	GameSignals.loading_game.emit(
 		GameStateManager.State.GAMEPLAY, 
-		"res://Scenes/test/menu_overlay/test_menu.tscn"
+		"res://tests/menu_overlay/test_menu.tscn"
 	)
 
 func _on_exit_button_pressed():

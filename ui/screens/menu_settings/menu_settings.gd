@@ -137,7 +137,7 @@ func _on_event_change_key(
 		("")
 	)
 
-	var mon_theme = preload("res://Theme/menu.tres")
+	var mon_theme = preload("res://assets/theme/menu_theme.tres")
 
 	var delete_button: Button = dialogOptions.add_option("Delete")
 	var modify_button: Button = dialogOptions.add_option("Modify")
