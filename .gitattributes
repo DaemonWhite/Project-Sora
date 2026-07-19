@@ -1,7 +1,22 @@
-# Auto detect text files and perform LF normalization
-* text=lf
+# Forcer Git à gérer les fins de lignes automatiquement
+* text=auto
 
-*.gd text
-*.md text
-*.godot text
-*.tscn
+# S'assurer que les scripts et fichiers texte de Godot utilisent toujours LF (le standard universel)
+*.gd text eol=lf
+*.tscn text eol=lf
+*.godot text eol=lf
+*.json text eol=lf
+*.cfg text eol=lf
+*.md text eol=lf
+
+# Déclarer les fichiers binaires pour que Git n'essaie jamais de toucher à leurs fins de lignes
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.import binary
+*.res binary
+*.tres text
