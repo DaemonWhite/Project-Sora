@@ -23,7 +23,7 @@ func _load_settings() -> void:
     # Récupération de la liste des fichiers
 	var files_settings = Utils.search_recursif_file(
         "res://Scripts/settings/list_setting/",
-        ["gd"]
+        ["gd", "gdc"]
     )
 
 
