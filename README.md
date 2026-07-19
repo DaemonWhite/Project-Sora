@@ -56,15 +56,9 @@ pour plus de détaille référer vous à [conduite du code](CODE_OF_CONDUCT.md)
 # Architecture du projet
 Le projet suivra l'arborescence suivante :
 ```sh
-/models/ # Les models 3ds Sont stocker ICI
-/scenes/ # Les scène sont stocker ICI
-/scripts/ # Les scripts sont stocker ICI
-/textures/ # Les textures sont stocker ICI
+/assets/ # Tout les assets du projet sont ICI (audio, font, mesh, textures)
+/core/ # La logique métier du projet sont ICI
+/systems/ # Logique du gameplay ui
+/tests/ # Les fichier qui serve au tests
+/ui/ # Les menu du jeu
 ```
-
-Pour plus de détaille sur l'arborescence de chacun référer vous à leurs docs :
-
-- [Models](Models/README.md)
-- [Scenes](Scenes/README.md)
-- [Scripts](Scripts/README.md)
-- [Textures](Textures/README.md)
