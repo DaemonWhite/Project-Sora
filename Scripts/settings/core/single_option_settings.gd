@@ -43,7 +43,8 @@ func set_current_option(value: Variant) -> bool:
 	return false
 
 func get_current_option_index() -> int:
-	var keys = _options.keys()
+	var keys = self._options.keys()
+	print(keys)
 	for i in range(keys.size()):
 		if keys[i] == self._current_option:
 			return i

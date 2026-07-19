@@ -1,11 +1,16 @@
 class_name InputTranslator
 extends RefCounted
 
+## Format texte d'un bouton
 const KEY: String = "[%s]"
+## Touche inconue
 const UNKNOW_KEY: String = "[?]"
+## Speparateur de touche
 const KEYS_SEPARATOR: String = ", "
+## Si une touche est pas reconue
 const UNDEFINED_KEY: String = "Undefined key"
 
+## Type de contoler utiliser par le systèmes
 enum GAMEPAD_MAP {
 	XBOX,
 	SWITCH,
