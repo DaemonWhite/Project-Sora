@@ -32,7 +32,7 @@ func _init_settings_by_group(group_enum: BaseSettings.GROUP, index: int) -> int:
 	tab.name = name
 
 	tabSettings.add_tab(
-		EventOverlay.new(
+		EventBetterTabMenu.new(
 			index, 
 			"", 
 			name

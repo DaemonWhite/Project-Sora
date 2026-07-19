@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bavji8n4dhmli"]
 
 [ext_resource type="Script" uid="uid://cuevleq2h0chc" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
-[ext_resource type="Script" uid="uid://cx54ucq5ys2pp" path="res://Scripts/menu/better_tab_menu.gd" id="2_jkvie"]
-[ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
+[ext_resource type="Script" uid="uid://cx54ucq5ys2pp" path="res://Scripts/menu/components/better_tab_menu.gd" id="2_jkvie"]
+[ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://Scripts/menu/components/event_better_tab_menu.gd" id="3_nv03i"]
 [ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="7_veiov"]
 
 [node name="MenuSetting" type="Control" unique_id=269193167]

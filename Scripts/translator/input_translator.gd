@@ -12,30 +12,41 @@ const UNDEFINED_KEY: String = "Undefined key"
 
 ## Type de contoler utiliser par le systèmes
 enum GAMEPAD_MAP {
+	## Layout XBOX
 	XBOX,
+	## Layout SWITCH
 	SWITCH,
+	## Layout PlayStation
 	PS
 }
 
 enum KEY_TYPE {
+	## Mode du systèmes
 	DEFAULT = -1,
+	## Tout les layout possible
 	ALL = 0,
+	## Seul les layout clavier
 	KEYBOAR_MOUSE = 10,
+	## Seul les layout manette
 	GAMEPAD = 20
 }
 
 static var _default_filter_key = InputTranslator.KEY_TYPE.ALL
 static var _default_filter_gamepad_map = InputTranslator.GAMEPAD_MAP.XBOX
 
+## Permet de choisir si renvoie que les touches du clavier ou de la manette
 static func set_default_filter_key(filter_key: InputTranslator.KEY_TYPE) -> void:
 	InputTranslator._default_filter_key = filter_key
 
+## Permet de choisir qu'elle layout doit êtres utiliser pour les manettes
 static func set_default_filter_gamepad_map(filter_gamepad_map: GAMEPAD_MAP) -> void:
 	InputTranslator._default_filter_gamepad_map = filter_gamepad_map
 
+## Retourne le mode de filtrage d'input utiliser
 static func get_default_filter_key() -> InputTranslator.KEY_TYPE:
 	return InputTranslator._default_filter_key
 
+## Retourne le mode de filtrage de manette utiliser
 static func get_default_filter_gamepad_map() -> GAMEPAD_MAP:
 	return InputTranslator._default_filter_gamepad_map
 
@@ -45,6 +56,7 @@ static func _get_true_key_type_filter(key_type: InputTranslator.KEY_TYPE) -> Inp
 
 	return key_type
 
+## Permet de récupérer n'importe quelle evenement par texte
 static func get_event_key_to_string(
 		event: Variant, 
 		d_filter: InputTranslator.KEY_TYPE = InputTranslator.KEY_TYPE.DEFAULT
@@ -86,7 +98,7 @@ static func get_event_key_to_string(
 	return text_keys
 
 
-# --- Logique d'extraction de la touche ---
+## Permet de récupérer les touches associer à une action
 static func get_action_key_text(
 		action_name: String, 
 		d_filter: InputTranslator.KEY_TYPE = InputTranslator.KEY_TYPE.DEFAULT
@@ -113,7 +125,7 @@ static func get_action_key_text(
 		
 	return text_keys
 
-# --- Traduction Souris ---
+## Méthode qui traduit le keycode d'une souris
 static func get_mouse_button_name(button_index: int) -> String:
 	match button_index:
 		MOUSE_BUTTON_LEFT: return "Clic Gauche"
@@ -125,7 +137,7 @@ static func get_mouse_button_name(button_index: int) -> String:
 		MOUSE_BUTTON_WHEEL_DOWN: return "Molette Bas"
 		_: return "Bouton Souris " + str(button_index)
 
-# --- Traduction Boutons Manette ---
+## Méthode qui traduit le keycode d'une manette 
 static func get_joypad_button_name(button_index: int, map_type: GAMEPAD_MAP = _default_filter_gamepad_map) -> String:
 	match button_index:
 		JOY_BUTTON_A:
@@ -151,7 +163,7 @@ static func get_joypad_button_name(button_index: int, map_type: GAMEPAD_MAP = _d
 		_: 
 			return "Bouton " + str(button_index)
 
-# --- Traduction Axes Manette (Gâchettes) ---
+## Méthode qui traduit les axes d'une manettes
 static func get_joypad_axis_name(axis: int, map_type: GAMEPAD_MAP = _default_filter_gamepad_map) -> String:
 	match axis:
 		JOY_AXIS_TRIGGER_LEFT:

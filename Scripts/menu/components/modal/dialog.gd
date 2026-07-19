@@ -28,8 +28,11 @@ extends BaseLayerUi
 		if is_node_ready() and closeButton:
 			closeButton.visible = value
 
+## Bouton de fermeture
 @onready var closeButton: Button = $CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Close
+## Titre de la fenétre
 @onready var titleLabel: Label = $CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Title
+## Texte au centre de la fenétre
 @onready var descriptionLabel: RichTextLabel = $CenterContainer/PanelContainer/VBoxContainer/ChildContainer/Description
 @onready var childContainer: Container = $CenterContainer/PanelContainer/VBoxContainer/ChildContainer
 

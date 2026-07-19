@@ -1,8 +1,12 @@
-class_name EventOverlay
+class_name EventBetterTabMenu
 extends Resource
+## Classe qui donne les information pour [BetterTabMenu]
 
+## Position du menu
 @export var index: int = 0
+## Racourci clavier pour l'ouvrir
 @export var event: String = ""
+## Nom du menu
 @export var name_tab: String = ""
 
 
