@@ -1,32 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bavji8n4dhmli"]
+[gd_scene format=3 uid="uid://bavji8n4dhmli"]
 
-[ext_resource type="Script" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
-[ext_resource type="Script" path="res://Scripts/menu/better_tab_menu.gd" id="2_jkvie"]
-[ext_resource type="PackedScene" uid="uid://d3jy8p2tm7mni" path="res://Scenes/menu/setting/controller.tscn" id="2_p4h8w"]
-[ext_resource type="Script" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
-[ext_resource type="PackedScene" uid="uid://chrm4m3gr4hik" path="res://Scenes/menu/setting/audio.tscn" id="3_oytpo"]
-[ext_resource type="PackedScene" uid="uid://bn4ysq0gnht1x" path="res://Scenes/menu/setting/video.tscn" id="4_k8osn"]
+[ext_resource type="Script" uid="uid://cuevleq2h0chc" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
+[ext_resource type="Script" uid="uid://cx54ucq5ys2pp" path="res://Scripts/menu/better_tab_menu.gd" id="2_jkvie"]
+[ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://Scripts/menu/event_overlay.gd" id="3_nv03i"]
 [ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="7_veiov"]
 
-[sub_resource type="Resource" id="Resource_arj4i"]
-script = ExtResource("3_nv03i")
-index = 0
-event = ""
-name_tab = "Contrôle"
-
-[sub_resource type="Resource" id="Resource_riah2"]
-script = ExtResource("3_nv03i")
-index = 1
-event = ""
-name_tab = "Son"
-
-[sub_resource type="Resource" id="Resource_un8ve"]
-script = ExtResource("3_nv03i")
-index = 2
-event = ""
-name_tab = "Vidéo"
-
-[node name="MenuSetting" type="Control"]
+[node name="MenuSetting" type="Control" unique_id=269193167]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_kftnu")
 active_process_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1047325957]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,47 +23,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabSetting" type="TabContainer" parent="VBoxContainer"]
+[node name="TabSetting" type="TabContainer" parent="VBoxContainer" unique_id=2065049882]
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 0
 script = ExtResource("2_jkvie")
-event_by_submenu = Array[ExtResource("3_nv03i")]([SubResource("Resource_arj4i"), SubResource("Resource_riah2"), SubResource("Resource_un8ve")])
+event_by_submenu = Array[ExtResource("3_nv03i")]([])
 
-[node name="ControllerSetting" parent="VBoxContainer/TabSetting" instance=ExtResource("2_p4h8w")]
-layout_mode = 2
-metadata/_tab_index = 0
-metadata/_tab_name = "Contrôle"
-
-[node name="SoundSetting" parent="VBoxContainer/TabSetting" instance=ExtResource("3_oytpo")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-metadata/_tab_name = "Son"
-
-[node name="VideoSetting" parent="VBoxContainer/TabSetting" instance=ExtResource("4_k8osn")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-metadata/_tab_name = "Vidéo"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1948551386]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Return" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Return" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1981031995]
 layout_mode = 2
 text = "Return"
 
-[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1558164034]
 layout_mode = 2
 theme = ExtResource("7_veiov")
 theme_type_variation = &"ButtonError"
 text = "Reset"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1129118041]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 

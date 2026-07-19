@@ -14,7 +14,7 @@ func _ready() -> void:
 func _init_tab_settings() -> void:
 	const groups = BaseSettings.GROUP
 
-	var index = 3
+	var index = 0
 
 	for group in groups.values():
 		index = self._init_settings_by_group(group, index)

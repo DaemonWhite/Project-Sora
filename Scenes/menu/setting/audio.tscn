@@ -1,8 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://chrm4m3gr4hik"]
+[gd_scene format=3 uid="uid://dyxu7wlo1jhv8"]
 
-[ext_resource type="Script" path="res://Scripts/menu/setting/audio.gd" id="1_csj5f"]
+[sub_resource type="GDScript" id="GDScript_t3rpm"]
+script/source = "extends Control
 
-[node name="SoundSetting" type="Control"]
+func _ready():
+	
+	$Son/Slider_music.value = SceneSound.get_music_level()
+	$Son/Slider_effect.value = SceneSound.get_sfx_level()
+
+## Evenement qui modifie le volume de la musique 
+func _on_slider_music_value_changed(value):
+	SceneSound.update_music_level(value)
+	
+## Evenement qui change le volume des effets
+func _on_slider_effect_value_changed(value):
+	SceneSound.update_sfx_level(value)
+	
+func _on_retour_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/menu/main_menu.tscn\")
+
+
+func _on_graphisme_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/menu/setting/video.tscn\")
+
+
+func _on_audio_pressed():
+	get_tree().change_scene_to_file(\"res://Scenes/menu/setting/audio.tscn\")
+
+
+func _on_controlle_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/menu/setting/control.tscn\")
+"
+
+[node name="SoundSetting" type="Control" unique_id=344403932]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -10,9 +40,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_csj5f")
+script = SubResource("GDScript_t3rpm")
 
-[node name="Son" type="Control" parent="."]
+[node name="Son" type="Control" parent="." unique_id=1508463539]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.452
@@ -23,7 +53,7 @@ offset_top = 0.103973
 offset_right = 516.0
 offset_bottom = 0.311981
 
-[node name="Slider_music" type="HSlider" parent="Son"]
+[node name="Slider_music" type="HSlider" parent="Son" unique_id=1340195377]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 21.0
@@ -33,14 +63,14 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="Musique" type="Label" parent="Son"]
+[node name="Musique" type="Label" parent="Son" unique_id=1797469690]
 layout_mode = 0
 offset_top = 23.0
 offset_right = 112.0
 offset_bottom = 46.0
 text = "Musique :"
 
-[node name="Slider_effect" type="HSlider" parent="Son"]
+[node name="Slider_effect" type="HSlider" parent="Son" unique_id=1981694554]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 77.0
@@ -50,14 +80,14 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 
-[node name="Effet" type="Label" parent="Son"]
+[node name="Effet" type="Label" parent="Son" unique_id=879706205]
 layout_mode = 0
 offset_top = 78.0
 offset_right = 70.0
 offset_bottom = 101.0
 text = "Effet :"
 
-[node name="Retour" type="Control" parent="."]
+[node name="Retour" type="Control" parent="." unique_id=1000956689]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
