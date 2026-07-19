@@ -1,5 +1,5 @@
 class_name  BaseSettings
-extends Object
+extends RefCounted
 ## Gère la sauvegarde des paramètres et sert de classe de base pour les paramètres
 ##
 ## La classe permet de gérer les sauvegardes des paramètres à partir de méthodes static.
@@ -103,7 +103,7 @@ var _default_option: Variant = null
 var _current_option: Variant = null
 
 ## Liste toutes les classes enfant instanciées.
-static var _list_settings: Array = []
+static var _list_settings: Array[BaseSettings] = []
 ## Contient la configuration courante
 static var _config: ConfigFile = ConfigFile.new()
 ## Contient le chemin de la configuration sauvegardé
@@ -126,6 +126,7 @@ enum GROUP {
 
 func _init() -> void:
 	BaseSettings._list_settings.append(self)
+		
 	self._ready()
 	
 	var current_option = BaseSettings._config.get_value(
@@ -196,10 +197,16 @@ func get_default_option() -> Variant:
 func get_group() -> BaseSettings.GROUP:
 	return self._group
 
+func get_group_name() -> String:
+	return BaseSettings.get_group_to_string(self._group)
+
+static func get_group_to_ui_name(group: BaseSettings.GROUP) -> String:
+	return BaseSettings.get_group_to_string(group)
+
 ## Convertie le groupe [enum BaseSettings.GROUP] en chaine de charactères
-static func get_group_to_string(group_enum: BaseSettings.GROUP) -> String:
+static func get_group_to_string(group: BaseSettings.GROUP) -> String:
 	var categorie: String = ""
-	match group_enum:
+	match group:
 		BaseSettings.GROUP.OTHER:
 			categorie = "OTHER"
 		BaseSettings.GROUP.GRAPHICS:
@@ -209,7 +216,7 @@ static func get_group_to_string(group_enum: BaseSettings.GROUP) -> String:
 		BaseSettings.GROUP.KEYBOARD:
 			categorie = "KEYBOARD"
 			
-	return TranslationServer.translate(categorie)
+	return categorie
 
 ## Renvoie le nom du paramètre
 func get_name() -> String:
@@ -234,8 +241,7 @@ static func get_settings() -> Array:
 ## Renvoie tous les paramètres instanciés appartenant à la catégorie désignée voir [enum BaseSettings.GROUP]
 static func get_settings_by_enum(group_enum: BaseSettings.GROUP) -> Array[BaseSettings]:
 	var list_settings: Array[BaseSettings]
-
-	for setting in BaseSettings._list_settings:
+	for setting: BaseSettings in BaseSettings._list_settings:
 		if setting.get_group() == group_enum:
 			list_settings.append(setting)
 
