@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d0il5ag06b50w"]
+
+[ext_resource type="Script" uid="uid://lnsntsclm0r0" path="res://ui/components/settings/scene_sound.gd" id="1_eow3q"]
+[ext_resource type="AudioStream" uid="uid://bup444ace8dp4" path="res://assets/audio/music/menu_song.mp3" id="2_onhcs"]
+[ext_resource type="AudioStream" uid="uid://u2bldqc6g8cv" path="res://assets/audio/sfx/sword_sound_effect.mp3" id="3_76byt"]
+
+[node name="Node" type="Node" unique_id=1547894613]
+script = ExtResource("1_eow3q")
+
+[node name="Music_Menu" type="AudioStreamPlayer2D" parent="." unique_id=865627116]
+stream = ExtResource("2_onhcs")
+bus = &"Music"
+
+[node name="click" type="AudioStreamPlayer2D" parent="." unique_id=36175998]
+stream = ExtResource("3_76byt")
+bus = &"SFX"
