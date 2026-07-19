@@ -1,202 +1,79 @@
 class_name KeySettings
 extends BaseSettings
 
-## Gère le paramètrage des évenements du clavier.
-##
-## Permet de sauvegarder les paramètres clavier associé à une action.
-## Il est pas recommandé de l'utiliser directement car [KeyboardSettings] s'occupe de les générer
-## tous dynamiquement au moment ou il est instancié.
-
-## Entrer des controlleurs prise en charge
-enum INPUT {
-	## Prise en charge du controlleur [InputEventJoypadButton]
-	joypad_button,
-	## Prise en charge du controlleur [InputEventJoypadMotion]
-	joypad_motion,
-	## Prise en charge du controlleur [InputEventMouseButton]
-	mouse,
-	## Prise en charge du controlleur [InputEventKey]
-	keyboard,
-	## Enum d'erreur
-	error
-}
+## Gère le paramétrage des événements.
+## Version propre et simplifiée profitant de la sérialisation native de Godot.
 
 enum ADD_RESULT {
 	SUCCESS = 1,
 	ERROR_DUPLICATE = 2,
-	ERROR_INVALID_EVENT_TYPE = 3,
+	ERROR_MISSING_EVENT = 3,
+	ERROR_INVALID_EVENT_TYPE = 4
 }
 
-func _init(action: String, events: Array[InputEvent] ) -> void:
+func _init(action: String, events: Array[InputEvent]) -> void:
 	self._name = action
 	self._ui_name = tr(action)
 	self._group = BaseSettings.GROUP.KEYBOARD
 	
-	# Initialise la stucture du clavier
-	self._default_option = {
-		KeySettings.INPUT.joypad_button : [], # Bouton de la manette
-		KeySettings.INPUT.joypad_motion : [], # Joystick de la manette
-		KeySettings.INPUT.mouse : [], # Touche de la souris
-		KeySettings.INPUT.keyboard : [], # Touche clavier
-	}
+	# _default_option et _current_option stockent désormais directement 
+	# un tableau d'objets InputEvent. C'est tout !
+	self._default_option = events.duplicate()
 	
-
-
-	for event in events:
-		var data = self._process_input_event(event)
-		if data.type != KeySettings.INPUT.error:
-			self._default_option[data.type].append(data.value)
-		else:
-			push_warning("Keyboard Settings: Evenement inconnu, il sera ignoré", event)
-		
 	super._init()
 
-## Fonction utilitaire pour extraire la valeur et le type d'un événement
-func _process_input_event(event: InputEvent) -> Dictionary:
-	var type = detect_event_input(event)
-	var value: Variant = null
-	
-	match type:
-		KeySettings.INPUT.joypad_button:
-			value = event.button_index
-		KeySettings.INPUT.joypad_motion:
-			value = [event.axis, event.axis_value]
-		KeySettings.INPUT.mouse:
-			value = event.button_index
-		KeySettings.INPUT.keyboard:
-			value = event.keycode
-	
-	return {"type": type, "value": value}
-
-## Permet de detecter le type de controleur utilisé
-static func detect_event_input(input: InputEvent) -> KeySettings.INPUT:
-	var event = KeySettings.INPUT.error
-
-	if input is InputEventJoypadButton:
-		event = KeySettings.INPUT.joypad_button
-	elif input is InputEventJoypadMotion:
-		event = KeySettings.INPUT.joypad_motion
-	elif input is InputEventMouseButton:
-		event = KeySettings.INPUT.mouse
-	elif input is InputEventKey:
-		event = KeySettings.INPUT.keyboard
-
-	return event
-
-## Ajoute un evenement voir [enum KeySettings.INPUT] pour voir les évenements pris en charge
+## Ajoute un événement à l'action actuelle
 func add_event(event: InputEvent) -> KeySettings.ADD_RESULT:
-	
-	var data = self._process_input_event(event)
-	
-	if data.type == KeySettings.INPUT.error:
-		push_warning("Keyboard Settings: Impossible d'ajouter l'evenement inconnu", event)
+	if not event is InputEvent:
 		return KeySettings.ADD_RESULT.ERROR_INVALID_EVENT_TYPE
 
-	# Empeche le double évenement
-	if self._current_option[data["type"]].find(data["value"]) == -1:
-		self._current_option[data["type"]].append(data["value"])
-	else:
-		push_warning("Keyboard Settings: Evenement deja assigner")
-		return KeySettings.ADD_RESULT.ERROR_DUPLICATE
+	for current_event in self._current_option:
+		if current_event.is_match(event):
+			push_warning("KeySettings: Événement déjà assigné")
+			return KeySettings.ADD_RESULT.ERROR_DUPLICATE
 
+	self._current_option.append(event)
 	return KeySettings.ADD_RESULT.SUCCESS
 
-# Permet de modifier les évènement
 func modify_event(
-			input_event: InputEvent,
-			old_input_mode: KeySettings.INPUT ,
-			old_value: Variant
-		) -> KeySettings.ADD_RESULT:
+		input_event: InputEvent,
+		old_event: InputEvent
+	) -> KeySettings.ADD_RESULT:
+	var index_to_remove = self.get_match_event_pos(old_event)
+
+	if index_to_remove == -1:
+		push_warning("KeySettings: Événement inexistant")
+		return KeySettings.ADD_RESULT.ERROR_MISSING_EVENT
+
+
+	self._current_option[index_to_remove] = input_event
 	
-	var result: KeySettings.ADD_RESULT = self.add_event(input_event)
-
-	print(self._current_option)
-
-	print(old_input_mode)
-	print(old_value)
-
-	print(result)
-
-	if result != KeySettings.ADD_RESULT.SUCCESS:
-		print("sss")
-		return result
+	return KeySettings.ADD_RESULT.SUCCESS
 
 
-	print("rrr")
-	self.remove_event(old_input_mode, old_value)
-	
-	return result
+## Supprime un événement
+func remove_event(event: InputEvent) -> void:
+	var index_to_remove = self.get_match_event_pos(event)
 
-#Permet de supprimer l'évenement
-func remove_event(input_mode: KeySettings.INPUT, value: Variant) -> void:
-	if not self._current_option.has(input_mode):
-		push_warning("Keyboard Settings remove_event: Input invalide")
-
-
-	var index = self._current_option[input_mode].find(value)
-
-	if index  != -1:
-		self._current_option[input_mode].remove_at(index)
-		print(self._current_option)
+	if index_to_remove != -1:
+		self._current_option.remove_at(index_to_remove)
 	else:
-		push_warning("Keyboard Settings remove_event: Evenement innexistant")
+		push_warning("KeySettings: Événement inexistant")
 
-
-## Permet de supprimer l'évenement  par l'InputEvent
-func remove_event_by_event(event: InputEvent):
-	var data = self._process_input_event(event)
-
-	if data.type == KeySettings.INPUT.error:
-		push_warning("Keyboard Settings: Impossible de supprimer l'evenement inconnu", event)
-		return
-
-	self.remove_event(data["type"], data["value"])
-
-func convert_key_code_to_event(key: Variant, value) -> InputEvent:
-	var input_event = null
-
-	match key:
-		KeySettings.INPUT.joypad_button:
-				input_event = InputEventJoypadButton.new()
-				input_event.button_index = value
-
-		KeySettings.INPUT.joypad_motion:
-				input_event = InputEventJoypadMotion.new()
-				input_event.axis = value[0]
-				input_event.axis_value = value[1]
-					
-		KeySettings.INPUT.mouse:
-				input_event = InputEventMouseButton.new()
-				input_event.button_index = value
-					
-		KeySettings.INPUT.keyboard:
-				input_event = InputEventKey.new()
-				input_event.keycode = value
-		_: push_warning("KeySettings: Input not supported", key)
-		
-
-	return input_event
-
+## Applique directement les modifications à l'InputMap de Godot
 func _apply() -> void:
 	InputMap.action_erase_events(self._name)
 	
-	for key in self._current_option.keys():
-		for value in self._current_option[key]:
-			var event = self.convert_key_code_to_event(key, value)
-			InputMap.action_add_event(self._name, event)
-		
-		
+	# Plus besoin de décortiquer les enums et les types ! 
+	# On réinjecte les objets bruts directement dans Godot.
+	for event in self._current_option:
+		InputMap.action_add_event(self._name, event)
 
-## Renvoie le dictionaire contenant toutes les lettres
-## [br]
-## Format du dictionnaire
-##	[codeblock]
-##	{
-##	    KeySettings.INPUT.joypad_button : [button_gamepad], # Bouton de la manetette
-##	    KeySettings.INPUT.joypad_motion : [[axis], [axis_value]], # Joystick de la manette
-##		KeySettings.INPUT.joypad_mouse : [button_louse], # Touche de la souris
-##	    KeySettings.INPUT.keyboard : [key], # Touche clavier
-##	}
-## [/codeblock]
-func get_current_option() -> Dictionary:
-	return super.get_current_option()
+func get_match_event_pos(event: InputEvent) -> int:
+	var index_to_remove = -1
+	for i in range(self._current_option.size()):
+		if self._current_option[i].is_match(event):
+			index_to_remove = i
+			break
+
+	return index_to_remove

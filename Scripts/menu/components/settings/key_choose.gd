@@ -30,16 +30,13 @@ func _ready() -> void:
 		self._append_keys(keys)
 
 func _append_keys(keys) -> void:
-	for key in keys:
-		for value in keys[key]:
-			var button = Button.new()
-			button.text = InputTranslator.get_event_key_to_string(
-				self.setting.convert_key_code_to_event(
-					key, value
-				)
-			)
-			self.keyListContainer.add_child(button)
-			button.pressed.connect(self._link_signals.bind(self, button, key, value))
+	for key: InputEvent in keys:
+		var button = Button.new()
+		button.text = InputTranslator.get_event_key_to_string(
+			key
+		)
+		self.keyListContainer.add_child(button)
+		button.pressed.connect(self._link_signals.bind(self, button, key))
 
 ## Relie le callback au bouton
 func set_link_signals(link_signalls: Callable) -> void:
@@ -76,14 +73,13 @@ func add_key(key: InputEvent) -> KeySettings.ADD_RESULT:
 ## Modifi une touche de [KeySettings]
 func modify_key(
 			key: InputEvent, 
-			old_key: KeySettings.INPUT, 
-			old_value: Variant
+			old_key: InputEvent
 		) -> KeySettings.ADD_RESULT:
-	var result = self.setting.modify_event(key, old_key, old_value)
+	var result = self.setting.modify_event(key, old_key)
 	self.setting.apply()
 	return result
 
 ## Supprime une touche de [KeySettings]
-func remove_key(key, value) -> void:
-	self.setting.remove_event(key, value)
+func remove_key(key: InputEvent) -> void:
+	self.setting.remove_event(key)
 	self.setting.apply()
