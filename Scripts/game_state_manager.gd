@@ -1,15 +1,25 @@
 extends Node
+## Classe qui permet de gérer les états du jeu
 
+
+## États du jeu
 enum State { 
+    ## État du menu principal
     MAIN_MENU,
+    ## État en jeu
     GAMEPLAY, 
+    ## État jeu en pause
     PAUSE, 
+    ## État dialogue ouvert
     DIALOGUE,
+    ## État chargement du jeu
     LOADING_GAME 
 }
+
+## État actuelle du jeu
 var current_state: State = State.GAMEPLAY
 
-
+## Dernier état du jeu
 var last_input_mode = State.GAMEPLAY
 
 func _ready() -> void:

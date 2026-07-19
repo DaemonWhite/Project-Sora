@@ -1,8 +1,8 @@
 class_name Utils
 extends Object
+## Classe utilitaire du jeu
 
-
-## Search recursivly in a folder for all the
+## Recherche de manière récursif des fichier avec option de filtrage
 static func search_recursif_file(folder: String, extensions: Array[String] = []) -> Array[String]:
     var files: Array[String] = []
     var dir = DirAccess.open(folder)
