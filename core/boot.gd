@@ -20,34 +20,15 @@ func _load_settings() -> void:
 	print("load_settings...")
 	BaseSettings.set_path_settings(PATH_SETTINGS)
 	BaseSettings.load()
-    # Récupération de la liste des fichiers
-	var files_settings = Utils.search_recursif_file(
-        "res://core/settings/list_setting/",
-        ["gd", "gdc"]
-    )
+	# Récupération de la liste des fichier
+	var files_settings: Array = Utils.auto_load_scripts(
+		"res://core/settings/list_setting/",
+		"base_settings.gd",
+		true
+	)
 
-
-	for file in files_settings:
-		var script = load(file) as GDScript
-		
-		if not script or not script.can_instantiate():
-			continue
-
-		var base_script = script.get_base_script()
-		var is_valid_setting = false
-		
-		while base_script != null:
-			if base_script.resource_path.get_file() == "base_settings.gd":
-				is_valid_setting = true
-				break
-			base_script = base_script.get_base_script()
-			
-		if not is_valid_setting:
-			push_warning("Le script ignoré (n'hérite pas de BaseSettings) : ", file)
-			continue
-			
-		var settings = script.new()
-		print("Loaded : {0} -> {1}".format([settings.get_name(), settings.get_current_option()]))
+	for file_setting in files_settings :
+		print("Loaded : {0} -> {1}".format([file_setting.get_name(), file_setting.get_current_option()]))
 
 	KeyboardSettings.init()
 
@@ -63,6 +44,7 @@ func _register_ui_manager() -> void:
 	UiManager.register_ui(&"DialogChooseKey", "res://ui/components/modal/dialog_choose_key.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"DialogOptions", "res://ui/components/modal/dialog_options.tscn", UiManager.LayerType.SYSTEM_MENU, false)
 	UiManager.register_ui(&"TestSelect", "res://ui/hud/test_select/test_select.tscn", UiManager.LayerType.CRITICAL)
+	UiManager.register_ui(&"Console", "res://ui/hud/console/console.tscn", UiManager.LayerType.DEBUG)
 	print("Ui registered")
 
 func _register_tags_text() -> void:
