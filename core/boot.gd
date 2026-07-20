@@ -56,7 +56,7 @@ func _load_settings() -> void:
 
 func _register_ui_manager() -> void:
 	UiManager.register_ui(&"MainMenu", "res://ui/screens/menu_main/main_menu.tscn", UiManager.LayerType.GAME_MENU)
-	UiManager.register_ui(&"PauseMenu", "res://ui/screens/menu_pause/menu_pause.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"PauseMenu", "res://ui/screens/menu_pause/menu_pause.tscn", UiManager.LayerType.GAME_MENU)
 	UiManager.register_ui(&"SettingsMenu", "res://ui/screens/menu_settings/menu_settings.tscn", UiManager.LayerType.SYSTEM_MENU)
 	UiManager.register_ui(&"Dialog", "res://ui/components/modal/dialog.tscn", UiManager.LayerType.SYSTEM_MENU, false)
 	UiManager.register_ui(&"DialogConfirm", "res://ui/components/modal/dialog_confirm.tscn", UiManager.LayerType.SYSTEM_MENU, false)

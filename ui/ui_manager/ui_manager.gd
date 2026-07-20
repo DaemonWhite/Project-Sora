@@ -19,7 +19,9 @@ enum LayerType {
 	## Layer des transition
 	TRANSITION = 250,
 	## Layer des Élément critique
-	CRITICAL = 300
+	CRITICAL = 300,
+	## Layer pour le debugage
+	DEBUG = 1000
 }
 
 var _ui_registry: Dictionary = {}
@@ -62,7 +64,11 @@ func unregister_ui(ui_id: StringName) -> void:
 ## Note il n'affiche pas les menu
 ## Seul les menu modal désactive les élèment du dessous
 func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLayerUi:
+	# Calque cible
 	var target_layer: LayerType = layer
+	## Nombre de calque actif
+	var insert_index_stack = self._ui_stack.size()
+
 	if layer == LayerType.DEFAULT:
 		if not self._ui_registry.has(ui_id):
 			push_error("L'UI suivante n'est pas enregistrée : ", ui_id)
@@ -73,20 +79,27 @@ func push_ui(ui_id: StringName, layer: LayerType = LayerType.DEFAULT) -> BaseLay
 	var ui_instance = self._get_or_create_ui(ui_id, target_layer)
 	if not ui_instance:
 		return null
-	
-	# Change le process mode par celui privilégier du menu
-	ui_instance.process_mode = ui_instance.active_process_mode
 
-	# Empeche la desactivation si le menu n'est pas modal
-	if ui_instance.is_modal:
-		for i in range(_ui_stack.size() - 1, -1, -1):
-			var prev_ui = _ui_stack[i]
-			
-			if prev_ui.is_modal:
-				prev_ui.process_mode = Node.PROCESS_MODE_DISABLED
-				break 
-			
-	self._ui_stack.append(ui_instance)
+	# Regarde ou il doit insérer le calque
+	for i in range(self._ui_stack.size() - 1, -1, -1):
+		var prev_ui = _ui_stack[i]
+		var prev_layer = prev_ui.get_meta("layer_priority")
+		
+		# Si le menu qu'on insère est plus (ou aussi) prioritaire, il va au-dessus
+		if target_layer >= prev_layer:
+			insert_index_stack = i + 1
+			break
+		else:
+			insert_index_stack = i
+	
+	if _ui_stack.has(ui_instance):
+		_ui_stack.erase(ui_instance)
+	
+
+	self._ui_stack.insert(insert_index_stack, ui_instance)
+	
+	self._update_stack_states()
+	
 	return ui_instance
 
 
@@ -113,7 +126,7 @@ func clear_cache(ui_id: StringName):
 
 	var ui_instance = _cached_uis[ui_id]
 	self._cached_uis.erase(ui_id)
-	self.ui_instance.queue_free()
+	ui_instance.queue_free()
 
 ## Permet de vider le cache
 ##
@@ -156,6 +169,9 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 	if layer == LayerType.DEFAULT:
 		layer = self._ui_registry[ui_id]["layer"]
 
+	# Définie ça priorité
+	instance.set_meta("layer_priority", layer)
+
 	self._layers[layer].add_child(instance)
 	
 	if is_unique:
@@ -163,13 +179,34 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 	
 	return instance
 
+func _update_stack_states() -> void:
+	var has_modal_above: bool = false
+	var focus_ui: BaseLayerUi = null 
+
+	for i in range(_ui_stack.size() - 1, -1, -1):
+		var ui = _ui_stack[i]
+        
+		if focus_ui == null:
+			focus_ui = ui 
+
+		if has_modal_above:
+            # Un menu modal est au-dessus, on gèle celui-ci
+			ui.process_mode = Node.PROCESS_MODE_DISABLED
+		else:
+			# Ce menu est actif
+			ui.process_mode = ui.active_process_mode
+			if ui.is_modal:
+				has_modal_above = true
+                
+	if focus_ui != null and focus_ui.process_mode != Node.PROCESS_MODE_DISABLED:
+		focus_ui.grab_focus_on_default()
+
 func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
 	if _ui_stack.has(ui_instance):
 		_ui_stack.erase(ui_instance)
 		
-	for i in range(_ui_stack.size() - 1, -1, -1):
-		var ui = _ui_stack[i]
-		if ui.is_modal:
-			ui.process_mode = ui.active_process_mode
-			ui.grab_focus_on_default()
-			break
+	self._update_stack_states()
+
+	## Evite les fuites de mémoire en détruisant les objet non unique
+	if not _cached_uis.values().has(ui_instance):
+		ui_instance.queue_free()
