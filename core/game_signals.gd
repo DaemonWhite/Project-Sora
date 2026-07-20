@@ -1,4 +1,3 @@
-class_name Game_Sginals
 extends Node
 
 ## Signal poour prévenir de l'ouverture du menu pause
@@ -8,12 +7,15 @@ signal pause_opened()
 @warning_ignore("unused_signal")
 signal pause_closed()
 
-## Signal poour prévenir de l'ouverture de l'inventaire
+
 @warning_ignore("unused_signal")
-signal inventory_opened()
-## Signal poour prévenir de la fermeture du menu pause 
+signal option_opened()
 @warning_ignore("unused_signal")
-signal inventory_closed()
+signal option_closed(options_menu)
+
+## Signal pour prévenir du chargement
+@warning_ignore("unused_signal")
+signal ui_open_requested(state: GameStateManager.State, load_file: String)
 
 ## Signal pour prévenir du chargement
 @warning_ignore("unused_signal")
