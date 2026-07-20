@@ -34,7 +34,8 @@ var _cached_uis: Dictionary = {}
 	LayerType.GAME_MENU: $GameMenuLayer,
 	LayerType.SYSTEM_MENU: $SystemMenuLayer,
 	LayerType.TRANSITION: $TransitionLayer,
-	LayerType.CRITICAL: $CriticalLayer
+	LayerType.CRITICAL: $CriticalLayer,
+	LayerType.DEBUG: $DebugLayer
 }
 
 
