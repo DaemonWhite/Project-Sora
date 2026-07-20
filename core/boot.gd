@@ -10,6 +10,8 @@ func _ready() -> void:
 	self._register_ui_manager()
 	self._register_tags_text()
 
+	DebugCommands.auto_registered_command()
+
 	UiManager.push_ui(&"PauseMenu")
 	UiManager.push_ui(&"TestSelect").open()
 	print("Boot finished")
