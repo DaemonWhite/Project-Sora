@@ -7,7 +7,7 @@
 font = ExtResource("2_sw1f8")
 font_size = 40
 
-[node name="Pause" type="Control" node_paths=PackedStringArray("default_focus_node")]
+[node name="Pause" type="Control" unique_id=1578694885 node_paths=PackedStringArray("default_focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ script = ExtResource("1_6bd8v")
 default_focus_node = NodePath(".")
 active_process_mode = 3
 
-[node name="Pause" type="Label" parent="."]
+[node name="Pause" type="Label" parent="." unique_id=1927525018]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,7 +36,7 @@ label_settings = SubResource("LabelSettings_o3lev")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="."]
+[node name="ResumeButton" type="Button" parent="." unique_id=770803750]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,7 +52,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Reprendre"
 
-[node name="OptionsButton" type="Button" parent="."]
+[node name="OptionsButton" type="Button" parent="." unique_id=317620416]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +68,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Options"
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="." unique_id=697117720]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -84,5 +84,6 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_sw1f8")
 text = "Quitter"
 
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
