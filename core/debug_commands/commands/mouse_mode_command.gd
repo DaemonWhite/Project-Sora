@@ -7,15 +7,6 @@ var _mouse_options: Dictionary[String, int]
 func _setup() -> void:
 	self._command_name = "mouse"
 	self._description = "Permet de changer l'états du pointeur de la souris"
-	
-	self._mouse_options = {
-		"captured" : Input.MOUSE_MODE_CAPTURED,
-		"confined" : Input.MOUSE_MODE_CONFINED,
-		"confined_hiden" : Input.MOUSE_MODE_CONFINED_HIDDEN,
-		"hiden" : Input.MOUSE_MODE_HIDDEN,
-		"max": Input.MOUSE_MODE_MAX,
-		"visible": Input.MOUSE_MODE_VISIBLE
-	}
 
 	self._add_options(
 		&"captured",
@@ -44,13 +35,13 @@ func _setup() -> void:
 	self._add_options(
 		&"visible",
 		&"Rend la souris visible et libre de la fenétre",
-		self._on_mouse_mode.bind(Input.MOUSE_MODE_CONFINED)
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_VISIBLE)
 	)	
 
 	# Optionnel : Enregistrer des options/flags avec leur callback respectif
 	# _add_options("-v", "Exécute en mode verbeux", _exec_verbose)
 
-func _on_mouse_mode(args, mouse) -> String:
+func _on_mouse_mode(_args, mouse) -> String:
 	Input.set_mouse_mode(mouse)
 	return "Mouse set mode : %s" % mouse 
 
@@ -58,11 +49,11 @@ func _on_mouse_mode(args, mouse) -> String:
 func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 	# Proposer des arguments dynamiques à la touche Tab (ex: liste d'items, cartes, etc.)
 	# return ["valeur_1", "valeur_2"]
-	return self._mouse_options.keys()
+	return []
 
 
 ## Logique principale exécutée si aucune option n'a été spécifiée
-func _exec(args: PackedStringArray) -> String:
+func _exec(_args: PackedStringArray) -> String:
 	return self.get_help()
 
 
