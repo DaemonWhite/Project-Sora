@@ -32,21 +32,16 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 
 ## Retourne la liste des suggestions d'autocomplétion filtrées
 func get_autocomplete(args: PackedStringArray) -> Array[String]:
-	var suggestions: Array[String] = []
+	if  args.size() == 2:
+		var suggestions: Array[String] = []
+		for value in self._options.values():
+			suggestions.push_back(value["name"])
+		return suggestions
 
-	for opt_key in self._options.keys():
-		suggestions.append(opt_key)
+	if args.size() < 3:
+		return self._get_autocomplete(args)
 
-	suggestions.append_array(self._get_autocomplete(args))
-
-	if not args.is_empty():
-		var current_word: String = args[-1]
-		if not current_word.is_empty():
-			suggestions = suggestions.filter(
-				func(item: String) -> bool: return item.begins_with(current_word)
-			)
-
-	return suggestions
+	return []
 
 ## À surcharger pour la logique principale
 func _exec(_args: PackedStringArray) -> String:

@@ -6,7 +6,7 @@ extends RefCounted
 
 static var _path_commands: String = "res://core/debug_commands/commands/"
 
-static var _commands: Dictionary = {}
+static var _commands: Dictionary[String, BaseCommand] = {}
 
 ## Enregistree une nouvelle commande
 static func register_command(name_command: String, command: BaseCommand) -> void:
@@ -17,6 +17,14 @@ static func get_command(name_command: String) -> BaseCommand:
 	if DebugCommands._commands.has(name_command):
 		return DebugCommands._commands[name_command]
 	return null
+
+static func get_autocomplete(commands_array: PackedStringArray) -> Array[String]:
+
+	if commands_array.size() > 1 and DebugCommands._commands.has(commands_array[0]):
+		return DebugCommands._commands[commands_array[0]].get_autocomplete(commands_array)
+
+
+	return DebugCommands._commands.keys()
 
 ## Récupère toute les commandes
 static func get_all_commands() -> Dictionary:
