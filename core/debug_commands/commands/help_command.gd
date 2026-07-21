@@ -18,8 +18,8 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 func _exec(_args: PackedStringArray) -> String:
 	var output: String = ""
 	for command in DebugCommands.get_all_commands().values():
-		output += "[br]%s[br]" % command.get_help()
-
+		output += "\n%s" % command.get_help()
+	print(output)
 	return  output
 
 

@@ -4,13 +4,13 @@ extends BaseLayerUi
 
 ## Le texte pour envoyer la command
 @onready
-var input_command: SuggestionLineEdit = $PanelContainer/VBoxContainer/HBoxContainer/InputCommand
+var input_command: SuggestionLineEdit = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/InputCommand
 ## Le bouton pour envoyer la command
 @onready
-var enter_command: Button = $PanelContainer/VBoxContainer/HBoxContainer/EnterCommand
+var enter_command: Button = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/EnterCommand
 ## les log du text
 @onready
-var log_text: RichTextLabel = $PanelContainer/VBoxContainer/LogText
+var log_text: RichTextLabel = $PanelContainer/MarginContainer/VBoxContainer/LogText
 
 var _history: Array[String] = []
 var _index_history: int = 0

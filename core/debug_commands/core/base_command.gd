@@ -74,10 +74,13 @@ func get_description() -> String:
 	return self._description
 
 func get_help() -> String:
-	var ouput: String = "%s" % self._command_name
-	ouput += "[br]%s" % self.get_description()
-	
+	var output: String = "%s" % self._command_name
+	output += "\n%s" % self.get_description()
+	output += "[color=light_gray]"
 	for option in self._options.values():
-		ouput += "[ul]{name} -> {description}[/ul]".format(option)
+		output += "[ul]{name} -> {description}[/ul]".format(option)
+	output += "[/color]"
 
-	return ouput
+	if self._options.is_empty():
+		output += "\n"
+	return output

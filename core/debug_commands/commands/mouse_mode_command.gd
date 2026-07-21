@@ -6,7 +6,7 @@ var _mouse_options: Dictionary[String, int]
 ## Configuration initiale : Nom, description et déclaration des options
 func _setup() -> void:
 	self._command_name = "mouse"
-	self._description = "Permet de changer l'états du pointeur de la sours"
+	self._description = "Permet de changer l'états du pointeur de la souris"
 	
 	self._mouse_options = {
 		"captured" : Input.MOUSE_MODE_CAPTURED,
@@ -17,9 +17,42 @@ func _setup() -> void:
 		"visible": Input.MOUSE_MODE_VISIBLE
 	}
 
+	self._add_options(
+		&"captured",
+		&"Rend la souris invisible",
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_CAPTURED)
+	)
+
+	self._add_options(
+		&"confined",
+		&"Bloque la souris dans la fenètre",
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_CONFINED)
+	)
+
+	self._add_options(
+		&"confined_hiden",
+		&"Bloque la souris dans la fenètre et la rend invisible",
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	)
+
+	self._add_options(
+		&"hiden",
+		&"rend la souris invisible et libre de la fenétre",
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_HIDDEN)
+	)
+
+	self._add_options(
+		&"visible",
+		&"Rend la souris visible et libre de la fenétre",
+		self._on_mouse_mode.bind(Input.MOUSE_MODE_CONFINED)
+	)	
+
 	# Optionnel : Enregistrer des options/flags avec leur callback respectif
 	# _add_options("-v", "Exécute en mode verbeux", _exec_verbose)
 
+func _on_mouse_mode(args, mouse) -> String:
+	Input.set_mouse_mode(mouse)
+	return "Mouse set mode : %s" % mouse 
 
 ## Propositions d'autocomplétion dynamiques (Optionnel)
 func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
@@ -30,15 +63,7 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 
 ## Logique principale exécutée si aucune option n'a été spécifiée
 func _exec(args: PackedStringArray) -> String:
-	if args.is_empty() or not self._mouse_options.has(args[0]):
-		var text = "Option disonible:[br]"
-		for mouse in self._mouse_options.keys() :
-			text += "[ul]%s[/ul]" % mouse 
-		return text
-
-	Input.set_mouse_mode(self._mouse_options[args[0]])
-
-	return "Mouse mode set : %s" % args[0]
+	return self.get_help()
 
 
 # --- Exemple de callback pour option (Facultatif) ---
