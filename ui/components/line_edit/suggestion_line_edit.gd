@@ -70,6 +70,7 @@ func _build_button(suggestion: String) -> Button:
 	var button: Button = Button.new()
 	button.text = suggestion
 	button.pressed.connect(self._on_suggetions_selected.bind(button))
+	button.set_text_alignment(HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT)
 	return button
 
 func _on_suggetions_selected(button: Button):
@@ -90,9 +91,11 @@ func clear_suggestion() -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
-		self.panel_suggestion.focus_prev()
+		if self.panel_suggestion.visible:
+			self.panel_suggestion.focus_prev()
 		self.up.emit()
 	elif event.is_action_pressed("ui_down"):
-		self.panel_suggestion.focus_next()
+		if self.panel_suggestion.visible:
+			self.panel_suggestion.focus_next()
 		self.down.emit()
 

@@ -22,16 +22,11 @@ func _ready() -> void:
 	super._ready()
 	self.active_process_mode = Node.PROCESS_MODE_ALWAYS
 
-	self.input_command.set_suggestion([
-		"abrico",
-		"péche",
-		"périer",
-		"chaussette",
-		"paria"
-	])
-
 func open() -> void:
 	super.open()
+	if self.log_text.text.is_empty():
+		self.send_command("version")
+	
 	self.input_command.process_mode = Node.PROCESS_MODE_INHERIT
 	self.input_command.grab_focus()
 
