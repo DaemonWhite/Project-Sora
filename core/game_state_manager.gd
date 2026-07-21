@@ -31,6 +31,7 @@ func change_state(new_state: State) -> void:
     )
 
 func _on_close_console(console):
+    self.debug_mode = false
     self.change_state(console.exit_state_mode)
 
 func _on_debug_toggle() -> void:

@@ -42,6 +42,10 @@ window/size/resizable=false
 
 project/assembly_name="Projet-sora"
 
+[global_group]
+
+Debug="Groupe qui relie tout les élèment de debugage"
+
 [gui]
 
 theme/custom="uid://cmd1vx5uasn1n"

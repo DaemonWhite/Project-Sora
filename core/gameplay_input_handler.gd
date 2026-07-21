@@ -14,5 +14,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			GameStateManager.State.GAMEPLAY:
 				GameSignals.ui_open_requested.emit("PauseMenu")
 
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_console"):
 		GameSignals.debug_toggle.emit()
