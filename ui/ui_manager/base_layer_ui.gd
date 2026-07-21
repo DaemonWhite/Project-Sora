@@ -12,6 +12,12 @@ signal closed(BaseLayerUi)
 ## Signal émis lorsque l'UI est complètement ouverte
 signal openfinished
 
+## Definie le type de menu cible
+@export var target_game_state: GameStateManager.State = GameStateManager.State.MENU
+
+## Définie si le menu à besoin d'une souris
+@export var require_visible_mouse: bool = true
+
 ## Détermine si cette UI bloque les inputs des UIs situées en dessous (comportement modal)
 @export var is_modal: bool = true
 

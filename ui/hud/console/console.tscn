@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k5740")
+target_game_state = 2
 metadata/_custom_type_script = "uid://blmq8kbtgde73"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=827464464]

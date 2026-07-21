@@ -15,6 +15,8 @@ var log_text: RichTextLabel = $PanelContainer/VBoxContainer/LogText
 var _history: Array[String] = []
 var _index_history: int = 0
 
+var exit_state_mode: GameStateManager.State
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -27,6 +29,10 @@ func _ready() -> void:
 		"chaussette",
 		"paria"
 	])
+
+func open() -> void:
+	super.open()
+	self.input_command.grab_focus()
 
 ## methode pour envoyer une command
 func send_command(command: String) -> void:

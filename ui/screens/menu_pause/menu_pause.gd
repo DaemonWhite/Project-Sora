@@ -2,7 +2,7 @@ class_name PauseMenu
 extends BaseLayerUi
 	
 func _on_resume_button_pressed() -> void:
-	GameSignals.pause_closed.emit()
+	GameSignals.ui_close_requested.emit("PauseMenu")
 
 func _on_exit_button_pressed() -> void:
 	GameSignals.main_menu.emit()

@@ -2,10 +2,8 @@ extends BaseLayerUi
 
 func _ready():
 	SceneSound.launch_music_menu()
-	UiManager.push_ui("Console").open()
 
 func _on_options_button_pressed():
-	print("ok")
 	GameSignals.ui_open_requested.emit("SettingsMenu")
 
 func _on_new_game_button_pressed():
