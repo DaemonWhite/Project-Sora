@@ -32,7 +32,12 @@ func _ready() -> void:
 
 func open() -> void:
 	super.open()
+	self.input_command.process_mode = Node.PROCESS_MODE_INHERIT
 	self.input_command.grab_focus()
+
+func close() -> void:
+	self.input_command.process_mode = Node.PROCESS_MODE_DISABLED
+	super.close()
 
 ## methode pour envoyer une command
 func send_command(command: String) -> void:

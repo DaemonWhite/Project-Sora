@@ -1,11 +1,11 @@
-class_name ExitCommand
+class_name ExitGameCommand
 extends BaseCommand
 
 
 ## Configuration initiale : Nom, description et déclaration des options
 func _setup() -> void:
-	self._command_name = "exit"
-	self._description = "Permet de sortir de l'interpreteur de commande"
+	self._command_name = "qqq"
+	self._description = "Ferme le jeu"
 	
 	# Optionnel : Enregistrer des options/flags avec leur callback respectif
 	# _add_options("-v", "Exécute en mode verbeux", _exec_verbose)
@@ -21,15 +21,11 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 ## Logique principale exécutée si aucune option n'a été spécifiée
 func _exec(_args: PackedStringArray) -> String:
 	var tree = Engine.get_main_loop() as SceneTree
-	
-	if tree:		
-		var liste = tree.get_nodes_in_group("Debug")
-		for node in liste:
-			if node is Console:
-				node.close()
-				return "Fermeture de la console"
+	if tree:
+		tree.quit()
 
-	return "Impossible de fermer la console"
+
+	return "Exit game"
 
 
 # --- Exemple de callback pour option (Facultatif) ---
