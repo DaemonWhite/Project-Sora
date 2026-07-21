@@ -23,7 +23,6 @@ func _setup() -> void:
 	)
 
 	self._list_scenes = Utils.search_recursif_file(PATH_TEST, ["tscn"])
-	print(self._list_scenes)
 
 ## Logique principale de la commande (exécutée si aucune option ne correspond)
 func _exec(_args: PackedStringArray) -> String:
@@ -42,7 +41,6 @@ func _get_autocomplete(args: PackedStringArray) -> Array[String]:
 func _list_commands(_args: PackedStringArray):
 	var output: String = ""
 
-	print(self._list_scenes)
 	for scene in self._list_scenes:
 		output += "%s[br]" % scene
 

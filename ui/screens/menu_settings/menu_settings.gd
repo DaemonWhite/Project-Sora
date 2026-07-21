@@ -89,7 +89,6 @@ func _on_closed_key_choose_setting(
 
 	var call_event: Callable = component.add_key.bind(choose_key)
 	if old_key != null:
-		print("MODIFY")
 		call_event = component.modify_key.bind(choose_key, old_key)
 
 	if choose_key != null:
@@ -131,7 +130,6 @@ func _on_event_change_key(
 		key: InputEvent
 	) -> void:
 	var dialogOptions: DialogOptions = UiManager.push_ui("DialogOptions")
-	print(button.text)
 	dialogOptions.setup(
 		tr("Would you like to edit or delete a key %s?") % button.text,
 		("")

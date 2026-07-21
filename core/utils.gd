@@ -58,5 +58,4 @@ static func auto_load_scripts(
 		if instanciate: scripts.push_back(script.new())
 		else: scripts.push_back(script) 	
 	
-	print(scripts)
 	return scripts
