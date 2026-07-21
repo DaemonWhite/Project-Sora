@@ -1,8 +1,6 @@
 class_name MouseModeCommand
 extends BaseCommand
 
-var _mouse_options: Dictionary[String, int]
-
 ## Configuration initiale : Nom, description et déclaration des options
 func _setup() -> void:
 	self._command_name = "mouse"

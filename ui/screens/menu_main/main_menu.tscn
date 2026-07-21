@@ -9,7 +9,7 @@ font = ExtResource("2_k11rj")
 font_size = 64
 font_color = Color(1, 0.231373, 0.203922, 1)
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1598214680]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_q0exs")
 active_process_mode = 3
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=367183273]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -33,13 +33,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_u7ckb")
 
-[node name="Menu" type="Control" parent="."]
-layout_mode = 2
+[node name="Menu" type="Control" parent="." unique_id=404261210]
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="Menu"]
+[node name="Title" type="Label" parent="Menu" unique_id=1983793058]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,8 +55,9 @@ text = "Le Sablier"
 label_settings = SubResource("LabelSettings_rfr8j")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=41227132]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,21 +71,21 @@ offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NewGameButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="Menu/VBoxContainer" unique_id=269459985]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "Nouvelle partie"
 
-[node name="OptionsButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="Menu/VBoxContainer" unique_id=2138762726]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k11rj")
 theme_override_font_sizes/font_size = 25
 text = "OPTIONS"
 
-[node name="ExitButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="Menu/VBoxContainer" unique_id=1033893876]
 modulate = Color(7.567, 1, 1, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k11rj")
