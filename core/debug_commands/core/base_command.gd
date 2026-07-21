@@ -38,7 +38,7 @@ func get_autocomplete(args: PackedStringArray) -> Array[String]:
 			suggestions.push_back(value["name"])
 		return suggestions
 
-	if args.size() < 3:
+	if args.size() >= 3:
 		return self._get_autocomplete(args)
 
 	return []
