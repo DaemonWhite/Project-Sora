@@ -7,7 +7,7 @@ var _list_scenes: Array[String] = []
 
 ## Configuration de la commande
 func _setup() -> void:
-	self._command_name = "scene_test"
+	self._command_name = "load_scene_test"
 	self._description = "Permet de lancer les scènes de test"
 
 	self._add_options(
@@ -29,6 +29,12 @@ func _setup() -> void:
 func _exec(_args: PackedStringArray) -> String:
 	return self.get_help()
 
+## À surcharger dans les commandes filles pour proposer des arguments dynamiques (ex: noms de maps, items...)
+func _get_autocomplete(args: PackedStringArray) -> Array[String]:
+	if args.size() > 3 and not args.find("load") :
+		return []
+	return self._list_scenes
+
 # --- Callbacks d'options (Facultatif) ---
 # func _exec_verbose(args: PackedStringArray) -> String:
 # 	return "Commande exécutée en mode verbeux !"
@@ -43,10 +49,10 @@ func _list_commands(_args: PackedStringArray):
 	return output
 
 func _load_game(args: PackedStringArray):
-	if args.size() == 1:
+	if args.size() < 1:
 		return DebugCommands.build_response("Error enter path scene please".format(args))
 
-	if not self._list_scenes.find(args) > -1:
+	if not self._list_scenes.find(args[0]) > -1:
 		return DebugCommands.build_response("Error scene {0} not exist".format(args))		
 
 	GameSignals.loading_game.emit(
