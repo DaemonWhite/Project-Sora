@@ -2,6 +2,7 @@ extends BaseLayerUi
 
 func _ready():
 	SceneSound.launch_music_menu()
+	UiManager.push_ui("Console").open()
 
 func _on_options_button_pressed():
 	print("ok")
