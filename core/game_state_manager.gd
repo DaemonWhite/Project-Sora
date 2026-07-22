@@ -86,8 +86,8 @@ func _on_ui_closed(_ui: BaseLayerUi, saved_state: State, restore_mouse: bool) ->
 
 func _on_main_menu() -> void:
     self.change_state(State.MENU)
-    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     UiManager.push_ui("MainMenu").open()
+    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_loading_game(target_state: State, load_file: String) -> void:
