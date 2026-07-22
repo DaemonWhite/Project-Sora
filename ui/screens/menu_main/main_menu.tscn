@@ -9,7 +9,7 @@ font = ExtResource("2_k11rj")
 font_size = 64
 font_color = Color(1, 0.231373, 0.203922, 1)
 
-[node name="MainMenu" type="Control" unique_id=1598214680]
+[node name="MainMenu" type="Control" unique_id=1598214680 node_paths=PackedStringArray("default_focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q0exs")
+default_focus_node = NodePath("Menu/VBoxContainer/NewGameButton")
 active_process_mode = 3
 
 [node name="Background" type="TextureRect" parent="." unique_id=367183273]
