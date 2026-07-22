@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://derw5h30p0iyq"]
+
+[ext_resource type="Script" uid="uid://blmq8kbtgde73" path="res://ui/ui_manager/base_layer_ui.gd" id="1_cb6vg"]
+
+[node name="PopupNotif" type="Control" unique_id=917870602]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cb6vg")
+metadata/_custom_type_script = "uid://blmq8kbtgde73"

@@ -92,6 +92,7 @@ func _on_main_menu() -> void:
 
 func _on_loading_game(target_state: State, load_file: String) -> void:
 	UiManager.pop_ui("MainMenu")
+	UiManager.pop_ui("Notification")
 	self.change_state(State.LOADING_GAME)
 	
 	if load_file != "":
@@ -100,4 +101,5 @@ func _on_loading_game(target_state: State, load_file: String) -> void:
 	await get_tree().process_frame
 	
 	self.change_state(target_state)
+	UiManager.push_ui("Notification")
 	GameSignals.loaded_game.emit(target_state)

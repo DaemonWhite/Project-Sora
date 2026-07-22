@@ -28,3 +28,6 @@ signal closed_game()
 ## Signal pour prévenir de l'ouverture du menu principal
 @warning_ignore("unused_signal")
 signal main_menu()
+
+@warning_ignore("unused_signal")
+signal send_notification(notification_data: NotificationData)

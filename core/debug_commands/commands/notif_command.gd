@@ -1,15 +1,11 @@
-# meta-name: Commande Debug
-# meta-description: Template complet pour BaseCommand (Options, Autocomplétion & Réponses)
-# meta-default: true
-
-class_name _CLASS_
-extends _BASE_
+class_name NotifCommand
+extends BaseCommand
 
 
 ## Configuration initiale : Nom, description et déclaration des options
 func _setup() -> void:
-	self._command_name = "nom_de_la_commande"
-	self._description = "Description de ce que fait la commande. Usage: nom_de_la_commande [options] [args]"
+	self._command_name = "notif_test"
+	self._description = "Permet d'envoyer une notif au systéme de notification \notif_test title message"
 	
 	# Optionnel : Enregistrer des options/flags avec leur callback respectif
 	# _add_options("-v", "Exécute en mode verbeux", _exec_verbose)
@@ -24,12 +20,23 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 
 ## Logique principale exécutée si aucune option n'a été spécifiée
 func _exec(args: PackedStringArray) -> String:
-	# 1. Exemple de vérification des arguments
-	# if args.is_empty():
-	# 	return "[color=orange]Erreur : argument requis.[/color]"
+	if args.is_empty():
+		return "[color=orange]Erreur : argument requis.[/color]"
 
-	# 2. Logique principale
-	# var target_name: String = args[0]
+	if not GameSignals.send_notification.has_connections():
+		return "[color=orange]Envoyer dans le buffer[/color] !"
+
+	var message = ""
+
+	if args.size() > 1:
+		message = args[1]
+
+	GameSignals.send_notification.emit(
+		NotificationData.new(
+			args[0],
+			message
+		)
+	)
 
 	return "Commande [color=green]exécutée avec succès[/color] !"
 

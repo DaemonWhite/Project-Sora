@@ -11,13 +11,10 @@ func _ready() -> void:
 
 ## Appelée par l'UIManager pour ouvrir l'interface
 func open() -> void:
-    # Ajouter votre traitement avant ouverture
+	# Ajouter votre traitement avant ouverture
 	super.open()
 
 ## Appelée par l'UIManager pour fermer l'interface
 func close() -> void:
-    # Ajouter votre traitemnt arpès fermeture
+	# Ajouter votre traitemnt arpès fermeture
 	super.close()
-
-
-

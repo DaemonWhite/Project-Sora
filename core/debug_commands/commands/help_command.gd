@@ -19,7 +19,6 @@ func _exec(_args: PackedStringArray) -> String:
 	var output: String = ""
 	for command in DebugCommands.get_all_commands().values():
 		output += "\n%s" % command.get_help()
-	print(output)
 	return  output
 
 
