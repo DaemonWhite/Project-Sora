@@ -2,6 +2,20 @@ class_name Utils
 extends Object
 ## Classe utilitaire du jeu
 
+static func get_version() -> String:
+	var project_name = ProjectSettings.get_setting("application/config/name")
+	var project_version = ProjectSettings.get_setting("application/config/version")
+	var godot_version = Engine.get_version_info()
+	var os_name = OS.get_name()
+	var os_distro = OS.get_distribution_name()
+	var os_version = OS.get_version()
+
+
+	var output = project_name + " v" + project_version + "\n"
+	output += "Godot : {major}.{minor}.{patch} {status} {build}\n".format(godot_version) 
+	output += "Os\t" + os_name + " " + os_distro + " " + os_version 
+	return output
+
 ## Recherche de manière récursif des fichier avec option de filtrage
 static func search_recursif_file(folder: String, extensions: Array[String] = []) -> Array[String]:
 	var files: Array[String] = []

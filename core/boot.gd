@@ -6,10 +6,14 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	BetterLogger.new()
-	BetterLogger.debug("Boot started")
+	BetterLogger.info("Boot started")
+	print(Utils.get_version())
+
 	self._load_settings()
 	self._register_ui_manager()
 	self._register_tags_text()
+
+	DebugCommands.auto_registered_command()
 
 	UiManager.push_ui(&"PauseMenu")
 	UiManager.push_ui(&"TestSelect").open()

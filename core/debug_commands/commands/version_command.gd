@@ -20,18 +20,8 @@ func _get_autocomplete(_args: PackedStringArray) -> Array[String]:
 
 ## Logique principale exécutée si aucune option n'a été spécifiée
 func _exec(_args: PackedStringArray) -> String:
-	var project_name = ProjectSettings.get_setting("application/config/name")
-	var project_version = ProjectSettings.get_setting("application/config/version")
-	var godot_version = Engine.get_version_info()
-	var os_name = OS.get_name()
-	var os_distro = OS.get_distribution_name()
-	var os_version = OS.get_version()
-
-
 	var output = "[color=light_gray]" 
-	output += project_name + " v" + project_version + "\n"
-	output += "Godot : {major}.{minor}.{patch} {status} {build}\n".format(godot_version) 
-	output += "Os\t" + os_name + " " + os_distro + " " + os_version 
+	output += Utils.get_version()  
 	output += "[/color]"
 	return output
 
