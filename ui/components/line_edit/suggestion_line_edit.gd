@@ -106,5 +106,5 @@ func _gui_input(event: InputEvent) -> void:
 		var suggestion: Button = self.panel_suggestion.get_selected_element()
 		if suggestion:
 			self._on_suggetions_selected(suggestion)
-			self.accept_event()
+		self.accept_event()
 
