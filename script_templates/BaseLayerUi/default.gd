@@ -1,9 +1,9 @@
-# meta-name: Commande Debug
-# meta-description: Template complet pour BaseCommand (Options, Autocomplétion & Réponses)
+# meta-name: UI Layer
+# meta-description: Template complet pour UIManger (Options, Autocomplétion & Réponses)
 # meta-default: true
 
 class_name _CLASS_
-extends _BASE_
+extends BaseLayerUi
 
 func _ready() -> void:
 	super._ready()

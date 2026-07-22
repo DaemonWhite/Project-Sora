@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d2ynrmx73wsc8" path="res://ui/hud/console/console.gd" id="1_k5740"]
 [ext_resource type="Script" uid="uid://bhdvw8vkfklpq" path="res://ui/components/line_edit/suggestion_line_edit.gd" id="2_d0gjk"]
 
-[node name="Console" type="Control" unique_id=1190260053 groups=["Debug"]]
+[node name="Console" type="Control" unique_id=1190260053 node_paths=PackedStringArray("default_focus_node") groups=["Debug"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k5740")
 target_game_state = 2
+default_focus_node = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/InputCommand")
 metadata/_custom_type_script = "uid://blmq8kbtgde73"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=827464464]

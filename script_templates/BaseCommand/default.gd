@@ -3,7 +3,7 @@
 # meta-default: true
 
 class_name _CLASS_
-extends _BASE_
+extends BaseCommand
 
 
 ## Configuration initiale : Nom, description et déclaration des options

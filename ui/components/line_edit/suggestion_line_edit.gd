@@ -69,6 +69,8 @@ func _on_changed_text(new_text: String) -> void:
 func _build_button(suggestion: String) -> Button:
 	var button: Button = Button.new()
 	button.text = suggestion
+	button.focus_mode = Control.FOCUS_NONE
+	button.toggle_mode = true
 	button.pressed.connect(self._on_suggetions_selected.bind(button))
 	button.set_text_alignment(HorizontalAlignment.HORIZONTAL_ALIGNMENT_LEFT)
 	return button
@@ -93,9 +95,16 @@ func _gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
 		if self.panel_suggestion.visible:
 			self.panel_suggestion.focus_prev()
+			self.accept_event()
 		self.up.emit()
 	elif event.is_action_pressed("ui_down"):
 		if self.panel_suggestion.visible:
 			self.panel_suggestion.focus_next()
+			self.accept_event()
 		self.down.emit()
+	elif event.is_action_pressed("ui_focus_next"):
+		var suggestion: Button = self.panel_suggestion.get_selected_element()
+		if suggestion:
+			self._on_suggetions_selected(suggestion)
+			self.accept_event()
 
