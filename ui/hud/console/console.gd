@@ -28,7 +28,6 @@ func open() -> void:
 		self.send_command("version")
 	
 	self.input_command.process_mode = Node.PROCESS_MODE_INHERIT
-	self.input_command.grab_focus()
 
 func close() -> void:
 	self.input_command.process_mode = Node.PROCESS_MODE_DISABLED

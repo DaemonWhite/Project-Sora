@@ -10,6 +10,7 @@ var _list_elements: Array[Control] = []
 ## VBox qui contient la liste d'élèment insérer
 var container: VBoxContainer = VBoxContainer.new()
 
+var _current_focus_idx: int = -1
 
 func _ready() -> void:
 	super._ready()
@@ -38,32 +39,46 @@ func remove_element(element: Control) -> void:
 ## Permet de  supprimer tout les élèments les vide complétemnet de la mémoire
 func clear_elements() -> void:
 	for element in _list_elements:
-		self.container.remove_child(element) # Retire du layout immédiatement
+		self.container.remove_child(element)
 		element.queue_free()
 	self._list_elements.clear()
+	self._current_focus_idx = -1
 
 
 func focus_next() -> void:
 	if self._list_elements.is_empty():
 		return
 	
-	var current_idx: int = self._get_focused_index()
-	var next_idx: int = 0 if current_idx == -1 else (current_idx + 1) % self._list_elements.size()
-	self._list_elements[next_idx].grab_focus()
+	var next_idx: int = 0 if self._current_focus_idx == -1 else (self._current_focus_idx + 1) % self._list_elements.size()
+	self._set_virtual_focus(next_idx)
 
 func focus_prev() -> void:
 	if self._list_elements.is_empty():
 		return
 	
-	var current_idx: int = self._get_focused_index()
-	# Si aucun élément n'a le focus, on commence au dernier.
-	var prev_idx: int = self._list_elements.size() - 1 if current_idx == -1 else (current_idx - 1 + self._list_elements.size()) % self._list_elements.size()
-	self._list_elements[prev_idx].grab_focus()
+	# Si rien n'est sélectionné, on part du bas. Sinon on recule (en bouclant)
+	var prev_idx: int = self._list_elements.size() - 1 if self._current_focus_idx <= 0 else (self._current_focus_idx - 1)
+	self._set_virtual_focus(prev_idx)
 
 
-# Méthode utilitaire pour trouver quel élément possède actuellement le focus
-func _get_focused_index() -> int:
-	for i in range(self._list_elements.size()):
-		if self._list_elements[i].has_focus():
-			return i
-	return -1
+func _set_virtual_focus(idx: int) -> void:
+	# 1. On "relâche" l'ancien bouton
+	if self._current_focus_idx >= 0 and self._current_focus_idx < self._list_elements.size():
+		var old_btn = self._list_elements[self._current_focus_idx] as Button
+		if old_btn:
+			old_btn.button_pressed = false
+
+	# 2. On met à jour l'index
+	self._current_focus_idx = idx
+
+	# 3. On "enfonce" le nouveau bouton
+	if self._current_focus_idx >= 0 and self._current_focus_idx < self._list_elements.size():
+		var new_btn = self._list_elements[self._current_focus_idx] as Button
+		if new_btn:
+			new_btn.button_pressed = true
+
+func get_selected_element() -> Control:
+	if self._current_focus_idx >= 0 and self._current_focus_idx < self._list_elements.size():
+		return self._list_elements[self._current_focus_idx]
+	return null
+
