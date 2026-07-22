@@ -33,6 +33,10 @@ UiManager="*res://ui/ui_manager/ui_manager.tscn"
 GameplayInputHandler="*res://core/gameplay_input_handler.gd"
 Boot="*res://core/boot.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1920
