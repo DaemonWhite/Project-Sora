@@ -38,7 +38,7 @@ static func _log(message: String, level: Level) -> void:
 			color_tag = "white"
 		Level.WARNING:
 			prefix = "[WARN]"
-			color_tag = "yellow"
+			color_tag = "orange"
 		Level.ERROR:
 			prefix = "[ERROR]"
 			color_tag = "red"
