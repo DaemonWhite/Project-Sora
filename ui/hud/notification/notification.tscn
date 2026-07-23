@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://crj3nafm3rr88"]
+
+[ext_resource type="Script" uid="uid://ovt2q325aolr" path="res://ui/hud/notification/notification.gd" id="1_c3uwu"]
+
+[node name="Notification" type="Control" unique_id=2101386505 node_paths=PackedStringArray("default_focus_node")]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_c3uwu")
+require_visible_mouse = false
+is_modal = false
+default_focus_node = NodePath("")
+metadata/_custom_type_script = "uid://blmq8kbtgde73"

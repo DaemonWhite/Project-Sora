@@ -34,9 +34,9 @@ func add_tab(eventBetterTabMenu: EventBetterTabMenu, tab: Control) -> void:
 	self._add_event(eventBetterTabMenu)
 
 ## Permet de choisir une page par son nom
-func select_tab_by_name(name: String):
+func select_tab_by_name(name_tab: String):
 	for submenu in event_by_submenu:
-		if submenu.name_tab == name:
+		if submenu.name_tab == name_tab:
 			self.current_tab = submenu.index
 			break
 
