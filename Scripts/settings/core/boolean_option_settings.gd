@@ -17,8 +17,9 @@ extends BaseSettings
 ## [/codeblock]
 
 ## Change le paramètre courant, un [bool] est attendue si non fait rien
-func set_current_option(value: Variant) -> void:
+func set_current_option(value: Variant) -> bool:
 	if value is bool:
 		self._current_option = value
-	else:
-		push_warning("Valeur non bollean")
+		return true
+	push_warning("Valeur non bollean")
+	return false

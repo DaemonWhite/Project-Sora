@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxp5114qclwck"]
+
+[ext_resource type="PackedScene" uid="uid://cwuyoyihxk1rg" path="res://Scenes/test/teste_camera.tscn" id="1_c0ejm"]
+[ext_resource type="PackedScene" uid="uid://cdd3xv5gyojg1" path="res://Scenes/menu/PauseMenu.tscn" id="2_i88gi"]
+
+[node name="Node" type="Node"]
+process_mode = 1
+process_thread_group = 1
+process_thread_group_order = 0
+process_thread_messages = 3
+physics_interpolation_mode = 1
+auto_translate_mode = 1
+
+[node name="TesteCamera" parent="." instance=ExtResource("1_c0ejm")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_i88gi")]
+visible = false

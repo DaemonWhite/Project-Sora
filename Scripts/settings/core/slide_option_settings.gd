@@ -24,10 +24,24 @@ extends BaseSettings
 var _min: float
 ## Valeur maximum
 var _max: float
+## Valeur du pas
+var _step: float
 
 ## Change le paramètre courant un [float] est attendue si on ne fait rien	
-func set_current_option(value: Variant) -> void:
-	if self._min <= value or self._max >= value:
-		self._current_option = value
-	else:
-		push_warning("Valeur hors plage")
+func set_current_option(value: Variant) -> bool:
+	if (self._min <= value or self._max >= value) and value is float:
+		return super.set_current_option(value)
+	push_warning("Valeur hors plage")
+	return false
+
+## Renvoie la valeur minimum
+func get_min() -> float:
+	return self._min
+
+## Renvoie la valeur maximum
+func get_max() -> float:
+	return self._max
+
+## Renvoie la valeur du pas
+func get_step() -> float:
+	return self._step

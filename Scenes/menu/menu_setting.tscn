@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bavji8n4dhmli"]
+
+[ext_resource type="Script" uid="uid://cuevleq2h0chc" path="res://Scripts/menu/menu_setting.gd" id="1_kftnu"]
+[ext_resource type="Script" uid="uid://cx54ucq5ys2pp" path="res://Scripts/menu/components/better_tab_menu.gd" id="2_jkvie"]
+[ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://Scripts/menu/components/event_better_tab_menu.gd" id="3_nv03i"]
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://Theme/menu.tres" id="7_veiov"]
+
+[node name="MenuSetting" type="Control" unique_id=269193167]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kftnu")
+active_process_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1047325957]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabSetting" type="TabContainer" parent="VBoxContainer" unique_id=2065049882]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+script = ExtResource("2_jkvie")
+event_by_submenu = Array[ExtResource("3_nv03i")]([])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1948551386]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Return" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1981031995]
+layout_mode = 2
+text = "Return"
+
+[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1558164034]
+layout_mode = 2
+theme = ExtResource("7_veiov")
+theme_type_variation = &"ButtonError"
+text = "Reset"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1129118041]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Reset" to="." method="_on_reset_pressed"]

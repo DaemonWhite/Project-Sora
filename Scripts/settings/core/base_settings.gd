@@ -1,5 +1,5 @@
 class_name  BaseSettings
-extends Object
+extends RefCounted
 ## Gère la sauvegarde des paramètres et sert de classe de base pour les paramètres
 ##
 ## La classe permet de gérer les sauvegardes des paramètres à partir de méthodes static.
@@ -87,6 +87,12 @@ extends Object
 ## Nom du paramètre
 var _name: String = ""
 
+## Nom du paramètre à afficher dans l'UI
+var _ui_name: String = ""
+
+## Description du paramètre à afficher dans l'UI
+var _description: String = ""
+
 ## Group du paramètre voir [enum BaseSettings.GROUP]
 var _group: BaseSettings.GROUP = BaseSettings.GROUP.OTHER
 
@@ -97,7 +103,7 @@ var _default_option: Variant = null
 var _current_option: Variant = null
 
 ## Liste toutes les classes enfant instanciées.
-static var _list_settings: Array = []
+static var _list_settings: Array[BaseSettings] = []
 ## Contient la configuration courante
 static var _config: ConfigFile = ConfigFile.new()
 ## Contient le chemin de la configuration sauvegardé
@@ -120,6 +126,7 @@ enum GROUP {
 
 func _init() -> void:
 	BaseSettings._list_settings.append(self)
+		
 	self._ready()
 	
 	var current_option = BaseSettings._config.get_value(
@@ -128,8 +135,11 @@ func _init() -> void:
 	)
 	
 	if current_option != null:
-		self.set_current_option(current_option)
-		self.apply(false)
+		var result: bool = self.set_current_option(current_option)
+		if result:
+			self.apply(false)
+		else:
+			self.reset()
 	else:
 		self.reset()
 		
@@ -164,12 +174,19 @@ func apply(save_configuration: bool=true) -> void:
 	if save_configuration:
 		BaseSettings.save()
 
-## Réinitialises-en appliquant le paramètre automatiquement.[br]
+## Réinitialises-en appliquant le paramètre par défaut.[br]
 ## [color=Orange][b] ATTENTION [/b][/color] Ne sauvegarde pas la configuration voir 
 ## [method BaseSettings.save] pour sauvegarder.
 func reset() -> void:
 	self._current_option = self._default_option
 	self.apply(false)
+
+## Réinitialises-en tout les paramètres par défauts.[br]
+## [color=Orange][b] ATTENTION [/b][/color] Ne sauvegarde pas la configuration voir 
+## [method BaseSettings.save] pour sauvegarder.
+static func resets() -> void:
+	for setting in BaseSettings._list_settings:
+		setting.reset()
 
 ## Renvoie le paramètre courant.
 func get_current_option() -> Variant:
@@ -183,10 +200,16 @@ func get_default_option() -> Variant:
 func get_group() -> BaseSettings.GROUP:
 	return self._group
 
+func get_group_name() -> String:
+	return BaseSettings.get_group_to_string(self._group)
+
+static func get_group_to_ui_name(group: BaseSettings.GROUP) -> String:
+	return BaseSettings.get_group_to_string(group)
+
 ## Convertie le groupe [enum BaseSettings.GROUP] en chaine de charactères
-static func get_group_to_string(group_enum: BaseSettings.GROUP) -> String:
+static func get_group_to_string(group: BaseSettings.GROUP) -> String:
 	var categorie: String = ""
-	match group_enum:
+	match group:
 		BaseSettings.GROUP.OTHER:
 			categorie = "OTHER"
 		BaseSettings.GROUP.GRAPHICS:
@@ -198,9 +221,17 @@ static func get_group_to_string(group_enum: BaseSettings.GROUP) -> String:
 			
 	return categorie
 
-## Renvoie le non du paramètre
+## Renvoie le nom du paramètre
 func get_name() -> String:
 	return self._name
+
+## Renvoie le nom du paramètre à afficher dans l'UI
+func get_ui_name() -> String:
+	return self._ui_name
+
+## Renvoie la description du paramètre à afficher dans l'UI
+func get_description() -> String:
+	return self._description
 
 ## Renvoie le chemin de sauvegarde de la configuration
 static func get_path_settings() -> String:
@@ -213,8 +244,7 @@ static func get_settings() -> Array:
 ## Renvoie tous les paramètres instanciés appartenant à la catégorie désignée voir [enum BaseSettings.GROUP]
 static func get_settings_by_enum(group_enum: BaseSettings.GROUP) -> Array[BaseSettings]:
 	var list_settings: Array[BaseSettings]
-
-	for setting in BaseSettings._list_settings:
+	for setting: BaseSettings in BaseSettings._list_settings:
 		if setting.get_group() == group_enum:
 			list_settings.append(setting)
 
@@ -234,6 +264,13 @@ func is_different() -> bool:
 		BaseSettings.get_group_to_string(self._group), 
 		self._name
 	) != self._current_option
+
+static func is_differents() -> bool:
+	for settings: BaseSettings in BaseSettings._list_settings :
+		print(settings._name, " -> ", settings.is_different())
+		if settings.is_different():
+			return true
+	return false
 	
 ## Vérifie si le paramètre diffère de celui par défaut.
 func is_not_default() -> bool:
@@ -243,8 +280,9 @@ func is_not_default() -> bool:
 	) != self._default_option
 
 ## Change le paramètre courant.
-func set_current_option(option: Variant) -> void:
+func set_current_option(option: Variant) -> bool:
 	self._current_option = option
+	return true
 
 ## Change le chemin de sauvegarde.
 static func set_path_settings(path: String) -> void:

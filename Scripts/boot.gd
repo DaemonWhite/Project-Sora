@@ -5,43 +5,66 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	BaseSettings.set_path_settings("user://sora_settings.cfg")
-	BaseSettings.load()
+	print("Boot started")
+	self._load_settings()
+	self._register_ui_manager()
+	self._register_tags_text()
 
-	var resolution = ResolutionSetting.new()
-	MsaaSetting.new()
-	VsyncSetting.new()
-	TaaSetting.new()
-	FxaaSetting.new()
-	var screen = ScreenSetting.new() # Teste screen
-	# screen.set_current_option(1)
-	# screen.apply(false)
-	var window = WindowModeSetting.new()
-	window.apply_signal.connect(Callable(resolution, "event_apply"))
-	window.apply(false)
-	MasterSoundSetting.new()
-	var keyboard = KeyboardSettings.new()
-	
-	var s = BaseSettings.get_settings_by_name(
-		BaseSettings.GROUP.GRAPHICS, 
-		"RESOLUTION"
-	)
-	
-	print("RESOLUTION Recup -> ", s.get_current_option())
-	
-	print("RESOLUTION Not Default -> ", s.is_not_default())
-	
-	s.set_current_option("1920") # Doit echouer
-	s.set_current_option("1920x1080")
-	
-	print("RESOLUTION Diffenret -> ", s.is_different())
-	
-	s.apply()
-	
-	var input_event = InputEventKey.new()
-	input_event.keycode = KEY_F2
-	var event_key = keyboard.get_key_settings("ui_up")
-	event_key.add_event(input_event)
-	event_key.apply(false)
-	# event_key.remove_event(input_event) # Pour supprimer l'action tester
+	UiManager.push_ui(&"PauseMenu")
+	UiManager.push_ui(&"TestSelect").open()
+	print("Boot finished")
+
+func _load_settings() -> void:
+	const PATH_SETTINGS = "user://sora_settings.cfg"
+	print("Path settings : ", PATH_SETTINGS)
+	print("load_settings...")
+	BaseSettings.set_path_settings(PATH_SETTINGS)
+	BaseSettings.load()
+    # Récupération de la liste des fichiers
+	var files_settings = Utils.search_recursif_file(
+        "res://Scripts/settings/list_setting/",
+        ["gd", "gdc"]
+    )
+
+
+	for file in files_settings:
+		var script = load(file) as GDScript
+		
+		if not script or not script.can_instantiate():
+			continue
+
+		var base_script = script.get_base_script()
+		var is_valid_setting = false
+		
+		while base_script != null:
+			if base_script.resource_path.get_file() == "base_settings.gd":
+				is_valid_setting = true
+				break
+			base_script = base_script.get_base_script()
+			
+		if not is_valid_setting:
+			push_warning("Le script ignoré (n'hérite pas de BaseSettings) : ", file)
+			continue
+			
+		var settings = script.new()
+		print("Loaded : {0} -> {1}".format([settings.get_name(), settings.get_current_option()]))
+
+	KeyboardSettings.init()
+
 	BaseSettings.save()
+	print("Settings loaded")
+
+func _register_ui_manager() -> void:
+	UiManager.register_ui(&"MainMenu", "res://Scenes/menu/main_menu.tscn", UiManager.LayerType.GAME_MENU)
+	UiManager.register_ui(&"PauseMenu", "res://Scenes/menu/PauseMenu.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"SettingsMenu", "res://Scenes/menu/menu_setting.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"Dialog", "res://Scenes/menu/components/modal/Dialog.tscn", UiManager.LayerType.SYSTEM_MENU, false)
+	UiManager.register_ui(&"DialogConfirm", "res://Scenes/menu/components/modal/DialogConfirm.tscn", UiManager.LayerType.SYSTEM_MENU, false)
+	UiManager.register_ui(&"DialogChooseKey", "res://Scenes/menu/components/modal/DialogChooseKey.tscn", UiManager.LayerType.SYSTEM_MENU)
+	UiManager.register_ui(&"DialogOptions", "res://Scenes/menu/components/modal/DialogOptions.tscn", UiManager.LayerType.SYSTEM_MENU, false)
+	UiManager.register_ui(&"TestSelect", "res://Scenes/menu/hud/TestSelect.tscn", UiManager.LayerType.CRITICAL)
+	print("Ui registered")
+
+func _register_tags_text() -> void:
+	TextFormatter.register_route("input", InputTranslator.get_action_key_text)
+	print("Tags registered")

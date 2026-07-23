@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bgj1gy63x6iei"]
+
+[ext_resource type="Script" uid="uid://cx54ucq5ys2pp" path="res://Scripts/menu/components/better_tab_menu.gd" id="1_5vx1c"]
+[ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://Scripts/menu/components/event_better_tab_menu.gd" id="2_5gfos"]
+
+[sub_resource type="Resource" id="Resource_f0lgo"]
+script = ExtResource("2_5gfos")
+
+[node name="BetterTabMenu" type="TabContainer" unique_id=420777473]
+process_mode = 3
+script = ExtResource("1_5vx1c")
+event_by_submenu = Array[ExtResource("2_5gfos")]([SubResource("Resource_f0lgo")])
