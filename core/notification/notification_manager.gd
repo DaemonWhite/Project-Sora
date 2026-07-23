@@ -51,3 +51,15 @@ static func get_scene_for_data(data: NotificationData) -> PackedScene:
 		
 	push_error("NotificationManager: Aucune scène trouvée pour le type " + str(data.type))
 	return null
+
+static func flush() -> void:
+	if not GameSignals.send_notification.has_connections():
+		return 
+	
+	for notif_data in NotificationManager.buffer:
+		GameSignals.send_notification.emit(notif_data)
+
+	NotificationManager.buffer.clear()
+
+static func clear_buffer() -> void:
+	NotificationManager.buffer.clear()

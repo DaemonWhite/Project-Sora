@@ -14,16 +14,5 @@ grow_vertical = 2
 script = ExtResource("1_c3uwu")
 require_visible_mouse = false
 is_modal = false
-default_focus_node = NodePath("NotifContainer")
-active_process_mode = 3
+default_focus_node = NodePath("")
 metadata/_custom_type_script = "uid://blmq8kbtgde73"
-
-[node name="NotifContainer" type="VBoxContainer" parent="." unique_id=1832124378]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -150.0
-offset_bottom = 50.0
-grow_horizontal = 0

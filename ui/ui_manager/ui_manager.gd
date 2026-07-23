@@ -24,7 +24,7 @@ enum LayerType {
 	DEBUG = 1000
 }
 
-var _ui_registry: Dictionary = {}
+var _ui_registry: Dictionary[String, Variant] = {}
 
 var _ui_stack: Array[BaseLayerUi] = []
 var _cached_uis: Dictionary = {}
@@ -110,7 +110,7 @@ func pop_ui(ui_id: StringName, c_clear_chache: bool = false) -> void:
 		push_warning("Tentative de fermer une UI qui n'est pas instanciée : ", ui_id)
 		return
 		
-	var ui_instance = _cached_uis[ui_id]
+	var ui_instance: BaseLayerUi = _cached_uis[ui_id]
 	
 	if _ui_stack.has(ui_instance):
 		ui_instance.close()
@@ -165,6 +165,7 @@ func _get_or_create_ui(ui_id: StringName, layer: LayerType) -> BaseLayerUi:
 
 	# Permet la fermeture automatique de décaharger correctement l'ui
 	instance.closed.connect(self._on_ui_closed)
+	instance.opened.connect(self._on_ui_opened)
 
 	# Récupère le layer par défaut
 	if layer == LayerType.DEFAULT:
@@ -186,28 +187,44 @@ func _update_stack_states() -> void:
 
 	for i in range(_ui_stack.size() - 1, -1, -1):
 		var ui = _ui_stack[i]
-        
+		
 		if focus_ui == null:
 			focus_ui = ui 
 
 		if has_modal_above:
-            # Un menu modal est au-dessus, on gèle celui-ci
+			# Un menu modal est au-dessus, on gèle celui-ci
 			ui.process_mode = Node.PROCESS_MODE_DISABLED
 		else:
 			# Ce menu est actif
 			ui.process_mode = ui.active_process_mode
 			if ui.is_modal:
 				has_modal_above = true
-                
+
 	if focus_ui.is_modal and focus_ui != null and focus_ui.process_mode != Node.PROCESS_MODE_DISABLED :
 		focus_ui.grab_focus_on_default()
 
+
+func _on_ui_opened(ui_instance: BaseLayerUi) -> void:
+	## Rajoute à la stack si l'ui à dispaure
+	if self._ui_stack.find(ui_instance) > -1:
+		return
+
+	var key_ui: String = self._cached_uis.find_key(ui_instance)
+	print(key_ui)
+	if key_ui:
+		print("ok")
+		self.push_ui(
+			key_ui
+		)
+
 func _on_ui_closed(ui_instance: BaseLayerUi) -> void:
-	if _ui_stack.has(ui_instance):
-		_ui_stack.erase(ui_instance)
+	if self._ui_stack.has(ui_instance):
+		self._ui_stack.erase(ui_instance)
+
+	ui_instance.process_mode = ui_instance.closed_process_mode
 		
 	self._update_stack_states()
 
 	## Evite les fuites de mémoire en détruisant les objet non unique
-	if not _cached_uis.values().has(ui_instance):
+	if not self._cached_uis.values().has(ui_instance):
 		ui_instance.queue_free()

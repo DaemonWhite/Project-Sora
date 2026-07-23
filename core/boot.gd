@@ -17,7 +17,6 @@ func _ready() -> void:
 
 	UiManager.push_ui(&"PauseMenu")
 	UiManager.push_ui(&"TestSelect").open()
-	UiManager.push_ui(&"Notification", UiManager.LayerType.DEBUG).open()
 	BetterLogger.debug("Boot finished")
 
 func _load_settings() -> void:
