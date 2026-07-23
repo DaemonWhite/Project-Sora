@@ -210,9 +210,7 @@ func _on_ui_opened(ui_instance: BaseLayerUi) -> void:
 		return
 
 	var key_ui: String = self._cached_uis.find_key(ui_instance)
-	print(key_ui)
 	if key_ui:
-		print("ok")
 		self.push_ui(
 			key_ui
 		)

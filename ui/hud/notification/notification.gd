@@ -39,9 +39,7 @@ func _ready() -> void:
 
 ## Appelée par l'UIManager pour ouvrir l'interface
 func _start_open() -> void:
-	GameSignals.send_notification.connect(self._on_send_notification)
-	print("connec")
-	
+	GameSignals.send_notification.connect(self._on_send_notification)	
 
 func _ended_open() -> void:
 	await self.get_tree().process_frame
@@ -119,7 +117,6 @@ func _add_notif_safe(data: NotificationData) -> void:
 		popup.visible = true
 
 		self._display_popup.push_back(popup)
-		print(self._display_popup.size() )	
 
 		# S'il n'y a que cette popup à l'écran, elle devient la première : on la lance
 		if self._display_popup.size() == 1:
