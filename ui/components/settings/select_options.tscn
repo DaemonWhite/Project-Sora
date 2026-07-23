@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dirjlgf5aacu4"]
+
+[ext_resource type="Script" uid="uid://c17euwv3lq4f5" path="res://ui/components/settings/select_options.gd" id="1_vspm4"]
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://assets/theme/menu_theme.tres" id="2_6t8gq"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vspm4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("2_6t8gq")
+theme_type_variation = &"ButtonError"
+text = "Reset"

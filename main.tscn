@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c36rjb1v7wf34"]
+
+[ext_resource type="Script" uid="uid://cmb77ljeeabo0" path="res://main.gd" id="1_xiose"]
+
+[node name="Node" type="Node" unique_id=32222264]
+process_mode = 3
+physics_interpolation_mode = 1
+script = ExtResource("1_xiose")

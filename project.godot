@@ -15,9 +15,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Projet-sora"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/textures/icons/main.svg"
 
 [audio]
 
@@ -25,12 +25,12 @@ buses/default_bus_layout="uid://dc5b60pv8vh1f"
 
 [autoload]
 
-SceneSound="*res://Scenes/menu/setting/scene_sound.tscn"
-GameSignals="*res://Scripts/game_signals.gd"
-GameStateManager="*res://Scripts/game_state_manager.gd"
-UiManager="*res://Scenes/menu/components/UIManager/UIManager.tscn"
-GameplayInputHandler="*res://Scripts/gameplay_input_handler.gd"
-Boot="*res://Scripts/boot.gd"
+SceneSound="*res://ui/components/settings/scene_sound.tscn"
+GameSignals="*res://core/game_signals.gd"
+GameStateManager="*res://core/game_state_manager.gd"
+UiManager="*res://ui/ui_manager/ui_manager.tscn"
+GameplayInputHandler="*res://core/gameplay_input_handler.gd"
+Boot="*res://core/boot.gd"
 
 [display]
 
@@ -107,7 +107,7 @@ ui_pause={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Scripts/settings/core/base_settings.gd", "res://Scripts/settings/list_setting/graphics/fxaa_setting.gd", "res://Scripts/settings/list_setting/graphics/msaa_setting.gd", "res://Scripts/settings/list_setting/graphics/resolution_setting.gd", "res://Scripts/settings/list_setting/graphics/screen_setting.gd", "res://Scripts/settings/list_setting/graphics/vsync_setting.gd", "res://Scripts/settings/list_setting/graphics/window_mode_setting.gd", "res://Scripts/settings/list_setting/graphics/taa_setting.gd")
+locale/translations_pot_files=PackedStringArray("res://core/settings/core/base_settings.gd", "res://core/settings/list_setting/graphics/fxaa_setting.gd", "res://core/settings/list_setting/graphics/msaa_setting.gd", "res://core/settings/list_setting/graphics/resolution_setting.gd", "res://core/settings/list_setting/graphics/screen_setting.gd", "res://core/settings/list_setting/graphics/taa_setting.gd", "res://core/settings/list_setting/graphics/vsync_setting.gd", "res://core/settings/list_setting/graphics/window_mode_setting.gd")
 
 [layer_names]
 

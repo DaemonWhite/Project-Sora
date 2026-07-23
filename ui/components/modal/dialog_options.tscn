@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cyqkw42b427m6"]
+
+[ext_resource type="PackedScene" uid="uid://cvn2kw0m3gvgv" path="res://ui/components/modal/dialog.tscn" id="1_oxwjj"]
+[ext_resource type="Script" uid="uid://dbe3v70u0uche" path="res://ui/components/modal/dialog_options.gd" id="2_36k5o"]
+
+[node name="Dialog" instance=ExtResource("1_oxwjj")]
+visible = false
+script = ExtResource("2_36k5o")
+
+[node name="ButtonContainer" type="HFlowContainer" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" index="1"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1

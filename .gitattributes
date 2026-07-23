@@ -7,6 +7,7 @@
 *.godot text eol=lf
 *.json text eol=lf
 *.cfg text eol=lf
+*.tres text eol=lf
 *.md text eol=lf
 
 # Déclarer les fichiers binaires pour que Git n'essaie jamais de toucher à leurs fins de lignes

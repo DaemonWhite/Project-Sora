@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c7nbpguq5nnmb"]
+
+[ext_resource type="Script" uid="uid://cccoydlf1j1uc" path="res://ui/ui_manager/ui_manager.gd" id="1_rrdoo"]
+
+[node name="UiManager" type="Node" unique_id=1633191373]
+script = ExtResource("1_rrdoo")
+
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1868413260]
+
+[node name="GameMenuLayer" type="CanvasLayer" parent="." unique_id=95202052]
+layer = 10
+
+[node name="SystemMenuLayer" type="CanvasLayer" parent="." unique_id=120744571]
+layer = 20
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=763951059]
+layer = 30
+
+[node name="CriticalLayer" type="CanvasLayer" parent="." unique_id=1339319625]
+layer = 40
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=56655627]
+layer = 40

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://d0qjqlbl4jvox"]
+
+[ext_resource type="PackedScene" uid="uid://cvn2kw0m3gvgv" path="res://ui/components/modal/dialog.tscn" id="1_i5vra"]
+[ext_resource type="Script" uid="uid://cneq5bwnelpsa" path="res://ui/components/modal/dialog_confirm.gd" id="2_eq6gh"]
+[ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://assets/theme/menu_theme.tres" id="3_ta21w"]
+
+[node name="DialogConfirm" instance=ExtResource("1_i5vra")]
+visible = false
+script = ExtResource("2_eq6gh")
+enabledCloseButton = false
+
+[node name="Close" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="1"]
+visible = false
+theme = ExtResource("3_ta21w")
+theme_type_variation = &"ButtonError"
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" index="0"]
+layout_mode = 2
+alignment = 2
+
+[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0"]
+layout_mode = 2
+theme = ExtResource("3_ta21w")
+theme_type_variation = &"ButtonError"
+text = "Cancel"
+
+[node name="Valide" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="1"]
+layout_mode = 2
+theme = ExtResource("3_ta21w")
+theme_type_variation = &"ButtonSuccess"
+text = "Valid"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Valide" to="." method="_on_valide_pressed"]

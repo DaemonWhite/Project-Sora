@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b82bf5brfavsr"]
+
+[ext_resource type="Script" uid="uid://bnrd6f6wcoqlm" path="res://ui/hud/test_select/test_select.gd" id="1_7f2rd"]
+
+[node name="TestSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("1_7f2rd")
+is_modal = false
+active_process_mode = 3
+
+[node name="Select" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 20.0
+grow_horizontal = 0
+
+[connection signal="item_selected" from="Select" to="." method="_on_select_item_selected"]
