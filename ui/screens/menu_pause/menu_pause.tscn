@@ -15,7 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6bd8v")
-default_focus_node = NodePath(".")
+target_game_state = 2
+default_focus_node = NodePath("ResumeButton")
 active_process_mode = 3
 
 [node name="Pause" type="Label" parent="." unique_id=1927525018]

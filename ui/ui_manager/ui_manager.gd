@@ -199,7 +199,7 @@ func _update_stack_states() -> void:
 			if ui.is_modal:
 				has_modal_above = true
                 
-	if focus_ui != null and focus_ui.process_mode != Node.PROCESS_MODE_DISABLED:
+	if focus_ui.is_modal and focus_ui != null and focus_ui.process_mode != Node.PROCESS_MODE_DISABLED :
 		focus_ui.grab_focus_on_default()
 
 func _on_ui_closed(ui_instance: BaseLayerUi) -> void:

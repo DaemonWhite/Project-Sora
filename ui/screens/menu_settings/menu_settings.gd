@@ -8,6 +8,7 @@ const COMPOENT_PATH = "res:///ui/components/settings/"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	self._init_tab_settings()
 
 
@@ -25,17 +26,17 @@ func _init_settings_by_group(group_enum: BaseSettings.GROUP, index: int) -> int:
 	if len(list_settings) <= 0:
 		return index
 
-	var name = BaseSettings.get_group_to_ui_name(group_enum)
+	var name_group = BaseSettings.get_group_to_ui_name(group_enum)
 	var tab = Control.new()
 	var tabContainer = load(COMPOENT_PATH + "container_settings.tscn").instantiate()
 	tab.add_child(tabContainer)
-	tab.name = name
+	tab.name = name_group
 
 	tabSettings.add_tab(
 		EventBetterTabMenu.new(
 			index, 
 			"", 
-			name
+			name_group
 		),
 		tab
 	)
@@ -89,7 +90,6 @@ func _on_closed_key_choose_setting(
 
 	var call_event: Callable = component.add_key.bind(choose_key)
 	if old_key != null:
-		print("MODIFY")
 		call_event = component.modify_key.bind(choose_key, old_key)
 
 	if choose_key != null:
@@ -131,7 +131,6 @@ func _on_event_change_key(
 		key: InputEvent
 	) -> void:
 	var dialogOptions: DialogOptions = UiManager.push_ui("DialogOptions")
-	print(button.text)
 	dialogOptions.setup(
 		tr("Would you like to edit or delete a key %s?") % button.text,
 		("")

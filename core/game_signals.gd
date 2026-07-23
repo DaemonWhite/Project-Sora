@@ -1,21 +1,15 @@
 extends Node
 
-## Signal poour prévenir de l'ouverture du menu pause
+## Debug toggle
 @warning_ignore("unused_signal")
-signal pause_opened()
-## Signal poour prévenir de la fermeture du menu pause
-@warning_ignore("unused_signal")
-signal pause_closed()
+signal debug_toggle
 
-
-@warning_ignore("unused_signal")
-signal option_opened()
-@warning_ignore("unused_signal")
-signal option_closed(options_menu)
-
-## Signal pour prévenir du chargement
+## Signal pour ouvrir un menu
 @warning_ignore("unused_signal")
 signal ui_open_requested(state: GameStateManager.State, load_file: String)
+## Signal pour fermer un menu
+@warning_ignore("unused_signal")
+signal ui_close_requested(menu_name: String)
 
 ## Signal pour prévenir du chargement
 @warning_ignore("unused_signal")
