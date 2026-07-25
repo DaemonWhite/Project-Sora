@@ -6,7 +6,7 @@ var sprite_size: Vector2
 
 var mode: TileMapLayerGround.SoilState = TileMapLayerGround.SoilState.WELL_DIRT
 
-@export var tilemap: TileMapLayer = null
+@export var tilemap: TileMapLayerGround = null
 
 
 func _ready() -> void:
@@ -23,6 +23,11 @@ func _process(_delta: float) -> void:
 	cell = self.tilemap.local_to_map(self.tilemap.get_local_mouse_position())
 	global_position = self.tilemap.to_global(self.tilemap.map_to_local(cell))
 
+	BetterLogger.debug(
+		self.tilemap.enum_to_srtring(
+			self.tilemap.resolve_default_soil_state(cell)
+		)
+	)
 
 	if Input.is_action_pressed("mouse_valide"):
 		self.tilemap.set_soil_state(cell,  mode)

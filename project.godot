@@ -36,6 +36,11 @@ Boot="*res://core/boot.gd"
 [debug]
 
 file_logging/enable_file_logging=true
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/missing_await=1
 
 [display]
 
