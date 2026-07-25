@@ -17,3 +17,7 @@ export/*
 
 # Vscode ignore
 .vscode/
+
+# Pour l'instant ignore les Chunks car le système n'est pas forcément pret
+
+Chunks/
