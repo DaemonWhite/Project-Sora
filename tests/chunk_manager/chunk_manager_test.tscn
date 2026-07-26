@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c7bwa8bciut40"]
+
+[ext_resource type="PackedScene" uid="uid://367iuu8uiixi" path="res://systems/chunk_manger/chunk_manager.tscn" id="1_1n5wu"]
+
+[node name="ChunkManagerTest" type="Node2D" unique_id=943525644]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=163698341]
+position = Vector2(322, 320)
+
+[node name="ChunkManager" parent="." unique_id=1521957738 node_paths=PackedStringArray("node_listener") instance=ExtResource("1_1n5wu")]
+node_listener = NodePath("../Camera2D")

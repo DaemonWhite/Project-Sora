@@ -54,7 +54,7 @@ func _draw() -> void:
 	if not self.show_grid or not Engine.is_editor_hint():
 		return
 
-	var world_map:Node = _find_world_map()
+	var world_map:Node = self._find_world_map()
 	if not world_map:
 		return
 
@@ -62,7 +62,7 @@ func _draw() -> void:
 	if global_bounds.size == Vector2i.ZERO:
 		return
 
-	var tile_size: Vector2i = _get_tile_size(world_map)
+	var tile_size: Vector2i = self._get_tile_size(world_map)
 	var chunk_px_size: Vector2i = Vector2(self.chunk_size * tile_size)
 
 	var start_chunk: Vector2i = Vector2i(
