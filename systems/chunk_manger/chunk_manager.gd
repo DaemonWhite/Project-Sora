@@ -7,6 +7,7 @@ extends Node2D
 ## Taille d'un chunk en tuile
 @export var chunk_size: Vector2i = Vector2i(64, 64):
 	set(value):
+		self._update_true_chunk_size()
 		self._update_chunks()
 		chunk_size = value
 	get:
@@ -15,8 +16,8 @@ extends Node2D
 ## Taille d'une tuile en pixel
 @export var tile_size: Vector2i = Vector2i(64, 64):
 	set(value):
+		self._update_true_chunk_size()
 		self._update_chunks()
-		_true_chunk_size = chunk_size * tile_size
 		tile_size = value
 	get:
 		return tile_size
@@ -68,7 +69,7 @@ var pending_chunks: Array[Vector2i] = []
 func _ready() -> void:
 	BetterLogger.debug(self._true_chunk_size)
 	self._index_chunk_files()
-	
+	self._update_true_chunk_size()
 	# Premier chargement direct au démarrage si le listener est assigné
 	if self.node_listener:
 		self._update_chunks()
@@ -183,6 +184,11 @@ func unload_chunk(coord: Vector2i) -> void:
 		chunk_node.queue_free()
 		self.loaded_chunks.erase(coord)
 
+func get_chunk() -> Node2D:
+	if not 	self.loaded_chunks.has(self.current_chunk):
+		return null
+
+	return self.loaded_chunks[self.current_chunk]
 
 func _draw() -> void:
 	if not self.draw_debug_grid or self._true_chunk_size == Vector2i.ZERO:

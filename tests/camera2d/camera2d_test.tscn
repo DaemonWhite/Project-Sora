@@ -15,4 +15,6 @@ current_camera_mode = 0
 target_node = NodePath("../Player")
 metadata/_custom_type_script = "uid://cb48u4cljj146"
 
-[node name="Player" parent="." unique_id=1678827466 instance=ExtResource("3_lu4le")]
+[node name="Player" parent="." unique_id=1678827466 node_paths=PackedStringArray("chunks_manager") instance=ExtResource("3_lu4le")]
+chunks_manager = NodePath("../ChunkManager")
+visible_cursor = true
