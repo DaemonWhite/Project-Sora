@@ -3,27 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://d0qjqlbl4jvox" path="res://ui/components/modal/dialog_confirm.tscn" id="1_el80l"]
 [ext_resource type="Script" uid="uid://c1d5lfjixx417" path="res://ui/components/modal/dialog_choose_key.gd" id="2_p3ht4"]
 
-[node name="DialogConfirm" instance=ExtResource("1_el80l")]
-visible = false
+[node name="DialogConfirm" unique_id=1445976357 node_paths=PackedStringArray("default_focus_node") instance=ExtResource("1_el80l")]
 script = ExtResource("2_p3ht4")
 title = "Veulier choisir une touche"
+default_focus_node = NodePath("CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Retry")
 active_process_mode = 3
 
-[node name="Title" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="0"]
+[node name="Title" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(870882174) index="0" unique_id=1619734981]
 text = "Veulier choisir une touche"
 
-[node name="Description" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" index="0"]
+[node name="Description" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" parent_id_path=PackedInt32Array(1306974513) index="0" unique_id=1940140206]
 visible = false
 size_flags_vertical = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" index="1"]
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer" parent_id_path=PackedInt32Array(1306974513) index="1" unique_id=828285790]
 layout_mode = 2
 
-[node name="LabelChooseButton" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer/CenterContainer" index="0"]
+[node name="LabelChooseButton" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/ChildContainer/CenterContainer" index="0" unique_id=869287885]
 layout_mode = 2
 text = "Appuyer sur une touche"
 
-[node name="Retry" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0"]
+[node name="Retry" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0" unique_id=899237708]
 layout_mode = 2
 text = "Retry"
 

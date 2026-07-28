@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://6s4tcto2pdtj" path="res://ui/components/better_tab_menu/event_better_tab_menu.gd" id="3_4vucj"]
 [ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://assets/theme/menu_theme.tres" id="4_l3bwb"]
 
-[node name="MenuSetting" type="Control" unique_id=269193167]
+[node name="MenuSetting" type="Control" unique_id=269193167 node_paths=PackedStringArray("default_focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l3bwb")
+default_focus_node = NodePath("VBoxContainer/HBoxContainer/Return")
 active_process_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1047325957]

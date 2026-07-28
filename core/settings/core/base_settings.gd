@@ -267,7 +267,6 @@ func is_different() -> bool:
 
 static func is_differents() -> bool:
 	for settings: BaseSettings in BaseSettings._list_settings :
-		print(settings._name, " -> ", settings.is_different())
 		if settings.is_different():
 			return true
 	return false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnrd6f6wcoqlm" path="res://ui/hud/test_select/test_select.gd" id="1_7f2rd"]
 
-[node name="TestSelect" type="Control"]
+[node name="TestSelect" type="Control" unique_id=1752791096 node_paths=PackedStringArray("default_focus_node")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -10,9 +10,10 @@ anchor_right = 1.0
 grow_horizontal = 0
 script = ExtResource("1_7f2rd")
 is_modal = false
+default_focus_node = NodePath("Select")
 active_process_mode = 3
 
-[node name="Select" type="OptionButton" parent="."]
+[node name="Select" type="OptionButton" parent="." unique_id=811588831]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

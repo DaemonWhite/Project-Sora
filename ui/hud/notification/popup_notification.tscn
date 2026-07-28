@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cqwisov4luuxt"]
+
+[ext_resource type="Script" uid="uid://pr0w5gmrkval" path="res://ui/hud/notification/popup_notification.gd" id="1_7s8wm"]
+[ext_resource type="Texture2D" uid="uid://ckefahfk2sofm" path="res://assets/textures/icons/icon.svg" id="2_o24u6"]
+
+[node name="PopupNotification" type="PanelContainer" unique_id=1221511091]
+custom_minimum_size = Vector2(0, 55)
+custom_maximum_size = Vector2(300, 100)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+script = ExtResource("1_7s8wm")
+default_icon = ExtResource("2_o24u6")
+
+[node name="Timer" type="Timer" parent="." unique_id=1717504011]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1354990110]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="IconRect" type="TextureRect" parent="HBoxContainer" unique_id=936884887]
+layout_mode = 2
+texture = ExtResource("2_o24u6")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1570745901]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=435651786]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "az"
+
+[node name="Message" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=2143323737]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "zaazaz"
+fit_content = true
+scroll_active = false

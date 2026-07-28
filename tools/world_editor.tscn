@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dwe52h3o7n4bj"]
+
+[ext_resource type="PackedScene" uid="uid://c7ipjcx8yxbm1" path="res://tests/farmer/ground_test.tscn" id="1_m2ro7"]
+[ext_resource type="Script" uid="uid://cmgph3t1x3e6l" path="res://tools/bake_chunk.gd" id="1_r45n2"]
+[ext_resource type="Texture2D" uid="uid://dje38c1qsitsc" path="res://assets/textures/cursor.png" id="3_w30yj"]
+
+[node name="WorldSlicer" type="Node2D" unique_id=647899624]
+script = ExtResource("1_r45n2")
+chunk_size = Vector2i(8, 8)
+
+[node name="WorldMap" parent="." unique_id=1068424559 instance=ExtResource("1_m2ro7")]
+
+[node name="Farming" type="TileMapLayer" parent="WorldMap" unique_id=197916592]
+
+[node name="Environment" type="TileMapLayer" parent="WorldMap" unique_id=857825214]
+
+[node name="Sprite2D" type="Sprite2D" parent="WorldMap" unique_id=1896680076]
+position = Vector2(670, 666)
+texture = ExtResource("3_w30yj")

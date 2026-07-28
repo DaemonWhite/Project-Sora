@@ -4,34 +4,34 @@
 [ext_resource type="Script" uid="uid://cneq5bwnelpsa" path="res://ui/components/modal/dialog_confirm.gd" id="2_eq6gh"]
 [ext_resource type="Theme" uid="uid://cmd1vx5uasn1n" path="res://assets/theme/menu_theme.tres" id="3_ta21w"]
 
-[node name="DialogConfirm" instance=ExtResource("1_i5vra")]
-visible = false
+[node name="DialogConfirm" unique_id=83138336 node_paths=PackedStringArray("default_focus_node") instance=ExtResource("1_i5vra")]
 script = ExtResource("2_eq6gh")
 enabledCloseButton = false
+default_focus_node = NodePath("CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Valide")
 
-[node name="Close" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" index="1"]
+[node name="Close" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(870882174) index="1" unique_id=350102629]
 visible = false
 theme = ExtResource("3_ta21w")
 theme_type_variation = &"ButtonError"
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" index="2"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" parent_id_path=PackedInt32Array(1437314139) index="2" unique_id=1249233957]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" index="0" unique_id=1423541415]
 layout_mode = 2
 alignment = 2
 
-[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0"]
+[node name="Cancel" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="0" unique_id=1711295515]
 layout_mode = 2
 theme = ExtResource("3_ta21w")
 theme_type_variation = &"ButtonError"
 text = "Cancel"
 
-[node name="Valide" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="1"]
+[node name="Valide" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer" index="1" unique_id=347956472]
 layout_mode = 2
 theme = ExtResource("3_ta21w")
 theme_type_variation = &"ButtonSuccess"

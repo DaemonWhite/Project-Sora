@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cewh5fi26qbfa"]
+
+[ext_resource type="PackedScene" uid="uid://367iuu8uiixi" path="res://systems/chunk_manger/chunk_manager.tscn" id="1_ys2ms"]
+[ext_resource type="Script" uid="uid://cb48u4cljj146" path="res://systems/camera2d/camera_2d_handler.gd" id="2_0iw07"]
+[ext_resource type="PackedScene" uid="uid://dwwh3io8wvpks" path="res://systems/player/player.tscn" id="3_lu4le"]
+
+[node name="Camera2dTest" type="Node2D" unique_id=630965987]
+
+[node name="ChunkManager" parent="." unique_id=1521957738 node_paths=PackedStringArray("node_listener") instance=ExtResource("1_ys2ms")]
+node_listener = NodePath("../Camera2DHandler")
+
+[node name="Camera2DHandler" type="Camera2D" parent="." unique_id=2069567121 node_paths=PackedStringArray("target_node")]
+script = ExtResource("2_0iw07")
+current_camera_mode = 0
+target_node = NodePath("../Player")
+metadata/_custom_type_script = "uid://cb48u4cljj146"
+
+[node name="Player" parent="." unique_id=1678827466 node_paths=PackedStringArray("chunks_manager") instance=ExtResource("3_lu4le")]
+chunks_manager = NodePath("../ChunkManager")
+visible_cursor = true

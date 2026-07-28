@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://c5ga51l0vrhit"]
+
+[ext_resource type="Script" uid="uid://vekebbopk6ma" path="res://tests/notification/notification_test.gd" id="1_wrjyf"]
+
+[node name="NotificationTest" type="Control" unique_id=429128136]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wrjyf")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=643624308]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 240.0
+grow_vertical = 2
+columns = 2
+
+[node name="Titre" type="Label" parent="GridContainer" unique_id=943223674]
+layout_mode = 2
+text = "Titre"
+
+[node name="LineTitre" type="LineEdit" parent="GridContainer" unique_id=1438202713]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Titre"
+
+[node name="Label" type="Label" parent="GridContainer" unique_id=772126946]
+layout_mode = 2
+text = "Description"
+
+[node name="LineDescription" type="LineEdit" parent="GridContainer" unique_id=751897933]
+layout_mode = 2
+placeholder_text = "Description"
+
+[node name="Label2" type="Label" parent="GridContainer" unique_id=1788635495]
+layout_mode = 2
+text = "Temps"
+
+[node name="LineTime" type="LineEdit" parent="GridContainer" unique_id=1004310911]
+layout_mode = 2
+text = "0.5"
+placeholder_text = "0.7"
+
+[node name="Label3" type="Label" parent="GridContainer" unique_id=610954180]
+layout_mode = 2
+text = "Notification ouverte ?"
+
+[node name="EnableNotif" type="CheckButton" parent="GridContainer" unique_id=2062227610]
+layout_mode = 2
+
+[node name="NbNotif" type="Label" parent="GridContainer" unique_id=1166877236]
+layout_mode = 2
+text = "NB Notififcation"
+
+[node name="Nb" type="LineEdit" parent="GridContainer" unique_id=1730298783]
+layout_mode = 2
+text = "1"
+placeholder_text = "Nombre de notif"
+
+[node name="Container" type="Container" parent="GridContainer" unique_id=695367265]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer" unique_id=1714371315]
+layout_mode = 2
+text = "Envoyer"
+
+[connection signal="pressed" from="GridContainer/EnableNotif" to="." method="_on_enable_notif_pressed"]
+[connection signal="pressed" from="GridContainer/Button" to="." method="_on_button_pressed"]

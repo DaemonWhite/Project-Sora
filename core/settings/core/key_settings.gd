@@ -84,7 +84,6 @@ func get_match_event_pos(event: InputEvent) -> int:
 	return index_to_remove
 
 func set_current_option(option: Variant) -> bool:
-	print(option)
 	if option is Array[InputEvent]:
 		return super.set_current_option(option)
 	push_warning("KeySettings: paramètres inconune")
